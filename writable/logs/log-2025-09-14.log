@@ -1,0 +1,271 @@
+ERROR - 2025-09-14 03:40:54 --> mysqli_sql_exception: Column 'noRm' cannot be null in C:\xampp\htdocs\rsiaaisyiyah\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\rsiaaisyiyah\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pa...', 0)
+#1 C:\xampp\htdocs\rsiaaisyiyah\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pa...')
+#2 C:\xampp\htdocs\rsiaaisyiyah\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pa...')
+#3 C:\xampp\htdocs\rsiaaisyiyah\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pa...', Array, false)
+#4 C:\xampp\htdocs\rsiaaisyiyah\system\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\rsiaaisyiyah\system\BaseModel.php(805): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\rsiaaisyiyah\system\Model.php(749): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\xampp\htdocs\rsiaaisyiyah\system\BaseModel.php(716): CodeIgniter\Model->insert(Array, false)
+#8 C:\xampp\htdocs\rsiaaisyiyah\app\Controllers\Rme.php(31): CodeIgniter\BaseModel->save(Array)
+#9 C:\xampp\htdocs\rsiaaisyiyah\system\CodeIgniter.php(943): App\Controllers\Rme->tambahPasien()
+#10 C:\xampp\htdocs\rsiaaisyiyah\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+#11 C:\xampp\htdocs\rsiaaisyiyah\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\rsiaaisyiyah\index.php(79): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2025-09-14 03:40:54 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'noRm' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (:noRm:, :nik:, :nama:, :alamat:, :tanggalLahir:, :status:, :hapus:)', [...], false)
+ 2 SYSTEMPATH\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(805): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(749): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(716): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\Rme.php(31): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->tambahPasien()
+ 8 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 03:40:54 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'noRm' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, 0)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, 0)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (:noRm:, :nik:, :nama:, :alamat:, :tanggalLahir:, :status:, :hapus:)', [...], false)
+ 4 SYSTEMPATH\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(805): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(749): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(716): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\Rme.php(31): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->tambahPasien()
+10 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+11 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 03:40:54 --> [Caused by] mysqli_sql_exception: Column 'noRm' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, 0)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, 0)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, 0)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (:noRm:, :nik:, :nama:, :alamat:, :tanggalLahir:, :status:, :hapus:)', [...], false)
+ 5 SYSTEMPATH\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(805): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(749): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(716): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Rme.php(31): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->tambahPasien()
+11 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2025-09-14 03:44:43 --> mysqli_sql_exception: Column 'noRm' cannot be null in C:\xampp\htdocs\rsiaaisyiyah\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\rsiaaisyiyah\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pa...', 0)
+#1 C:\xampp\htdocs\rsiaaisyiyah\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pa...')
+#2 C:\xampp\htdocs\rsiaaisyiyah\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pa...')
+#3 C:\xampp\htdocs\rsiaaisyiyah\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pa...', Array, false)
+#4 C:\xampp\htdocs\rsiaaisyiyah\system\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\rsiaaisyiyah\system\BaseModel.php(805): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\rsiaaisyiyah\system\Model.php(749): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\xampp\htdocs\rsiaaisyiyah\system\BaseModel.php(716): CodeIgniter\Model->insert(Array, false)
+#8 C:\xampp\htdocs\rsiaaisyiyah\app\Controllers\Rme.php(31): CodeIgniter\BaseModel->save(Array)
+#9 C:\xampp\htdocs\rsiaaisyiyah\system\CodeIgniter.php(943): App\Controllers\Rme->tambahPasien()
+#10 C:\xampp\htdocs\rsiaaisyiyah\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+#11 C:\xampp\htdocs\rsiaaisyiyah\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\rsiaaisyiyah\index.php(79): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2025-09-14 03:44:43 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'noRm' cannot be null
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (:noRm:, :nik:, :nama:, :alamat:, :tanggalLahir:, :status:, :hapus:)', [...], false)
+ 2 SYSTEMPATH\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(805): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(749): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(716): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\Rme.php(31): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->tambahPasien()
+ 8 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 03:44:43 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'noRm' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, 0)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, 0)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (:noRm:, :nik:, :nama:, :alamat:, :tanggalLahir:, :status:, :hapus:)', [...], false)
+ 4 SYSTEMPATH\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(805): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(749): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(716): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\Rme.php(31): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->tambahPasien()
+10 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+11 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 03:44:43 --> [Caused by] mysqli_sql_exception: Column 'noRm' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, 0)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, 0)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, 0)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `pasien` (`noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `status`, `hapus`) VALUES (:noRm:, :nik:, :nama:, :alamat:, :tanggalLahir:, :status:, :hapus:)', [...], false)
+ 5 SYSTEMPATH\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(805): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(749): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(716): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Rme.php(31): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->tambahPasien()
+11 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 03:48:01 --> ParseError: syntax error, unexpected token "->", expecting identifier or variable or "{" or "$"
+in APPPATH\Controllers\Rme.php on line 31.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\rsiaaisyiyah\\app\\Controllers\\RME.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\RME')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\RME')
+ 4 SYSTEMPATH\CodeIgniter.php(901): class_exists('\\App\\Controllers\\RME', true)
+ 5 SYSTEMPATH\CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 03:48:04 --> ParseError: syntax error, unexpected token "->", expecting identifier or variable or "{" or "$"
+in APPPATH\Controllers\Rme.php on line 31.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(290): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\rsiaaisyiyah\\app\\Controllers\\RME.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\RME')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\RME')
+ 4 SYSTEMPATH\CodeIgniter.php(901): class_exists('\\App\\Controllers\\RME', true)
+ 5 SYSTEMPATH\CodeIgniter.php(490): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2025-09-14 08:51:41 --> mysqli_sql_exception: Unknown column 'idPasien' in 'where clause' in C:\xampp\htdocs\rsiaaisyiyah\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\rsiaaisyiyah\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\rsiaaisyiyah\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\rsiaaisyiyah\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\rsiaaisyiyah\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\rsiaaisyiyah\system\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\rsiaaisyiyah\system\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\rsiaaisyiyah\app\Controllers\Rme.php(46): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\rsiaaisyiyah\system\CodeIgniter.php(943): App\Controllers\Rme->muatSkor()
+#8 C:\xampp\htdocs\rsiaaisyiyah\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+#9 C:\xampp\htdocs\rsiaaisyiyah\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\rsiaaisyiyah\index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2025-09-14 08:51:41 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'idPasien' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `pasien`
+WHERE `idPasien` = :idPasien:', [...], false)
+ 2 SYSTEMPATH\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Rme.php(46): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->muatSkor()
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 08:51:41 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'idPasien' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `pasien`
+WHERE `idPasien` = 0')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `pasien`
+WHERE `idPasien` = 0')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `pasien`
+WHERE `idPasien` = :idPasien:', [...], false)
+ 4 SYSTEMPATH\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Rme.php(46): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->muatSkor()
+ 8 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 08:51:41 --> [Caused by] mysqli_sql_exception: Unknown column 'idPasien' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT *
+FROM `pasien`
+WHERE `idPasien` = 0', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `pasien`
+WHERE `idPasien` = 0')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `pasien`
+WHERE `idPasien` = 0')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `pasien`
+WHERE `idPasien` = :idPasien:', [...], false)
+ 5 SYSTEMPATH\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Rme.php(46): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->muatSkor()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 08:51:55 --> ErrorException: Array to string conversion
+in APPPATH\Controllers\Rme.php on line 47.
+ 1 APPPATH\Controllers\Rme.php(47): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\rsiaaisyiyah\\app\\Controllers\\Rme.php', 47)
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->muatSkor()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 08:51:56 --> ErrorException: Array to string conversion
+in APPPATH\Controllers\Rme.php on line 47.
+ 1 APPPATH\Controllers\Rme.php(47): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\rsiaaisyiyah\\app\\Controllers\\Rme.php', 47)
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->muatSkor()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 08:57:54 --> ErrorException: Array to string conversion
+in APPPATH\Controllers\Rme.php on line 47.
+ 1 APPPATH\Controllers\Rme.php(47): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\rsiaaisyiyah\\app\\Controllers\\Rme.php', 47)
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->muatSkor()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 08:57:56 --> ErrorException: Array to string conversion
+in APPPATH\Controllers\Rme.php on line 47.
+ 1 APPPATH\Controllers\Rme.php(47): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\rsiaaisyiyah\\app\\Controllers\\Rme.php', 47)
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->muatSkor()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 08:58:04 --> ErrorException: Array to string conversion
+in APPPATH\Controllers\Rme.php on line 47.
+ 1 APPPATH\Controllers\Rme.php(47): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\rsiaaisyiyah\\app\\Controllers\\Rme.php', 47)
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->muatSkor()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 08:58:28 --> ErrorException: Array to string conversion
+in APPPATH\Controllers\Rme.php on line 47.
+ 1 APPPATH\Controllers\Rme.php(47): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\rsiaaisyiyah\\app\\Controllers\\Rme.php', 47)
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->muatSkor()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 13:49:31 --> Error: Call to a member function set() on bool
+in APPPATH\Controllers\Rme.php on line 73.
+ 1 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->ubahSkor()
+ 2 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 13:50:16 --> ArgumentCountError: Too few arguments to function CodeIgniter\Model::set(), 0 passed in C:\xampp\htdocs\rsiaaisyiyah\app\Controllers\Rme.php on line 74 and at least 1 expected
+in SYSTEMPATH\Model.php on line 684.
+ 1 APPPATH\Controllers\Rme.php(74): CodeIgniter\Model->set()
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->ubahSkor()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 13:52:40 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 1781.
+ 1 SYSTEMPATH\BaseModel.php(1781): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\BaseModel.php(959): CodeIgniter\BaseModel->transformDataToArray(null, 'update')
+ 3 SYSTEMPATH\Model.php(812): CodeIgniter\BaseModel->update([...], null)
+ 4 APPPATH\Controllers\Rme.php(74): CodeIgniter\Model->update([...])
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->ubahSkor()
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-09-14 15:36:16 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "cetakskor.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('cetakskor.php')
+ 2 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('cetakskor', [], true)
+ 3 APPPATH\Controllers\Rme.php(80): view('cetakskor')
+ 4 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Rme->printSkor('1')
+ 5 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Rme))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()

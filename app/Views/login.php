@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>RSIA Aisyiyah | Log in </title>
+
+    <!-- Bootstrap -->
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/1745f7e20d.js" crossorigin="anonymous"></script>
+
+    <!-- Custom Theme Style -->
+    <link href="<?= base_url() ?>public/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+</head>
+
+<body class="login" style="background :url(<?= base_url() . "public/assets/img/login.jpg" ?>); height:100%; background-position:center; background-size: cover; no-repeat;">
+    <div>
+        <div class="login_wrapper" style="background-color: #98e6b8ff; padding:20px;">
+            <form method="post" action="<?= base_url() ?>login/auth">
+                <h1 class="inline-block">Login</h1>
+                <img src="<?= base_url() ?>public/assets/img/logorsia.png" width="90%" alt="">
+                <?php echo session()->getFlashdata('message'); ?>
+                <div class="form-group row">
+                    <select class="form-control" id="nama" name="nama">
+                        <?php for ($i = 0; $i < count($user); $i++) : ?>
+                            <option value="<?= $user[$i]["id"] ?>"><?= $user[$i]["id"] . ". " . $user[$i]["nama"] ?></option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
+                </div>
+                <div class="form-group row">
+                    <input type="submit" class="btn btn-success" value="Log in" />
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="separator">
+
+                    <div class="clearfix"></div>
+                    <br />
+
+                    <div>
+                        <h1><i style="color: white;" class="fa fa-hospital"></i> RSIA Aisyiyah</h1>
+                        <p>©2023 All Rights Reserved. <br /></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
