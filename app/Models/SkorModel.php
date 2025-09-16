@@ -8,5 +8,5 @@ class SkorModel extends Model
 {
     protected $table      = 'skorpoedji';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['idPasien', 'i', 'ii', 'iii', 'iiii'];
+    protected $allowedFields = ['noRm', 'i', 'ii', 'iii', 'iiii'];
 }

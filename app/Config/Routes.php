@@ -5,13 +5,13 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
 $routes->post('/skorPoudji/tambahpasien', 'skorPoudji::tambahPasien');
-$routes->post('/skorPoudji/editpasien', 'skorPoudji::editPasien');
 $routes->post('/skorPoudji/hapuspasien', 'skorPoudji::hapusPasien');
 $routes->post('/skorPoudji/muatdatapasien', 'skorPoudji::muatdatapasien');
+$routes->post('/skorPoudji/muattambahpasien', 'skorPoudji::muattambahpasien');
 $routes->post('/skorPoudji/muatpasien', 'skorPoudji::muatPasien');
 $routes->post('/skorPoudji/muatskor', 'skorPoudji::muatSkor');
-$routes->post('/skorPoudji/lihatskor', 'skorPoudji::lihatSkor');
 $routes->post('/skorPoudji/ubahskor', 'skorPoudji::ubahSkor');
 $routes->get('/skorPoudji/printskor/(:any)', 'skorPoudji::printSkor/$1');
 $routes->get('/skorPoudji', 'skorPoudji::index');

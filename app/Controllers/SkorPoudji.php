@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\PasienModel;
 use App\Models\SkorModel;
+use App\Models\PasienSkorpModel;
 
 class SkorPoudji extends BaseController
 {
@@ -11,6 +12,7 @@ class SkorPoudji extends BaseController
     {
         $this->pasienModel = new PasienModel();
         $this->skorModel = new SkorModel();
+        $this->pasienSkorpModel = new PasienSkorpModel();
     }
 
     public function index()
@@ -24,83 +26,47 @@ class SkorPoudji extends BaseController
 
     public function muatDataPasien()
     {
-        echo json_encode($this->pasienModel->findAll());
+        echo json_encode($this->pasienSkorpModel->findAll());
     }
 
-    public function muatPasien()
+    public function muatTambahPasien()
     {
-        echo json_encode($this->pasienModel->where('id', $this->request->getPost("idPasien"))->findAll());
+        echo json_encode($this->pasienModel->findAll());
     }
 
     public function tambahPasien()
     {
         $data = [
             "noRm" => $this->request->getPost("noRm"),
-            "nik" => $this->request->getPost("nik"),
-            "nama" => $this->request->getPost("nama"),
-            "alamat" => $this->request->getPost("alamat"),
-            "tanggalLahir" => $this->request->getPost("tglLahir"),
-            "status" => $this->request->getPost("status")
+            "i" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
+            "ii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
+            "iii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
+            "iiii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0'
         ];
 
-        $this->pasienModel->save($data);
+        $this->skorModel->save($data);
 
-        echo json_encode("");
-    }
-
-    public function editPasien()
-    {
-        $data = [
-            "noRm" => $this->request->getPost("noRm"),
-            "nik" => $this->request->getPost("nik"),
-            "nama" => $this->request->getPost("nama"),
-            "alamat" => $this->request->getPost("alamat"),
-            "tanggalLahir" => $this->request->getPost("tglLahir"),
-            "status" => $this->request->getPost("status"),
-        ];
-
-        $this->pasienModel->update($this->request->getPost("id"), $data);
         echo json_encode("");
     }
 
     public function hapusPasien()
     {
-        $this->skorModel->where("idPasien", $this->request->getPost("id"))->delete();
-        $this->pasienModel->delete($this->request->getPost("id"));
+        $this->skorModel->where("noRm", $this->request->getPost("noRm"))->delete();
         echo json_encode("");
     }
 
     public function muatSkor()
     {
-        $idPasien = $this->request->getPost("idPasien");
-        $dataSkor = $this->skorModel->where('idPasien', $idPasien)->findAll();
-        if (count($dataSkor) == 0) {
-            $data = [
-                "idPasien" => $idPasien,
-                "i" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
-                "ii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
-                "iii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
-                "iiii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0'
-            ];
+        $noRm = $this->request->getPost("noRm");
 
-            $this->skorModel->save($data);
-        }
-        $dataSkor = $this->skorModel->where('idPasien', $idPasien)->findAll();
-
-        echo json_encode($dataSkor);
-    }
-
-    public function lihatSkor()
-    {
-        $idPasien = $this->request->getPost("idPasien");
-        $dataSkor = $this->skorModel->where('idPasien', $idPasien)->findAll();
+        $dataSkor = $this->skorModel->where('noRm', $noRm)->findAll();
 
         echo json_encode($dataSkor);
     }
 
     public function ubahSkor()
     {
-        $idPasien = $this->request->getPost("id");
+        $noRm = $this->request->getPost("noRm");
         $data = [
             "i" => $this->request->getPost("i"),
             "ii" => $this->request->getPost("ii"),
@@ -108,14 +74,14 @@ class SkorPoudji extends BaseController
             "iiii" => $this->request->getPost("iiii")
         ];
 
-        $this->skorModel->where('idPasien', $idPasien);
+        $this->skorModel->where('noRm', $noRm);
         $this->skorModel->update(null, $data);
         echo json_encode('');
     }
 
-    public function printSkor($idPasien)
+    public function printSkor($noRm)
     {
-        $dataPasien = $this->pasienModel->where('id', $idPasien)->findAll();
+        $dataPasien = $this->pasienSkorpModel->where('noRm', $noRm)->findAll();
         // print_r($dataPasien[0]);
         echo view("cetakskor", $dataPasien[0]);
     }

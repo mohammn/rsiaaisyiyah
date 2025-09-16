@@ -6,7 +6,8 @@ use CodeIgniter\Model;
 
 class PasienModel extends Model
 {
+    protected $DBGroup = 'sik';
     protected $table      = 'pasien';
-    protected $primaryKey = 'id';
-    protected $allowedFields = ['noRm', 'nik', 'nama', 'alamat', 'tanggalLahir', 'status'];
+    protected $primaryKey = 'no_rkm_medis';
+    protected $allowedFields = ['no_rkm_medis', 'no_ktp', 'nm_pasien', 'alamat', 'tgl_lahir', 'jk'];
 }

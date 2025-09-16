@@ -1,7 +1,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.css">
 
-    <input type="hidden" id="idPasien" value="<?= $id ?>">
+    <input type="hidden" id="noRm" value="<?= $noRm ?>">
 
     <style>
         @media print {
@@ -31,11 +31,11 @@
             <table class="table table-borderless tabel table-sm mt-2">
                 <tr>
                     <td>Nama</td>
-                    <td>: <?= $nama ?></td>
+                    <td>: <?= $nm_pasien ?></td>
                 </tr>
                 <tr>
                     <td>Tgl.Lahir</td>
-                    <td>: <?= $tanggalLahir ?></td>
+                    <td>: <?= $tgl_lahir ?></td>
                 </tr>
                 <tr>
                     <td>Alamat</td>
@@ -43,7 +43,7 @@
                 </tr>
                 <tr>
                     <td>NIK</td>
-                    <td>: <?= $nik ?></td>
+                    <td>: <?= $no_ktp ?></td>
                 </tr>
                 <tr>
                     <td>No.RM</td>
@@ -338,11 +338,11 @@
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
         function lihatSkor() {
-            idPasien = $("#idPasien").val()
+            noRm = $("#noRm").val()
             $.ajax({
-                url: '<?= base_url() ?>skorPoudji/lihatskor',
+                url: '<?= base_url() ?>skorPoudji/muatskor',
                 method: 'post',
-                data: "idPasien=" + idPasien,
+                data: "noRm=" + noRm,
                 dataType: 'json',
                 success: function(data) {
                     datai = data[0].i.split("a")

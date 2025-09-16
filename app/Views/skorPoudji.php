@@ -19,7 +19,7 @@
                         <th>Nama</th>
                         <th>Tgl Lahir</th>
                         <th>Alamat</th>
-                        <th>Status</th>
+                        <th>Jenis Kelamin</th>
                         <th>Tindakan</th>
                     </tr>
                 </thead>
@@ -31,48 +31,37 @@
 </div>
 
 <!-- Modal tambah Pasien-->
-<div class="modal fade" id="modalTambahPasien" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-xl" id="modalTambahPasien" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Skor Poedji Rochjati</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="hidden" name="idPasienEdit" id="idPasienEdit">
-                <div class="mb-3">
-                    <label for="noRm" class="form-label">No. RM</label>
-                    <input type="text" class="form-control" id="noRm" maxlength="6">
+                <div class="p-2">
+                    <b class="h6"> Petunjuk : </b> Cari pasien yang akan ditambahkan surat <b>Skor Poedji Rochjati</b>, lalua klik tombol <i class="fas fa-plus"></i> di ujung kiri.
                 </div>
-                <div class="mb-3">
-                    <label for="nik" class="form-label">NIK</label>
-                    <input type="text" class="form-control" id="nik" maxlength="16">
+                <div class="card-body">
+                    <table class="table table-striped" id="tabelTambahPasien">
+                        <thead>
+                            <tr>
+                                <th>No. RM</th>
+                                <th>NIK</th>
+                                <th>Nama</th>
+                                <th>Tgl Lahir</th>
+                                <th>Alamat</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelDataTambahPasien">
+                        </tbody>
+                    </table>
                 </div>
-                <div class="mb-3">
-                    <label for="nama" class="form-label">Nama</label>
-                    <input type="text" class="form-control" id="nama" maxlength="256">
-                </div>
-                <div class="mb-3">
-                    <label for="alamat" class="form-label">Alamat</label>
-                    <textarea class="form-control" id="alamat" rows="3"></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="tglLahir" class="form-label">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="tglLahir" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid city.
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="tglLahir" class="form-label">Status</label>
-                    <select class="form-select" aria-label="tglLahir" id="status">
-                        <option value="rajal">Rawat Jalan</option>
-                        <option value="ranap">Rawat Inap</option>
-                    </select>
-                </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" onclick="edit()" class="btn btn-primary" style="display:none;" id="tombolEdit">Perbarui</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" onclick="tambah()" class="btn btn-primary" id="tombolTambah">Simpan</button>
             </div>
@@ -89,7 +78,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body ">
-                <input type="hidden" id="idPasien">
+                <input type="hidden" id="noRm">
                 <table class="table table-bordered table-striped table-hover text-center">
                     <tr>
                         <th rowspan="3" class="table-primary" style="vertical-align: middle;">Kel. F.R.</th>
@@ -1385,7 +1374,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body ">
-                <input type="hidden" id="idPasien">
+                <input type="hidden" id="noRm">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h4 id="namaPasienSkor"></h4>
+                    </div>
+                </div>
                 <table class="table table-bordered table-striped table-hover text-center">
                     <tr>
                         <th rowspan="3" class="table-primary" style="vertical-align: middle;">Kel. F.R.</th>
@@ -1681,8 +1675,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="hidden" id="idPasienHapus">
-                Apakah anda yakin ingin menghapus pasien dengan nama <b id="namaPasienHapus"></b> ?<br>
+                <input type="hidden" id="noRmHapus">
+                Apakah anda yakin ingin menghapus <b>Skor Poedji Raochjati</b> pasien dengan nama <b id="namaPasienHapus"></b> ?<br>
                 Data tidak dapat dikembalikan !
             </div>
             <div class="modal-footer">
@@ -1707,14 +1701,14 @@
                 for (let i = 0; i < data.length; i++) {
                     tabel += "<tr>" +
                         "<td>" + data[i].noRm + "</td>" +
-                        "<td>" + data[i].nik + "</td>" +
-                        "<td>" + data[i].nama + "</td>" +
-                        "<td>" + data[i].tanggalLahir + "</td>" +
-                        "<td>" + data[i].alamat + "</td><td>" + data[i].status + "</td>" +
-                        "<td>" + '<button class="btn btn-warning btn-sm" onclick="lihatSkor(' + data[i].id + ')"><i class="fas fa-eye"></i></button> ' +
-                        ' <button class="btn btn-success btn-sm" onclick="trySkor(' + data[i].id + ')"><i class="fas fa-bars"></i></button> ' +
-                        ' <button class="btn btn-info btn-sm"><i class="fas fa-edit" onclick="tryEdit(' + data[i].id + ')"></i></button> ' +
-                        ' <button class="btn btn-danger btn-sm"><i class="fas fa-trash"  onclick="tryHapus(' + data[i].id + ',\'' + data[i].nama + '\')"></i></button> ' +
+                        "<td>" + data[i].no_ktp + "</td>" +
+                        "<td>" + data[i].nm_pasien + "</td>" +
+                        "<td>" + data[i].tgl_lahir + "</td>" +
+                        "<td>" + data[i].alamat + "</td>" +
+                        "<td>" + data[i].jk + "</td>" +
+                        "<td>" + '<button class="btn btn-info btn-sm" onclick="lihatSkor(\'' + data[i].noRm + '\',\'' + data[i].nm_pasien + '\')"><i class="fas fa-eye"></i></button> ' +
+                        ' <button class="btn btn-primary btn-sm" onclick="trySkor(\'' + data[i].noRm + '\')"><i class="fa fa-pencil"></i></button> ' +
+                        ' <button class="btn btn-secondary btn-sm"><i class="fas fa-trash"  onclick="tryHapus(\'' + data[i].noRm + '\',\'' + data[i].nm_pasien + '\')"></i></button> ' +
                         "</td></tr>"
                 }
                 if (!tabel) {
@@ -1728,48 +1722,47 @@
         });
     }
 
+    function muatTambahPasien() {
+        $.ajax({
+            url: '<?= base_url() ?>skorPoudji/muattambahpasien',
+            method: 'post',
+            dataType: 'json',
+            success: function(data) {
+                var tabel = ''
+                for (let i = 0; i < data.length; i++) {
+                    tabel += "<tr>" +
+                        "<td>" + data[i].no_rkm_medis + "</td>" +
+                        "<td>" + data[i].no_ktp + "</td>" +
+                        "<td>" + data[i].nm_pasien + "</td>" +
+                        "<td>" + data[i].tgl_lahir + "</td>" +
+                        "<td>" + data[i].alamat + "</td>" +
+                        "<td>" + data[i].jk + "</td>" +
+                        "<td>" + '<button class="btn btn-info btn-sm" onclick="tambah(\'' + data[i].no_rkm_medis + '\')"><i class="fas fa-plus"></i></button> ' +
+                        "</td></tr>"
+                }
+                if (!tabel) {
+                    tabel = '<td class="text-center" colspan="6">Data Masih kosong :)</td>'
+                }
+
+                $("#tabelDataTambahPasien").html(tabel)
+                $("#tabelTambahPasien").DataTable()
+
+            }
+        });
+    }
+
     function tryTambah() {
-        $("#tombolEdit").hide()
-        $("#tombolTambah").show()
-        $("#noRm").val("")
-        $("#nik").val("")
-        $("#nama").val('')
-        $("#alamat").val('')
-        $("#tglLahir").val('')
+        muatTambahPasien()
         $("#modalTambahPasien").modal("show");
     }
 
-    function tambah() {
-        var noRM = $("#noRm").val()
-        var nik = $("#nik").val()
-        var nama = $("#nama").val()
-        var alamat = $("#alamat").val()
-        var tglLahir = $("#tglLahir").val()
-        var status = $("#status").val()
-
-        if (noRM.replace(/\s/g, "") == "") {
-            $("#noRm").focus()
-        } else if (nik.replace(/\s/g, "") == "") {
-            $("#nik").focus()
-        } else if (nama.replace(/\s/g, "") == "") {
-            $("#nama").focus()
-        } else if (alamat.replace(/\s/g, "") == "") {
-            $("#alamat").focus()
-        } else if (tglLahir == "") {
-            $("#tglLahir").focus()
-        }
-
+    function tambah(noRm) {
         $.ajax({
             url: '<?= base_url() ?>skorPoudji/tambahpasien',
             method: 'post',
-            data: "noRm=" + noRM + '&nik=' + nik + '&nama=' + nama + '&alamat=' + alamat + '&tglLahir=' + tglLahir + '&status=' + status,
+            data: "noRm=" + noRm,
             dataType: 'json',
             success: function(data) {
-                $("#noRm").val("")
-                $("#nik").val("")
-                $("#nama").val('')
-                $("#alamat").val('')
-                $("#tglLahir").val('')
                 muatData()
 
                 $("#modalTambahPasien").modal("hide");
@@ -1777,97 +1770,37 @@
         });
     }
 
-    function tryEdit(id) {
-        $("#tombolEdit").show()
-        $("#tombolTambah").hide()
-        $("#modalTambahPasien").modal("show");
-        $.ajax({
-            url: '<?= base_url() ?>skorPoudji/muatpasien',
-            method: 'post',
-            data: "idPasien=" + id,
-            dataType: 'json',
-            success: function(data) {
-                $("#idPasienEdit").val(id)
-                $("#noRm").val(data[0].noRm)
-                $("#nik").val(data[0].nik)
-                $("#nama").val(data[0].nama)
-                $("#alamat").val(data[0].alamat)
-                $("#tglLahir").val(data[0].tanggalLahir)
-                $("#status").val(data[0].status)
-            }
-        });
-    }
-
-    function edit() {
-        var id = $("#idPasienEdit").val()
-        var noRm = $("#noRm").val()
-        var nik = $("#nik").val()
-        var nama = $("#nama").val()
-        var alamat = $("#alamat").val()
-        var tglLahir = $("#tglLahir").val()
-        var status = $("#status").val()
-
-        if (noRm.replace(/\s/g, "") == "") {
-            $("#noRm").focus()
-        } else if (nik.replace(/\s/g, "") == "") {
-            $("#nik").focus()
-        } else if (nama.replace(/\s/g, "") == "") {
-            $("#nama").focus()
-        } else if (alamat.replace(/\s/g, "") == "") {
-            $("#alamat").focus()
-        } else if (tglLahir == "") {
-            $("#tglLahir").focus()
-        }
-
-        $.ajax({
-            url: '<?= base_url() ?>skorPoudji/editpasien',
-            method: 'post',
-            data: "id=" + id + '&noRm=' + noRm + '&nik=' + nik + '&nama=' + nama + '&alamat=' + alamat + '&tglLahir=' + tglLahir + '&status=' + status,
-            dataType: 'json',
-            success: function(data) {
-                $("#noRm").val("")
-                $("#nik").val("")
-                $("#nama").val('')
-                $("#alamat").val('')
-                $("#tglLahir").val('')
-                muatData()
-
-                $("#modalTambahPasien").modal("hide");
-            }
-        });
-    }
-
-    function tryHapus(id, nama) {
+    function tryHapus(noRm, nama) {
         $("#modalHapusPasien").modal("show");
         $("#namaPasienHapus").html(nama)
-        $("#idPasienHapus").val(id)
+        $("#noRmHapus").val(noRm)
     }
 
     function hapusPasien() {
-        var id = $("#idPasienHapus").val()
+        var noRm = $("#noRmHapus").val()
 
         $.ajax({
             url: '<?= base_url() ?>skorPoudji/hapuspasien',
             method: 'post',
-            data: "id=" + id,
+            data: "noRm=" + noRm,
             dataType: 'json',
             success: function(data) {
-                $("#idPasienHapus").val("")
+                $("#noRmHapus").val("")
                 $("#modalHapusPasien").modal("hide");
                 muatData()
             }
         });
     }
 
-    function trySkor(idPasien) {
+    function trySkor(noRm) {
         $("#modalSkorPoedji").modal("show");
         $.ajax({
             url: '<?= base_url() ?>skorPoudji/muatskor',
             method: 'post',
-            data: "idPasien=" + idPasien,
+            data: "noRm=" + noRm,
             dataType: 'json',
             success: function(data) {
-                $("#idPasien").val(idPasien)
+                $("#noRm").val(noRm)
                 datai = data[0].i.split("a")
                 for (let i = 0; i < datai.length; i++) {
                     $("#i" + i).val(datai[i])
@@ -1932,7 +1865,7 @@
         $.ajax({
             url: '<?= base_url() ?>skorPoudji/ubahskor',
             method: 'post',
-            data: "id=" + $("#idPasien").val() + '&i=' + datai + '&ii=' + dataii + '&iii=' + dataiii + '&iiii=' + dataiiii,
+            data: "noRm=" + $("#noRm").val() + '&i=' + datai + '&ii=' + dataii + '&iii=' + dataiii + '&iiii=' + dataiiii,
             dataType: 'json',
             success: function(data) {
                 $("#modalSkorPoedji").modal("hide");
@@ -1941,16 +1874,17 @@
 
     }
 
-    function lihatSkor(idPasien) {
+    function lihatSkor(noRm, namaPasien) {
+        $("#namaPasienSkor").html(namaPasien);
         $("#modalLihatSkor").modal("show");
-        $("#tombolPrint").attr("href", "skorPoudji/printskor/" + idPasien);
+        $("#tombolPrint").attr("href", "skorPoudji/printskor/" + noRm);
         $.ajax({
             url: '<?= base_url() ?>skorPoudji/muatskor',
             method: 'post',
-            data: "idPasien=" + idPasien,
+            data: "noRm=" + noRm,
             dataType: 'json',
             success: function(data) {
-                $("#idPasien").val(idPasien)
+                $("#noRm").val(noRm)
                 datai = data[0].i.split("a")
                 for (let i = 0; i < datai.length; i++) {
                     $("#li" + i).html(datai[i])
