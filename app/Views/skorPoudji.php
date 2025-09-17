@@ -40,7 +40,7 @@
             </div>
             <div class="modal-body">
                 <div class="p-2">
-                    <b class="h6"> Petunjuk : </b> Cari pasien yang akan ditambahkan surat <b>Skor Poedji Rochjati</b>, lalua klik tombol <i class="fas fa-plus"></i> di ujung kiri.
+                    <b class="h6"> Petunjuk : </b> <i><u> Cari pasien yang akan ditambahkan surat <b class="text-info">Skor Poedji Rochjati</b>, lalua klik tombol <i class="fas fa-plus"></i> di ujung kanan.</u></i>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped" id="tabelTambahPasien">
@@ -62,8 +62,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" onclick="tambah()" class="btn btn-primary" id="tombolTambah">Simpan</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
@@ -1659,8 +1658,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Tutup</button>
-                <a href="" target="_blank" class="btn btn-warning" id="tombolPrint">Print</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <a href="" target="_blank" class="btn btn-info" id="tombolPrint">Print</a>
             </div>
         </div>
     </div>
@@ -1707,7 +1706,7 @@
                         "<td>" + data[i].alamat + "</td>" +
                         "<td>" + data[i].jk + "</td>" +
                         "<td>" + '<button class="btn btn-info btn-sm" onclick="lihatSkor(\'' + data[i].noRm + '\',\'' + data[i].nm_pasien + '\')"><i class="fas fa-eye"></i></button> ' +
-                        ' <button class="btn btn-primary btn-sm" onclick="trySkor(\'' + data[i].noRm + '\')"><i class="fa fa-pencil"></i></button> ' +
+                        ' <button class="btn btn-info btn-sm" onclick="trySkor(\'' + data[i].noRm + '\')"><i class="fa fa-pencil"></i></button> ' +
                         ' <button class="btn btn-secondary btn-sm"><i class="fas fa-trash"  onclick="tryHapus(\'' + data[i].noRm + '\',\'' + data[i].nm_pasien + '\')"></i></button> ' +
                         "</td></tr>"
                 }

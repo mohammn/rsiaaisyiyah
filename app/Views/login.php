@@ -46,11 +46,10 @@
                 <div class="separator">
 
                     <div class="clearfix"></div>
-                    <br />
 
                     <div>
-                        <h1><i style="color: white;" class="fa fa-hospital"></i> RSIA Aisyiyah</h1>
-                        <p>©2023 All Rights Reserved. <br /></p>
+                        <i>Made by <b>MN Dev</b> with <i class="fa fa-heart text-danger" aria-hidden="true"></i> to : </i><br>
+                        <h3 style="display: inline;"><i style="color: white;" class="fa fa-hospital"></i> RSIA Aisyiyah </h3><sub>Bangkalan</sub>
                     </div>
                 </div>
             </form>

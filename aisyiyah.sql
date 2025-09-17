@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Sep 2025 pada 07.23
+-- Waktu pembuatan: 17 Sep 2025 pada 19.14
 -- Versi server: 10.4.20-MariaDB
 -- Versi PHP: 8.0.8
 
@@ -50,12 +50,33 @@ INSERT INTO `pasien` (`id`, `noRm`, `nik`, `nama`, `alamat`, `tanggalLahir`, `st
 -- --------------------------------------------------------
 
 --
+-- Stand-in struktur untuk tampilan `pasienskorpoedji`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `pasienskorpoedji` (
+`id` int(11)
+,`noRm` varchar(15)
+,`i` varchar(64)
+,`ii` varchar(64)
+,`iii` varchar(64)
+,`iiii` varchar(64)
+,`no_rkm_medis` varchar(15)
+,`no_ktp` varchar(20)
+,`nm_pasien` varchar(40)
+,`alamat` varchar(200)
+,`tgl_lahir` date
+,`jk` enum('L','P')
+);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `skorpoedji`
 --
 
 CREATE TABLE `skorpoedji` (
   `id` int(11) NOT NULL,
-  `idPasien` int(11) NOT NULL,
+  `noRm` varchar(15) NOT NULL,
   `i` varchar(64) NOT NULL,
   `ii` varchar(64) NOT NULL,
   `iii` varchar(64) NOT NULL,
@@ -66,12 +87,14 @@ CREATE TABLE `skorpoedji` (
 -- Dumping data untuk tabel `skorpoedji`
 --
 
-INSERT INTO `skorpoedji` (`id`, `idPasien`, `i`, `ii`, `iii`, `iiii`) VALUES
-(1, 1, '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a3a0a7a0a2', '1a2a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a3a0', '2a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a8', '1a0a0a0a0a0a0a0a0a0a0a0a0a6a0a0a0a0a0a0a0a0a0a0a0a6a0a2a0'),
-(4, 3, '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a5a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a4a0a6a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a3a0a0a0a7a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a2a0a0a0a0a0a8'),
-(5, 4, '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a1a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a2', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a3a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a4a0a0'),
-(6, 5, '1a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a2a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a3a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a4a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0'),
-(7, 6, '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a2a0a0a0a3a0a0a0a0a0a0a0a5a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a2a0a0a0a2a0a0a0a0a0a0a0a6a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0');
+INSERT INTO `skorpoedji` (`id`, `noRm`, `i`, `ii`, `iii`, `iiii`) VALUES
+(1, '001348', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a3a0a7a0a2', '1a2a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a3a0', '2a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a8', '1a0a0a0a0a0a0a0a0a0a0a0a0a6a0a0a0a0a0a0a0a0a0a0a0a6a0a2a0'),
+(4, '000003', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a5a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a4a0a6a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a3a0a0a0a7a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a2a0a0a0a0a0a8'),
+(6, '000005', '1a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a2a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a3a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a4a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0'),
+(7, '000006', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a2a0a0a0a3a0a0a0a0a0a0a0a5a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a2a0a0a0a2a0a0a0a0a0a0a0a6a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0'),
+(12, '000971', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0'),
+(13, ' 001828', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a1', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0'),
+(14, '001220', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0', '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0');
 
 -- --------------------------------------------------------
 
@@ -92,8 +115,16 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `nama`, `password`, `rule`) VALUES
 (1, 'Andi', '$2y$10$yuPmzFjZKTHojkqnWote0Ob.jR4M9PbRwgN7FrkXs8Z.CLw0ygA86', '1'),
-(6, 'Andini hartanti', '$2y$10$Y0oPQHl7y0ZoMvHJc3T7n.Bw.xB5vZz6Dc.LLoPpD.Ak2vV/9Ufhe', '1'),
-(7, 'Sri Handayani', '$2y$10$0L6VyAGqEags3sFLgurM/uRQ6bYfBDINArPjDORhiXwoCGwTqLJ.a', '0');
+(8, 'FINDRIYANI DWI KUSASI,S.Tr.Kes', '$2y$10$UCjzWC.JNjGYfnWWq7xGueM9Z7uCQYjVdPSkLAH6r4HXgXNRZ82o6', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `pasienskorpoedji`
+--
+DROP TABLE IF EXISTS `pasienskorpoedji`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pasienskorpoedji`  AS SELECT `skorpoedji`.`id` AS `id`, `skorpoedji`.`noRm` AS `noRm`, `skorpoedji`.`i` AS `i`, `skorpoedji`.`ii` AS `ii`, `skorpoedji`.`iii` AS `iii`, `skorpoedji`.`iiii` AS `iiii`, `sik`.`pasien`.`no_rkm_medis` AS `no_rkm_medis`, `sik`.`pasien`.`no_ktp` AS `no_ktp`, `sik`.`pasien`.`nm_pasien` AS `nm_pasien`, `sik`.`pasien`.`alamat` AS `alamat`, `sik`.`pasien`.`tgl_lahir` AS `tgl_lahir`, `sik`.`pasien`.`jk` AS `jk` FROM (`skorpoedji` join `sik`.`pasien` on(`skorpoedji`.`noRm` = `sik`.`pasien`.`no_rkm_medis`)) ;
 
 --
 -- Indexes for dumped tables
@@ -131,13 +162,13 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT untuk tabel `skorpoedji`
 --
 ALTER TABLE `skorpoedji`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
