@@ -27,8 +27,8 @@
         <div class="col-3">
             <br><br>
         </div>
-        <div class="col-5 border border-dark">
-            <table class="table table-borderless tabel table-sm mt-2">
+        <div class="col-5 border border-dark" style="display: flex; justify-content: center;">
+            <table class="table table-borderless tabel table-sm mt-3">
                 <tr>
                     <td>Nama</td>
                     <td>: <?= $nm_pasien ?></td>
@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 text-center mb-3">
+        <div class="col-12 text-center mb-3 mt-2">
             <h3>SKOR POEDJI ROCHJATI</h1>
         </div>
     </div>

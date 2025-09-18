@@ -30,14 +30,14 @@ class Login extends BaseController
         $user = $usersModel->where('id', $username)->first();
 
         if (empty($user)) {
-            session()->setFlashdata('message', '<span class="text-danger">Username Salah :(</span>');
+            session()->setFlashdata('message', '<small><mark><span class="text-danger">Username Salah :(</span></mark></small>');
             return redirect()->to(base_url() . "/login");
         } else if (password_verify($password, $user['password'])) {
             session()->set('nama', $user["nama"]);
             session()->set('rule', $user["rule"]);
             return redirect()->to(base_url() . "dashboard");
         } else {
-            session()->setFlashdata('message', '<span class="text-danger">Password Salah :(</span>');
+            session()->setFlashdata('message', '<small><mark><span class="text-danger">Password Salah :(</span></mark></small>');
             return redirect()->to(base_url() . "login");
         }
     }

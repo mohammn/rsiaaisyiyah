@@ -8,10 +8,10 @@
         <div class="card-header">
             <button class="btn btn-info" onclick="tryTambah()">Tambah Pasien</button>
             <i class="fas fa-table me-1"></i>
-            Skor Poedji Rochjati
+            Skor poedji rochjati
         </div>
-        <div class="card-body">
-            <table class="table table-striped" id="tabelPasien">
+        <div class="card-body" style="overflow-y: auto;">
+            <table class="table table-striped table-responsive-lg" id="tabelPasien">
                 <thead>
                     <tr>
                         <th>No. RM</th>
@@ -35,15 +35,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Skor Poedji Rochjati</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah skor poedji rochjati</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="p-2">
-                    <b class="h6"> Petunjuk : </b> <i><u> Cari pasien yang akan ditambahkan surat <b class="text-info">Skor Poedji Rochjati</b>, lalua klik tombol <i class="fas fa-plus"></i> di ujung kanan.</u></i>
+                    <b class="h6"><i class="fa-regular fa-circle-question"></i> Petunjuk : </b> <small><mark><i> Cari pasien yang akan ditambahkan surat <b class="text-info">Skor Poedji Rochjati</b>, lalu klik tombol <i class="fas fa-plus"></i> di ujung kanan.</i></mark></small>
                 </div>
-                <div class="card-body">
-                    <table class="table table-striped" id="tabelTambahPasien">
+                <hr>
+                <div class="card-body" style="overflow-y: auto;">
+                    <table class="table table-striped table-responsive" id="tabelTambahPasien">
                         <thead>
                             <tr>
                                 <th>No. RM</th>
@@ -76,9 +77,9 @@
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">SKOR POEDJI ROCHJATI</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body ">
+            <div class="modal-body" style="overflow-y: auto;">
                 <input type="hidden" id="noRm">
-                <table class="table table-bordered table-striped table-hover text-center">
+                <table class="table table-bordered table-striped table-hover text-center table-responsive">
                     <tr>
                         <th rowspan="3" class="table-primary" style="vertical-align: middle;">Kel. F.R.</th>
                         <th rowspan="3" class="table-primary" style="vertical-align: middle;">No.</th>
@@ -1369,17 +1370,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Lihat Skor Poedji Rochjati</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Lihat skor poedji rochjati</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body ">
+            <div class="modal-body" style="overflow-y: auto;">
                 <input type="hidden" id="noRm">
                 <div class="row">
                     <div class="col-12 text-center">
                         <h4 id="namaPasienSkor"></h4>
                     </div>
                 </div>
-                <table class="table table-bordered table-striped table-hover text-center">
+                <table class="table table-bordered table-responsive table-striped table-hover text-center">
                     <tr>
                         <th rowspan="3" class="table-primary" style="vertical-align: middle;">Kel. F.R.</th>
                         <th rowspan="3" class="table-primary" style="vertical-align: middle;">No.</th>
@@ -1744,7 +1745,9 @@
                 }
 
                 $("#tabelDataTambahPasien").html(tabel)
-                $("#tabelTambahPasien").DataTable()
+                $("#tabelTambahPasien").DataTable({
+                    responsive: true
+                })
 
             }
         });

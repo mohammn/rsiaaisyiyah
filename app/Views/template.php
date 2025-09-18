@@ -23,7 +23,32 @@
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script> -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.js"></script>
+    <style>
+        .running-text-container {
+            width: 30%;
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            padding: 5px;
+            margin-left: 65%;
+        }
 
+        .running-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 17s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-100%, 0);
+            }
+        }
+    </style>
 </head>
 
 <body class="sb-nav-fixed">
@@ -33,12 +58,15 @@
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        </div>
+        <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="running-text-container">
+                <div class="running-text">
+                    Selamat datang "<?= session()->get('nama') ?>" di aplikasi rekam medis elektronik RSIA Aisyiyah Bangkalan. Jl. Letnan Ramli No.21, Rw. 02, Keraton, Bangkalan.
+                </div>
             </div>
-        </form>
+        </div>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
