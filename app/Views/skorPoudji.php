@@ -1723,6 +1723,10 @@
     }
 
     function muatTambahPasien() {
+        if ($.fn.DataTable.isDataTable('#tabelTambahPasien')) {
+            $('#tabelTambahPasien').DataTable().destroy();
+            console.log('datatable')
+        }
         $.ajax({
             url: '<?= base_url() ?>skorPoudji/muattambahpasien',
             method: 'post',

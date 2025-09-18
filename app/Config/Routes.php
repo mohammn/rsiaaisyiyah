@@ -6,16 +6,16 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->post('/skorPoudji/tambahpasien', 'skorPoudji::tambahPasien');
-$routes->post('/skorPoudji/hapuspasien', 'skorPoudji::hapusPasien');
-$routes->post('/skorPoudji/muatdatapasien', 'skorPoudji::muatdatapasien');
-$routes->post('/skorPoudji/muattambahpasien', 'skorPoudji::muattambahpasien');
-$routes->post('/skorPoudji/muatpasien', 'skorPoudji::muatPasien');
-$routes->post('/skorPoudji/muatskor', 'skorPoudji::muatSkor');
-$routes->post('/skorPoudji/ubahskor', 'skorPoudji::ubahSkor');
-$routes->get('/skorPoudji/printskor/(:any)', 'skorPoudji::printSkor/$1');
-$routes->get('/skorPoudji', 'skorPoudji::index');
-$routes->get('/', 'dashboard::index');
+$routes->post('/skorPoudji/tambahpasien', 'SkorPoudji::tambahPasien');
+$routes->post('/skorPoudji/hapuspasien', 'SkorPoudji::hapusPasien');
+$routes->post('/skorPoudji/muatdatapasien', 'SkorPoudji::muatDataPasien');
+$routes->post('/skorPoudji/muattambahpasien', 'SkorPoudji::muatTambahPasien');
+$routes->post('/skorPoudji/muatpasien', 'SkorPoudji::muatPasien');
+$routes->post('/skorPoudji/muatskor', 'SkorPoudji::muatSkor');
+$routes->post('/skorPoudji/ubahskor', 'SkorPoudji::ubahSkor');
+$routes->get('/skorPoudji/printskor/(:any)', 'SkorPoudji::printSkor/$1');
+$routes->get('/skorPoudji', 'SkorPoudji::index');
+$routes->get('/', 'Dashboard::index');
 
 $routes->get('/dashboard', 'Dashboard::index');
 
