@@ -1689,14 +1689,17 @@
 
 <script>
     muatData()
+    muatTambahPasien()
 
     function muatData() {
+        if ($.fn.DataTable.isDataTable('#tabelPasien')) {
+            $('#tabelPasien').DataTable().destroy();
+        }
         $.ajax({
             url: '<?= base_url() ?>skorPoudji/muatdatapasien',
             method: 'post',
             dataType: 'json',
             success: function(data) {
-                console.log(data)
                 var tabel = ''
                 for (let i = 0; i < data.length; i++) {
                     tabel += "<tr>" +
@@ -1725,7 +1728,6 @@
     function muatTambahPasien() {
         if ($.fn.DataTable.isDataTable('#tabelTambahPasien')) {
             $('#tabelTambahPasien').DataTable().destroy();
-            console.log('datatable')
         }
         $.ajax({
             url: '<?= base_url() ?>skorPoudji/muattambahpasien',
@@ -1758,7 +1760,6 @@
     }
 
     function tryTambah() {
-        muatTambahPasien()
         $("#modalTambahPasien").modal("show");
     }
 
@@ -1769,8 +1770,8 @@
             data: "noRm=" + noRm,
             dataType: 'json',
             success: function(data) {
-                muatData()
 
+                muatData()
                 $("#modalTambahPasien").modal("hide");
             }
         });

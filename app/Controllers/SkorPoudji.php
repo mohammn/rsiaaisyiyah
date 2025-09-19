@@ -36,15 +36,19 @@ class SkorPoudji extends BaseController
 
     public function tambahPasien()
     {
-        $data = [
-            "noRm" => $this->request->getPost("noRm"),
-            "i" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
-            "ii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
-            "iii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
-            "iiii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0'
-        ];
+        $dataSkor = $this->skorModel->where('noRm', $this->request->getPost("noRm"))->findAll();
+        if (empty($dataSkor)) {
+            $data = [
+                "noRm" => $this->request->getPost("noRm"),
+                "i" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
+                "ii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
+                "iii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
+                "iiii" => '0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0'
+            ];
 
-        $this->skorModel->save($data);
+            $this->skorModel->save($data);
+        }
+
 
         echo json_encode("");
     }
