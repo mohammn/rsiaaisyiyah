@@ -8,6 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>RSIA Aisyiyah</title>
+    <link rel="icon" type="image/x-icon" href="<?= base_url() ?>public/assets/img/rsiaaisyiyahicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="<?= base_url() ?>public/css/styles.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/1745f7e20d.js" crossorigin="anonymous"></script>
@@ -63,7 +64,7 @@
         <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="running-text-container">
                 <div class="running-text">
-                    Selamat datang "<?= session()->get('nama') ?>" di aplikasi rekam medis elektronik RSIA Aisyiyah Bangkalan. Jl. Letnan Ramli No.21, Rw. 02, Keraton, Bangkalan.
+                    <img src="<?= base_url() ?>public/assets/img/run.gif" alt="run" style="width:5%;"> Selamat datang "<?= session()->get('nama') ?>" di aplikasi rekam medis elektronik RSIA Aisyiyah Bangkalan. Jl. Letnan Ramli No.21, Rw. 02, Keraton, Bangkalan.
                 </div>
             </div>
         </div>
@@ -91,7 +92,7 @@
                         <div class="sb-sidenav-menu-heading">Menu</div>
                         <a class="nav-link" href="dashboard">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard ( soon !)
+                            Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#rme" aria-expanded="false" aria-controls="collapseLayouts">
@@ -101,8 +102,7 @@
                         </a>
                         <div class="collapse" id="rme" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">Coming Soon !</a>
-                                <a class="nav-link" href="#">Coming Soon !</a>
+                                <a class="nav-link" href="persetujuanRajal">Persetujuan rawat jalan</a>
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#suratSurat" aria-expanded="false" aria-controls="collapseLayouts">
@@ -113,7 +113,6 @@
                         <div class="collapse" id="suratSurat" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="skorPoudji">Skor Poedji Rochjati</a>
-                                <a class="nav-link" href="#">Coming Soon !</a>
                             </nav>
                         </div>
                         <?php if (session()->get('rule') == 1) { ?>

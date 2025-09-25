@@ -1,7 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.css">
 
     <input type="hidden" id="noRm" value="<?= $noRm ?>">
+
+    <link rel="icon" type="image/x-icon" href="<?= base_url() ?>public/assets/img/rsiaaisyiyahicon.ico">
 
     <style>
         @media print {
@@ -21,6 +27,15 @@
             padding: 1;
         }
     </style>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="<?= base_url() ?>public/assets/img/rsiaaisyiyahicon.ico">
+    <title>Cetak Skor Poedji Rochjati</title>
+</head>
+
+<body>
 
     <div class="row pt-4 m-1">
         <div class="col-4"><br><img src="<?= base_url() ?>public/assets/img/logorsia.png" width="120%" alt=""></div>
@@ -334,103 +349,104 @@
             <td id="totaliiiil"></td>
         </tr>
     </table>
+</body>
 
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script>
-        function lihatSkor() {
-            noRm = $("#noRm").val()
-            $.ajax({
-                url: '<?= base_url() ?>skorPoudji/muatskor',
-                method: 'post',
-                data: "noRm=" + noRm,
-                dataType: 'json',
-                success: function(data) {
-                    datai = data[0].i.split("a")
-                    for (let i = 0; i < datai.length; i++) {
-                        $("#li" + i).html(datai[i])
-                    }
-
-                    dataii = data[0].ii.split("a")
-                    for (let i = 0; i < dataii.length; i++) {
-                        $("#lii" + i).html(dataii[i])
-                    }
-
-                    dataiii = data[0].iii.split("a")
-                    for (let i = 0; i < dataiii.length; i++) {
-                        $("#liii" + i).html(dataiii[i])
-                    }
-
-                    dataiiii = data[0].iiii.split("a")
-                    for (let i = 0; i < dataiiii.length; i++) {
-                        $("#liiii" + i).html(dataiiii[i])
-                    }
-
-                    hitungSkori('l')
-                    hitungSkorii('l')
-                    hitungSkoriii('l')
-                    hitungSkoriiii('l')
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script>
+    function lihatSkor() {
+        noRm = $("#noRm").val()
+        $.ajax({
+            url: '<?= base_url() ?>skorPoudji/muatskor',
+            method: 'post',
+            data: "noRm=" + noRm,
+            dataType: 'json',
+            success: function(data) {
+                datai = data[0].i.split("a")
+                for (let i = 0; i < datai.length; i++) {
+                    $("#li" + i).html(datai[i])
                 }
-            });
-        }
 
-        function hitungSkori(target = '') {
-            total = 0
-            if (target) {
-                for (let i = 0; i < 29; i++) {
-                    total += parseInt($("#li" + i).html(), 10)
+                dataii = data[0].ii.split("a")
+                for (let i = 0; i < dataii.length; i++) {
+                    $("#lii" + i).html(dataii[i])
                 }
-            } else {
-                for (let i = 0; i < 29; i++) {
-                    total += parseInt($("#i" + i).val(), 10)
+
+                dataiii = data[0].iii.split("a")
+                for (let i = 0; i < dataiii.length; i++) {
+                    $("#liii" + i).html(dataiii[i])
                 }
+
+                dataiiii = data[0].iiii.split("a")
+                for (let i = 0; i < dataiiii.length; i++) {
+                    $("#liiii" + i).html(dataiiii[i])
+                }
+
+                hitungSkori('l')
+                hitungSkorii('l')
+                hitungSkoriii('l')
+                hitungSkoriiii('l')
             }
+        });
+    }
 
-            $("#totali" + target).html(total)
-        }
-
-        function hitungSkorii(target = '') {
-            total = 0
-            if (target) {
-                for (let i = 0; i < 29; i++) {
-                    total += parseInt($("#lii" + i).html(), 10)
-                }
-            } else {
-                for (let i = 0; i < 29; i++) {
-                    total += parseInt($("#ii" + i).val(), 10)
-                }
+    function hitungSkori(target = '') {
+        total = 0
+        if (target) {
+            for (let i = 0; i < 29; i++) {
+                total += parseInt($("#li" + i).html(), 10)
             }
-            $("#totalii" + target).html(total)
-        }
-
-        function hitungSkoriii(target = '') {
-            total = 0
-            if (target) {
-                for (let i = 0; i < 29; i++) {
-                    total += parseInt($("#liii" + i).html(), 10)
-                }
-            } else {
-                for (let i = 0; i < 29; i++) {
-                    total += parseInt($("#iii" + i).val(), 10)
-                }
+        } else {
+            for (let i = 0; i < 29; i++) {
+                total += parseInt($("#i" + i).val(), 10)
             }
-            $("#totaliii" + target).html(total)
         }
 
-        function hitungSkoriiii(target = '') {
-            total = 0
-            if (target) {
-                for (let i = 0; i < 29; i++) {
-                    total += parseInt($("#liiii" + i).html(), 10)
-                }
-            } else {
-                for (let i = 0; i < 29; i++) {
-                    total += parseInt($("#iiii" + i).val(), 10)
-                }
+        $("#totali" + target).html(total)
+    }
+
+    function hitungSkorii(target = '') {
+        total = 0
+        if (target) {
+            for (let i = 0; i < 29; i++) {
+                total += parseInt($("#lii" + i).html(), 10)
             }
-            $("#totaliiii" + target).html(total)
-
-            window.print();
+        } else {
+            for (let i = 0; i < 29; i++) {
+                total += parseInt($("#ii" + i).val(), 10)
+            }
         }
+        $("#totalii" + target).html(total)
+    }
 
-        lihatSkor()
-    </script>
+    function hitungSkoriii(target = '') {
+        total = 0
+        if (target) {
+            for (let i = 0; i < 29; i++) {
+                total += parseInt($("#liii" + i).html(), 10)
+            }
+        } else {
+            for (let i = 0; i < 29; i++) {
+                total += parseInt($("#iii" + i).val(), 10)
+            }
+        }
+        $("#totaliii" + target).html(total)
+    }
+
+    function hitungSkoriiii(target = '') {
+        total = 0
+        if (target) {
+            for (let i = 0; i < 29; i++) {
+                total += parseInt($("#liiii" + i).html(), 10)
+            }
+        } else {
+            for (let i = 0; i < 29; i++) {
+                total += parseInt($("#iiii" + i).val(), 10)
+            }
+        }
+        $("#totaliiii" + target).html(total)
+
+        window.print();
+    }
+
+    lihatSkor()
+</script>

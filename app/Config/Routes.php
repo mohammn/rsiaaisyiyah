@@ -15,16 +15,25 @@ $routes->post('/skorPoudji/muatskor', 'SkorPoudji::muatSkor');
 $routes->post('/skorPoudji/ubahskor', 'SkorPoudji::ubahSkor');
 $routes->get('/skorPoudji/printskor/(:any)', 'SkorPoudji::printSkor/$1');
 $routes->get('/skorPoudji', 'SkorPoudji::index');
-$routes->get('/', 'Dashboard::index');
 
+$routes->get('/', 'Dashboard::index');
 $routes->get('/dashboard', 'Dashboard::index');
 
 $routes->get('/login', 'Login::index');
 $routes->post('/login/auth', 'Login::auth');
 $routes->get('/login/logout', 'Login::logout');
 
-
 $routes->get('/user', 'User::index');
 $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
+
+$routes->get('/persetujuanRajal', 'PersetujuanRajal::index');
+$routes->post('/persetujuanRajal/muatdatapasien', 'PersetujuanRajal::muatDataPasien');
+$routes->post('/persetujuanRajal/muattambahpasien', 'PersetujuanRajal::muatTambahPasien');
+$routes->post('/persetujuanRajal/tambahPasien', 'PersetujuanRajal::tambahPasien');
+$routes->post('/persetujuanRajal/simpanTtd', 'PersetujuanRajal::simpanTtd');
+$routes->post('/persetujuanRajal/editpasien', 'PersetujuanRajal::editPasien');
+$routes->post('/persetujuanRajal/hapuspasien', 'PersetujuanRajal::hapusPasien');
+
+$routes->get('/persetujuanRajal/printpersrajal/(:any)', 'PersetujuanRajal::cetakPersRajal/$1');

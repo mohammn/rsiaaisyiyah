@@ -3,12 +3,12 @@
 <?php $this->section('content') ?>
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Surat-surat</h1>
+    <h1 class="mt-4">Skor poedji rochjati</h1>
     <div class="card mb-4">
         <div class="card-header">
             <button class="btn btn-info" onclick="tryTambah()">Tambah Pasien</button>
             <i class="fas fa-table me-1"></i>
-            Skor poedji rochjati
+            Data pasien
         </div>
         <div class="card-body" style="overflow-y: auto;">
             <table class="table table-striped table-responsive-lg" id="tabelPasien">
