@@ -387,7 +387,7 @@
                             (<?= $petugas ?> )
                         </td>
                         <td>
-                            Saksi Keluarga
+                            Saksi
                             <br>
                             <br>
                             <div id="ttdSaksi">
