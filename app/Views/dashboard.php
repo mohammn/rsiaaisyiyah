@@ -9,37 +9,41 @@
     <div class="row">
         <div class="col-xl-3 col-md-6">
             <div class="card bg-primary text-white mb-4">
-                <div class="card-body">Primary Card</div>
+                <div class="card-body">
+                    <div class="small text-white"><i class="fas fa-user"></i> <?= $pasienRajalHariIni ?> Orang</div>
+                </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    Pasien Rawat Jalan Hari ini
                 </div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card bg-warning text-white mb-4">
-                <div class="card-body">Warning Card</div>
+                <div class="card-body">
+                    <div class="small text-white"><i class="fas fa-user"></i> <?= $pasienRajalKemarin ?> Orang</div>
+                </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    Pasien Rawat Jalan Kemarin
                 </div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card bg-success text-white mb-4">
-                <div class="card-body">Success Card</div>
+                <div class="card-body">
+                    <div class="small text-white"><i class="fas fa-user"></i> <?= $pasienRanapHariIni ?> Orang</div>
+                </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    Pasien Rawat Inap Hari ini
                 </div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card bg-danger text-white mb-4">
-                <div class="card-body">Danger Card</div>
+                <div class="card-body">
+                    <div class="small text-white"><i class="fas fa-user"></i> <?= $pasienRanapKemarin ?> Orang</div>
+                </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    Pasien Rawat Inap Kemarin
                 </div>
             </div>
         </div>
@@ -49,127 +53,208 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-chart-area me-1"></i>
-                    Contoh Area Chart
+                    Pasien Rawat Jalan / Bulan
                 </div>
-                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                <div class="card-body"><canvas id="chartPasienRajal" width="100%" height="40"></canvas></div>
             </div>
         </div>
         <div class="col-xl-6">
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-chart-bar me-1"></i>
-                    Contoh Bar Chart
+                    Pasien Rawat Inap / Bulan
                 </div>
-                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                <div class="card-body"><canvas id="chartPasienRanap" width="100%" height="40"></canvas></div>
             </div>
         </div>
     </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<SCript>
-    // Set new default font family and font color to mimic Bootstrap's default styling
-    Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-    Chart.defaults.global.defaultFontColor = '#292b2c';
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/0.7.0/chartjs-plugin-datalabels.min.js"></script>
+<script>
+    chartRajalPerbulan()
+    chartRanapPerbulan()
 
-    // Area Chart Example
-    var ctx = document.getElementById("myAreaChart");
-    var myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ["Mar 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"],
-            datasets: [{
-                label: "Sessions",
-                lineTension: 0.3,
-                backgroundColor: "rgba(2,117,216,0.2)",
-                borderColor: "rgba(2,117,216,1)",
-                pointRadius: 5,
-                pointBackgroundColor: "rgba(2,117,216,1)",
-                pointBorderColor: "rgba(255,255,255,0.8)",
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "rgba(2,117,216,1)",
-                pointHitRadius: 50,
-                pointBorderWidth: 2,
-                data: [10000, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451],
-            }],
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    time: {
-                        unit: 'date'
-                    },
-                    gridLines: {
-                        display: false
-                    },
-                    ticks: {
-                        maxTicksLimit: 7
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        min: 0,
-                        max: 40000,
-                        maxTicksLimit: 5
-                    },
-                    gridLines: {
-                        color: "rgba(0, 0, 0, .125)",
-                    }
+    function chartRajalPerbulan() {
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#292b2c';
+
+        // Area Chart Example
+        var chartRajal = document.getElementById("chartPasienRajal");
+        var chartRajalPerbulan = new Chart(chartRajal, {
+            type: 'line',
+            data: {
+                labels: [
+                    "Januari",
+                    "Februari",
+                    "Maret",
+                    "April",
+                    "Mei",
+                    "Juni",
+                    "Juli",
+                    "Agustus",
+                    "September",
+                    "Oktober",
+                    "November",
+                    "Desember"
+                ],
+                datasets: [{
+                    label: "Pasien ",
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(2,117,216,0.2)",
+                    borderColor: "rgba(2,117,216,1)",
+                    pointRadius: 5,
+                    pointBackgroundColor: "rgba(2,117,216,1)",
+                    pointBorderColor: "rgba(255,255,255,0.8)",
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                    pointHitRadius: 50,
+                    pointBorderWidth: 2,
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 }],
             },
-            legend: {
-                display: false
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: function(value) {
+                            return value;
+                        },
+                        font: {
+                            weight: 'italic'
+                        }
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'date'
+                        },
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 12
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0
+                        },
+                        gridLines: {
+                            color: "rgba(0, 0, 0, .125)",
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                }
+            },
+            // plugin tersedia di global variable ChartDataLabels
+            plugins: [ChartDataLabels]
+        });
+
+        $.ajax({
+            url: '<?= base_url() ?>dashboard/pasienPerBulan',
+            method: 'post',
+            data: "jenis=Ralan",
+            dataType: 'json',
+            success: function(data) {
+                chartRajalPerbulan.data.datasets[0].data = data.total;
+                chartRajalPerbulan.data.labels = data.bulan;
+
+                chartRajalPerbulan.update();
             }
-        }
-    });
+        });
 
 
-    // Set new default font family and font color to mimic Bootstrap's default styling
-    Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-    Chart.defaults.global.defaultFontColor = '#292b2c';
+    }
 
-    // Bar Chart Example
-    var ctx = document.getElementById("myBarChart");
-    var myLineChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["January", "February", "March", "April", "May", "June"],
-            datasets: [{
-                label: "Revenue",
-                backgroundColor: "rgba(2,117,216,1)",
-                borderColor: "rgba(2,117,216,1)",
-                data: [4215, 5312, 6251, 7841, 9821, 14984],
-            }],
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    time: {
-                        unit: 'month'
-                    },
-                    gridLines: {
-                        display: false
-                    },
-                    ticks: {
-                        maxTicksLimit: 6
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        min: 0,
-                        max: 15000,
-                        maxTicksLimit: 5
-                    },
-                    gridLines: {
-                        display: true
-                    }
+
+
+    function chartRanapPerbulan() {
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#292b2c';
+
+        // Bar Chart Example
+        var chartRanap = document.getElementById("chartPasienRanap");
+        var chartRanapPerbulan = new Chart(chartRanap, {
+            type: 'bar',
+            data: {
+                labels: [
+                    "Januari",
+                    "Februari",
+                    "Maret",
+                    "April",
+                    "Mei",
+                    "Juni",
+                    "Juli",
+                    "Agustus",
+                    "September",
+                    "Oktober",
+                    "November",
+                    "Desember"
+                ],
+                datasets: [{
+                    label: "Pasien",
+                    backgroundColor: "rgba(99, 172, 236, 1)",
+                    borderColor: "rgba(112, 179, 237, 1)",
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 }],
             },
-            legend: {
-                display: false
+            options: {
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'month'
+                        },
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 12
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                        },
+                        gridLines: {
+                            display: true
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                }
             }
-        }
-    });
-</SCript>
+        });
+
+        $.ajax({
+            url: '<?= base_url() ?>dashboard/pasienPerBulan',
+            method: 'post',
+            data: "jenis=Ranap",
+            dataType: 'json',
+            success: function(data) {
+                chartRanapPerbulan.data.datasets[0].data = data.total;
+                chartRanapPerbulan.data.labels = data.bulan;
+
+                chartRanapPerbulan.update();
+            }
+        })
+    }
+</script>
 
 <?php $this->endSection() ?>

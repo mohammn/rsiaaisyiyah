@@ -55,7 +55,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-light bg-light">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="dashboard">RSIA Aisyiyah</a>
+        <a class="navbar-brand ps-3" href="dashboard"><img src="<?= base_url() ?>public/assets/img/logorsiaaisyiyah.png" alt="logo RSIA Aisyiyah" style="width:15%;"> RSIA Aisyiyah</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
@@ -64,7 +64,7 @@
         <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="running-text-container">
                 <div class="running-text">
-                    <img src="<?= base_url() ?>public/assets/img/run.gif" alt="run" style="width:5%;"> Selamat datang "<?= session()->get('nama') ?>" di aplikasi rekam medis elektronik RSIA Aisyiyah Bangkalan. Jl. Letnan Ramli No.21, Rw. 02, Keraton, Bangkalan.
+                    <img src="<?= base_url() ?>public/assets/img/gif/pokemon.gif" alt="run" style="width:5%;"> Selamat datang "<?= session()->get('nama') ?>" di aplikasi rekam medis elektronik RSIA Aisyiyah Bangkalan. Jl. Letnan Ramli No.21, Rw. 02, Keraton, Bangkalan.
                 </div>
             </div>
         </div>

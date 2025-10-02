@@ -18,6 +18,7 @@ $routes->get('/skorPoudji', 'SkorPoudji::index');
 
 $routes->get('/', 'Dashboard::index');
 $routes->get('/dashboard', 'Dashboard::index');
+$routes->post('/dashboard/pasienPerBulan', 'Dashboard::pasienPerBulan');
 
 $routes->get('/login', 'Login::index');
 $routes->post('/login/auth', 'Login::auth');
