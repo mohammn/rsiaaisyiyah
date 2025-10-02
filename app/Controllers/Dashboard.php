@@ -3,12 +3,14 @@
 namespace App\Controllers;
 
 use App\Models\RegPeriksaModel;
+use App\Models\KamarInapModel;
 
 class Dashboard extends BaseController
 {
     public function __construct()
     {
         $this->regPeriksaModel = new RegPeriksaModel();
+        $this->kamarInapModel = new KamarInapModel();
     }
 
     public function index()
@@ -24,8 +26,8 @@ class Dashboard extends BaseController
         $data["pasienRajalHariIni"] = $this->regPeriksaModel->where('tgl_registrasi', $tglHariIni)->where('status_lanjut', 'Ralan')->countAllResults();
         $data["pasienRajalKemarin"] = $this->regPeriksaModel->where('tgl_registrasi', $tglKemarin)->where('status_lanjut', 'Ralan')->countAllResults();
 
-        $data["pasienRanapHariIni"] = $this->regPeriksaModel->where('tgl_registrasi', $tglHariIni)->where('status_lanjut', 'Ranap')->countAllResults();
-        $data["pasienRanapKemarin"] = $this->regPeriksaModel->where('tgl_registrasi', $tglKemarin)->where('status_lanjut', 'Ranap')->countAllResults();
+        $data["pasienRanapHariIni"] = $this->kamarInapModel->where('tgl_masuk <=', $tglHariIni)->where('tgl_keluar >=', $tglHariIni)->countAllResults();
+        $data["pasienRanapKemarin"] = $this->kamarInapModel->where('tgl_masuk <=', $tglKemarin)->where('tgl_keluar >=', $tglKemarin)->countAllResults();
 
 
         echo view('dashboard', $data);
@@ -57,13 +59,22 @@ class Dashboard extends BaseController
 
         $jumlahPasien = [];
 
-        for ($i = $index + 1; $i < 12; $i++) {
-            $jumlahPasien[] = $this->regPeriksaModel->where('tgl_registrasi >=', ($tahunSekarang - 1) . "-" . ($i + 1) . "-01")->where('tgl_registrasi <=', ($tahunSekarang - 1) . "-" . ($i + 1)  . "-31")->where('status_lanjut', $jenis)->countAllResults();
+        if ($jenis = "Ralan") {
+            for ($i = $index + 1; $i < 12; $i++) {
+                $jumlahPasien[] = $this->regPeriksaModel->where('tgl_registrasi >=', ($tahunSekarang - 1) . "-" . ($i + 1) . "-01")->where('tgl_registrasi <=', ($tahunSekarang - 1) . "-" . ($i + 1)  . "-31")->where('status_lanjut', $jenis)->countAllResults();
+            }
+            for ($i = 0; $i < $index + 1; $i++) {
+                $jumlahPasien[] = $this->regPeriksaModel->where('tgl_registrasi >=', $tahunSekarang . "-" . ($i + 1) . "-01")->where('tgl_registrasi <=', $tahunSekarang . "-" . ($i + 1) . "-31")->where('status_lanjut', $jenis)->countAllResults();
+            }
+        } else {
+            for ($i = $index + 1; $i < 12; $i++) {
+                $jumlahPasien[] = $this->kamarInapModel->where('tgl_masuk >=', ($tahunSekarang - 1) . "-" . ($i + 1) . "-01")->where('tgl_registrasi <=', ($tahunSekarang - 1) . "-" . ($i + 1)  . "-31")->countAllResults();
+            }
+            for ($i = 0; $i < $index + 1; $i++) {
+                $jumlahPasien[] = $this->kamarInapModel->where('tgl_masuk >=', $tahunSekarang . "-" . ($i + 1) . "-01")->where('tgl_registrasi <=', $tahunSekarang . "-" . ($i + 1) . "-31")->countAllResults();
+            }
         }
 
-        for ($i = 0; $i < $index + 1; $i++) {
-            $jumlahPasien[] = $this->regPeriksaModel->where('tgl_registrasi >=', $tahunSekarang . "-" . ($i + 1) . "-01")->where('tgl_registrasi <=', $tahunSekarang . "-" . ($i + 1) . "-31")->where('status_lanjut', $jenis)->countAllResults();
-        }
 
         $hasil = [
             "bulan" => $urutanBulan,
