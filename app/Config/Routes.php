@@ -6,19 +6,29 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->post('/skorPoudji/tambahpasien', 'SkorPoudji::tambahPasien');
-$routes->post('/skorPoudji/hapuspasien', 'SkorPoudji::hapusPasien');
-$routes->post('/skorPoudji/muatdatapasien', 'SkorPoudji::muatDataPasien');
-$routes->post('/skorPoudji/muattambahpasien', 'SkorPoudji::muatTambahPasien');
-$routes->post('/skorPoudji/muatpasien', 'SkorPoudji::muatPasien');
-$routes->post('/skorPoudji/muatskor', 'SkorPoudji::muatSkor');
-$routes->post('/skorPoudji/ubahskor', 'SkorPoudji::ubahSkor');
-$routes->get('/skorPoudji/printskor/(:any)', 'SkorPoudji::printSkor/$1');
-$routes->get('/skorPoudji', 'SkorPoudji::index');
+$routes->post('/rm/skorPoudji/tambahSkor', 'Rm\SkorPoudji::tambahSkor');
+$routes->post('/rm/skorPoudji/ubahskor', 'Rm\SkorPoudji::ubahSkor');
+$routes->post('/rm/skorPoudji/hapus', 'Rm\SkorPoudji::hapus');
+$routes->get('/rm/skorPoudji/printskor/(:any)', 'Rm\SkorPoudji::printSkor/$1');
+$routes->get('/rm/skorPoudji/muatskor/(:any)', 'Rm\SkorPoudji::muatSkor/$1');
+$routes->get('/rm/skorPoudji/(:any)/(:any)', 'Rm\SkorPoudji::index/$1/$2');
 
 $routes->get('/', 'Dashboard::index');
 $routes->get('/dashboard', 'Dashboard::index');
 $routes->post('/dashboard/pasienPerBulan', 'Dashboard::pasienPerBulan');
+
+$routes->get('/log/muatLog/(:any)', 'Log::muatLog/$1');
+$routes->get('/log', 'Log::index');
+
+$routes->get('/ranap', 'Ranap::index');
+$routes->post('/ranap/muatData', 'Ranap::muatData');
+
+$routes->get('/rajal', 'Rajal::index');
+$routes->post('/rajal/muatData', 'Rajal::muatData');
+
+$routes->get('/igd', 'Igd::index');
+$routes->post('/igd/muatData', 'Igd::muatData');
+
 
 $routes->get('/login', 'Login::index');
 $routes->post('/login/auth', 'Login::auth');
@@ -29,12 +39,39 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
-$routes->get('/persetujuanRajal', 'PersetujuanRajal::index');
-$routes->post('/persetujuanRajal/muatdatapasien', 'PersetujuanRajal::muatDataPasien');
-$routes->post('/persetujuanRajal/muattambahpasien', 'PersetujuanRajal::muatTambahPasien');
-$routes->post('/persetujuanRajal/tambahPasien', 'PersetujuanRajal::tambahPasien');
-$routes->post('/persetujuanRajal/simpanTtd', 'PersetujuanRajal::simpanTtd');
-$routes->post('/persetujuanRajal/editpasien', 'PersetujuanRajal::editPasien');
-$routes->post('/persetujuanRajal/hapuspasien', 'PersetujuanRajal::hapusPasien');
+$routes->get('/rm/persetujuanRajal/jalankanMigrasiTtd', 'Rm\PersetujuanRajal::jalankanMigrasiTtd');
+$routes->post('/rm/persetujuanRajal/ubahWaktu', 'Rm\PersetujuanRajal::ubahWaktu');
+$routes->post('/rm/persetujuanRajal/simpanTtd', 'Rm\PersetujuanRajal::simpanTtd');
+$routes->post('/rm/persetujuanRajal/hapus', 'Rm\PersetujuanRajal::hapus');
+$routes->post('/rm/persetujuanRajal/edit', 'Rm\PersetujuanRajal::edit');
+$routes->get('/rm/persetujuanRajal/cetak/(:any)', 'Rm\PersetujuanRajal::cetak/$1');
+$routes->post('/rm/persetujuanRajal/tambah', 'Rm\PersetujuanRajal::tambah');
+$routes->get('/rm/persetujuanRajal/(:any)', 'Rm\PersetujuanRajal::index/$1');
 
-$routes->get('/persetujuanRajal/printpersrajal/(:any)', 'PersetujuanRajal::cetakPersRajal/$1');
+$routes->post('/rm/dpjp/ubahWaktu', 'Rm\Dpjp::ubahWaktu');
+$routes->post('/rm/dpjp/simpanTtd', 'Rm\Dpjp::simpanTtd');
+$routes->post('/rm/dpjp/hapus', 'Rm\Dpjp::hapus');
+$routes->get('/rm/dpjp/cetak/(:any)', 'Rm\Dpjp::cetak/$1');
+$routes->post('/rm/dpjp/tambah', 'Rm\Dpjp::tambah');
+$routes->get('/rm/dpjp/(:any)', 'Rm\Dpjp::index/$1');
+
+$routes->post('/rm/rekonsiliasiObat/tambahPaket', 'Rm\RekonsiliasiObat::tambahPaket');
+$routes->post('/rm/rekonsiliasiObat/hapusObat', 'Rm\RekonsiliasiObat::hapusObat');
+$routes->get('/rm/rekonsiliasiObat/muatDataObat/(:any)', 'Rm\RekonsiliasiObat::muatDataObat/$1');
+$routes->post('/rm/rekonsiliasiObat/simpanObat', 'Rm\RekonsiliasiObat::simpanObat');
+$routes->get('/rm/rekonsiliasiObat/dataObat/(:any)', 'Rm\RekonsiliasiObat::dataObat/$1');
+
+$routes->get('/rm/rekonsiliasiObat/cetak/(:any)', 'Rm\RekonsiliasiObat::cetak/$1');
+$routes->post('/rm/rekonsiliasiObat/hapus', 'Rm\RekonsiliasiObat::hapus');
+$routes->post('/rm/rekonsiliasiObat/simpan', 'Rm\RekonsiliasiObat::simpan');
+$routes->get('/rm/rekonsiliasiObat/muatData/(:any)', 'Rm\RekonsiliasiObat::muatData/$1');
+$routes->get('/rm/rekonsiliasiObat/(:any)', 'Rm\RekonsiliasiObat::index/$1');
+
+$routes->get('/rm/(:any)', 'Rm::Index/$1');
+
+$routes->get('/pasien', 'Pasien::Index');
+$routes->post('/pasien/lihatPj', 'Pasien::lihatPj');
+$routes->post('/Pasien/simpanPj', 'Pasien::simpanPj');
+
+$routes->get('/pengaturan', 'Pengaturan::Index');
+$routes->post('/pengaturan/ubahWaktu', 'Pengaturan::ubahWaktu');

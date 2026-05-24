@@ -23,10 +23,10 @@
 
 <body class="login" style="background :url(<?= base_url() . "public/assets/img/login.jpg" ?>); height:100%; background-position:center; background-size: cover; no-repeat;">
     <div>
-        <div class="login_wrapper" style="background-color: #98e6b8ff; padding:20px;">
+        <div class="login_wrapper bg-info" style="padding:20px;">
             <form method="post" action="<?= base_url() ?>login/auth">
                 <img src="<?= base_url() ?>public/assets/img/logorsia.png" width="90%" alt="">
-                <h3 class="inline-block">Login</h3>
+                <h3 class="inline-block text-white">Login</h3>
                 <div class="form-group row mt-2">
                     <select class="form-control" id="nama" name="nama">
                         <?php for ($i = 0; $i < count($user); $i++) : ?>
@@ -38,7 +38,7 @@
                     <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
                 </div>
                 <div class="form-group row">
-                    <input type="submit" class="btn btn-success" value="Log in" />
+                    <input type="submit" class="btn btn-primary" value="Log in" />
                 </div>
 
                 <div class="row">
@@ -52,7 +52,7 @@
                     <div class="clearfix"></div>
 
                     <div>
-                        <sub>Made by <b>MN Dev</b> with <i class="fa fa-heart text-danger" aria-hidden="true"></i> to : </sub><br>
+                        <sub>Made by <b>MN Dev</b> with <i class="fa fa-heart text-danger" aria-hidden="true"></i> for : </sub><br>
                         <h4 style="display: inline;"><i style="color: white;" class="fa fa-hospital"></i> RSIA Aisyiyah </h4><sub>Bangkalan</sub>
                     </div>
                 </div>

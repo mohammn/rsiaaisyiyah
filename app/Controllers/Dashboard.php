@@ -7,17 +7,22 @@ use App\Models\KamarInapModel;
 
 class Dashboard extends BaseController
 {
+    protected $regPeriksaModel;
+    protected $kamarInapModel;
+
     public function __construct()
     {
+        if (!session()->get('nama')) {
+            header('Location: ' . base_url('login'));
+            exit();
+        }
+
         $this->regPeriksaModel = new RegPeriksaModel();
         $this->kamarInapModel = new KamarInapModel();
     }
 
     public function index()
     {
-        if (!session()->get('nama')) {
-            return redirect()->to(base_url() . "login");
-        }
         $data = [];
 
         $tglHariIni = date('Y-m-d');

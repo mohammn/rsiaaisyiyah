@@ -8,13 +8,14 @@ class User extends BaseController
 {
     public function __construct()
     {
+        if (!session()->get('nama') or (session()->get('rule') != 1 and session()->get('rule') != 2)) {
+            header('Location: ' . base_url('login'));
+            exit();
+        }
         $this->userModel = new UserModel();
     }
     public function index()
     {
-        if (!session()->get('nama') or session()->get('rule') != 1) {
-            return redirect()->to(base_url() . "login");
-        }
         echo view('user');
     }
     public function muatData()

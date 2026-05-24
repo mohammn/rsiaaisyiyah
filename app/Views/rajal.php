@@ -1,0 +1,99 @@
+<?php $this->extend('template') ?>
+
+<?php $this->section('content') ?>
+
+<div class="container-fluid px-4">
+    <h3 class="mt-4">Pasien Rawat Inap</h3>
+    <div class="card mb-4">
+        <div class="card-header d-flex align-items-center bg-vibrant-blue text-white">
+
+            <span class="me-2">Menampilkan data pasien mulai tanggal:</span>
+            <input type="date" value="<?= date('Y-m-d'); ?>" onchange="muatData()" class="form-control me-3" id="tglMulai" style="width: auto;">
+
+            <span class="me-2">Sampai tanggal:</span>
+            <input type="date" value="<?= date('Y-m-d'); ?>" onchange="muatData()" class="form-control" id="tglAkhir" style="width: auto;">
+
+        </div>
+        <div class="card-body" style="overflow-y: auto;">
+            <table class="table table-striped table-responsive-lg" id="tabelPasien">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>No Rawat</th>
+                        <th>Nama Pasien</th>
+                        <th>No RM</th>
+                        <th>Poli</th>
+                        <th>Dokter</th>
+                        <th>Tgl Registrasi</th>
+                        <th>Jam Registrasi</th>
+                        <th>Status Lanjut</th>
+                        <th>Status Bayar</th>
+                        <th>Status Poli</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelDataPasien">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    muatData();
+
+    function muatData() {
+        $.ajax({
+            url: '<?= base_url() ?>rajal/muatData',
+            data: 'tglMulai=' + $("#tglMulai").val() + '&tglAkhir=' + $("#tglAkhir").val(),
+            method: 'post',
+            dataType: 'json',
+            beforeSend: function() {
+                // 1. Hancurkan DataTable jika sudah ada sebelumnya agar tidak error "Cannot reinitialise"
+                if ($.fn.DataTable.isDataTable('#tabelPasien')) {
+                    $('#tabelPasien').DataTable().destroy();
+                }
+                // 2. Tampilkan loading spinner
+                $("#tabelDataPasien").html("<tr><td colspan='11' class='text-center'><i class='fas fa-spinner fa-spin'></i> Memuat data...</td></tr>");
+            },
+            success: function(data) {
+                console.log(data);
+                let baris = '';
+                for (let i = 0; i < data.length; i++) {
+                    let baseUrl = '<?= base_url() ?>';
+                    let noRawatUrl = data[i].no_rawat.replace(/\//g, '-'); // Mengganti '/' menjadi '-' untuk URL
+
+                    baris += '<tr>';
+                    baris += '<td>' + (i + 1) + '</td>';
+                    baris += '<td>';
+                    baris += '    <a href="' + baseUrl + 'rm/' + noRawatUrl + '" class="link text-brand">';
+                    baris += '        ' + data[i].no_rawat;
+                    baris += '    </a>';
+                    baris += '</td>';
+                    baris += '<td>' + (data[i].nm_pasien ?? '-') + '</td>';
+                    baris += '<td>' + data[i].no_rkm_medis + '</td>';
+                    baris += '<td>' + (data[i].nm_poli ?? '-') + '</td>';
+                    baris += '<td>' + (data[i].nm_dokter ?? '-') + '</td>';
+                    baris += '<td>' + data[i].tgl_registrasi + '</td>';
+                    baris += '<td>' + data[i].jam_reg + '</td>';
+                    baris += '<td>' + data[i].status_lanjut + '</td>';
+                    baris += '<td>' + data[i].status_bayar + '</td>';
+                    baris += '<td>' + data[i].status_poli + '</td>';
+                    baris += '</tr>';
+                }
+
+                $("#tabelDataPasien").html(baris);
+
+                // 4. Inisialisasi ulang DataTable
+                $('#tabelPasien').DataTable({
+                    "language": {
+                        "url": "<?= base_url('public/js/Indonesian.json') ?>" // Opsional: Bahasa Indonesia
+                    },
+                    "responsive": true,
+                    "retrieve": true // Memastikan data baru yang diambil masuk ke table
+                });
+            }
+        });
+    }
+</script>
+
+<?php $this->endSection() ?>

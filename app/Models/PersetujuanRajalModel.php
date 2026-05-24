@@ -8,5 +8,5 @@ class PersetujuanRajalModel extends Model
 {
     protected $table      = 'persetujuanrajal';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['noRm', 'nama', 'noHp', 'alamat', 'sebagai', 'petugas', 'saksi', 'keluarga', 'pembayaran', 'selesai', 'ttdWali', 'ttdSaksi'];
+    protected $allowedFields = ['noRm', 'nama', 'noHp', 'alamat', 'sebagai', 'petugas', 'saksi', 'keluarga', 'pembayaran', 'selesai', 'ttdWali', 'ttdSaksi', 'tglinput'];
 }
