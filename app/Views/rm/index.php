@@ -130,14 +130,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>2.</td>
+                            <td>3.</td>
                             <td>Formulir Pemilihan DPJP</td>
                             <td>
                                 <?= $data->dpjp ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/dpjp/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
                             </td>
                         </tr>
                         <tr>
-                            <td>2.</td>
+                            <td>4.</td>
                             <td>Rekonsiliasi Obat</td>
                             <td>
                                 <?= $data->rekonsiliasiObat ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/rekonsiliasiObat/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>

@@ -180,98 +180,98 @@ class PersetujuanRajal extends BaseController
         ]);
     }
 
-    public function jalankanMigrasiTtd()
-    {
-        // Tambah batas waktu eksekusi agar tidak timeout
-        set_time_limit(300);
+    // public function jalankanMigrasiTtd()
+    // {
+    //     // Tambah batas waktu eksekusi agar tidak timeout
+    //     set_time_limit(300);
 
-        $semuaData = $this->persetujuanRajalModel->findAll();
+    //     $semuaData = $this->persetujuanRajalModel->findAll();
 
-        // PERBAIKAN: Menggunakan ROOTPATH agar pasti masuk ke folder public yang benar
-        $folderTujuan = ROOTPATH . 'public/ttd/persRajal/';
+    //     // PERBAIKAN: Menggunakan ROOTPATH agar pasti masuk ke folder public yang benar
+    //     $folderTujuan = ROOTPATH . 'public/ttd/persRajal/';
 
-        // Buat folder tujuan secara rekursif jika belum ada
-        if (!is_dir($folderTujuan)) {
-            mkdir($folderTujuan, 0777, true);
-        }
+    //     // Buat folder tujuan secara rekursif jika belum ada
+    //     if (!is_dir($folderTujuan)) {
+    //         mkdir($folderTujuan, 0777, true);
+    //     }
 
-        $jumlahWaliTerubah = 0;
-        $jumlahSaksiTerubah = 0;
-        $errorLog = [];
+    //     $jumlahWaliTerubah = 0;
+    //     $jumlahSaksiTerubah = 0;
+    //     $errorLog = [];
 
-        foreach ($semuaData as $row) {
-            $noRm = $row['noRm'];
-            $dataUpdate = ['id' => $row['id']]; // Sesuaikan nama Primary Key tabel kamu
-            $eksekusiUpdate = false;
+    //     foreach ($semuaData as $row) {
+    //         $noRm = $row['noRm'];
+    //         $dataUpdate = ['id' => $row['id']]; // Sesuaikan nama Primary Key tabel kamu
+    //         $eksekusiUpdate = false;
 
-            // Fungsi lokal untuk memproses decoding Base64 dan penulisan file fisik
-            $prosesFile = function ($fieldData, $suffix) use ($folderTujuan, $noRm, &$errorLog) {
-                if (empty($fieldData) || str_contains((string)$fieldData, '.png')) {
-                    return false;
-                }
+    //         // Fungsi lokal untuk memproses decoding Base64 dan penulisan file fisik
+    //         $prosesFile = function ($fieldData, $suffix) use ($folderTujuan, $noRm, &$errorLog) {
+    //             if (empty($fieldData) || str_contains((string)$fieldData, '.png')) {
+    //                 return false;
+    //             }
 
-                $namaFile = $noRm . $suffix . '.png';
-                $fullPath = $folderTujuan . $namaFile;
+    //             $namaFile = $noRm . $suffix . '.png';
+    //             $fullPath = $folderTujuan . $namaFile;
 
-                // Jika data berupa resource stream dari database
-                if (is_resource($fieldData)) {
-                    $fieldData = stream_get_contents($fieldData);
-                }
+    //             // Jika data berupa resource stream dari database
+    //             if (is_resource($fieldData)) {
+    //                 $fieldData = stream_get_contents($fieldData);
+    //             }
 
-                // Decode data Base64 dari Canvas
-                if (str_contains((string)$fieldData, 'data:image/png;base64,')) {
-                    $rawBase64 = explode(',', $fieldData);
-                    $dataBiner = base64_decode($rawBase64[1]);
-                } else {
-                    $dataBiner = $fieldData; // Fallback jika ternyata biner murni
-                }
+    //             // Decode data Base64 dari Canvas
+    //             if (str_contains((string)$fieldData, 'data:image/png;base64,')) {
+    //                 $rawBase64 = explode(',', $fieldData);
+    //                 $dataBiner = base64_decode($rawBase64[1]);
+    //             } else {
+    //                 $dataBiner = $fieldData; // Fallback jika ternyata biner murni
+    //             }
 
-                // Tulis file ke target folder di public/ttd/persRajal/
-                if (file_put_contents($fullPath, $dataBiner) !== false) {
-                    return $namaFile;
-                } else {
-                    $errorLog[] = "Gagal menulis file fisik di folder public untuk RM: " . $noRm;
-                    return false;
-                }
-            };
+    //             // Tulis file ke target folder di public/ttd/persRajal/
+    //             if (file_put_contents($fullPath, $dataBiner) !== false) {
+    //                 return $namaFile;
+    //             } else {
+    //                 $errorLog[] = "Gagal menulis file fisik di folder public untuk RM: " . $noRm;
+    //                 return false;
+    //             }
+    //         };
 
-            // Eksekusi TTD Wali
-            $hasilWali = $prosesFile($row['ttdWali'], '_wali');
-            if ($hasilWali !== false) {
-                $dataUpdate['ttdWali'] = $hasilWali;
-                $eksekusiUpdate = true;
-                $jumlahWaliTerubah++;
-            }
+    //         // Eksekusi TTD Wali
+    //         $hasilWali = $prosesFile($row['ttdWali'], '_wali');
+    //         if ($hasilWali !== false) {
+    //             $dataUpdate['ttdWali'] = $hasilWali;
+    //             $eksekusiUpdate = true;
+    //             $jumlahWaliTerubah++;
+    //         }
 
-            // Eksekusi TTD Saksi
-            $hasilSaksi = $prosesFile($row['ttdSaksi'], '_saksi');
-            if ($hasilSaksi !== false) {
-                $dataUpdate['ttdSaksi'] = $hasilSaksi;
-                $eksekusiUpdate = true;
-                $jumlahSaksiTerubah++;
-            }
+    //         // Eksekusi TTD Saksi
+    //         $hasilSaksi = $prosesFile($row['ttdSaksi'], '_saksi');
+    //         if ($hasilSaksi !== false) {
+    //             $dataUpdate['ttdSaksi'] = $hasilSaksi;
+    //             $eksekusiUpdate = true;
+    //             $jumlahSaksiTerubah++;
+    //         }
 
-            // Database HANYA di-update jika file fisik sukses tertulis di folder public yang benar
-            if ($eksekusiUpdate) {
-                $this->persetujuanRajalModel->save($dataUpdate);
-            }
-        }
+    //         // Database HANYA di-update jika file fisik sukses tertulis di folder public yang benar
+    //         if ($eksekusiUpdate) {
+    //             $this->persetujuanRajalModel->save($dataUpdate);
+    //         }
+    //     }
 
-        // Tampilkan Laporan Akhir
-        echo "<h2>Hasil Migrasi Sukses (Path Terbuka):</h2>";
-        echo "Sukses TTD Wali: " . $jumlahWaliTerubah . " file.<br>";
-        echo "Sukses TTD Saksi: " . $jumlahSaksiTerubah . " file.<br>";
-        echo "Lokasi fisik saat ini: <code>" . $folderTujuan . "</code><br>";
+    //     // Tampilkan Laporan Akhir
+    //     echo "<h2>Hasil Migrasi Sukses (Path Terbuka):</h2>";
+    //     echo "Sukses TTD Wali: " . $jumlahWaliTerubah . " file.<br>";
+    //     echo "Sukses TTD Saksi: " . $jumlahSaksiTerubah . " file.<br>";
+    //     echo "Lokasi fisik saat ini: <code>" . $folderTujuan . "</code><br>";
 
-        if (!empty($errorLog)) {
-            echo "<h3>Log Error:</h3><ul>";
-            foreach ($errorLog as $err) {
-                echo "<li style='color:red;'>$err</li>";
-            }
-            echo "</ul>";
-        } else {
-            echo "<h3 style='color:green;'>Selamat! Semua file sukses masuk ke folder public/ttd/persRajal/</h3>";
-        }
-        exit;
-    }
+    //     if (!empty($errorLog)) {
+    //         echo "<h3>Log Error:</h3><ul>";
+    //         foreach ($errorLog as $err) {
+    //             echo "<li style='color:red;'>$err</li>";
+    //         }
+    //         echo "</ul>";
+    //     } else {
+    //         echo "<h3 style='color:green;'>Selamat! Semua file sukses masuk ke folder public/ttd/persRajal/</h3>";
+    //     }
+    //     exit;
+    // }
 }
