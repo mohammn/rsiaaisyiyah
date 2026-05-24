@@ -18,8 +18,8 @@
 # =======================================================
 # KONFIGURASI FOLDER TANDA TANGAN (TTD)
 # =======================================================
-# Abaikan semua file hasil upload di subfolder manapun di dalam /public/ttd/
-/public/ttd/**/*
+# Abaikan semua file di dalam folder ttd dan semua subfoldernya (cukup 2 bintang)
+/public/ttd/**
 
-# KECUALI file .gitkeep, agar struktur foldernya tidak hilang saat di-push ke Git
+# KECUALI semua file .gitkeep yang ada di subfolder manapun di dalam /public/ttd/
 !/public/ttd/**/.gitkeep
