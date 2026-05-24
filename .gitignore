@@ -1,0 +1,25 @@
+.env
+/vendor/
+
+# =======================================================
+# KONFIGURASI FOLDER WRITABLE (BAWAAN CI4)
+# =======================================================
+/writable/cache/*
+!/writable/cache/.gitkeep
+/writable/debugbar/*
+!/writable/debugbar/.gitkeep
+/writable/logs/*
+!/writable/logs/.gitkeep
+/writable/session/*
+!/writable/session/.gitkeep
+/writable/uploads/*
+!/writable/uploads/.gitkeep
+
+# =======================================================
+# KONFIGURASI FOLDER TANDA TANGAN (TTD)
+# =======================================================
+# Abaikan semua file hasil upload di subfolder manapun di dalam /public/ttd/
+/public/ttd/**/*
+
+# KECUALI file .gitkeep, agar struktur foldernya tidak hilang saat di-push ke Git
+!/public/ttd/**/.gitkeep
