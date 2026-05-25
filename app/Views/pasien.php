@@ -135,7 +135,7 @@
         $("#modalPj").modal("show");
 
         $.ajax({
-            url: '<?= base_url() ?>pjPasien/lihatPj',
+            url: '<?= base_url() ?>pasien/lihatPj',
             method: 'post',
             data: 'noRm=' + noRm,
             dataType: 'json',
@@ -189,7 +189,7 @@
             $("#alamatPj").focus();
         } else {
             $.ajax({
-                url: '<?= base_url() ?>pjPasien/simpanPj',
+                url: '<?= base_url() ?>pasien/simpanPj',
                 method: 'post',
                 data: 'noRm=' + noRm + '&namaPj=' + namaPj + '&nikPj=' + nikPj + '&tglLahirPj=' + tglLahirPj + '&tempatLahirPj=' + tempatLahirPj + '&jkPj=' + jkPj + '&alamatPj=' + alamatPj,
                 dataType: 'json',
