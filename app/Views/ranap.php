@@ -48,16 +48,39 @@
 </div>
 
 <script>
+    let tglMulai = sessionStorage.getItem('tglMulaiRanap');
+    let tglAkhir = sessionStorage.getItem('tglAkhirRanap');
+    let status = sessionStorage.getItem('status');
+
+    if (tglMulai && tglAkhir && status) {
+        $('#tglMulai').val(tglMulai);
+        $('#tglAkhir').val(tglAkhir);
+        $('#status').val(status);
+    } else {
+        let hariIni = new Date().toLocaleDateString('sv-SE'); // Lebih aman dari isu timezone
+
+        $('#tglMulai').val(hariIni);
+        $('#tglAkhir').val(hariIni);
+        $('#status').val('belum');
+
+        sessionStorage.setItem('tglMulaiRanap', hariIni);
+        sessionStorage.setItem('tglAkhirRanap', hariIni);
+        sessionStorage.setItem('status', 'belum');
+    }
+
     muatData();
 
     function muatData() {
+        sessionStorage.setItem('tglMulaiRanap', $("#tglMulai").val());
+        sessionStorage.setItem('tglAkhirRanap', $("#tglAkhir").val());
+        sessionStorage.setItem('status', $("#status").val());
+
         $.ajax({
             url: '<?= base_url() ?>ranap/muatData',
             data: 'tglMulai=' + $("#tglMulai").val() + '&tglAkhir=' + $("#tglAkhir").val() + '&status=' + $("#status").val(),
             method: 'post',
             dataType: 'json',
             beforeSend: function() {
-                // 1. Hancurkan DataTable jika sudah ada sebelumnya agar tidak error "Cannot reinitialise"
                 if ($.fn.DataTable.isDataTable('#tabelPasien')) {
                     $('#tabelPasien').DataTable().destroy();
                 }
@@ -65,7 +88,10 @@
                 $("#tabelDataPasien").html("<tr><td colspan='11' class='text-center'><i class='fas fa-spinner fa-spin'></i> Memuat data...</td></tr>");
             },
             success: function(data) {
-                console.log(data);
+                sessionStorage.setItem('tglMulai', $("#tglMulai").val());
+                sessionStorage.setItem('tglAkhir', $("#tglAkhir").val());
+                sessionStorage.setItem('status', $("#status").val());
+
                 let baris = '';
                 for (let i = 0; i < data.length; i++) {
                     let baseUrl = '<?= base_url() ?>';
@@ -113,6 +139,7 @@
                             "sLast": "Terakhir"
                         }
                     },
+                    "stateSave": true,
                     "responsive": true,
                     "retrieve": true
                 });

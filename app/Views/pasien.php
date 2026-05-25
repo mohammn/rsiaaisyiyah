@@ -61,7 +61,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6 mb-3 mb-md-0">
                             <label for="nik" class="form-label fw-bold">NIK</label>
-                            <input type="number" id="nikPj" class="form-control" placeholder="Masukkan 16 digit NIK">
+                            <input type="text" id="nikPj" class="form-control" placeholder="Masukkan 16 digit NIK">
                         </div>
                         <div class="col-md-6">
                             <label for="jkPj" class="form-label fw-bold">Jenis Kelamin</label>
@@ -158,7 +158,7 @@
 
     function resetIsian() {
         $("#namaPj").val("");
-        $("#nikPj").val(null);
+        $("#nikPj").val("");
         $("#tglLahirPj").val("");
         $("#tempatLahirPj").val("");
         $("#jkPj").val("");
