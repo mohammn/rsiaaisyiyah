@@ -103,10 +103,21 @@
 <script>
     $('#tabelPasien').DataTable({
         "language": {
-            "url": "<?= base_url('public/js/Indonesian.json') ?>" // Opsional: Bahasa Indonesia
+            // Kita gunakan objek ajax di dalam language agar tipenya dipaksa menjadi JSON
+            "url": "<?= base_url('public/js/Indonesian.json') ?>",
+            "ajax": {
+                "url": "<?= base_url('public/js/Indonesian.json') ?>",
+                "dataType": "json",
+                "beforeSend": function(xhr) {
+                    // Memaksa browser (terutama Firefox) untuk override MIME-type menjadi JSON sebelum dikirim
+                    if (xhr.overrideMimeType) {
+                        xhr.overrideMimeType("application/json");
+                    }
+                }
+            }
         },
         "responsive": true,
-        "retrieve": true // Memastikan data baru yang diambil masuk ke table
+        "retrieve": true
     });
 
     function lihatPj(noRm, namaPasien, namaPj, alamatPj) {
