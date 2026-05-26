@@ -3,7 +3,7 @@
 <?php $this->section('content') ?>
 
 <div class="container-fluid px-4">
-    <h3 class="mt-4">Pasien Rawat Inap</h3>
+    <h3 class="mt-4">Pasien Rawat Jalan</h3>
     <div class="card mb-4">
         <div class="card-header d-flex align-items-center bg-vibrant-blue text-white">
 
