@@ -18,6 +18,7 @@ class Rajal extends BaseController
     }
     public function index()
     {
+        session()->set('kembali', 'rajal');
         echo view('rajal');
     }
 

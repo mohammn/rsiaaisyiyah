@@ -18,6 +18,7 @@ class Igd extends BaseController
     }
     public function index()
     {
+        session()->set('kembali', 'igd');
         echo view('igd');
     }
 

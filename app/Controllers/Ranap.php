@@ -18,7 +18,7 @@ class Ranap extends BaseController
     }
     public function index()
     {
-
+        session()->set('kembali', 'ranap');
         echo view('ranap');
     }
 

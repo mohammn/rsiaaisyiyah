@@ -13,6 +13,7 @@
     <div class="card mb-4">
         <div class="card-header d-flex align-items-center">
             <span class="me-2">
+                <a class="btn btn-estetik btn-simpan" href="<?= base_url(session()->get('kembali')) ?>">Kembali</a>
                 <button type="button" class="btn btn-estetik btn-lihat" data-bs-toggle="modal" data-bs-target="#modalTambahForm">
                     Daftar Form
                 </button>
@@ -199,76 +200,6 @@
         "responsive": true,
         "retrieve": true
     });
-
-    function muatData() {
-        $.ajax({
-            url: '<?= base_url() ?>igd/muatData',
-            data: 'tglMulai=' + $("#tglMulai").val() + '&tglAkhir=' + $("#tglAkhir").val(),
-            method: 'post',
-            dataType: 'json',
-            beforeSend: function() {
-                // 1. Hancurkan DataTable jika sudah ada sebelumnya agar tidak error "Cannot reinitialise"
-                if ($.fn.DataTable.isDataTable('#tabelPasien')) {
-                    $('#tabelPasien').DataTable().destroy();
-                }
-                // 2. Tampilkan loading spinner
-                $("#tabelDataPasien").html("<tr><td colspan='11' class='text-center'><i class='fas fa-spinner fa-spin'></i> Memuat data...</td></tr>");
-            },
-            success: function(data) {
-                console.log(data);
-                let baris = '';
-                for (let i = 0; i < data.length; i++) {
-                    // Definisikan base URL di bagian atas script atau kirim dari view ke JS
-                    let baseUrl = '<?= base_url() ?>';
-
-                    let noRawatUrl = data[i].no_rawat.replace(/\//g, '-'); // Mengganti '/' menjadi '-' untuk URL
-
-                    baris += '<tr>';
-                    baris += '<td>' + (i + 1) + '</td>';
-                    baris += '<td>';
-                    baris += '    <a href="' + baseUrl + 'pasien/rm/' + noRawatUrl + '" class="link text-brand">';
-                    baris += '        ' + data[i].no_rawat;
-                    baris += '    </a>';
-                    baris += '</td>';
-                    baris += '<td>' + (data[i].nm_pasien ?? '-') + '</td>';
-                    baris += '<td>' + data[i].no_rkm_medis + '</td>';
-                    baris += '<td>' + (data[i].nm_poli ?? '-') + '</td>';
-                    baris += '<td>' + (data[i].nm_dokter ?? '-') + '</td>';
-                    baris += '<td>' + data[i].tgl_registrasi + '</td>';
-                    baris += '<td>' + data[i].jam_reg + '</td>';
-                    baris += '<td>' + data[i].status_lanjut + '</td>';
-                    baris += '<td>' + data[i].status_bayar + '</td>';
-                    baris += '<td>' + data[i].status_poli + '</td>';
-                    baris += '</tr>';
-                }
-
-                $("#tabelDataPasien").html(baris);
-                // 4. Inisialisasi ulang DataTable
-                $('#tabelPasien').DataTable({
-                    "language": {
-                        "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
-                        "sProcessing": "Sedang memproses...",
-                        "sLengthMenu": "Tampilkan _MENU_ entri",
-                        "sZeroRecords": "Tidak ditemukan data yang sesuai",
-                        "sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-                        "sInfoEmpty": "Menampilkan 0 sampai 0 dari 0 entri",
-                        "sInfoFiltered": "(disaring dari _MAX_ entri keseluruhan)",
-                        "sInfoPostFix": "",
-                        "sSearch": "Cari:",
-                        "sUrl": "",
-                        "paginate": { // <-- Di sini diubah dari oPaginate menjadi paginate
-                            "sFirst": "Pertama",
-                            "sPrevious": "Sebelumnya",
-                            "sNext": "Selanjutnya",
-                            "sLast": "Terakhir"
-                        }
-                    },
-                    "responsive": true,
-                    "retrieve": true
-                });
-            }
-        });
-    }
 
     $(document).ready(function() {
         if (window.location.hash === '#modalTambahForm') {
