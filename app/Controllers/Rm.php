@@ -8,6 +8,7 @@ use App\Models\PersetujuanRajalModel;
 use App\Models\DpjpModel;
 use App\Models\RekonsiliasiObatModel;
 use App\Models\RekonsiliasiObatDataModel;
+use App\Models\IcGeneralModel;
 
 use function PHPSTORM_META\type;
 
@@ -19,6 +20,7 @@ class Rm extends BaseController
     protected $dpjpModel;
     protected $rekonsiliasiObatModel;
     protected $rekonsiliasiObatDataModel;
+    protected $icGeneralModel;
 
     public function __construct()
     {
@@ -32,6 +34,7 @@ class Rm extends BaseController
         $this->dpjpModel = new DpjpModel();
         $this->rekonsiliasiObatModel = new RekonsiliasiObatModel();
         $this->rekonsiliasiObatDataModel = new RekonsiliasiObatDataModel();
+        $this->icGeneralModel = new IcGeneralModel();
     }
     public function index($no_rawat)
     {
@@ -57,19 +60,25 @@ class Rm extends BaseController
         $dpjp = $this->dpjpModel->where('noRawat', $no_rawat)->first();
         $rekonsiliasiObat = $this->rekonsiliasiObatModel->where('noRawat', $no_rawat)->first();
         $rekonsiliasiObatData = $this->rekonsiliasiObatDataModel->where('noRawat', $no_rawat)->first();
+        $icGeneral = $this->icGeneralModel->where('noRawat', $no_rawat)->findAll();
 
 
-        //status data=====================
+        //===========status data=====================
         $statusSKorPoudji = [];
         for ($i = 0; $i < count($skorPoudji); $i++) {
             $statusSKorPoudji[$i] = $this->cekSemuaKolom($skorPoudji[$i]);
+        }
+        $statusIcGeneral = [];
+        for ($i = 0; $i < count($icGeneral); $i++) {
+            $statusIcGeneral[$i] = $this->cekSemuaKolom($icGeneral[$i], ['ttdWali', 'ttdSaksi']);
         }
 
         $status = [
             "skorPoudji" => $statusSKorPoudji,
             "persRajal" => $this->cekSemuaKolom($persRajal, ['selesai', 'ttdWali', 'ttdSaksi']),
             "dpjp" => $this->cekSemuaKolom($dpjp, ['ttdWali']),
-            "rekonsiliasiObat" => $this->statusRekonsiliasiObat($rekonsiliasiObat, $rekonsiliasiObatData)
+            "rekonsiliasiObat" => $this->statusRekonsiliasiObat($rekonsiliasiObat, $rekonsiliasiObatData),
+            "icGeneral" => $statusIcGeneral,
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -79,6 +88,7 @@ class Rm extends BaseController
             'persRajal'  => $persRajal,    // Biarkan null jika data tidak ada
             'dpjp'  => $dpjp,    // Biarkan null jika data tidak ada
             'rekonsiliasiObat'  => $rekonsiliasiObat,    // Biarkan null jika data tidak ada
+            'icGeneral'  => $icGeneral,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 

@@ -48,6 +48,13 @@ $routes->get('/rm/persetujuanRajal/cetak/(:any)', 'Rm\PersetujuanRajal::cetak/$1
 $routes->post('/rm/persetujuanRajal/tambah', 'Rm\PersetujuanRajal::tambah');
 $routes->get('/rm/persetujuanRajal/(:any)', 'Rm\PersetujuanRajal::index/$1');
 
+$routes->post('/rm/icGeneral/ubahWaktu', 'Rm\IcGeneral::ubahWaktu');
+$routes->post('/rm/icGeneral/simpanTtd', 'Rm\IcGeneral::simpanTtd');
+$routes->post('/rm/icGeneral/hapus', 'Rm\IcGeneral::hapus');
+$routes->get('/rm/icGeneral/cetak/(:any)', 'Rm\IcGeneral::cetak/$1');
+$routes->post('/rm/icGeneral/simpan', 'Rm\IcGeneral::simpan');
+$routes->get('/rm/icGeneral/(:any)', 'Rm\IcGeneral::index/$1');
+
 $routes->post('/rm/dpjp/ubahWaktu', 'Rm\Dpjp::ubahWaktu');
 $routes->post('/rm/dpjp/simpanTtd', 'Rm\Dpjp::simpanTtd');
 $routes->post('/rm/dpjp/hapus', 'Rm\Dpjp::hapus');
