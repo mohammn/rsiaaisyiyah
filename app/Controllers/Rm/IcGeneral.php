@@ -112,6 +112,9 @@ class IcGeneral extends BaseController
         } else {
             $id = $this->request->getPost("tujuanSimpan");
             unset($data['noRawat']);
+
+            $this->catatLog('ubah', 'ic_general', $id, $this->icGeneralModel->where('id', $id)->first(), $data);
+
             $this->icGeneralModel->where('id', $id)->set($data)->update();
         }
 
@@ -138,7 +141,7 @@ class IcGeneral extends BaseController
     public function hapus()
     {
         $id = $this->request->getPost("id");
-        $this->catatLog('hapus', 'dpjp', $id, $this->icGeneralModel->where('id', $id)->first());
+        $this->catatLog('hapus', 'ic_general', $id, $this->icGeneralModel->where('id', $id)->first());
 
         $this->icGeneralModel->where("id", $id)->delete();
         echo json_encode("");
