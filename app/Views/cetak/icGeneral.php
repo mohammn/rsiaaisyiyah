@@ -209,7 +209,7 @@ $today = new \DateTime();
                     </tr>
                     <tr>
                         <td colspan="2">Pemberi informasi</td>
-                        <td colspan="2"><?= $data->icGeneral['petugas'] ?></td>
+                        <td colspan="2"><?= $data->icGeneral['dokter'] ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">Penerima informasi</td>
