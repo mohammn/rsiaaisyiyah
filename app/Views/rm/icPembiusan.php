@@ -1,8 +1,8 @@
 <?php
 
 /** @var object $data */
-if ($data->icGeneral) {
-    $tglLahir = new \DateTime($data->icGeneral["tanggalLahir"]);
+if ($data->icPembiusan) {
+    $tglLahir = new \DateTime($data->icPembiusan["tanggalLahir"]);
 }
 ?>
 
@@ -18,14 +18,14 @@ if ($data->icGeneral) {
         </div>
         <div class="card-body" style="overflow-y: auto;">
             <div class="text-center">
-                <h5 class="text-uppercase"><i>INFORMED CONCENT</i> <?= $data->icGeneral ? $data->icGeneral['judul'] : '' ?></h5>
+                <h5 class="text-uppercase"><i>INFORMED CONSENT</i> TINDAKAN PEMBIUSAN <br>(ANESTESI REGIONAL, UMUM/SEDASI)</h5>
                 Untuk pasien : <b><?= $data->pasien["nm_pasien"] ?></b> (<?= $data->pasien["no_rkm_medis"] ?>). NIK: <?= $data->pasien["no_ktp"] ?><br>
                 No Rawat : <b><?= $data->pasien["no_rawat"] ?></b>. Lahir : <?= $data->pasien["tgl_lahir"] ?> <br>
                 Alamat : <?= $data->pasien["alamat"] ?>
                 <hr>
             </div>
 
-            <?php if ($data->icGeneral) : ?>
+            <?php if ($data->icPembiusan) : ?>
                 <div class="row">
 
                     <div class="col-6">
@@ -38,23 +38,23 @@ if ($data->icGeneral) {
                             <table class="table table-info table-borderless">
                                 <tr>
                                     <td>Nama</td>
-                                    <td>: <?= $data->icGeneral["nama"] . " (" . $data->icGeneral["jk"] . ")" ?></td>
+                                    <td>: <?= $data->icPembiusan["nama"] . " (" . $data->icPembiusan["jk"] . ")" ?></td>
                                 </tr>
                                 <tr>
                                     <td>NIK</td>
-                                    <td>: <?= $data->icGeneral["nik"]  ?></td>
+                                    <td>: <?= $data->icPembiusan["nik"]  ?></td>
                                 </tr>
                                 <tr>
                                     <td>TTL</td>
-                                    <td>: <?= $data->icGeneral["tempatLahir"] . ", " . $tglLahir->format('d-m-Y') ?></td>
+                                    <td>: <?= $data->icPembiusan["tempatLahir"] . ", " . $tglLahir->format('d-m-Y') ?></td>
                                 </tr>
                                 <tr>
                                     <td>Alamat</td>
-                                    <td>: <?= $data->icGeneral["alamat"] ?></td>
+                                    <td>: <?= $data->icPembiusan["alamat"] ?></td>
                                 </tr>
                                 <tr>
                                     <td>Sebagai</td>
-                                    <td>: <?= $data->icGeneral["sebagai"] ?></td>
+                                    <td>: <?= $data->icPembiusan["sebagai"] ?></td>
                                 </tr>
                             </table>
                         </div>
@@ -62,44 +62,41 @@ if ($data->icGeneral) {
 
                     <div class="col-6">
                         <div class="alert alert-info">
-                            <div class="row">
+                            <div class="row mb-3">
                                 <div class="col-12 text-center">Petugas :</div>
                                 <hr>
                             </div>
                             <table class="table table-info table-borderless">
                                 <tr>
                                     <td>Petugas</td>
-                                    <td>: <?= $data->icGeneral["petugas"] ?></td>
+                                    <td>: <?= $data->icPembiusan["petugas"] ?></td>
                                 </tr>
                                 <tr>
                                     <td>Dokter</td>
-                                    <td>: <?= $data->icGeneral["dokter"] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Tindakan Medis</td>
-                                    <td>: <?= $data->icGeneral["tindakanMedis"] ?></td>
+                                    <td>: <?= $data->icPembiusan["dokter"] ?></td>
                                 </tr>
                                 <tr>
                                     <td>Saksi</td>
-                                    <td>: <?= $data->icGeneral["saksi"] ?></td>
+                                    <td>: <?= $data->icPembiusan["saksi"] ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Jenis</td>
-                                    <td>: <?= $data->icGeneral["jenis"] == 'setuju' ? '<span class="badge-estetik bg-vibrant-teal">Persetujuan</span>' : '<span class="badge-estetik bg-vibrant-red">Penolakan</span>'; ?></td>
+                                    <td>Tindakan Medis</td>
+                                    <td>: <?= $data->icPembiusan["tindakanMedis"] ?></td>
                                 </tr>
                             </table>
+                            <br>
                             <br>
                         </div>
                     </div>
 
                     <br><br>
                     <div class="text-center">
-                        <?php if ($data->icGeneral['ttdSaksi'] && $data->icGeneral['ttdWali']): ?>
-                            <a class="btn btn-estetik btn-cetak" href="<?= base_url('/rm/icGeneral/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->icGeneral['id']) ?>" target="_blank">
+                        <?php if ($data->icPembiusan['ttdSaksi'] && $data->icPembiusan['ttdWali']): ?>
+                            <a class="btn btn-estetik btn-cetak" href="<?= base_url('/rm/icPembiusan/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->icPembiusan['id']) ?>" target="_blank">
                                 <i class="fas fa-print me-1"></i> Cetak
                             </a>
                         <?php else: ?>
-                            <a class="btn btn-estetik btn-simpan" href="<?= base_url('/rm/icGeneral/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->icGeneral['id']) ?>" target="_blank">
+                            <a class="btn btn-estetik btn-simpan" href="<?= base_url('/rm/icPembiusan/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->icPembiusan['id']) ?>" target="_blank">
                                 <i class="fas fa-pen-nib me-1"></i> TTD
                             </a>
                             <button class="btn btn-estetik btn-lihat" data-bs-toggle="modal" data-bs-target="#modalEdit">
@@ -119,7 +116,7 @@ if ($data->icGeneral) {
 
             <?php else : ?>
                 <h6 class="text-center">Form isian :</h6>
-                <?= $this->include("rm/partials/formIcGeneral.php") ?>
+                <?= $this->include("rm/partials/formIcPembiusan.php") ?>
 
                 <div class="text-center">
                     <div class="bg-info" id="pesanError"> </div>
@@ -144,11 +141,11 @@ if ($data->icGeneral) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <?= $this->include("rm/partials/formIcGeneral.php") ?>
+                <?= $this->include("rm/partials/formIcPembiusan.php") ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-estetik btn-batal" data-bs-dismiss="modal"><i class="fas fa-ban me-1"></i> Batal</button>
-                <button class="btn btn-estetik btn-simpan" onclick="simpan(<?= $data->icGeneral['id'] ?? '' ?>)">
+                <button class="btn btn-estetik btn-simpan" onclick="simpan(<?= $data->icPembiusan['id'] ?? '' ?>)">
                     <i class="fa fa-floppy-o me-1"></i> Simpan
                 </button>
             </div>
@@ -188,7 +185,7 @@ if ($data->icGeneral) {
             </div>
             <div class="modal-body">
                 Untuk pasien : <b><?= $data->pasien["nm_pasien"] ?></b>. <br> No Rawat : <b><?= $data->pasien["no_rawat"] ?></b>. <br><br>
-                <input type="datetime-local" class="form-control" id="waktu" value="<?= !empty($data->icGeneral) ? date('Y-m-d\TH:i', strtotime($data->icGeneral["tglinput"])) : '' ?>">
+                <input type="datetime-local" class="form-control" id="waktu" value="<?= !empty($data->icPembiusan) ? date('Y-m-d\TH:i', strtotime($data->icPembiusan["tglinput"])) : '' ?>">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-estetik btn-batal" data-bs-dismiss="modal"><i class="fas fa-ban me-1"></i> Batal</button>
@@ -246,13 +243,13 @@ if ($data->icGeneral) {
             $('#samaDgPasien').prop('checked', false);
         }
         if (!$('#samaDgPj').is(':checked') && !$('#samaDgPasien').is(':checked')) {
-            $("#nama").val(<?= json_encode($data->icGeneral['nama'] ?? '') ?>);
-            $("#jk").val(<?= json_encode($data->icGeneral['jk'] ?? '') ?>);
-            $("#tglLahir").val(<?= json_encode($data->icGeneral['tanggalLahir'] ?? '') ?>);
-            $("#tempatLahir").val(<?= json_encode($data->icGeneral['tempatLahir'] ?? '') ?>);
-            $("#alamat").val(<?= json_encode($data->icGeneral['alamat'] ?? '') ?>);
-            $("#nik").val(<?= json_encode($data->icGeneral['nik'] ?? '') ?>);
-            $("#sebagai").val(<?= json_encode($data->icGeneral['sebagai'] ?? 'Suami') ?>);
+            $("#nama").val(<?= json_encode($data->icPembiusan['nama'] ?? '') ?>);
+            $("#jk").val(<?= json_encode($data->icPembiusan['jk'] ?? '') ?>);
+            $("#tglLahir").val(<?= json_encode($data->icPembiusan['tanggalLahir'] ?? '') ?>);
+            $("#tempatLahir").val(<?= json_encode($data->icPembiusan['tempatLahir'] ?? '') ?>);
+            $("#alamat").val(<?= json_encode($data->icPembiusan['alamat'] ?? '') ?>);
+            $("#nik").val(<?= json_encode($data->icPembiusan['nik'] ?? '') ?>);
+            $("#sebagai").val(<?= json_encode($data->icPembiusan['sebagai'] ?? 'Suami') ?>);
 
             $("#nama").prop('disabled', false);
             $("#jk").prop('disabled', false);
@@ -277,22 +274,16 @@ if ($data->icGeneral) {
         var dokter = $("#dokter").val();
         var saksi = $("#saksi").val();
         var tindakanMedis = $("#tindakanMedis").val();
-        var judul = $("#judul").val();
 
-        var jenis = $('input[name="jenis"]:checked').val();
 
-        // =============== TAMBAHKAN INI (Definisikan 11 variabel baru) ===============
-        var diagnosis = $("#diagnosis").val();
-        var dasar = $("#dasar").val();
-        var tindakan = $("#tindakan").val();
+        // =============== ISIAN INFORMED CONSENT ===============
+        var jenisAnestesi = $('input[name="jenis_anestesi"]:checked').val();
+        var isiKombinasi = $('#isiKombinasi').val();
+        var jenisAnestesi2 = $('input[name="jenis_anestesi2"]:checked').val();
+        var diagnosa = $("#diagnosa").val();
         var indikasi = $("#indikasi").val();
-        var tataCara = $("#tataCara").val();
-        var tujuan = $("#tujuan").val();
-        var risiko = $("#risiko").val();
-        var komplikasi = $("#komplikasi").val();
         var prognosis = $("#prognosis").val();
         var alternatif = $("#alternatif").val();
-        var lainLain = $("#lainLain").val();
         // ===========================================================================
 
         $("#pesanError").html("");
@@ -315,21 +306,15 @@ if ($data->icGeneral) {
         } else if (nik.replace(/\s+/g, "-") == "") {
             $("#nik").focus();
             $("#pesanError").html("NIK wajib diisi");
-        } else if (tindakanMedis.replace(/\s+/g, "-") == "") {
-            $("#tindakanMedis").focus();
-            $("#pesanError").html("Tindakan Medis wajib diisi");
         } else if (!dokter) {
             $("#dokter").focus();
             $("#pesanError").html("Dokter wajib dipilih");
         } else if (saksi.replace(/\s+/g, "-") == "") {
             $("#saksi").focus();
             $("#pesanError").html("Saksi wajib diisi");
-        } else if (judul.replace(/\s+/g, "-") == "") {
-            $("#judul").focus();
-            $("#pesanError").html("Judul wajib diisi");
         } else {
             $.ajax({
-                url: '<?= base_url("rm/icGeneral/simpan") ?>',
+                url: '<?= base_url("rm/icPembiusan/simpan") ?>',
                 method: 'POST',
                 data: {
                     tujuanSimpan: tujuanSimpan,
@@ -340,30 +325,23 @@ if ($data->icGeneral) {
                     tglLahir: tglLahir,
                     alamat: alamat,
                     nik: nik,
-                    tindakanMedis: tindakanMedis,
                     sebagai: sebagai,
                     petugas: petugas,
                     saksi: saksi,
                     dokter: dokter,
-                    judul: judul,
+                    tindakanMedis: tindakanMedis,
 
-                    jenis: jenis,
-
-                    diagnosis: diagnosis,
-                    dasar: dasar,
-                    tindakan: tindakan,
+                    jenisAnestesi: jenisAnestesi,
+                    isiKombinasi: isiKombinasi,
+                    jenisAnestesi2: jenisAnestesi2,
+                    diagnosa: diagnosa,
                     indikasi: indikasi,
-                    tataCara: tataCara,
-                    tujuan: tujuan,
-                    risiko: risiko,
-                    komplikasi: komplikasi,
                     prognosis: prognosis,
                     alternatif: alternatif,
-                    lainLain: lainLain
                 },
                 dataType: 'json',
                 success: function(data) {
-                    location.href = "<?= base_url('rm/icGeneral/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>/" + data.id;
+                    location.reload();
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
@@ -374,7 +352,7 @@ if ($data->icGeneral) {
     }
 
 
-    <?php if ($data->icGeneral) : ?>
+    <?php if ($data->icPembiusan) : ?>
 
         function tryHapus() {
             $("#modalHapus").modal("show");
@@ -383,12 +361,12 @@ if ($data->icGeneral) {
         }
 
         function hapus() {
-            var id = "<?= $data->icGeneral['id'] ?? '' ?>";
+            var noRawat = "<?= $data->icPembiusan['noRawat'] ?? '' ?>";
 
             $.ajax({
-                url: '<?= base_url() ?>rm/icGeneral/hapus',
+                url: '<?= base_url() ?>rm/icPembiusan/hapus',
                 method: 'post',
-                data: "id=" + id,
+                data: "noRawat=" + noRawat,
                 dataType: 'json',
                 success: function(data) {
                     location.href = "<?= base_url('rm/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>";
@@ -398,14 +376,14 @@ if ($data->icGeneral) {
 
         function ubahWaktu() {
             waktu = $("#waktu").val();
-            id = "<?= $data->icGeneral['id'] ?? '' ?>";
+            noRawat = "<?= $data->icPembiusan['noRawat'] ?? '' ?>";
 
             $.ajax({
-                url: '<?= base_url() ?>rm/icGeneral/ubahWaktu',
+                url: '<?= base_url() ?>rm/icPembiusan/ubahWaktu',
                 method: 'post',
                 data: {
                     "<?= csrf_token() ?>": "<?= csrf_hash() ?>",
-                    "id": id,
+                    "noRawat": noRawat,
                     "waktu": waktu
                 },
                 dataType: 'json',
