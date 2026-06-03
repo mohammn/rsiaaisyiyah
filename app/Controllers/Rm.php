@@ -10,6 +10,7 @@ use App\Models\RekonsiliasiObatModel;
 use App\Models\RekonsiliasiObatDataModel;
 use App\Models\IcGeneralModel;
 use App\Models\IcDarahModel;
+use App\Models\IcSesarModel;
 
 use function PHPSTORM_META\type;
 
@@ -23,6 +24,7 @@ class Rm extends BaseController
     protected $rekonsiliasiObatDataModel;
     protected $icGeneralModel;
     protected $icDarahModel;
+    protected $icSesarModel;
 
     public function __construct()
     {
@@ -38,6 +40,7 @@ class Rm extends BaseController
         $this->rekonsiliasiObatDataModel = new RekonsiliasiObatDataModel();
         $this->icGeneralModel = new IcGeneralModel();
         $this->icDarahModel = new IcDarahModel();
+        $this->icSesarModel = new IcSesarModel();
     }
     public function index($no_rawat)
     {
@@ -65,6 +68,7 @@ class Rm extends BaseController
         $rekonsiliasiObatData = $this->rekonsiliasiObatDataModel->where('noRawat', $no_rawat)->first();
         $icGeneral = $this->icGeneralModel->where('noRawat', $no_rawat)->findAll();
         $icDarah = $this->icDarahModel->where('noRawat', $no_rawat)->first();
+        $icSesar = $this->icSesarModel->where('noRawat', $no_rawat)->first();
 
 
         //===========status data=====================
@@ -84,6 +88,7 @@ class Rm extends BaseController
             "rekonsiliasiObat" => $this->statusRekonsiliasiObat($rekonsiliasiObat, $rekonsiliasiObatData),
             "icGeneral" => $statusIcGeneral,
             "icDarah" => $this->cekSemuaKolom($icDarah, ['ttdWali', 'ttdSaksi']),
+            "icSesar" => $this->cekSemuaKolom($icSesar, ['ttdWali', 'ttdSaksi', 'indikasiIbu', 'indikasiJanin']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -95,6 +100,7 @@ class Rm extends BaseController
             'rekonsiliasiObat'  => $rekonsiliasiObat,    // Biarkan null jika data tidak ada
             'icGeneral'  => $icGeneral,    // Biarkan null jika data tidak ada
             'icDarah'  => $icDarah,    // Biarkan null jika data tidak ada
+            'icSesar'  => $icSesar,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 
