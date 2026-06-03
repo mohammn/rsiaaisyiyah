@@ -9,6 +9,7 @@ use App\Models\DpjpModel;
 use App\Models\RekonsiliasiObatModel;
 use App\Models\RekonsiliasiObatDataModel;
 use App\Models\IcGeneralModel;
+use App\Models\IcDarahModel;
 
 use function PHPSTORM_META\type;
 
@@ -21,6 +22,7 @@ class Rm extends BaseController
     protected $rekonsiliasiObatModel;
     protected $rekonsiliasiObatDataModel;
     protected $icGeneralModel;
+    protected $icDarahModel;
 
     public function __construct()
     {
@@ -35,6 +37,7 @@ class Rm extends BaseController
         $this->rekonsiliasiObatModel = new RekonsiliasiObatModel();
         $this->rekonsiliasiObatDataModel = new RekonsiliasiObatDataModel();
         $this->icGeneralModel = new IcGeneralModel();
+        $this->icDarahModel = new IcDarahModel();
     }
     public function index($no_rawat)
     {
@@ -61,6 +64,7 @@ class Rm extends BaseController
         $rekonsiliasiObat = $this->rekonsiliasiObatModel->where('noRawat', $no_rawat)->first();
         $rekonsiliasiObatData = $this->rekonsiliasiObatDataModel->where('noRawat', $no_rawat)->first();
         $icGeneral = $this->icGeneralModel->where('noRawat', $no_rawat)->findAll();
+        $icDarah = $this->icDarahModel->where('noRawat', $no_rawat)->first();
 
 
         //===========status data=====================
@@ -79,6 +83,7 @@ class Rm extends BaseController
             "dpjp" => $this->cekSemuaKolom($dpjp, ['ttdWali']),
             "rekonsiliasiObat" => $this->statusRekonsiliasiObat($rekonsiliasiObat, $rekonsiliasiObatData),
             "icGeneral" => $statusIcGeneral,
+            "icDarah" => $this->cekSemuaKolom($icDarah, ['ttdWali', 'ttdSaksi']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -89,6 +94,7 @@ class Rm extends BaseController
             'dpjp'  => $dpjp,    // Biarkan null jika data tidak ada
             'rekonsiliasiObat'  => $rekonsiliasiObat,    // Biarkan null jika data tidak ada
             'icGeneral'  => $icGeneral,    // Biarkan null jika data tidak ada
+            'icDarah'  => $icDarah,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 
