@@ -26,14 +26,19 @@ class IcPembiusanModel extends Model
         'tglinput',
         'ttdSaksi',
         'ttdWali',
+        'jenis',
 
         // Kolom tambahan baru
         'jenisAnestesi',
         'isiKombinasi',
-        'jenisAnestesi2',
         'diagnosa',
         'indikasi',
+        'tataCara',
+        'tujuan',
+        'komplikasi',
+        'risiko',
         'prognosis',
         'alternatif',
+        'lainLain',
     ];
 }

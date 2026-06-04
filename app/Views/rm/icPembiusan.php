@@ -66,7 +66,7 @@ if ($data->icPembiusan) {
                                 <div class="col-12 text-center">Petugas :</div>
                                 <hr>
                             </div>
-                            <table class="table table-info table-borderless">
+                            <table class="table table-info table-borderless mb-4">
                                 <tr>
                                     <td>Petugas</td>
                                     <td>: <?= $data->icPembiusan["petugas"] ?></td>
@@ -83,9 +83,11 @@ if ($data->icPembiusan) {
                                     <td>Tindakan Medis</td>
                                     <td>: <?= $data->icPembiusan["tindakanMedis"] ?></td>
                                 </tr>
+                                <tr>
+                                    <td>Jenis</td>
+                                    <td>: <?= $data->icPembiusan["jenis"] == 'PERSETUJUAN' ? '<span class="badge-estetik bg-vibrant-teal">PERSETUJUAN</span>' : '<span class="badge-estetik bg-vibrant-red">PENOLAKAN</span>'; ?></td>
+                                </tr>
                             </table>
-                            <br>
-                            <br>
                         </div>
                     </div>
 
@@ -158,11 +160,11 @@ if ($data->icPembiusan) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus persetujuan rawat jalan ?</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Data ?</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Apakah anda yakin ingin menghapus Form pemilihan DPJP pasien atas nama <b id="namaPasienHapus"></b> dengan no Rawat : <b id="noRawatHapus"></b> ? <br>
+                Apakah anda yakin ingin menghapus Form pasien atas nama <b id="namaPasienHapus"></b> dengan no Rawat : <b id="noRawatHapus"></b> ? <br>
                 <div class="alert alert-warning p-1 mt-2"> <i class="fa-solid fa-triangle-exclamation"></i> Peringatan ! Data tidak dapat dikembalikan.</div>
             </div>
             <div class="modal-footer">
@@ -274,16 +276,21 @@ if ($data->icPembiusan) {
         var dokter = $("#dokter").val();
         var saksi = $("#saksi").val();
         var tindakanMedis = $("#tindakanMedis").val();
+        var jenis = $('input[name="jenis"]:checked').val();
 
 
         // =============== ISIAN INFORMED CONSENT ===============
         var jenisAnestesi = $('input[name="jenis_anestesi"]:checked').val();
         var isiKombinasi = $('#isiKombinasi').val();
-        var jenisAnestesi2 = $('input[name="jenis_anestesi2"]:checked').val();
         var diagnosa = $("#diagnosa").val();
         var indikasi = $("#indikasi").val();
+        var tataCara = $("#tataCara").val();
+        var tujuan = $("#tujuan").val();
+        var komplikasi = $("#komplikasi").val();
+        var risiko = $("#risiko").val();
         var prognosis = $("#prognosis").val();
         var alternatif = $("#alternatif").val();
+        var lainLain = $("#lainLain").val();
         // ===========================================================================
 
         $("#pesanError").html("");
@@ -330,14 +337,19 @@ if ($data->icPembiusan) {
                     saksi: saksi,
                     dokter: dokter,
                     tindakanMedis: tindakanMedis,
+                    jenis: jenis,
 
                     jenisAnestesi: jenisAnestesi,
                     isiKombinasi: isiKombinasi,
-                    jenisAnestesi2: jenisAnestesi2,
                     diagnosa: diagnosa,
                     indikasi: indikasi,
+                    tataCara: tataCara,
+                    tujuan: tujuan,
+                    komplikasi: komplikasi,
+                    risiko: risiko,
                     prognosis: prognosis,
                     alternatif: alternatif,
+                    lainLain: lainLain,
                 },
                 dataType: 'json',
                 success: function(data) {

@@ -11,6 +11,7 @@ use App\Models\RekonsiliasiObatDataModel;
 use App\Models\IcGeneralModel;
 use App\Models\IcDarahModel;
 use App\Models\IcSesarModel;
+use App\Models\IcPembiusanModel;
 
 use function PHPSTORM_META\type;
 
@@ -25,6 +26,7 @@ class Rm extends BaseController
     protected $icGeneralModel;
     protected $icDarahModel;
     protected $icSesarModel;
+    protected $icPembiusanModel;
 
     public function __construct()
     {
@@ -41,6 +43,7 @@ class Rm extends BaseController
         $this->icGeneralModel = new IcGeneralModel();
         $this->icDarahModel = new IcDarahModel();
         $this->icSesarModel = new IcSesarModel();
+        $this->icPembiusanModel = new IcPembiusanModel();
     }
     public function index($no_rawat)
     {
@@ -69,6 +72,7 @@ class Rm extends BaseController
         $icGeneral = $this->icGeneralModel->where('noRawat', $no_rawat)->findAll();
         $icDarah = $this->icDarahModel->where('noRawat', $no_rawat)->first();
         $icSesar = $this->icSesarModel->where('noRawat', $no_rawat)->first();
+        $icPembiusan = $this->icPembiusanModel->where('noRawat', $no_rawat)->first();
 
 
         //===========status data=====================
@@ -81,6 +85,15 @@ class Rm extends BaseController
             $statusIcGeneral[$i] = $this->cekSemuaKolom($icGeneral[$i], ['ttdWali', 'ttdSaksi']);
         }
 
+        $pengecualianIcPembiusan = ['tataCara', 'tujuan', 'komplikasi', 'risiko', 'alternatif', 'ttdWali', 'ttdSaksi'];
+        if ($icPembiusan) {
+            if ($icPembiusan['jenisAnestesi'] === "Blok Syaraf Perifer" or $icPembiusan['jenisAnestesi'] === "Anestesi Umum") {
+                unset($pengecualianIcPembiusan['alternatif']);
+            } elseif ($icPembiusan['jenisAnestesi'] === "kombinasi") {
+                $pengecualianIcPembiusan = ['ttdWali', 'ttdSaksi'];
+            }
+        }
+
         $status = [
             "skorPoudji" => $statusSKorPoudji,
             "persRajal" => $this->cekSemuaKolom($persRajal, ['selesai', 'ttdWali', 'ttdSaksi']),
@@ -89,6 +102,7 @@ class Rm extends BaseController
             "icGeneral" => $statusIcGeneral,
             "icDarah" => $this->cekSemuaKolom($icDarah, ['ttdWali', 'ttdSaksi']),
             "icSesar" => $this->cekSemuaKolom($icSesar, ['ttdWali', 'ttdSaksi', 'indikasiIbu', 'indikasiJanin']),
+            "icPembiusan" => $this->cekSemuaKolom($icPembiusan, $pengecualianIcPembiusan),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -101,6 +115,7 @@ class Rm extends BaseController
             'icGeneral'  => $icGeneral,    // Biarkan null jika data tidak ada
             'icDarah'  => $icDarah,    // Biarkan null jika data tidak ada
             'icSesar'  => $icSesar,    // Biarkan null jika data tidak ada
+            'icPembiusan'  => $icPembiusan,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 

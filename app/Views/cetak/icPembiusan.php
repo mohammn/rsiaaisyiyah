@@ -146,7 +146,7 @@ $today = new \DateTime();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cetak IC General</title>
+    <title>Cetak IC Pembiusan</title>
 
     <link rel="icon" type="image/x-icon" href="<?= base_url() ?>public/assets/img/rsiaaisyiyahicon.ico">
 </head>
@@ -162,7 +162,7 @@ $today = new \DateTime();
                     </div>
                     <div class="col-5">
                         <div style="text-align: end;">
-                            RM 23a
+                            RM 23g
                         </div>
                         <div class="border border-dark" style="display: flex; justify-content: center;">
                             <table class="table table-borderless table-sm  mt-1 mb-1 tabel" style="font-size: xx-small;">
@@ -214,196 +214,236 @@ $today = new \DateTime();
                         <td colspan="2"><?= $data->icPembiusan['dokter'] ?></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Penerima informasi</td>
+                        <td colspan="2">Penerima informasi*</td>
                         <td colspan="2"><?= $data->icPembiusan['nama'] ?></td>
                     </tr>
                     <tr class="text-center">
                         <th>No.</th>
                         <th>JENIS INFORMASI</th>
                         <th>ISI INFORMASI</th>
-                        <th>TANDA (&#10004;)</th>
+                        <th style="font-size: 6pt;">TANDA (&#10004;)</th>
                     </tr>
                     <tr>
                         <td class="text-center" style="width: 2%;">1</td>
-                        <td style="width: 10%;">Diagnosa ( WD & DD )</td>
-                        <td style="width: 85%;"><?= $data->icPembiusan['diagnosa'] ?></td>
-                        <td class="text-center text-success fw-bold" style="width: 5%; font-size: 1.2rem;">✔</td>
+                        <td style="width: 18%;">Diagnosa (WD & DD)</td>
+                        <td style="width: 75%;"><?= $data->icPembiusan['diagnosa'] ?></td>
+                        <td class="text-center text-success fw-bold" style="width: 5%;">✔</td>
                     </tr>
                     <tr>
                         <td class="text-center">2</td>
                         <td>Dasar diagnosis</td>
                         <td>Anamnesa, pemeriksaan fisik, pemeriksaan penunjang.</td>
-                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                        <td class="text-center text-success fw-bold">✔</td>
                     </tr>
                     <tr>
                         <td class="text-center">3</td>
-                        <td>Tindakan kedokteran**</td>
+                        <td>Tindakan kedokteran</td>
                         <td>
-                            a. &nbsp; Anestesi Regional <br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<?= $data->icPembiusan["jenisAnestesi"] === 'Spinal/Epidural' ? '&#10004;' : '' ?> Spinal/ Epidural.
-                            <?= $data->icPembiusan["jenisAnestesi"] === 'Kaudal' ? '&#10004;' : '' ?> Kaudal.
-                            <?= $data->icPembiusan["jenisAnestesi"] === 'Blok' ? '&#10004;' : '' ?> Blok. <br>
-                            <?= $data->icPembiusan["jenisAnestesi"] === 'Anestesi Umum' ? 'ⓑ. ' : 'b. &nbsp;' ?> Anestesi Umum <br>
-                            <?= $data->icPembiusan["jenisAnestesi"] === 'kombinasi' ? 'ⓒ. ' : 'c. &nbsp;&nbsp;' ?> Anestesi Kombinasi: <?= $data->icPembiusan["jenisAnestesi"] === 'kombinasi'  ? '<u>' . $data->icPembiusan["isiKombinasi"] . '</u>' : '______________________' ?>
-
+                            <?php if ($data->icPembiusan["jenisAnestesi"] === 'Spinal/Epidural'): ?>
+                                <b>Anestesi Regional</b> : Spinal/ Epidural.
+                            <?php elseif ($data->icPembiusan["jenisAnestesi"] === 'Blok Syaraf Perifer'):  ?>
+                                <b>Anestesi Regional</b> : Blok Syaraf Perifer.
+                            <?php elseif ($data->icPembiusan["jenisAnestesi"] === 'Anestesi Umum'): ?>
+                                <b>Anestesi Umum</b>
+                            <?php else: ?>
+                                <b>Anestesi Kombinasi</b> : <?= $data->icPembiusan["isiKombinasi"] ?>
+                            <?php endif; ?>
                         </td>
-                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                        <td class="text-center text-success fw-bold">✔</td>
                     </tr>
                     <tr>
                         <td class="text-center">4</td>
                         <td>Indikasi tindakan</td>
                         <td><?= $data->icPembiusan['indikasi'] ?></td>
-                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                        <td class="text-center text-success fw-bold">✔</td>
                     </tr>
                     <tr>
                         <td class="text-center">5</td>
                         <td>Tata cara</td>
                         <td>
-                            <ol>
-                                <li>
-                                    Anestesi Regional <br>
-                                    <table>
-                                        <tr class="align-top">
-                                            <td>
-                                                <?= $data->icPembiusan["jenisAnestesi2"] === 'Spinal/Epidural' ? 'ⓐ. ' : 'a.' ?><br>
-                                            </td>
-                                            <td>
-                                                Anestesi Spinal/ Epidural <br>
-                                                Penyuntikan jarum pada sela – sela tulang belakang,
-                                                setelah obat Anestesi Lokal disuntikkan akan terasa
-                                                kesemutan, kebas pada area yang dibius kemudian terasa
-                                                berat dan pada akhirnya tidak dapat digerakkan. Pada
-                                                Anestesi Epidural dapat dipasang catheter untuk
-                                                menambahkan obat Anestesi Lokal bila diperlukan.
-                                            </td>
-                                        </tr>
-                                        <tr class="align-top">
-                                            <td>
-                                                <?= $data->icPembiusan["jenisAnestesi2"] === 'Kudal' ? 'ⓑ. ' : 'b.' ?><br>
-                                            </td>
-                                            <td>
-                                                Anestesi Kaudal <br>
-                                                Penyuntikkan jarum di daerah kaudal, di ringga epidural
-                                                setelah itu diberikan obat Anestesi Lokal.
-                                            </td>
-                                        </tr>
-                                        <tr class="align-top">
-                                            <td>
-                                                <?= $data->icPembiusan["jenisAnestesi2"] === 'Blok' ? 'ⓒ. ' : 'c.' ?><br>
-                                            </td>
-                                            <td>
-                                                Anestesi Blok Syaraf Perifer <br>
-                                                Pemberian Anestesi Lokal disekitar syaraf yang bisa
-                                                dipandu dengan USG atau Nerve Stimulator.
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                                <li>
-                                    Anestesi Umum <br>
-                                    Tindakan Anestesi Umum dilakukan dengan cara
-                                    memberikan obat bius melalui pembuluh darah dan/ atau
-                                    dihirup melalui hidung/ mulut. Lama kerja obat disesuaikan
-                                    dengan kebutuhan operasi. Setelah pasien tidak sadar, sesuai
-                                    kebutuhan operasi, dapat dilakukan pemasangan pipa nafas
-                                    untuk mengalirkan gas – gas pernafasan dan gas bius.
-                                </li>
-                            </ol>
+                            <?php if ($data->icPembiusan["jenisAnestesi"] === 'Spinal/Epidural'): ?>
+                                <ol type="a" class="ps-3 mb-0">
+                                    <li>
+                                        Pada anestesi spinal, obat disuntikkan menggunakan jarum
+                                        khusus yang sangat halus melalui sela tulang punggung
+                                        bagian bawah hingga mencapai ruang sumsum tulang
+                                        belakang.
+                                    </li>
+                                    <li>
+                                        Pada anestesi epidural, digunakan jarum khusus berukuran
+                                        lebih besar. Setelah jarum mencapai ruang epidural, selang
+                                        halus (kateter) dimasukkan ke dalam ruang tersebut untuk
+                                        menyalurkan obat bius ke saraf yang berada di sekitarnya.
+                                    </li>
+                                    <li>
+                                        Posisi penyuntikan spinal atau epidural Adalah duduk
+                                        membungkuk atau berbaring miring sambil menekuk
+                                        tubuh
+                                    </li>
+                                    <li>
+                                        Setalah penyuntikan obat maka kan terjadi perubahan
+                                        sensasi dan merasa seperti tidak memiliki tungkai bawah.
+                                        Efek ini akan berlangsung salaam 2 sampai 4 jam
+                                        tergabtung jenis konsentrasi obat anestesi yang digunakan
+                                    </li>
+                                </ol>
+                            <?php elseif ($data->icPembiusan["jenisAnestesi"] === 'Blok Syaraf Perifer'):  ?>
+                                <ol type="a" class="ps-3 mb-0">
+                                    <li>
+                                        Pemberian anestesi ini dilakukan dengan menyuntikkan
+                                        obat bius lokal di daerah saraf yang mempersarafi bagian
+                                        tubuh yang akan dioperasi.
+                                    </li>
+                                    <li>
+                                        Pada saat mencari lokasi saraf yang akan disuntik, pasien
+                                        mungkin akan merasakan sedikit nyeri. Kadang bila saraf
+                                        sudah terkena maka akan terasa seperti kesetrum di bagian
+                                        tubuh yang akan dioperasi.
+                                    </li>
+                                    <li>
+                                        pada saat penyuntikan obat bius lokal akan terasa nyeri,
+                                        tetapi lama-kelamaan bagian tubuh yang dioperasi akan
+                                        terasa kesemutan dan akhirnya terasa berat sampai tidak
+                                        bisa digerakkan. Efek bius berlangsung antara 2–4 jam
+                                        tergantung jenis obat yang dipakai.
+                                    </li>
+                                </ol>
+                            <?php elseif ($data->icPembiusan["jenisAnestesi"] === 'Anestesi Umum'): ?>
+                                Tindakan Anestesi Umum dilakukan dengan cara
+                                memberikan obat bius melalui pembuluh darah dan/ atau
+                                dihirup melalui hidung/ mulut. Lama kerja obat disesuaikan
+                                dengan kebutuhan operasi. Setelah pasien tidak sadar, sesuai
+                                kebutuhan operasi, dapat dilakukan pemasangan pipa nafas
+                                untuk mengalirkan gas – gas pernafasan dan gas bius.
+                            <?php else: ?>
+                                <?= $data->icPembiusan["tataCara"] ?>
+                            <?php endif; ?>
                         </td>
-                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                        <td class="text-center text-success fw-bold">✔</td>
                     </tr>
                     <tr>
                         <td class="text-center">6</td>
                         <td>Tujuan</td>
                         <td>
-                            <ol type="a">
-                                <li>
-                                    Supaya pasien tidak merasa sakit saat operasi (anestesi
-                                    regional);
-                                </li>
-                                <li>
-                                    Supaya pasien tidak sadar selama operasi (anestesi umum/
-                                    sedasi);
-                                </li>
-                                <li>
-                                    Supaya otot – otot menjadi rileks jika dibutuhkan (anestesi
-                                    umum).
-                                </li>
-                            </ol>
+                            <?php if ($data->icPembiusan["jenisAnestesi"] === 'Spinal/Epidural'): ?>
+                                Pembiusan setengah badan yang meliputi daerah perut
+                                sampai kaki dengan pasien tetap sadar tanpa merasakan nyeri
+                                saat operasi
+                            <?php elseif ($data->icPembiusan["jenisAnestesi"] === 'Blok Syaraf Perifer'):  ?>
+                                Pembiasiusan yang hanya melibatkan lengan atas atau bawah,
+                                tangan , kaki, tungkai dan sebagainya.
+                            <?php elseif ($data->icPembiusan["jenisAnestesi"] === 'Anestesi Umum'): ?>
+                                Teknik pembiusan dengan bius total dimana pasien tidak
+                                sadar, tidak dapat dirangsang dan tidak dapat merasakan
+                                sakit
+                            <?php else: ?>
+                                <?= $data->icPembiusan["tujuan"] ?>
+                            <?php endif; ?>
                         </td>
-                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                        <td class="text-center text-success fw-bold">✔</td>
                     </tr>
                     <tr>
                         <td class="text-center">7</td>
                         <td>Risiko</td>
                         <td>
-                            <ol type="a">
-                                <li>
-                                    Anestesi Regional :
-                                    Tekanan darah turun, blok spinal tinggi/ total, mual, muntah,
-                                    penurunan panas tubuh
-                                </li>
-                                <li>
-                                    Anestesi Umum :
-                                    ETT salah masuk kekerongkongan, oedemalaring, obstruksi
-                                    jalan nafas (odemalaring, pangkal lidah jatuh), henti jantung
-                                    perawatan ke Perawatan Intensif.
-                                </li>
-                            </ol>
+                            <?php if ($data->icPembiusan["jenisAnestesi"] === 'Spinal/Epidural'): ?>
+                                <ol type="a" class="ps-3 mb-0">
+                                    <li class="mb-0">Mual, muntah, gatal-gatal terutama di daerah wajah, menggigil</li>
+                                    <li class="mb-0">Alergi / hipersensitivitas terhadap obat (sangat jarang) mulai ringan sampai berat.</li>
+                                    <li class="mb-0">Gangguan pernapasan dari mulai ringan sampai berat (henti napas).</li>
+                                    <li class="mb-0">Dapat terjadi nyeri pinggang pasca bedah</li>
+                                    <li class="mb-0">Untuk epidural bisa terjadi kejang bila obat masuk kedalam pembuluh darah (jarang terjadi) dan dapat ditangani sesuai prosedur tanpa gejala sisa.</li>
+                                    <li class="mb-0"><span class="fst-italic">Hematom</span> (lebam/memar) pada lokasi penyuntikan dan kesulitan teknis lain, ringan hingga berat/fatal.</li>
+                                </ol>
+                            <?php elseif ($data->icPembiusan["jenisAnestesi"] === 'Blok Syaraf Perifer'):  ?>
+                                <ol type="a" class="ps-3 mb-0">
+                                    <li class="mb-0">Perdarahan pada tempat penyuntikan, terutama apabila saat penyuntikan mengenai pembuluh darah.</li>
+                                    <li class="mb-0">Efek blok yang berlangsung lebih lama dari perkiraan semula.</li>
+                                    <li class="mb-0">Kejang terjadi bila obat masuk kedalam pembuluh darah (jarang terjadi) dan dapat ditangani sesuai prosedur tanpa gejala sisa.</li>
+                                    <li class="mb-0"><span class="fst-italic">Hematom</span> (lebam/memar) pada lokasi penyuntikan serta kesulitan teknis lainnya.</li>
+                                </ol>
+                            <?php elseif ($data->icPembiusan["jenisAnestesi"] === 'Anestesi Umum'): ?>
+                                Mual, muntah, menggigil, pusing, mengantuk, sakit
+                                tenggorokan, sakit menelan, dapat diatasi dengan obatobatan.
+                            <?php else: ?>
+                                <?= $data->icPembiusan["risiko"] ?>
+                            <?php endif; ?>
                         </td>
-                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                        <td class="text-center text-success fw-bold">✔</td>
                     </tr>
                     <tr>
                         <td class="text-center">8</td>
                         <td>Komplikasi</td>
                         <td>
-                            <ol type="a">
-                                <li>
-                                    Anestesi Regional : <br>
-                                    Nyeri punggung, retensi urine, sakit kepala, spinal hematoma,
-                                    meningitis, kauda equine sindrom, kerusakan syaraf.
-                                </li>
-                                <li>
-                                    Anestesi Umum : <br>
-                                    Mual, muntah, menggigil, hipertermiamalignan, batuk,
-                                    aspirasi, kejang pita suara, spasme laring, alergi.
-                                </li>
-                            </ol>
+                            <?php if ($data->icPembiusan["jenisAnestesi"] === 'Spinal/Epidural'): ?>
+                                <ol type="a" class="ps-3 mb-0">
+                                    <li class="mb-0">Efek samping yang jarang terjadi yaitu Sakit kepala bagian depan atau belakang pada hari ke-2 atau ke-3, terutama sewaktu mengangkat kepala, dan akan menghilang setelah 5 sampai 7 hari.</li>
+                                    <li class="mb-0">Efek samping lain berupa gangguan buang air kecil.</li>
+                                    <li class="mb-0">Gangguan saraf perifer atau kesemutan/rasa baal yang memanjang.</li>
+                                </ol>
+                            <?php elseif ($data->icPembiusan["jenisAnestesi"] === 'Blok Syaraf Perifer'):  ?>
+                                Gangguan saraf perifer atau kesemutan/rasa baal yang
+                                berkepanjangan.
+                            <?php elseif ($data->icPembiusan["jenisAnestesi"] === 'Anestesi Umum'): ?>
+                                <ol type="a" class="ps-3 mb-0">
+                                    <li class="mb-0">Aspirasi (masuknya isi lambung ke dalam jalan nafas) dapat terjadi pada pasien tidak puasa.</li>
+                                    <li class="mb-0">Kesulitan pemasangan alat/pipa pernafasan yang tidak diduga sebelumnya, yang menyebabkan gigi patah dan trauma jalan nafas.</li>
+                                    <li class="mb-0">Kejang pita suara (<span class="fst-italic">spasme laring</span>), kejang jalan nafas bawah (<span class="fst-italic">spasme bronkus</span>) dari ringan hingga berat yang dapat menyebabkan henti jantung.</li>
+                                    <li class="mb-0">Alergi/hipersensitif terhadap obat (walaupun jarang), mulai derajat ringan hingga berat/fatal.</li>
+                                    <li class="mb-0">Komplikasi akan meningkat pada pasien anak usia &lt; 1 tahun, usia lanjut, pasien dengan penyakit penyerta (jantung, ginjal, hati, saraf, paru, endokrin, dll).</li>
+                                </ol>
+                            <?php else: ?>
+                                <?= $data->icPembiusan["komplikasi"] ?>
+                            <?php endif; ?>
                         </td>
-                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                        <td class="text-center text-success fw-bold">✔</td>
                     </tr>
                     <tr>
                         <td class="text-center">9</td>
                         <td>Prognosis</td>
                         <td><?= $data->icPembiusan['prognosis'] ?></td>
-                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                        <td class="text-center text-success fw-bold">✔</td>
                     </tr>
                     <tr>
                         <td class="text-center">10</td>
                         <td>Alternatif</td>
-                        <td><?= $data->icPembiusan['alternatif'] ?></td>
-                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
-                    </tr>
+                        <td>
+                            <?php if ($data->icPembiusan["jenisAnestesi"] === 'Spinal/Epidural'): ?>
+                                Bila gagal spinal / epidural dapat dilanjutkan pembiusan total/umum.
+                            <?php else:  ?>
+                                <?= $data->icPembiusan['alternatif'] ?>
+                            <?php endif; ?>
+                        </td>
+                        <td class="text-center text-success fw-bold">✔</td>
 
+                    </tr>
                     <tr>
-                        <td colspan="3" class="p-1" style="vertical-align: top; height: 100px;">
+                        <td class="text-center">11</td>
+                        <td>Lain - lain</td>
+                        <td>
+                            <?= $data->icPembiusan['lainLain'] ?>
+                        </td>
+                        <td class="text-center text-success fw-bold">✔</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="p-1" style="vertical-align: top;">
                             Dengan ini menyatakan bahwa saya, telah menerangkan hal-hal di atas secara benar dan jelas dan memberikan kesempatan untuk bertanya / berdiskusi.
                         </td>
-                        <td class="text-center" style="vertical-align: top; font-size: 0.9rem;">
-                            <div>Dokter</div>
+                        <td class="text-center" style="vertical-align: top;">
+                            <div style="font-size: xx-small;">Dokter</div>
                             <div id="qrKecil" class="pt-1"></div>
                             <div class="text-muted" style="font-size: 7pt;">( <?= $data->icPembiusan['dokter'] ? $data->icPembiusan['dokter'] : '............................' ?> )</div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="p-1" style="vertical-align: top; height: 100px;">
+                        <td colspan="3" class="p-1" style="vertical-align: top;">
                             Dengan ini menyatakan bahwa saya / keluarga pasien telah menerima informasi sebagaimana di atas yang saya beri tanda / paraf di kolom kanan serta telah diberi kesempatan untuk bertanya / berdiskusi, dan telah memahaminya.
                         </td>
                         <td class="text-center" style="vertical-align: top; font-size: 0.9rem;">
-                            <div>Penerima Informasi</div>
+                            <div style="font-size: xx-small;">Penerima Informasi</div>
                             <?php if ($data->icPembiusan["ttdWali"]) {
                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                echo '<img src="' . base_url('public/ttd/icPembiusan/' . $data->icPembiusan["ttdWali"]) . '" alt="tanda tangan Wali" style="max-width: 50px;" data-is-new="false">';
+                                echo '<img src="' . base_url('public/ttd/icPembiusan/' . $data->icPembiusan["ttdWali"]) . '" alt="tanda tangan Wali" style="max-width: 40px;" data-is-new="false">';
                             } else {
                                 echo '<br><br>';
                             } ?>
@@ -412,10 +452,9 @@ $today = new \DateTime();
                     </tr>
 
                     <tr>
-                        <td colspan="4" class="p-2 bg-light">
+                        <td colspan="4" class="bg-light">
                             <small class="fst-italic">
-                                *) Bila pasien tidak kompeten atau tidak mau menerima informasi, maka penerima informasi adalah wali atau keluarga terdekat. <br>
-                                **) Lingkari sesuai dengan Tindakan yang dilakukan.
+                                *) Bila pasien tidak kompeten atau tidak mau menerima informasi, maka penerima informasi adalah wali atau keluarga terdekat.
                             </small>
                         </td>
                     </tr>
@@ -426,12 +465,11 @@ $today = new \DateTime();
 
         <div class="page">
             <div class="subpage">
-
                 <div class="container my-4 text-dark" style="max-width: 800px; font-family: 'Times New Roman', Times, serif; line-height: 1.6;">
                     <div class="card p-5 border-dark shadow-sm">
 
                         <div class="text-center mb-1">
-                            <p style="font-size: 14pt;"><b>PERSETUJUAN TINDAKAN KEDOKTERAN</b></p>
+                            <p style="font-size: 14pt;"><b><?= $data->icPembiusan['jenis'] ?> TINDAKAN KEDOKTERAN</b></p>
                         </div>
 
                         <div class="mb-1">
@@ -476,7 +514,7 @@ $today = new \DateTime();
                         <p class="mb-2">Dengan ini menyatakan dengan sesungguhnya telah memberikan :</p>
 
                         <div class="text-center mb-1">
-                            <p style="font-size: 14pt;"><b>PERSETUJUAN</b></p>
+                            <p style="font-size: 14pt;"><b><?= $data->icPembiusan['jenis'] ?></b></p>
                         </div>
 
                         <div class="mb-2">
@@ -597,16 +635,16 @@ $today = new \DateTime();
                                     </td>
                                 </tr>
                             </table>
-                            <input type="hidden" id="id" value="<?= $data->icPembiusan["id"] ?>">
-                            <input type="hidden" id="dokter" value="<?= $data->icPembiusan["dokter"] ?>">
-                            <div class="row mt-5">
-                                <div class="col-12 text-center">
-                                    <div class="" id="pesanError"></div>
-                                    <?php if (!$data->icPembiusan["ttdWali"] and !$data->icPembiusan["ttdSaksi"]) { ?>
+                            <?php if (!$data->icPembiusan["ttdWali"] and !$data->icPembiusan["ttdSaksi"]) { ?>
+                                <input type="hidden" id="noRawat" value="<?= $data->icPembiusan["noRawat"] ?>">
+                                <input type="hidden" id="dokter" value="<?= $data->icPembiusan["dokter"] ?>">
+                                <div class="row mt-5">
+                                    <div class="col-12 text-center">
+                                        <div class="" id="pesanError"></div>
                                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalKunci">Selesaikan dan kunci Tanda tangan.</button>
-                                    <?php } ?>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -691,7 +729,7 @@ $today = new \DateTime();
         $("#pesanError").html("");
         $("#pesanError").removeClass("alert alert-danger");
 
-        var id = $("#id").val();
+        var noRawat = $("#noRawat").val();
 
         // Ambil elemen gambar
         var imgSaksiEl = $("#ttdSaksi img");
@@ -720,7 +758,7 @@ $today = new \DateTime();
             url: '<?= base_url() ?>rm/icPembiusan/simpanTtd',
             method: 'post',
             data: {
-                id: id,
+                noRawat: noRawat,
                 ttdSaksi: ttdSaksi,
                 ttdWali: ttdWali,
                 "<?= csrf_token() ?>": "<?= csrf_hash() ?>"
@@ -751,8 +789,8 @@ $today = new \DateTime();
     });
 
     var qrKecil = new QRCode(document.getElementById("qrKecil"), {
-        width: 50, // Set the width of the QR code
-        height: 50, // Set the height of the QR code
+        width: 30, // Set the width of the QR code
+        height: 30, // Set the height of the QR code
         colorDark: "#000000", // Color of the dark modules (e.g., black squares)
         colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
         correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)

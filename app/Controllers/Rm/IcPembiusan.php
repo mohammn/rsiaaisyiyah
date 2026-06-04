@@ -88,14 +88,19 @@ class IcPembiusan extends BaseController
             "nik"           => $this->request->getPost("nik"),
             "saksi"      => $this->request->getPost("saksi"),
             "tindakanMedis"      => $this->request->getPost("tindakanMedis"),
+            "jenis"      => $this->request->getPost("jenis"),
 
             "jenisAnestesi"      => $this->request->getPost("jenisAnestesi"),
             "isiKombinasi"      => $this->request->getPost("isiKombinasi"),
-            "jenisAnestesi2"      => $this->request->getPost("jenisAnestesi2"),
             "diagnosa"     => $this->request->getPost("diagnosa"),
             "indikasi"      => $this->request->getPost("indikasi"),
+            "tataCara"      => $this->request->getPost("tataCara"),
+            "tujuan"      => $this->request->getPost("tujuan"),
+            "komplikasi"      => $this->request->getPost("komplikasi"),
+            "risiko"      => $this->request->getPost("risiko"),
             "prognosis"     => $this->request->getPost("prognosis"),
             "alternatif"    => $this->request->getPost("alternatif"),
+            "lainLain"    => $this->request->getPost("lainLain"),
         ];
 
         if ($this->request->getPost("tujuanSimpan") == 'tambah') {
@@ -104,7 +109,7 @@ class IcPembiusan extends BaseController
             $noRawat = $this->request->getPost("noRawat");
             unset($data['noRawat']);
 
-            $this->catatLog('ubah', 'ic_general', $noRawat, $this->icPembiusan->where('noRawat', $noRawat)->first(), $data);
+            $this->catatLog('ubah', 'ic_pembiusan', $noRawat, $this->icPembiusan->where('noRawat', $noRawat)->first(), $data);
 
             $this->icPembiusan->where('noRawat', $noRawat)->set($data)->update();
         }
@@ -133,7 +138,7 @@ class IcPembiusan extends BaseController
     {
         $noRawat = $this->request->getPost("noRawat");
         $noRawat = str_replace('-', '/', $noRawat);
-        $this->catatLog('hapus', 'ic_general', $noRawat, $this->icPembiusan->where('noRawat', $noRawat)->first());
+        $this->catatLog('hapus', 'ic_pembiusan', $noRawat, $this->icPembiusan->where('noRawat', $noRawat)->first());
 
         $this->icPembiusan->where("noRawat", $noRawat)->delete();
         echo json_encode("");
@@ -182,18 +187,20 @@ class IcPembiusan extends BaseController
     public function simpanTtd()
     {
         // Ambil input noRawat dan data canvas dari form
-        $id    = $this->request->getPost("id");
+        $noRawat    = $this->request->getPost("noRawat");
+        $noRawat = str_replace('/', '-', $noRawat);
         $ttdWali    = $this->request->getPost("ttdWali");
         $ttdSaksi    = $this->request->getPost("ttdSaksi");
 
-        $lokasiFolder = 'icGeneral';
+        $lokasiFolder = 'icPembiusan';
 
         $data = [
-            "ttdWali" => $this->uploadTtd($ttdWali, $id . '_wali', $lokasiFolder),
-            "ttdSaksi" => $this->uploadTtd($ttdSaksi, $id . '_saksi', $lokasiFolder)
+            "ttdWali" => $this->uploadTtd($ttdWali, $noRawat . '_wali', $lokasiFolder),
+            "ttdSaksi" => $this->uploadTtd($ttdSaksi, $noRawat . '_saksi', $lokasiFolder)
         ];
 
-        $this->icPembiusan->where('id', $id)->set($data)->update();
+        $noRawat = str_replace('-', '/', $noRawat);
+        $this->icPembiusan->where('noRawat', $noRawat)->set($data)->update();
 
         return $this->response->setJSON([
             'status'  => 'success'
