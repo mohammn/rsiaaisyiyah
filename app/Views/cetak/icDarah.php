@@ -8,6 +8,22 @@ if ($data->icDarah) {
 $tglLahirPasien = new \DateTime($data->pasien["tgl_lahir"]);
 $today = new \DateTime();
 
+$tglTtd = $data->icDarah['tglTtd'] ?? ''; // Contoh: "4 Juni 2026, Pukul 00:26 WIB"
+
+if (!empty($tglTtd)) {
+    // Pecah string berdasarkan karakter ", Pukul "
+    $tglTtd = explode(', Pukul ', $tglTtd);
+
+    // Ambil hasilnya
+    $tanggalTtd = $tglTtd[0]; // Hasil: "4 Juni 2026"
+    $jamTtd     = $tglTtd[1] ?? ''; // Hasil: "00:26 WIB"
+    $jamTtd = explode(' WIB', $jamTtd);
+    $jamTtd = $jamTtd[0];
+} else {
+    $tanggalTtd = '';
+    $jamTtd     = '';
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -162,7 +178,7 @@ $today = new \DateTime();
                     </div>
                     <div class="col-5">
                         <div style="text-align: end;">
-                            RM 23a
+                            RM 23d
                         </div>
                         <div class="border border-dark" style="display: flex; justify-content: center;">
                             <table class="table table-borderless table-sm  mt-1 mb-1 tabel" style="font-size: xx-small;">
@@ -216,6 +232,11 @@ $today = new \DateTime();
                         <td colspan="2">Penerima informasi*</td>
                         <td colspan="2"><?= $data->icDarah['nama'] ?></td>
                     </tr>
+                    <tr style="font-size: 8pt;">
+                        <td colspan="2">Diberikan pada waktu</td>
+                        <td>Tanggal : <?= $tanggalTtd ?></td>
+                        <td>Jam : <?= $jamTtd ?></td>
+                    </tr>
                     <tr class="text-center">
                         <th>No.</th>
                         <th>JENIS INFORMASI</th>
@@ -224,21 +245,29 @@ $today = new \DateTime();
                     </tr>
                     <tr>
                         <td class="text-center" style="width: 2%;">1</td>
-                        <td style="width: 15%;">Pengertian Transfusi Darah</td>
-                        <td style="width: 80%;">
-                            Suatu proses memasukkan komponen darah dari orang sehat (Donor)
-                            kedalam tubuh orang sakit (Pasien) secara intravena.
+                        <td style="width: 15%;">Diagnosis</td>
+                        <td style="width: 75%;">
+                            <?= $data->icDarah['diagnosis'] ?>
                         </td>
-                        <td class="text-center text-success fw-bold" style="width: 5%; font-size: 1.2rem;">✔</td>
+                        <td class="text-center text-success fw-bold" style="width: 10%; font-size: 1.2rem;">✔</td>
                     </tr>
                     <tr>
                         <td class="text-center">2</td>
                         <td>
-                            Jenis Darah /
-                            Komponen Darah
+                            Dasar diagnosis
                         </td>
                         <td>
-                            <p class="fw-bold mb-1">Komponen Darah yang Diberikan:</p>
+                            <?= $data->icDarah['dasarDiagnosis'] ?>
+                        </td>
+                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td>
+                            Tindakan Kedokteran
+                        </td>
+                        <td>
+                            <p class="fw-bold mb-1">Jenis / Komponen Darah :</p>
                             <?php
                             $darahString = !empty($data->icDarah['darah']) ? $data->icDarah['darah'] : '';
                             $darah = !empty($darahString) ? explode('|', $darahString) : [];
@@ -249,18 +278,17 @@ $today = new \DateTime();
                                         <li><?= esc($item) ?></li>
                                     <?php endforeach; ?>
                                 </ol>
-                                Komponen darah tersebut diberikan kepada pasien sesuai indikasi.
+                                Jenis / komponen darah tersebut diberikan kepada pasien sesuai indikasi.
                             <?php else: ?>
-                                <p class="text-muted small italic">Tidak ada komponen darah yang dipilih.</p>
+                                <p class="text-muted small italic">Tidak ada jenis/komponen darah yang diberikan.</p>
                             <?php endif; ?>
                         </td>
                         <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
                     </tr>
                     <tr>
-                        <td class="text-center">3</td>
+                        <td class="text-center">4</td>
                         <td>
-                            Tujuan / Indikasi
-                            Transfusi Darah
+                            Indikasi Tindakan
                         </td>
                         <td>
                             <?php
@@ -281,74 +309,140 @@ $today = new \DateTime();
                         <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
                     </tr>
                     <tr>
-                        <td class="text-center">4</td>
-                        <td>Risiko / Komplikasi</td>
-                        <td>
-                            Komplikasi transfusi darah dapat dibedakan atas :
-                            <ol class="mb-0">
-                                <li>
-                                    Komplikasi menurut keterlibatan sistem imun tubuh :
-                                    <ol type="a" class="mb-0">
-                                        <li>
-                                            Komplikasi imunologi (berhubungan dengan reaksi transfusi)
-                                        </li>
-                                        <li>
-                                            Komplikasi non imunologi (disebabkan efek fisik dari komponen darah dan infeksi)
-                                        </li>
-                                    </ol>
-                                </li>
-                                <li>
-                                    Komplikasi menurut waktu pemberian transfusi :
-                                    <ol type="a" class="mb-0">
-                                        <li>Komplikasi segera (immediate)</li>
-                                        <li>Komplikasi tertunda (delayed)</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                        </td>
-                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
-                    </tr>
-                    <tr>
                         <td class="text-center">5</td>
-                        <td>Tata cara</td>
+                        <td>Tata Cara</td>
                         <td>
-                            <ol class="mb-0 ps-3">
+                            <ol class="ps-3 mb-0">
                                 <li>Menginformasikan kepada pasien/ keluarga tentang tindakan yang akan dilakukan;</li>
-                                <li>Kemudian siapkan peralatan sebagai berikut :
-                                    <ul style="list-style-type: lower-alpha;" class="mb-0">
-                                        <li>Blood Set;</li>
-                                        <li>Abbocath sesuai kebutuhan;</li>
+                                <li>
+                                    Kemudian siapkan peralatan sebagai berikut :
+                                    <ol type="a" class="ps-3text-muted">
+                                        <li class="fst-italic">Blood Set;</li>
+                                        <li class="fst-italic">Abbocath sesuai kebutuhan;</li>
                                         <li>Cairan infuse NaCl 0,9 %;</li>
-                                        <li>ET (Extention Tubing), three way;</li>
-                                        <li>Transfusion pump;</li>
-                                        <li>Blood warmer (jika diperlukan);</li>
+                                        <li class="fst-italic">ET (Extention Tubing), three way;</li>
+                                        <li class="fst-italic">Transfusion pump;</li>
+                                        <li class="fst-italic">Blood warmer (jika diperlukan);</li>
                                         <li>Labu darah (sesuai dengan jenis dan golongan darah);</li>
-                                        <li>Sarung tangan dan nierbekken.</li>
-                                    </ul>
+                                        <li>Sarung tangan dan <span class="fst-italic">nierbekken</span>.</li>
+                                    </ol>
                                 </li>
                                 <li>Periksa kelayakan darah dalam labu seperti warna dan bentuknya;</li>
-                                <li>Cocokkan nama pasien, tanggal lahir, golongan darah, nomor labu darah, tanggal pengambilan dan tanggal kadaluarsa antara kartu labu darah, label labu darah, formulir permintaan serta status pasien.</li>
-                                <li>Pencocokkan data pasien, data labu darah dilakukan oleh 2 (dua) staf rumah sakit ibu dan anak Aisyiyah dalam memastikan data tersebut</li>
+                                <li>
+                                    Cocokkan nama pasien, tanggal lahir, golongan darah, nomor labu darah, tanggal pengambilan dan tanggal kadaluarsa antara kartu labu darah, label labu darah, formulir permintaan serta status pasien.
+                                    Pencocokan data pasien, data labu darah dilakukan oleh 2 (dua) staf rumah sakit ibu dan anak Aisyiyah dalam memastikan data tersebut.
+                                </li>
                             </ol>
                         </td>
                         <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
                     </tr>
                     <tr>
                         <td class="text-center">6</td>
+                        <td>Tujuan</td>
+                        <td>
+                            <ol class="ps-3 mb-0">
+                                <li>
+                                    Meningkatkan asupan oksigen
+                                </li>
+                                <li>
+                                    Mempertahankan tekanan darah
+                                </li>
+                                <li>
+                                    Memperbaiki sirkuasi darah dan mempertahankan kehidupan
+                                </li>
+                                <li>
+                                    Mencegah dan atau mengurangi pendarahan yang abnormal
+                                </li>
+                            </ol>
+                        </td>
+                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">7</td>
+                        <td>Risiko</td>
+                        <td>
+                            <?php if ($data->icDarah['jenis'] == 'PERSETUJUAN'): ?>
+                                <ol class="ps-3 mb-0">
+                                    <li>
+                                        Demam, gatal-gatal, berdebar-debar, menggigil, flushing (muka
+                                        kemerahan), nyeri dada dan sakit kepala, pembengkakan daerah transfusi.
+                                    </li>
+                                    <li>
+                                        Risiko berat yang sangat jarang : reaksi alergi berat, infeksi bakteri atau
+                                        virus seperti hepatitis dan HIV/ AIDS dll.
+                                    </li>
+                                </ol>
+                            <?php else : ?>
+                                <ol class="ps-3 mb-0">
+                                    <li>
+                                        Bahaya yang serius terhadap hasil pengobatan.
+                                    </li>
+                                    <li>
+                                        Sakit menjadi lebih berat sampai kematian.
+                                    </li>
+                                </ol>
+                            <?php endif; ?>
+                        </td>
+                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">8</td>
+                        <td>Komplikasi</td>
+                        <td>
+                            <p class="mb-0">Komplikasi transfusi darah dapat dibedakan atas :</p>
+                            <ol class="ps-3 mb-0">
+                                <li class="mb-0">Komplikasi menurut keterlibatan sistem imun tubuh :<ol type="a" class="ps-3 mb-0">
+                                        <li class="mb-0">Komplikasi imunologi (berhubungan dengan reaksi transfusi)</li>
+                                        <li class="mb-0">Komplikasi non imunologi (disebabkan efek fisik dari komponen darah dan infeksi)</li>
+                                    </ol>
+                                </li>
+                                <li class="mb-0">Komplikasi menurut waktu pemberian transfusi :<ol type="a" class="ps-3 mb-0">
+                                        <li class="mb-0">Komplikasi segera (<span class="fst-italic">immediate</span>)</li>
+                                        <li class="mb-0">Komplikasi tertunda (<span class="fst-italic">delayed</span>)</li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </td>
+                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="page">
+            <div class="subpage">
+                <table class="table table-bordered table-sm mt-4">
+                    <tr>
+                        <td class="text-center">9</td>
+                        <td>Alternatif</td>
+                        <td>
+                            <?= $data->icDarah['alternatif'] ?>
+                        </td>
+                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">10</td>
+                        <td>Prognosis</td>
+                        <td>
+                            <?= $data->icDarah['prognosis'] ?>
+                        </td>
+                        <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">11</td>
                         <td>Lain - lain</td>
                         <td>
-                            <ol class="mb-0 ps-3">
-                                <li>
-                                    Pembiayaan darah transfusi ditanggung oleh pasien dan/ atau keluarga
-                                    pasien termasuk darah transfusi yang sudah dipesan dan/ atau dibeli
-                                    meskipun tidak terpakai/ sisa yang dikarenakan keadaan pasien.
-                                </li>
-                                <?php if ($data->icDarah['lainLain']) : ?>
-                                    <li>
-                                        <?= $data->icDarah['lainLain'] ?>
-                                    </li>
-                                <?php endif; ?>
-                            </ol>
+                            <?php if (($data->icDarah['jenisBayar'] ?? '') == 'Umum') : ?>
+                                Pembiayaan darah transfusi ditanggung oleh pasien dan/ atau
+                                keluarga pasien termasuk darah transfusi yang sudah dipesan dan/
+                                atau dibeli meskipun tidak terpakai/ sisa yang dikarenakan keadaan
+                                pasien.
+                            <?php elseif (($data->icDarah['jenisBayar'] ?? '') == 'BPJS') : ?>
+                                Pembiayaan tranfusi darah pasien BPJS di tanggung Rumah Sakit
+                            <?php else: ?>
+                                <?= esc($data->icDarah['lainLain'] ?? '-') ?>
+                            <?php endif; ?>
                         </td>
                         <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
                     </tr>
@@ -362,14 +456,6 @@ $today = new \DateTime();
                             <div class="text-muted" style="font-size: 7pt;">( <?= $data->icDarah['dokter'] ? $data->icDarah['dokter'] : '............................' ?> )</div>
                         </td>
                     </tr>
-                </table>
-
-            </div>
-        </div>
-
-        <div class="page">
-            <div class="subpage">
-                <table class="table table-bordered table-sm mt-2">
                     <tr>
                         <td colspan="3" class="p-1" style="vertical-align: top; height: 100px;">
                             Dengan ini menyatakan bahwa saya / keluarga pasien telah menerima informasi sebagaimana di atas yang saya beri tanda / paraf di kolom kanan serta telah diberi kesempatan untuk bertanya / berdiskusi, dan telah memahaminya.
@@ -396,16 +482,16 @@ $today = new \DateTime();
                 </table>
 
                 <div class="container my-4 text-dark" style="max-width: 800px; font-family: 'Times New Roman', Times, serif; line-height: 1.6;">
-                    <div class="card p-5 border-dark shadow-sm">
+                    <div class="card p-3 border-dark shadow-sm">
 
-                        <div class="text-center mb-1">
-                            <p style="font-size: 14pt;"><b>PERSETUJUAN TINDAKAN KEDOKTERAN</b></p>
+                        <div class="text-center">
+                            <p style="font-size: 14pt;" class="mb-1"><b><?= $data->icDarah['jenis'] ?> TINDAKAN KEDOKTERAN</b></p>
                         </div>
 
-                        <div class="mb-1">
-                            <p class="mb-1">Saya yang bertanda tangan di bawah ini :</p>
+                        <div>
+                            <p class="mb-0">Saya yang bertanda tangan di bawah ini :</p>
 
-                            <div class="row mb-1">
+                            <div class="row">
                                 <div class="col-4">Nama</div>
                                 <div class="col-8 d-flex">
                                     <span class="me-2">:</span>
@@ -413,7 +499,7 @@ $today = new \DateTime();
                                 </div>
                             </div>
 
-                            <div class="row mb-1">
+                            <div class="row ">
                                 <div class="col-4">Tanggal lahir / Jenis kelamin</div>
                                 <div class="col-8 d-flex align-items-center">
                                     <span class="me-2">:</span>
@@ -422,7 +508,7 @@ $today = new \DateTime();
                                 </div>
                             </div>
 
-                            <div class="row mb-1">
+                            <div class="row ">
                                 <div class="col-4">Alamat</div>
                                 <div class="col-8 d-flex align-items-end flex-column">
                                     <div class="w-100 d-flex">
@@ -432,7 +518,7 @@ $today = new \DateTime();
                                 </div>
                             </div>
 
-                            <div class="row mb-1">
+                            <div class="row ">
                                 <div class="col-4">Bukti diri / KTP</div>
                                 <div class="col-8 d-flex">
                                     <span class="me-2">:</span>
@@ -443,21 +529,21 @@ $today = new \DateTime();
 
                         <p class="mb-2">Dengan ini menyatakan dengan sesungguhnya telah memberikan :</p>
 
-                        <div class="text-center mb-1">
-                            <p style="font-size: 14pt;"><b>PERSETUJUAN</b></p>
+                        <div class="text-center">
+                            <p style="font-size: 14pt;" class="mb-1"><b><?= $data->icDarah['jenis'] ?></b></p>
                         </div>
 
                         <div class="mb-2">
-                            <div class="row mb-1">
+                            <div class="row ">
                                 <div class="col-12 d-flex align-items-center">
                                     <span class="me-2">Untuk dilakukan tindakan medis berupa :</span>
                                     <?= $data->icDarah['tindakanMedis'] ?>
                                 </div>
                             </div>
 
-                            <p class="mb-3 fw-bold">Terhadap : <?= $data->icDarah['sebagai'] ?></p>
+                            <p class="mb-1 fw-bold">Terhadap : <?= $data->icDarah['sebagai'] ?></p>
 
-                            <div class="row mb-1">
+                            <div class="row ">
                                 <div class="col-4">Nama</div>
                                 <div class="col-8 d-flex">
                                     <span class="me-2">:</span>
@@ -465,7 +551,7 @@ $today = new \DateTime();
                                 </div>
                             </div>
 
-                            <div class="row mb-1">
+                            <div class="row ">
                                 <div class="col-4">Tanggal lahir / Jenis kelamin</div>
                                 <div class="col-8 d-flex align-items-center">
                                     <span class="me-2">:</span>
@@ -474,7 +560,7 @@ $today = new \DateTime();
                                 </div>
                             </div>
 
-                            <div class="row mb-1">
+                            <div class="row ">
                                 <div class="col-4">Alamat</div>
                                 <div class="col-8 d-flex">
                                     <span class="me-2">:</span>
@@ -482,7 +568,7 @@ $today = new \DateTime();
                                 </div>
                             </div>
 
-                            <div class="row mb-1">
+                            <div class="row ">
                                 <div class="col-4">Dirawat di</div>
                                 <div class="col-8 d-flex">
                                     <span class="me-2">:</span>
@@ -490,7 +576,7 @@ $today = new \DateTime();
                                 </div>
                             </div>
 
-                            <div class="row mb-1">
+                            <div class="row ">
                                 <div class="col-4">No. Rekam Medik</div>
                                 <div class="col-8 d-flex">
                                     <span class="me-2">:</span>
@@ -507,7 +593,7 @@ $today = new \DateTime();
                             <p>Demikian pernyataan ini saya buat dengan penuh kesadaran dan tanpa paksaan.</p>
                         </div>
 
-                        <div class="row text-center mt-1">
+                        <div class="row text-center">
                             <div class="col-12 text-end">
                                 Bangkalan, <?= $data->icDarah['tglTtd'] ?>
                             </div>
@@ -565,16 +651,16 @@ $today = new \DateTime();
                                     </td>
                                 </tr>
                             </table>
-                            <input type="hidden" id="noRawat" value="<?= $data->icDarah["noRawat"] ?>">
-                            <input type="hidden" id="dokter" value="<?= $data->icDarah["dokter"] ?>">
-                            <div class="row mt-2">
-                                <div class="col-12 text-center">
-                                    <div class="" id="pesanError"></div>
-                                    <?php if (!$data->icDarah["ttdWali"] and !$data->icDarah["ttdSaksi"]) { ?>
+                            <?php if (!$data->icDarah["ttdWali"] and !$data->icDarah["ttdSaksi"]) { ?>
+                                <input type="hidden" id="noRawat" value="<?= $data->icDarah["noRawat"] ?>">
+                                <input type="hidden" id="dokter" value="<?= $data->icDarah["dokter"] ?>">
+                                <div class="row mt-2">
+                                    <div class="col-12 text-center">
+                                        <div class="" id="pesanError"></div>
                                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalKunci">Selesaikan dan kunci Tanda tangan.</button>
-                                    <?php } ?>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

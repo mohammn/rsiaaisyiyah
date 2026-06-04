@@ -92,8 +92,15 @@ class IcDarah extends BaseController
             "nik"           => $this->request->getPost("nik"),
             "saksi"         => $this->request->getPost("saksi"),
             "tindakanMedis" => $this->request->getPost("tindakanMedis"),
+            "jenis" => $this->request->getPost("jenis"),
 
             // Kolom tambahan Baru (Disesuaikan agar membaca array post dengan aman)
+            "jenisBayar" => $this->request->getPost("jenisBayar"),
+            "lainLain" => $this->request->getPost("lainLain"),
+            "diagnosis" => $this->request->getPost("diagnosis"),
+            "dasarDiagnosis" => $this->request->getPost("dasarDiagnosis"),
+            "alternatif" => $this->request->getPost("alternatif"),
+            "prognosis" => $this->request->getPost("prognosis"),
             "darah"         => (!empty($postDarah) && is_array($postDarah)) ? implode('|', $postDarah) : null,
             "indikasi"      => (!empty($postIndikasi) && is_array($postIndikasi)) ? implode('|', $postIndikasi) : null,
         ];

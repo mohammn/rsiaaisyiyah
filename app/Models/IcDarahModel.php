@@ -23,11 +23,18 @@ class IcDarahModel extends Model
         'nik',
         'saksi',
         'tindakanMedis',
+        'jenis',
         'tglinput',
         'ttdSaksi',
         'ttdWali',
 
         // Kolom tambahan baru
+        'jenisBayar',
+        'lainLain',
+        'diagnosis',
+        'dasarDiagnosis',
+        'alternatif',
+        'prognosis',
         'darah',
         'indikasi',
     ];

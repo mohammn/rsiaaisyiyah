@@ -18,7 +18,7 @@ if ($data->icDarah) {
         </div>
         <div class="card-body" style="overflow-y: auto;">
             <div class="text-center">
-                <h5 class="text-uppercase"><i>INFORMED CONSENT</i> TINDAKAN PEMBIUSAN <br>(ANESTESI REGIONAL, UMUM/SEDASI)</h5>
+                <h5 class="text-uppercase"><i>INFORMED CONSENT</i> PEMBERIAN DARAH DAN PRODUK DARAH</h5>
                 Untuk pasien : <b><?= $data->pasien["nm_pasien"] ?></b> (<?= $data->pasien["no_rkm_medis"] ?>). NIK: <?= $data->pasien["no_ktp"] ?><br>
                 No Rawat : <b><?= $data->pasien["no_rawat"] ?></b>. Lahir : <?= $data->pasien["tgl_lahir"] ?> <br>
                 Alamat : <?= $data->pasien["alamat"] ?>
@@ -62,7 +62,7 @@ if ($data->icDarah) {
 
                     <div class="col-6">
                         <div class="alert alert-info">
-                            <div class="row mb-3">
+                            <div class="row mb-4">
                                 <div class="col-12 text-center">Petugas :</div>
                                 <hr>
                             </div>
@@ -83,9 +83,11 @@ if ($data->icDarah) {
                                     <td>Tindakan Medis</td>
                                     <td>: <?= $data->icDarah["tindakanMedis"] ?></td>
                                 </tr>
+                                <tr>
+                                    <td>Jenis</td>
+                                    <td>: <?= $data->icDarah["jenis"] == 'PERSETUJUAN' ? '<span class="badge-estetik bg-vibrant-teal">PERSETUJUAN</span>' : '<span class="badge-estetik bg-vibrant-red">PENOLAKAN</span>'; ?></td>
+                                </tr>
                             </table>
-                            <br>
-                            <br>
                         </div>
                     </div>
 
@@ -158,11 +160,11 @@ if ($data->icDarah) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus persetujuan rawat jalan ?</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus data ?</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Apakah anda yakin ingin menghapus Form pemilihan DPJP pasien atas nama <b id="namaPasienHapus"></b> dengan no Rawat : <b id="noRawatHapus"></b> ? <br>
+                Apakah anda yakin ingin menghapus Form pasien atas nama <b id="namaPasienHapus"></b> dengan no Rawat : <b id="noRawatHapus"></b> ? <br>
                 <div class="alert alert-warning p-1 mt-2"> <i class="fa-solid fa-triangle-exclamation"></i> Peringatan ! Data tidak dapat dikembalikan.</div>
             </div>
             <div class="modal-footer">
@@ -274,9 +276,16 @@ if ($data->icDarah) {
         var dokter = $("#dokter").val();
         var saksi = $("#saksi").val();
         var tindakanMedis = $("#tindakanMedis").val();
+        var jenis = $('input[name="jenis"]:checked').val();
 
 
         // =============== ISIAN INFORMED CONSENT ===============
+        var jenisBayar = $("#jenisBayar").val();
+        var lainLain = $("#lainLain").val();
+        var diagnosis = $("#diagnosis").val();
+        var dasarDiagnosis = $("#dasarDiagnosis").val();
+        var alternatif = $("#alternatif").val();
+        var prognosis = $("#prognosis").val();
         var darah = $('input[name="darah[]"]:checked').map(function() {
             return this.value;
         }).get();
@@ -329,7 +338,14 @@ if ($data->icDarah) {
                     saksi: saksi,
                     dokter: dokter,
                     tindakanMedis: tindakanMedis,
+                    jenis: jenis,
 
+                    jenisBayar: jenisBayar,
+                    lainLain: lainLain,
+                    diagnosis: diagnosis,
+                    dasarDiagnosis: dasarDiagnosis,
+                    alternatif: alternatif,
+                    prognosis: prognosis,
                     darah: darah,
                     indikasi: indikasi,
                 },

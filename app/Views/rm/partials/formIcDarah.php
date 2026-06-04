@@ -7,10 +7,11 @@ $indikasi = !empty($data->icDarah['indikasi']) ? explode('|', $data->icDarah['in
 <style>
     /* Efek hover pada pembungkus form-check */
     .hover-check {
-        padding: 1px 15px;
+        padding: 0px 15px;
         border-radius: 6px;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
+        font-size: 10pt;
     }
 
     .hover-check:hover {
@@ -34,6 +35,7 @@ $indikasi = !empty($data->icDarah['indikasi']) ? explode('|', $data->icDarah['in
                     <div class="col-12 text-center">Data Penanggung Jawab :</div>
                     <hr>
                 </div>
+                <input type="hidden" class="form-control" id="petugas" value="<?= $data->icDarah['petugas'] ?? session()->get('nama') ?>">
                 <mark>Yang bertanda tangan di bawah ini :</mark>
                 <div class="row mb-3 mt-2">
                     <div class="col-7"><input type="text" class="form-control" id="nama" placeholder="Nama" value="<?= $data->icDarah['nama'] ?? '' ?>"></div>
@@ -99,16 +101,6 @@ $indikasi = !empty($data->icDarah['indikasi']) ? explode('|', $data->icDarah['in
                 </div>
                 <div class="row mt-3 mb-2">
                     <div class="col-6">
-                        <label for="petugas" class="form-label">Petugas :</label>
-                        <input type="text" class="form-control" id="petugas" value="<?= $data->icDarah['petugas'] ?? session()->get('nama') ?>" disabled>
-                    </div>
-                    <div class="col-6">
-                        <label for="saksi" class="form-label">Saksi :</label>
-                        <input type="text" class="form-control" id="saksi" value="<?= $data->icDarah['saksi'] ?? '' ?>">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-6">
                         <label for="petugas" class="form-label">Dokter :</label>
                         <select name="dokter" id="dokter" class="form-select">
                             <option value="" <?= (empty($data->icDarah['dokter'])) ? 'selected' : '' ?> disabled>-- Pilih Dokter --</option>
@@ -119,8 +111,50 @@ $indikasi = !empty($data->icDarah['indikasi']) ? explode('|', $data->icDarah['in
                         </select>
                     </div>
                     <div class="col-6">
+                        <label for="saksi" class="form-label">Saksi :</label>
+                        <input type="text" class="form-control" id="saksi" value="<?= $data->icDarah['saksi'] ?? '' ?>">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
                         <label for="tindakanMedis" class="form-label">Tindakan medis :</label>
                         <input type="text" class="form-control" id="tindakanMedis" value="<?= $data->icDarah['tindakanMedis'] ?? '' ?>">
+                    </div>
+                    <div class="col-md-6 mt-2 mt-md-0  border border-info rounded">
+                        <label class="form-label d-block fw-bold text-info-emphasis mb-0" style="font-size: 0.9rem;">
+                            JENIS <i>INFORMED CONSENT</i> :
+                        </label>
+                        <div class="btn-group btn-group-sm w-100" role="group">
+                            <input type="radio" class="btn-check" name="jenis" id="setuju" value="PERSETUJUAN"
+                                <?= (($data->icDarah['jenis'] ?? 'PERSETUJUAN') === 'PERSETUJUAN') ? 'checked' : '' ?>>
+                            <label class="btn btn-outline-success py-2 fw-bold" for="setuju" style="font-size: 0.75rem; white-space: nowrap;">
+                                <i class="fas fa-check fa-sm me-1"></i> PERSETUJUAN
+                            </label>
+
+                            <input type="radio" class="btn-check" name="jenis" id="tolak" value="PENOLAKAN"
+                                <?= (($data->icDarah['jenis'] ?? '') === 'PENOLAKAN') ? 'checked' : '' ?>>
+                            <label class="btn btn-outline-danger py-2 fw-bold" for="tolak" style="font-size: 0.75rem; white-space: nowrap;">
+                                <i class="fas fa-times fa-sm me-1"></i> PENOLAKAN
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <hr>
+
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="alternatif" class="form-label">Jenis Bayar :</label>
+                        <select name="jenisBayar" id="jenisBayar" class="form-select" onchange="cekJenisBayar()">
+                            <option value="Umum">Umum</option>
+                            <option value="BPJS">BPJS</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="lainLain" class="form-label">Lain - lain :</label>
+                        <textarea class="form-control" id="lainLain" rows="2" disabled><?= $data->icDarah['lainLain'] ?? '' ?></textarea>
                     </div>
                 </div>
             </div>
@@ -131,7 +165,27 @@ $indikasi = !empty($data->icDarah['indikasi']) ? explode('|', $data->icDarah['in
                     <div class="col-12 text-center">Pemberian informasi :</div>
                     <hr>
                 </div>
-                <div class="row mb-3 border border-info rounded p-2">
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="diagnosis" class="form-label">Diagnosis :</label>
+                        <textarea class="form-control" id="diagnosis" rows="2"><?= $data->icDarah['diagnosis'] ?? '' ?></textarea>
+                    </div>
+                    <div class="col-6">
+                        <label for="dasarDiagnosis" class="form-label">Dasar diagnosis :</label>
+                        <textarea class="form-control" id="dasarDiagnosis" rows="2"><?= $data->icDarah['dasarDiagnosis'] ?? '' ?></textarea>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <label for="alternatif" class="form-label">Alternatif :</label>
+                        <textarea class="form-control" id="alternatif" rows="2"><?= $data->icDarah['alternatif'] ?? '' ?></textarea>
+                    </div>
+                    <div class="col-6">
+                        <label for="prognosis" class="form-label">Prognosis :</label>
+                        <textarea class="form-control" id="prognosis" rows="2"><?= $data->icDarah['prognosis'] ?? '' ?></textarea>
+                    </div>
+                </div>
+                <div class="row mb-2 border border-info rounded p-2">
                     <div class="col-12">
                         <p class="fw-bold mb-1">Komponen darah yang tersedia sebagai berikut :</p>
 
@@ -235,3 +289,12 @@ $indikasi = !empty($data->icDarah['indikasi']) ? explode('|', $data->icDarah['in
         </div>
     </div>
 </form>
+<script>
+    function cekJenisBayar() {
+        if ($("#jenisBayar").val() == 'Lainnya') {
+            $("#lainLain").prop('disabled', false);
+        } else {
+            $("#lainLain").prop('disabled', true);
+        }
+    }
+</script>
