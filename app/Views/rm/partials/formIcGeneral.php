@@ -124,6 +124,7 @@
                             <option value="Steril Bersalin (MOW)">
                             <option value="Patologi Anatomi (PA)">
                             <option value="Pemberian Terapi">
+                            <option value="Observasi Persalinan">
                         </datalist>
                     </div>
                     <div class="col-md-6 mt-2 mt-md-0">

@@ -259,7 +259,7 @@ $today = new \DateTime();
                             $indikasiIbu = !empty($data->icSesar['indikasiIbu']) ? explode('|', $data->icSesar['indikasiIbu']) : [];
                             $keyLainnya = array_search('Lainnya', $indikasiIbu);
                             if ($keyLainnya !== false && !empty($data->icSesar['indikasiIbuLainnya'])) {
-                                $indikasiIbu[$keyLainnya] = 'Lainnya: ' . $data->icSesar['indikasiIbuLainnya'];
+                                $indikasiIbu[$keyLainnya] = $data->icSesar['indikasiIbuLainnya'];
                             }
                             ?>
 
@@ -277,7 +277,7 @@ $today = new \DateTime();
 
                             $keyLainnyaJanin = array_search('Lainnya', $indikasiJanin);
                             if ($keyLainnyaJanin !== false && !empty($data->icSesar['indikasiJaninLainnya'])) {
-                                $indikasiJanin[$keyLainnyaJanin] = 'Lainnya: ' . $data->icSesar['indikasiJaninLainnya'];
+                                $indikasiJanin[$keyLainnyaJanin] = $data->icSesar['indikasiJaninLainnya'];
                             }
                             ?>
 
