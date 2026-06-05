@@ -85,7 +85,7 @@ class Rm extends BaseController
             $statusIcGeneral[$i] = $this->cekSemuaKolom($icGeneral[$i], ['ttdWali', 'ttdSaksi']);
         }
 
-        $pengecualianIcPembiusan = ['tataCara', 'tujuan', 'komplikasi', 'risiko', 'alternatif', 'ttdWali', 'ttdSaksi'];
+        $pengecualianIcPembiusan = ['isiKombinasi', 'tataCara', 'tujuan', 'komplikasi', 'risiko', 'alternatif', 'ttdWali', 'ttdSaksi'];
         if ($icPembiusan) {
             if ($icPembiusan['jenisAnestesi'] === "Blok Syaraf Perifer" or $icPembiusan['jenisAnestesi'] === "Anestesi Umum") {
                 unset($pengecualianIcPembiusan['alternatif']);
