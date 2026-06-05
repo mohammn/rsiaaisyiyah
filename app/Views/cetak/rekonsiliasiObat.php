@@ -164,9 +164,9 @@
 
                             <td colspan="5" style="font-weight: normal !important; text-align: left; vertical-align: top; padding: 5px 8px !important;">
                                 <b>Dampak :</b> <br>
-                                <?= $data->rekonsiliasiObat['dampak'] == 'Tidak ada' ? '&#x2714;'  : '&#x25a2';  ?> Tidak Ada
-                                <?= $data->rekonsiliasiObat['dampak'] == 'Sedang' ? '&#x2714;'  : '&#x25a2';  ?> Sedang
+                                <?= $data->rekonsiliasiObat['dampak'] == 'Tidak Ada' ? '&#x2714;'  : '&#x25a2';  ?> Tidak Ada
                                 <?= $data->rekonsiliasiObat['dampak'] == 'Ringan' ? '&#x2714;'  : '&#x25a2';  ?> Ringan
+                                <?= $data->rekonsiliasiObat['dampak'] == 'Sedang' ? '&#x2714;'  : '&#x25a2';  ?> Sedang
                                 <?= $data->rekonsiliasiObat['dampak'] == 'Berat' ? '&#x2714;'  : '&#x25a2';  ?> Berat
                             </td>
                         </tr>
