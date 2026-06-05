@@ -111,7 +111,20 @@
                         <label for="judul" class="form-label fw-bold text-dark mb-1" style="font-size: 0.95rem;">
                             Judul <i>Informed Consent</i> :
                         </label>
-                        <input type="text" class="form-control form-control-lg border-2 border-secondary bg-white fw-semibold" id="judul" value="<?= $data->icGeneral['judul'] ?? '' ?>">
+                        <input type="text"
+                            class="form-control form-control-lg border-2 border-secondary bg-white fw-semibold"
+                            id="judul"
+                            list="saranJudul"
+                            value="<?= $data->icGeneral['judul'] ?? '' ?>">
+
+                        <datalist id="saranJudul">
+                            <option value="Pemasangan kateter">
+                            <option value="Pemasangan infus">
+                            <option value="Pemasangan IUD">
+                            <option value="Steril Bersalin (MOW)">
+                            <option value="Patologi Anatomi (PA)">
+                            <option value="Pemberian Terapi">
+                        </datalist>
                     </div>
                     <div class="col-md-6 mt-2 mt-md-0">
                         <label class="form-label d-block fw-bold text-info-emphasis mb-2" style="font-size: 0.9rem;">
