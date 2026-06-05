@@ -269,7 +269,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'ETERFIX inf 100 ml',
                     "ruangan"            => 'ko',
                     "dosis"              => '10 MG/ML',
-                    "frekuensi"          => '1X2',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -279,7 +279,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'TRAMADOL INJ 50 MG/ ML',
                     "ruangan"            => 'ko',
                     "dosis"              => '50 MG/ ML',
-                    "frekuensi"          => '1X3',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -289,7 +289,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'RINVELL INJ',
                     "ruangan"            => 'ko',
                     "dosis"              => '-', // Kosong diganti -
-                    "frekuensi"          => '1X4',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -299,7 +299,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'ASAM TRANEKSAMAT 500 MG',
                     "ruangan"            => 'ko',
                     "dosis"              => '500 MG',
-                    "frekuensi"          => '1X5',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -309,7 +309,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'METAMIZOLE SODIUM 500MG/ML',
                     "ruangan"            => 'ko',
                     "dosis"              => '500MG/ML',
-                    "frekuensi"          => '1X6',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -319,7 +319,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'REGIVELL 4 ML',
                     "ruangan"            => 'ko',
                     "dosis"              => '-',
-                    "frekuensi"          => '1X7',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -329,7 +329,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'ATROPIN SULFATE',
                     "ruangan"            => 'ko',
                     "dosis"              => '-',
-                    "frekuensi"          => '1X8',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -339,7 +339,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'DEXAMETHASONE',
                     "ruangan"            => 'ko',
                     "dosis"              => '-',
-                    "frekuensi"          => '1X9',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -349,7 +349,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'ETANYL',
                     "ruangan"            => 'ko',
                     "dosis"              => '-',
-                    "frekuensi"          => '1X10',
+                    "frekuensi"          => '1X11',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -359,7 +359,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'EPINEPHRINE',
                     "ruangan"            => 'ko',
                     "dosis"              => '-',
-                    "frekuensi"          => '1X11',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -369,7 +369,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'METHYLERGOMETHRINE 0,2 MG INJ',
                     "ruangan"            => 'ko',
                     "dosis"              => '0,2 MG INJ',
-                    "frekuensi"          => '1X12',
+                    "frekuensi"          => '1X11',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -379,7 +379,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'METOCLOPRAMIDE HYDROCHLORIDE', // Disesuaikan typo teks gambar GYDROCHLORIDE -> HYDROCHLORIDE
                     "ruangan"            => 'ko',
                     "dosis"              => '-',
-                    "frekuensi"          => '1X13',
+                    "frekuensi"          => '1X11',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -389,7 +389,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'OXYTOCIN INJEKSI 10IU/ml',
                     "ruangan"            => 'ko',
                     "dosis"              => '10IU/ml',
-                    "frekuensi"          => '1X14',
+                    "frekuensi"          => '1X3',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -399,12 +399,12 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'RANITIDINE HCL 25MG INJ',
                     "ruangan"            => 'ko',
                     "dosis"              => '25MG',
-                    "frekuensi"          => '1X15',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ]
             ];
-        } else {
+        } elseif ($kamar == 'rr') {
             $data = [
                 [
                     "noRawat"            => $noRawat,
@@ -474,6 +474,120 @@ class RekonsiliasiObat extends BaseController
                     "dosis"              => '40 MG',
                     "frekuensi"          => '2X1',
                     "caraPemberian"      => 'IV',
+                    "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
+                ]
+            ];
+        } else {
+            $data = [
+                [
+                    "noRawat"            => $noRawat,
+                    "idRekonsiliasiObat" => $idRekonsiliasiObat,
+                    "namaObat"           => 'CEFADROXIL',
+                    "ruangan"            => 'ri',
+                    "dosis"              => '500 MG',
+                    "frekuensi"          => '3X1',
+                    "caraPemberian"      => 'PO',
+                    "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
+                ],
+                [
+                    "noRawat"            => $noRawat,
+                    "idRekonsiliasiObat" => $idRekonsiliasiObat,
+                    "namaObat"           => 'ASAM MEFENAMAT',
+                    "ruangan"            => 'ri',
+                    "dosis"              => '500 MG',
+                    "frekuensi"          => '3X1',
+                    "caraPemberian"      => 'PO',
+                    "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
+                ],
+                [
+                    "noRawat"            => $noRawat,
+                    "idRekonsiliasiObat" => $idRekonsiliasiObat,
+                    "namaObat"           => 'NATRIUM DIKLOFENAK',
+                    "ruangan"            => 'ri',
+                    "dosis"              => '50 MossG', // Di gambar tertulis 50 MG
+                    "dosis"              => '50 MG',
+                    "frekuensi"          => '2X1',
+                    "caraPemberian"      => 'PO',
+                    "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
+                ],
+                [
+                    "noRawat"            => $noRawat,
+                    "idRekonsiliasiObat" => $idRekonsiliasiObat,
+                    "namaObat"           => 'NIFEDIPIN TABLET',
+                    "ruangan"            => 'ri',
+                    "dosis"              => '10 MG',
+                    "frekuensi"          => '3X1',
+                    "caraPemberian"      => 'PO',
+                    "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
+                ],
+                [
+                    "noRawat"            => $noRawat,
+                    "idRekonsiliasiObat" => $idRekonsiliasiObat,
+                    "namaObat"           => 'PARACETAMOL TABLET',
+                    "ruangan"            => 'ri',
+                    "dosis"              => '500 MG',
+                    "frekuensi"          => '4X2',
+                    "caraPemberian"      => 'PO',
+                    "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
+                ],
+                [
+                    "noRawat"            => $noRawat,
+                    "idRekonsiliasiObat" => $idRekonsiliasiObat,
+                    "namaObat"           => 'TABLET TAMBAH DARAH',
+                    "ruangan"            => 'ri',
+                    "dosis"              => '500 MG',
+                    "frekuensi"          => '2X1',
+                    "caraPemberian"      => 'PO',
+                    "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
+                ],
+                [
+                    "noRawat"            => $noRawat,
+                    "idRekonsiliasiObat" => $idRekonsiliasiObat,
+                    "namaObat"           => 'TRAMADOL TABLET',
+                    "ruangan"            => 'ri',
+                    "dosis"              => '50 MG',
+                    "frekuensi"          => '2X1',
+                    "caraPemberian"      => 'PO',
+                    "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
+                ],
+                [
+                    "noRawat"            => $noRawat,
+                    "idRekonsiliasiObat" => $idRekonsiliasiObat,
+                    "namaObat"           => 'TABLET TAMBAH DARAH', // No 8 di gambar
+                    "ruangan"            => 'ri',
+                    "dosis"              => '500 MG',
+                    "frekuensi"          => '3X1',
+                    "caraPemberian"      => 'PO',
+                    "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
+                ],
+                [
+                    "noRawat"            => $noRawat,
+                    "idRekonsiliasiObat" => $idRekonsiliasiObat,
+                    "namaObat"           => 'MYOTONIC',
+                    "ruangan"            => 'ri',
+                    "dosis"              => '125 MCG',
+                    "frekuensi"          => '3X1',
+                    "caraPemberian"      => 'PO',
+                    "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
+                ],
+                [
+                    "noRawat"            => $noRawat,
+                    "idRekonsiliasiObat" => $idRekonsiliasiObat,
+                    "namaObat"           => 'CAPSINAT',
+                    "ruangan"            => 'ri',
+                    "dosis"              => '500 MG',
+                    "frekuensi"          => '3X1',
+                    "caraPemberian"      => 'PO',
+                    "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
+                ],
+                [
+                    "noRawat"            => $noRawat,
+                    "idRekonsiliasiObat" => $idRekonsiliasiObat,
+                    "namaObat"           => 'FEMISIC',
+                    "ruangan"            => 'ri',
+                    "dosis"              => '500 MG',
+                    "frekuensi"          => '3X1',
+                    "caraPemberian"      => 'PO',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ]
             ];

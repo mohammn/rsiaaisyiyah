@@ -37,6 +37,7 @@
 
                 <button data-bs-toggle="modal" data-bs-target="#modalKo" class="btn-estetik btn-sm-estetik bg-vibrant-gray">Operasi</button>
                 <button data-bs-toggle="modal" data-bs-target="#modalRr" class="btn-estetik btn-sm-estetik bg-vibrant-gray">Recovery</button>
+                <button data-bs-toggle="modal" data-bs-target="#modalRi" class="btn-estetik btn-sm-estetik bg-vibrant-gray">Inap</button>
             </div>
             <br><br>
 
@@ -169,6 +170,29 @@
     </div>
 </div>
 
+
+<!-- Modal Ri-->
+<div class="modal fade" id="modalRi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Paket obat Rawat Inap.</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <sub class="alert alert-warning m-1 p-0"><b>Petunjuk : </b>Masukkan waktu pemberian terakhir. dan klik Buat. maka, paket obat Rawat Inap akan ditambah secara otomatis.
+                </sub><br><br>
+
+                <input type="datetime-local" name="wakturi" id="wakturi" class="form-control w-50">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-estetik btn-batal" data-bs-dismiss="modal"><i class="fas fa-ban me-1"></i> Batal</button>
+                <button type="button" class="btn btn-estetik btn-simpan" onclick="tambahPaket('ri')"><i class="fas fa-plus me-1"></i> Buat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal hapus-->
 <div class="modal fade" id="modalHapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -260,12 +284,7 @@
     function tambahPaket(kamar) {
         var noRawat = "<?= $data->pasien["no_rawat"] ?>";
         var id = "<?= $data->rekonsiliasiObat["id"] ?>";
-
-        if (kamar == 'ko') {
-            var waktu = $('#waktuko').val();
-        } else {
-            var waktu = $('#wakturr').val();
-        }
+        var waktu = $('#waktu' + kamar).val();
 
         if (!waktu) {
             $('#waktu' + kamar).focus();
