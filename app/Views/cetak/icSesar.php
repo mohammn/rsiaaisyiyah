@@ -334,7 +334,7 @@ $today = new \DateTime();
                         <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
                     </tr>
                     <tr>
-                        <td class="text-center">9</td>
+                        <td class="text-center">10</td>
                         <td>Alternatif</td>
                         <td>
                             <?= $data->icSesar['alternatif'] ?>
@@ -342,7 +342,7 @@ $today = new \DateTime();
                         <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>
                     </tr>
                     <tr>
-                        <td class="text-center">9</td>
+                        <td class="text-center">11</td>
                         <td>Lain - lain</td>
                         <td>
                             <?= $data->icSesar['lainLain'] ?>
