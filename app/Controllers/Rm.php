@@ -12,6 +12,7 @@ use App\Models\IcGeneralModel;
 use App\Models\IcDarahModel;
 use App\Models\IcSesarModel;
 use App\Models\IcPembiusanModel;
+use App\Models\IcPembiusanLokalModel;
 
 use function PHPSTORM_META\type;
 
@@ -27,6 +28,7 @@ class Rm extends BaseController
     protected $icDarahModel;
     protected $icSesarModel;
     protected $icPembiusanModel;
+    protected $icPembiusanLokalModel;
 
     public function __construct()
     {
@@ -44,6 +46,7 @@ class Rm extends BaseController
         $this->icDarahModel = new IcDarahModel();
         $this->icSesarModel = new IcSesarModel();
         $this->icPembiusanModel = new IcPembiusanModel();
+        $this->icPembiusanLokalModel = new IcPembiusanLokalModel();
     }
     public function index($no_rawat)
     {
@@ -73,6 +76,7 @@ class Rm extends BaseController
         $icDarah = $this->icDarahModel->where('noRawat', $no_rawat)->first();
         $icSesar = $this->icSesarModel->where('noRawat', $no_rawat)->first();
         $icPembiusan = $this->icPembiusanModel->where('noRawat', $no_rawat)->first();
+        $icPembiusanLokal = $this->icPembiusanLokalModel->where('noRawat', $no_rawat)->first();
 
 
         //===========status data=====================
@@ -103,6 +107,7 @@ class Rm extends BaseController
             "icDarah" => $this->cekSemuaKolom($icDarah, ['ttdWali', 'ttdSaksi']),
             "icSesar" => $this->cekSemuaKolom($icSesar, ['ttdWali', 'ttdSaksi', 'indikasiIbu', 'indikasiJanin']),
             "icPembiusan" => $this->cekSemuaKolom($icPembiusan, $pengecualianIcPembiusan),
+            "icPembiusanLokal" => $this->cekSemuaKolom($icPembiusanLokal, ['ttdWali', 'ttdSaksi']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -116,6 +121,7 @@ class Rm extends BaseController
             'icDarah'  => $icDarah,    // Biarkan null jika data tidak ada
             'icSesar'  => $icSesar,    // Biarkan null jika data tidak ada
             'icPembiusan'  => $icPembiusan,    // Biarkan null jika data tidak ada
+            'icPembiusanLokal'  => $icPembiusanLokal,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 

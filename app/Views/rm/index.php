@@ -152,6 +152,20 @@
                             </td>
                         </tr>
                     <?php endif; ?>
+                    <?php if ($data->icPembiusanLokal) : ?>
+                        <tr>
+                            <td><i>Informed Consent</i> Pembiusan Lokal</td>
+                            <td>
+                                <span class="badge-estetik <?= $data->status["icPembiusanLokal"] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["icPembiusanLokal"] ?></span>
+                            </td>
+                            <td><?= !empty($data->icPembiusanLokal['ttdWali']) && !empty($data->icPembiusanLokal['ttdSaksi']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                            <td>
+                                <a href="<?= base_url(" rm/icPembiusanLokal/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                <?= !empty($data->icPembiusanLokal['ttdWali'] && $data->icPembiusanLokal['ttdSaksi']) ? '<a href="' . base_url('/rm/icPembiusanLokal/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/icPembiusanLokal/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
+                                <a href="<?= base_url('/rm/icPembiusanLokal/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
@@ -230,6 +244,13 @@
                             <td><i>Informed Consent</i> Pembiusan Umum/Sedasi</td>
                             <td>
                                 <?= $data->icPembiusan ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/icPembiusan/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>9.</td>
+                            <td><i>Informed Consent</i> Pembiusan Lokal</td>
+                            <td>
+                                <?= $data->icPembiusanLokal ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/icPembiusanLokal/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
                             </td>
                         </tr>
                     </tbody>
