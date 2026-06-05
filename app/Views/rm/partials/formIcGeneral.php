@@ -118,8 +118,8 @@
                             value="<?= $data->icGeneral['judul'] ?? '' ?>">
 
                         <datalist id="saranJudul">
-                            <option value="Pemasangan kateter">
-                            <option value="Pemasangan infus">
+                            <option value="Pemasangan Kateter">
+                            <option value="Pemasangan Infus">
                             <option value="Pemasangan IUD">
                             <option value="Steril Bersalin (MOW)">
                             <option value="Patologi Anatomi (PA)">

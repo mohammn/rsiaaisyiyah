@@ -256,30 +256,35 @@ $today = new \DateTime();
                         <td>
                             <b class="fw-bold">Indikasi ibu : </b>
                             <?php
-                            // Mengambil data dari object $data->icSesar dan di-explode menjadi array
-                            // (Catatan: Pastikan key-nya 'indikasiIbu' ya, tadi di kode Anda sempat tertulis 'indikasi')
                             $indikasiIbu = !empty($data->icSesar['indikasiIbu']) ? explode('|', $data->icSesar['indikasiIbu']) : [];
+                            $keyLainnya = array_search('Lainnya', $indikasiIbu);
+                            if ($keyLainnya !== false && !empty($data->icSesar['indikasiIbuLainnya'])) {
+                                $indikasiIbu[$keyLainnya] = 'Lainnya: ' . $data->icSesar['indikasiIbuLainnya'];
+                            }
                             ?>
 
                             <?php if (!empty($indikasiIbu)): ?>
                                 <?= esc(implode(', ', $indikasiIbu)) ?>.
                             <?php else: ?>
-                                <p class="text-muted small italic">Tidak ada indikasi.</p>
+                                <span class="text-muted small italic">Tidak ada indikasi.</span>
                             <?php endif; ?>
 
                             <br>
 
                             <b class="fw-bold">Indikasi Janin : </b>
                             <?php
-                            // Mengambil data dari object $data->icSesar dan di-explode menjadi array
-                            // (Catatan: Pastikan key-nya 'indikasiIbu' ya, tadi di kode Anda sempat tertulis 'indikasi')
                             $indikasiJanin = !empty($data->icSesar['indikasiJanin']) ? explode('|', $data->icSesar['indikasiJanin']) : [];
+
+                            $keyLainnyaJanin = array_search('Lainnya', $indikasiJanin);
+                            if ($keyLainnyaJanin !== false && !empty($data->icSesar['indikasiJaninLainnya'])) {
+                                $indikasiJanin[$keyLainnyaJanin] = 'Lainnya: ' . $data->icSesar['indikasiJaninLainnya'];
+                            }
                             ?>
 
                             <?php if (!empty($indikasiJanin)): ?>
                                 <?= esc(implode(', ', $indikasiJanin)) ?>.
                             <?php else: ?>
-                                <p class="text-muted small italic">Tidak ada indikasi.</p>
+                                <span class="text-muted small italic">Tidak ada indikasi.</span>
                             <?php endif; ?>
                         </td>
                         <td class="text-center text-success fw-bold" style="font-size: 1.2rem;">✔</td>

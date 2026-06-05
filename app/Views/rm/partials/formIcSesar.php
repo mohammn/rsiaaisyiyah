@@ -142,12 +142,12 @@ $indikasiJanin = !empty($data->icSesar['indikasiJanin']) ? explode('|', $data->i
         </div>
         <div class="col-6">
             <div class="alert alert-info" role="alert">
-                <div class="row mb-3">
+                <div class="row">
                     <div class="col-12 text-center">Pemberian informasi :</div>
                     <hr>
                 </div>
 
-                <div class="row mb-3">
+                <div class="row mb-2">
                     <div class="col-6">
                         <label for="diagnosa" class="form-label">Diagnosa :</label>
                         <textarea type="text" class="form-control" id="diagnosa"><?= $data->icSesar['diagnosa'] ?? '' ?></textarea>
@@ -162,108 +162,111 @@ $indikasiJanin = !empty($data->icSesar['indikasiJanin']) ? explode('|', $data->i
                     <div class="col-6">
                         <div class="row">
                             <p class="fw-bold mb-1">Indikasi Tindakan (Ibu) :</p>
+
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiIbu[]" value="Panggul Sempit" id="panggul_sempit"
                                     <?= in_array('Panggul Sempit', $indikasiIbu ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="panggul_sempit">
-                                    Panggul Sempit
-                                </label>
+                                <label class="form-check-label" for="panggul_sempit">Panggul Sempit</label>
                             </div>
 
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiIbu[]" value="Partus Lama" id="partus_lama"
                                     <?= in_array('Partus Lama', $indikasiIbu ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="partus_lama">
-                                    Partus Lama
-                                </label>
+                                <label class="form-check-label" for="partus_lama">Partus Lama</label>
                             </div>
 
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiIbu[]" value="Riwayat SC Sebelumnya" id="riwayat_sc"
                                     <?= in_array('Riwayat SC Sebelumnya', $indikasiIbu ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="riwayat_sc">
-                                    Riwayat SC Sebelumnya
-                                </label>
+                                <label class="form-check-label" for="riwayat_sc">Riwayat SC Sebelumnya</label>
                             </div>
 
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiIbu[]" value="Perdarahan Antepartum" id="perdarahan_antepartum"
                                     <?= in_array('Perdarahan Antepartum', $indikasiIbu ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="perdarahan_antepartum">
-                                    Perdarahan Antepartum
-                                </label>
+                                <label class="form-check-label" for="perdarahan_antepartum">Perdarahan Antepartum</label>
                             </div>
 
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiIbu[]" value="Tumor Jalan Lahir" id="tumor_jalan_lahir"
                                     <?= in_array('Tumor Jalan Lahir', $indikasiIbu ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="tumor_jalan_lahir">
-                                    Tumor Jalan Lahir
-                                </label>
+                                <label class="form-check-label" for="tumor_jalan_lahir">Tumor Jalan Lahir</label>
                             </div>
 
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiIbu[]" value="Preeklampsia" id="preeklampsia"
                                     <?= in_array('Preeklampsia', $indikasiIbu ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="preeklampsia">
-                                    Preeklampsia
-                                </label>
+                                <label class="form-check-label" for="preeklampsia">Preeklampsia</label>
                             </div>
 
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiIbu[]" value="Lilitan Tali Pusar" id="lilitan_tali_pusar"
                                     <?= in_array('Lilitan Tali Pusar', $indikasiIbu ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="lilitan_tali_pusar">
-                                    Lilitan Tali Pusar
-                                </label>
+                                <label class="form-check-label" for="lilitan_tali_pusar">Lilitan Tali Pusar</label>
                             </div>
 
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiIbu[]" value="Miopia" id="miopia"
                                     <?= in_array('Miopia', $indikasiIbu ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="miopia">
-                                    Miopia
-                                </label>
+                                <label class="form-check-label" for="miopia">Miopia</label>
+                            </div>
+
+                            <div class="form-check hover-check d-flex gap-2 align-items-center mt-1">
+                                <div>
+                                    <input class="form-check-input" type="checkbox" name="indikasiIbu[]" value="Lainnya" id="lainnya_ibu"
+                                        <?= in_array('Lainnya', $indikasiIbu ?? []) ? 'checked' : '' ?>>
+                                    <label class="form-check-label" for="lainnya_ibu">Lainnya:</label>
+                                </div>
+                                <input type="text"
+                                    class="form-control form-control-sm border-info"
+                                    style="max-width: 250px;"
+                                    name="indikasiIbuLainnya"
+                                    id="indikasiIbuLainnya"
+                                    placeholder="sebutkan..."
+                                    value="<?= $data->icSesar['indikasiIbuLainnya'] ?? '' ?>">
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="row">
                             <p class="fw-bold mb-1">Indikasi Tindakan (Janin) :</p>
-                            <!-- Gawat Janin -->
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiJanin[]" value="Gawat Janin" id="gawat_janin"
                                     <?= in_array('Gawat Janin', $indikasiJanin ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="gawat_janin">
-                                    Gawat Janin
-                                </label>
+                                <label class="form-check-label" for="gawat_janin">Gawat Janin</label>
                             </div>
 
-                            <!-- Malpresentasi -->
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiJanin[]" value="Malpresentasi" id="malpresentasi"
                                     <?= in_array('Malpresentasi', $indikasiJanin ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="malpresentasi">
-                                    Malpresentasi
-                                </label>
+                                <label class="form-check-label" for="malpresentasi">Malpresentasi</label>
                             </div>
 
-                            <!-- Kehamilan Kembar -->
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiJanin[]" value="Kehamilan Kembar" id="kehamilan_kembar"
                                     <?= in_array('Kehamilan Kembar', $indikasiJanin ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="kehamilan_kembar">
-                                    Kehamilan Kembar
-                                </label>
+                                <label class="form-check-label" for="kehamilan_kembar">Kehamilan Kembar</label>
                             </div>
 
-                            <!-- Big Baby -->
                             <div class="form-check hover-check">
                                 <input class="form-check-input" type="checkbox" name="indikasiJanin[]" value="Big Baby" id="big_baby"
                                     <?= in_array('Big Baby', $indikasiJanin ?? []) ? 'checked' : '' ?>>
-                                <label class="form-check-label" for="big_baby">
-                                    <em>Big Baby</em>
-                                </label>
+                                <label class="form-check-label" for="big_baby"><em>Big Baby</em></label>
+                            </div>
+
+                            <div class="form-check hover-check d-flex gap-2 align-items-center mt-1">
+                                <div>
+                                    <input class="form-check-input" type="checkbox" name="indikasiJanin[]" value="Lainnya" id="lainnya"
+                                        <?= in_array('Lainnya', $indikasiJanin ?? []) ? 'checked' : '' ?>>
+                                    <label class="form-check-label" for="lainnya">Lainnya:</label>
+                                </div>
+                                <input type="text"
+                                    class="form-control form-control-sm border-info"
+                                    style="max-width: 250px;"
+                                    name="indikasiJaninLainnya"
+                                    id="indikasiJaninLainnya"
+                                    placeholder="sebutkan.."
+                                    value="<?= $data->icSesar['indikasiJaninLainnya'] ?? '' ?>">
                             </div>
                         </div>
                     </div>

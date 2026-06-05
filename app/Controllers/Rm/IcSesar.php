@@ -100,6 +100,8 @@ class IcSesar extends BaseController
             "lainLain" => $this->request->getPost("lainLain"),
             "indikasiIbu"      => (!empty($indikasiIbu) && is_array($indikasiIbu)) ? implode('|', $indikasiIbu) : null,
             "indikasiJanin"      => (!empty($indikasiJanin) && is_array($indikasiJanin)) ? implode('|', $indikasiJanin) : null,
+            "indikasiIbuLainnya" => $this->request->getPost("indikasiIbuLainnya"),
+            "indikasiJaninLainnya" => $this->request->getPost("indikasiJaninLainnya"),
         ];
 
         if ($this->request->getPost("tujuanSimpan") == 'tambah') {

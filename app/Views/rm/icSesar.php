@@ -290,6 +290,8 @@ if ($data->icSesar) {
         var indikasiJanin = $('input[name="indikasiJanin[]"]:checked').map(function() {
             return this.value;
         }).get();
+        var indikasiIbuLainnya = $("#indikasiIbuLainnya").val();;
+        var indikasiJaninLainnya = $("#indikasiJaninLainnya").val();;
         // ===========================================================================
 
         $("#pesanError").html("");
@@ -346,6 +348,8 @@ if ($data->icSesar) {
                     lainLain: lainLain,
                     indikasiIbu: indikasiIbu,
                     indikasiJanin: indikasiJanin,
+                    indikasiIbuLainnya: indikasiIbuLainnya,
+                    indikasiJaninLainnya: indikasiJaninLainnya,
                 },
                 dataType: 'json',
                 success: function(data) {

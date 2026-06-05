@@ -34,5 +34,7 @@ class IcSesarModel extends Model
         'lainLain',
         'indikasiIbu',
         'indikasiJanin',
+        'indikasiIbuLainnya',
+        'indikasiJaninLainnya',
     ];
 }
