@@ -18,7 +18,7 @@ if ($data->icSesar) {
         </div>
         <div class="card-body" style="overflow-y: auto;">
             <div class="text-center">
-                <h5 class="text-uppercase"><i>INFORMED CONSENT</i> TINDAKAN PEMBIUSAN <br>(ANESTESI REGIONAL, UMUM/SEDASI)</h5>
+                <h5 class="text-uppercase"><i>INFORMED CONSENT</i> TINDAKAN <i>SECTIO CAESARIA</i></h5>
                 Untuk pasien : <b><?= $data->pasien["nm_pasien"] ?></b> (<?= $data->pasien["no_rkm_medis"] ?>). NIK: <?= $data->pasien["no_ktp"] ?><br>
                 No Rawat : <b><?= $data->pasien["no_rawat"] ?></b>. Lahir : <?= $data->pasien["tgl_lahir"] ?> <br>
                 Alamat : <?= $data->pasien["alamat"] ?>
