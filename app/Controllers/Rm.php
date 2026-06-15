@@ -13,6 +13,7 @@ use App\Models\IcDarahModel;
 use App\Models\IcSesarModel;
 use App\Models\IcPembiusanModel;
 use App\Models\IcPembiusanLokalModel;
+use App\Models\LembarEdukasiModel;
 
 use function PHPSTORM_META\type;
 
@@ -29,6 +30,7 @@ class Rm extends BaseController
     protected $icSesarModel;
     protected $icPembiusanModel;
     protected $icPembiusanLokalModel;
+    protected $lembarEdukasiModel;
 
     public function __construct()
     {
@@ -47,6 +49,7 @@ class Rm extends BaseController
         $this->icSesarModel = new IcSesarModel();
         $this->icPembiusanModel = new IcPembiusanModel();
         $this->icPembiusanLokalModel = new IcPembiusanLokalModel();
+        $this->lembarEdukasiModel = new LembarEdukasiModel();
     }
     public function index($no_rawat)
     {
@@ -77,6 +80,7 @@ class Rm extends BaseController
         $icSesar = $this->icSesarModel->where('noRawat', $no_rawat)->first();
         $icPembiusan = $this->icPembiusanModel->where('noRawat', $no_rawat)->first();
         $icPembiusanLokal = $this->icPembiusanLokalModel->where('noRawat', $no_rawat)->first();
+        $lembarEdukasi = $this->lembarEdukasiModel->where('noRawat', $no_rawat)->first();
 
 
         //===========status data=====================
@@ -98,6 +102,8 @@ class Rm extends BaseController
             }
         }
 
+        $pengecualianLembarEdukasi = ['ttd_1', 'ttd_2', 'ttd_3', 'ttd_4', 'ttd_5', 'ttd_6', 'ttd_7', 'ttd_8', 'ttdWali', 'lainnya_1', 'lainnya_2', 'lainnya_3', 'lainnya_4', 'lainnya_5', 'lainnya_6', 'lainnya_7', 'lainnya_8'];
+
         $status = [
             "skorPoudji" => $statusSKorPoudji,
             "persRajal" => $this->cekSemuaKolom($persRajal, ['selesai', 'ttdWali', 'ttdSaksi']),
@@ -108,6 +114,7 @@ class Rm extends BaseController
             "icSesar" => $this->cekSemuaKolom($icSesar, ['ttdWali', 'ttdSaksi', 'indikasiIbu', 'indikasiJanin']),
             "icPembiusan" => $this->cekSemuaKolom($icPembiusan, $pengecualianIcPembiusan),
             "icPembiusanLokal" => $this->cekSemuaKolom($icPembiusanLokal, ['ttdWali', 'ttdSaksi']),
+            "lembarEdukasi" => $this->cekSemuaKolom($lembarEdukasi, $pengecualianLembarEdukasi),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -122,6 +129,7 @@ class Rm extends BaseController
             'icSesar'  => $icSesar,    // Biarkan null jika data tidak ada
             'icPembiusan'  => $icPembiusan,    // Biarkan null jika data tidak ada
             'icPembiusanLokal'  => $icPembiusanLokal,    // Biarkan null jika data tidak ada
+            'lembarEdukasi'  => $lembarEdukasi,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 

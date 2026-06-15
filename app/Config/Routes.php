@@ -39,6 +39,13 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/lembarEdukasi/ubahWaktu', 'Rm\LembarEdukasi::ubahWaktu');
+$routes->post('/rm/lembarEdukasi/simpanTtd', 'Rm\LembarEdukasi::simpanTtd');
+$routes->post('/rm/lembarEdukasi/hapus', 'Rm\LembarEdukasi::hapus');
+$routes->get('/rm/lembarEdukasi/cetak/(:any)', 'Rm\LembarEdukasi::cetak/$1');
+$routes->post('/rm/lembarEdukasi/simpan', 'Rm\LembarEdukasi::simpan');
+$routes->get('/rm/lembarEdukasi/(:any)', 'Rm\LembarEdukasi::index/$1');
+
 $routes->get('/rm/persetujuanRajal/jalankanMigrasiTtd', 'Rm\PersetujuanRajal::jalankanMigrasiTtd');
 $routes->post('/rm/persetujuanRajal/ubahWaktu', 'Rm\PersetujuanRajal::ubahWaktu');
 $routes->post('/rm/persetujuanRajal/simpanTtd', 'Rm\PersetujuanRajal::simpanTtd');
