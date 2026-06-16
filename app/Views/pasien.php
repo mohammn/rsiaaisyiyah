@@ -30,7 +30,7 @@
                             echo "<td>" . $data->pasien[$i]["no_rkm_medis"] . "</td>";
                             echo "<td>" . $data->pasien[$i]["nm_pasien"] . "</td>";
                             echo "<td>" . $data->pasien[$i]["no_ktp"] . "</td>";
-                            echo '<td> <button class="btn-estetik btn-sm-estetik bg-vibrant-purple" onclick="lihatPj(\'' . $data->pasien[$i]["no_rkm_medis"] . '\', \'' . $data->pasien[$i]["nm_pasien"] . '\', \'' . $data->pasien[$i]["namakeluarga"] . '\',\'' . $data->pasien[$i]["alamatpj"] . ', Desa/kel. ' . $data->pasien[$i]["kelurahanpj"] . ', Kec. ' . $data->pasien[$i]["kelurahanpj"] . ', ' . $data->pasien[$i]["kabupatenpj"] . '\')"><i class="fas fa-search"></i> Lihat PJ</button></td>';
+                            echo '<td> <button class="btn-estetik btn-sm-estetik bg-vibrant-purple" onclick="lihatPj(\'' . esc($data->pasien[$i]["no_rkm_medis"], 'js') . '\', \'' . esc($data->pasien[$i]["nm_pasien"], 'js') . '\', \'' . esc($data->pasien[$i]["namakeluarga"], 'js') . '\', \'' . esc($data->pasien[$i]["alamatpj"] . ', Desa/kel. ' . $data->pasien[$i]["kelurahanpj"] . ', Kec. ' . $data->pasien[$i]["kecamatanpj"] . ', ' . $data->pasien[$i]["kabupatenpj"], 'js') . '\')"><i class="fas fa-search"></i> Lihat PJ</button></td>';
                             echo "</tr>";
                         }
                         ?>

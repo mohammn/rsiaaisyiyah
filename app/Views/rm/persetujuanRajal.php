@@ -207,9 +207,9 @@
 
     function setSamadgPasien(asal) {
         if (asal == 'pasien') {
-            $("#namaWali").val("<?= $data->pasien['nm_pasien'] ?>")
-            $("#alamat").val("<?= $data->pasien['alamat'] ?>")
-            $("#noTelp").val("<?= $data->pasien['no_tlp'] ?>")
+            $("#namaWali").val(<?= json_encode($data->pasien['nm_pasien']) ?>);
+            $("#alamat").val(<?= json_encode($data->pasien['alamat']) ?>);
+            $("#noTelp").val(<?= json_encode($data->pasien['no_tlp']) ?>);
             $("#sebagai").val("Saya sendiri")
 
             $("#namaWali").prop('disabled', true);
@@ -220,8 +220,8 @@
             $('#samaDgPj').prop('checked', false);
         } else if (asal == 'pj') {
             <?php if ($data->pjPasien): ?>
-                $("#namaWali").val("<?= $data->pjPasien['namaPj'] ?>")
-                $("#alamat").val("<?= $data->pjPasien['alamatPj'] ?>")
+                $("#namaWali").val(<?= json_encode($data->pjPasien['namaPj']) ?>);
+                $("#alamat").val(<?= json_encode($data->pjPasien['alamatPj']) ?>);
             <?php endif; ?>
             $("#noTelp").val("")
             $("#sebagai").val("Suami")

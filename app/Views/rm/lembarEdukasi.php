@@ -203,7 +203,7 @@
 
     function setSamadgPasien(asal) {
         if (asal == 'pasien') {
-            $("#nama").val("<?= $data->pasien['nm_pasien'] ?>");
+            $("#nama").val(<?= json_encode($data->pasien['nm_pasien']) ?>);
             $("input[name='agama'][value='<?= $data->pasien['agama'] ?>' i]").prop('checked', true);
             $("#sebagai").val("Saya sendiri");
 
@@ -214,7 +214,7 @@
             $('#samaDgPj').prop('checked', false);
         } else if (asal == 'pj') {
             <?php if ($data->pjPasien): ?>
-                $("#nama").val("<?= $data->pjPasien['namaPj'] ?>")
+                $("#nama").val(<?= json_encode($data->pjPasien['namaPj']) ?>);
             <?php endif; ?>
             $("#sebagai").val("Suami")
 

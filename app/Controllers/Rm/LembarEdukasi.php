@@ -156,7 +156,7 @@ class LembarEdukasi extends BaseController
     {
         $noRawat = $this->request->getPost("noRawat");
         $noRawat = str_replace('-', '/', $noRawat);
-        $this->catatLog('hapus', 'ic_darah', $noRawat, $this->lembarEdukasiModel->where('noRawat', $noRawat)->first());
+        $this->catatLog('hapus', 'lembar_edukasi', $noRawat, $this->lembarEdukasiModel->where('noRawat', $noRawat)->first());
 
         $this->lembarEdukasiModel->where("noRawat", $noRawat)->delete();
         echo json_encode("");

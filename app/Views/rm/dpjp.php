@@ -170,11 +170,11 @@ if ($data->dpjp) {
 
     function setSamadgPasien(asal) {
         if (asal == 'pasien') {
-            $("#nama").val("<?= $data->pasien['nm_pasien'] ?>")
-            $("#jk").val("<?= $data->pasien['jk'] ?>")
-            $("#tglLahir").val("<?= $data->pasien['tgl_lahir'] ?>")
-            $("#tempatLahir").val("<?= $data->pasien['tmp_lahir'] ?>")
-            $("#alamat").val("<?= $data->pasien['alamat'] ?>")
+            $("#nama").val(<?= json_encode($data->pasien['nm_pasien']) ?>);
+            $("#jk").val(<?= json_encode($data->pasien['jk']) ?>);
+            $("#tglLahir").val(<?= json_encode($data->pasien['tgl_lahir']) ?>);
+            $("#tempatLahir").val(<?= json_encode($data->pasien['tmp_lahir']) ?>);
+            $("#alamat").val(<?= json_encode($data->pasien['alamat']) ?>);
             $("#sebagai").val("Saya sendiri")
 
             $("#nama").prop('disabled', true);
@@ -187,11 +187,11 @@ if ($data->dpjp) {
             $('#samaDgPj').prop('checked', false);
         } else if (asal == 'pj') {
             <?php if ($data->pjPasien): ?>
-                $("#nama").val("<?= $data->pjPasien['namaPj'] ?>")
-                $("#alamat").val("<?= $data->pjPasien['alamatPj'] ?>")
-                $("#jk").val("<?= $data->pjPasien['jkPj'] ?>")
-                $("#tglLahir").val("<?= $data->pjPasien['tglLahirPj'] ?>")
-                $("#tempatLahir").val("<?= $data->pjPasien['tempatLahirPj'] ?>")
+                $("#nama").val(<?= json_encode($data->pjPasien['namaPj']) ?>);
+                $("#alamat").val(<?= json_encode($data->pjPasien['alamatPj']) ?>);
+                $("#jk").val(<?= json_encode($data->pjPasien['jkPj']) ?>);
+                $("#tglLahir").val(<?= json_encode($data->pjPasien['tglLahirPj']) ?>);
+                $("#tempatLahir").val(<?= json_encode($data->pjPasien['tempatLahirPj']) ?>);
             <?php endif; ?>
             $("#sebagai").val("Suami")
 
@@ -205,13 +205,13 @@ if ($data->dpjp) {
             $('#samaDgPasien').prop('checked', false);
         }
         if (!$('#samaDgPj').is(':checked') && !$('#samaDgPasien').is(':checked')) {
-            $("#nama").val("")
-            $("#jk").val("")
-            $("#tglLahir").val("")
-            $("#tempatLahir").val("")
-            $("#alamat").val("")
-            $("#noTelp").val("")
-            $("#sebagai").val("Suami")
+            $("#nama").val(<?= json_encode($data->dpjp['nama'] ?? '') ?>);
+            $("#jk").val(<?= json_encode($data->dpjp['jk'] ?? '') ?>);
+            $("#tglLahir").val(<?= json_encode($data->dpjp['tanggalLahir'] ?? '') ?>);
+            $("#tempatLahir").val(<?= json_encode($data->dpjp['tempatLahir'] ?? '') ?>);
+            $("#alamat").val(<?= json_encode($data->dpjp['alamat'] ?? '') ?>);
+            $("#nik").val(<?= json_encode($data->dpjp['nik'] ?? '') ?>);
+            $("#sebagai").val(<?= json_encode($data->dpjp['sebagai'] ?? 'Suami') ?>);
 
             $("#nama").prop('disabled', false);
             $("#jk").prop('disabled', false);
