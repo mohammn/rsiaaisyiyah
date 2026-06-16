@@ -363,7 +363,7 @@
                                     <li>Perkiraan hari rawat</li>
                                     <li>Penjelasan komplikasi yang mungkin terjadi</li>
                                     <li>Penggunaan alat medis</li>
-                                    <li><?= $data->lembarEdukasi["lainnya_2"] ?? '...........................' ?></li>
+                                    <li><?= $data->lembarEdukasi["lainnya_2"] ?: '...........................' ?></li>
                                 </ol>
                             </td>
                             <td><?= isset($data->lembarEdukasi["tgl_2"]) ? date('d-m-Y', strtotime($data->lembarEdukasi["tgl_2"])) : '' ?></td>
@@ -448,7 +448,7 @@
                                 <ol type="a" class="mb-0">
                                     <li>Diet nutrisi</li>
                                     <li>Penyuluhan nutrisi</li>
-                                    <li><?= $data->lembarEdukasi["lainnya_4"] ?? '...........................' ?></li>
+                                    <li><?= $data->lembarEdukasi["lainnya_4"] ?: '...........................' ?></li>
                                 </ol>
                             </td>
                             <td><?= isset($data->lembarEdukasi["tgl_4"]) ? date('d-m-Y', strtotime($data->lembarEdukasi["tgl_4"])) : '' ?></td>
@@ -484,7 +484,7 @@
                                     <li>Cara penyimpanan</li>
                                     <li>Efek samping obat</li>
                                     <li>Kontraindikasi obat</li>
-                                    <li><?= $data->lembarEdukasi["lainnya_5"] ?? '...........................' ?></li>
+                                    <li><?= $data->lembarEdukasi["lainnya_5"] ?: '...........................' ?></li>
                                 </ol>
                             </td>
                             <td><?= isset($data->lembarEdukasi["tgl_5"]) ? date('d-m-Y', strtotime($data->lembarEdukasi["tgl_5"])) : '' ?></td>
@@ -518,7 +518,7 @@
                                 <ol type="a" class="mb-0">
                                     <li>
                                         Pendidikan kesehatan tentang :
-                                        <br><?= $data->lembarEdukasi["lainnya_6"] ?? '...........................' ?>
+                                        <br><?= $data->lembarEdukasi["lainnya_6"] ?: '...........................' ?>
                                     </li>
                                     <li>Penanganan & cara perawatan dirumah</li>
                                     <li>Perawatan luka</li>
@@ -559,7 +559,7 @@
                                 <ol type="a" class="mb-0">
                                     <li>Orientasi Ruangan</li>
                                     <li>Etika Batuk</li>
-                                    <li><?= $data->lembarEdukasi["lainnya_7"] ?? '...........................' ?></li>
+                                    <li><?= $data->lembarEdukasi["lainnya_7"] ?: '...........................' ?></li>
                                 </ol>
                             </td>
                             <td><?= isset($data->lembarEdukasi["tgl_7"]) ? date('d-m-Y', strtotime($data->lembarEdukasi["tgl_7"])) : '' ?></td>
@@ -589,7 +589,7 @@
 
                         <tr>
                             <td>
-                                <?= $data->lembarEdukasi["lainnya_8"] ?? '...........................' ?>
+                                <?= $data->lembarEdukasi["lainnya_8"] ?: '...........................' ?>
                             </td>
                             <td><?= isset($data->lembarEdukasi["tgl_8"]) ? date('d-m-Y', strtotime($data->lembarEdukasi["tgl_8"])) : '' ?></td>
                             <td><?= $data->lembarEdukasi["metode_8"] ?? '' ?></td>
