@@ -114,7 +114,7 @@ class Rm extends BaseController
             "dpjp" => $this->cekSemuaKolom($dpjp, ['ttdWali']),
             "rekonsiliasiObat" => $this->statusRekonsiliasiObat($rekonsiliasiObat, $rekonsiliasiObatData),
             "icGeneral" => $statusIcGeneral,
-            "icDarah" => $this->cekSemuaKolom($icDarah, ['ttdWali', 'ttdSaksi', 'lainLain']),
+            "icDarah" => $this->cekSemuaKolom($icDarah, ['ttdWali', 'ttdSaksi']),
             "icSesar" => $this->cekSemuaKolom($icSesar, ['ttdWali', 'ttdSaksi', 'indikasiIbu', 'indikasiJanin']),
             "icPembiusan" => $this->cekSemuaKolom($icPembiusan, $pengecualianIcPembiusan),
             "icPembiusanLokal" => $this->cekSemuaKolom($icPembiusanLokal, ['ttdWali', 'ttdSaksi']),
