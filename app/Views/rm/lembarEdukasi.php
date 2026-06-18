@@ -90,7 +90,7 @@
 
                     <br><br>
                     <div class="text-center">
-                        <?php if (!empty($data->lembarEdukasi['ttdWali']) && !empty($data->lembarEdukasi['ttd_1']) && !empty($data->lembarEdukasi['ttd_2']) && !empty($data->lembarEdukasi['ttd_3']) && !empty($data->lembarEdukasi['ttd_4']) && !empty($data->lembarEdukasi['ttd_5']) && !empty($data->lembarEdukasi['ttd_6']) && !empty($data->lembarEdukasi['ttd_7']) && !empty($data->lembarEdukasi['ttd_8'])): ?>
+                        <?php if (!empty($data->lembarEdukasi['ttdWali']) && !empty($data->lembarEdukasi['ttd_1']) && !empty($data->lembarEdukasi['ttd_2']) && !empty($data->lembarEdukasi['ttd_3']) && !empty($data->lembarEdukasi['ttd_4']) && !empty($data->lembarEdukasi['ttd_5']) && !empty($data->lembarEdukasi['ttd_6']) && !empty($data->lembarEdukasi['ttd_7'])): ?>
                             <a class="btn btn-estetik btn-cetak" href="<?= base_url('/rm/lembarEdukasi/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->lembarEdukasi['id']) ?>" target="_blank">
                                 <i class="fas fa-print me-1"></i> Cetak
                             </a>
