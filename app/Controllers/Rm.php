@@ -106,7 +106,7 @@ class Rm extends BaseController
             }
         }
 
-        $pengecualianLembarEdukasi = ['ttd_1', 'ttd_2', 'ttd_3', 'ttd_4', 'ttd_5', 'ttd_6', 'ttd_7', 'ttd_8', 'ttdWali', 'lainnya_1', 'lainnya_2', 'lainnya_3', 'lainnya_4', 'lainnya_5', 'lainnya_6', 'lainnya_7', 'lainnya_8', 'tgl_8', 'metode_8', 'evaluasi_8', 'petugas_8', 'wali_8'];
+        $pengecualianLembarEdukasi = ['ttd_1', 'ttd_2', 'ttd_3', 'ttd_4', 'ttd_5', 'ttd_6', 'ttd_7', 'ttd_8', 'ttdWali', 'lainnya_1', 'lainnya_2', 'lainnya_3', 'lainnya_4', 'lainnya_5', 'lainnya_6', 'lainnya_7', 'lainnya_8', 'tgl_8', 'metode_8', 'evaluasi_8', 'media_8', 'petugas_8', 'wali_8'];
 
         $status = [
             "skorPoudji" => $statusSKorPoudji,
