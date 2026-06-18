@@ -14,6 +14,7 @@ use App\Models\IcSesarModel;
 use App\Models\IcPembiusanModel;
 use App\Models\IcPembiusanLokalModel;
 use App\Models\LembarEdukasiModel;
+use App\Models\PersetujuanRanapModel;
 
 use function PHPSTORM_META\type;
 
@@ -31,6 +32,7 @@ class Rm extends BaseController
     protected $icPembiusanModel;
     protected $icPembiusanLokalModel;
     protected $lembarEdukasiModel;
+    protected $persetujuanRanapModel;
 
     public function __construct()
     {
@@ -50,6 +52,7 @@ class Rm extends BaseController
         $this->icPembiusanModel = new IcPembiusanModel();
         $this->icPembiusanLokalModel = new IcPembiusanLokalModel();
         $this->lembarEdukasiModel = new LembarEdukasiModel();
+        $this->persetujuanRanapModel = new PersetujuanRanapModel();
     }
     public function index($no_rawat)
     {
@@ -81,6 +84,7 @@ class Rm extends BaseController
         $icPembiusan = $this->icPembiusanModel->where('noRawat', $no_rawat)->first();
         $icPembiusanLokal = $this->icPembiusanLokalModel->where('noRawat', $no_rawat)->first();
         $lembarEdukasi = $this->lembarEdukasiModel->where('noRawat', $no_rawat)->first();
+        $persetujuanRanap = $this->persetujuanRanapModel->where('noRawat', $no_rawat)->first();
 
 
         //===========status data=====================
@@ -115,6 +119,7 @@ class Rm extends BaseController
             "icPembiusan" => $this->cekSemuaKolom($icPembiusan, $pengecualianIcPembiusan),
             "icPembiusanLokal" => $this->cekSemuaKolom($icPembiusanLokal, ['ttdWali', 'ttdSaksi']),
             "lembarEdukasi" => $this->cekSemuaKolom($lembarEdukasi, $pengecualianLembarEdukasi),
+            "persetujuanRanap" => $this->cekSemuaKolom($persetujuanRanap, ['ttdWali', 'ttdSaksi', 'status_asuransi_umum', 'kelas_umum', 'kelas_umum_lain_text', 'biaya_min', 'biaya_max', 'no_bpjs', 'bpjs_status_kelas', 'bpjs_naik_tingkat', 'nama_asuransi_lain']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -130,6 +135,7 @@ class Rm extends BaseController
             'icPembiusan'  => $icPembiusan,    // Biarkan null jika data tidak ada
             'icPembiusanLokal'  => $icPembiusanLokal,    // Biarkan null jika data tidak ada
             'lembarEdukasi'  => $lembarEdukasi,    // Biarkan null jika data tidak ada
+            'persetujuanRanap'  => $persetujuanRanap,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 

@@ -46,6 +46,13 @@ $routes->get('/rm/lembarEdukasi/cetak/(:any)', 'Rm\LembarEdukasi::cetak/$1');
 $routes->post('/rm/lembarEdukasi/simpan', 'Rm\LembarEdukasi::simpan');
 $routes->get('/rm/lembarEdukasi/(:any)', 'Rm\LembarEdukasi::index/$1');
 
+$routes->post('/rm/persetujuanRanap/ubahWaktu', 'Rm\PersetujuanRanap::ubahWaktu');
+$routes->post('/rm/persetujuanRanap/simpanTtd', 'Rm\PersetujuanRanap::simpanTtd');
+$routes->post('/rm/persetujuanRanap/hapus', 'Rm\PersetujuanRanap::hapus');
+$routes->get('/rm/persetujuanRanap/cetak/(:any)', 'Rm\PersetujuanRanap::cetak/$1');
+$routes->post('/rm/persetujuanRanap/simpan', 'Rm\PersetujuanRanap::simpan');
+$routes->get('/rm/persetujuanRanap/(:any)', 'Rm\PersetujuanRanap::index/$1');
+
 $routes->get('/rm/persetujuanRajal/jalankanMigrasiTtd', 'Rm\PersetujuanRajal::jalankanMigrasiTtd');
 $routes->post('/rm/persetujuanRajal/ubahWaktu', 'Rm\PersetujuanRajal::ubahWaktu');
 $routes->post('/rm/persetujuanRajal/simpanTtd', 'Rm\PersetujuanRajal::simpanTtd');
