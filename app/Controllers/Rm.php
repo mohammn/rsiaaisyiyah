@@ -119,7 +119,7 @@ class Rm extends BaseController
             "icPembiusan" => $this->cekSemuaKolom($icPembiusan, $pengecualianIcPembiusan),
             "icPembiusanLokal" => $this->cekSemuaKolom($icPembiusanLokal, ['ttdWali', 'ttdSaksi']),
             "lembarEdukasi" => $this->cekSemuaKolom($lembarEdukasi, $pengecualianLembarEdukasi),
-            "persetujuanRanap" => $this->cekSemuaKolom($persetujuanRanap, ['ttdWali', 'ttdSaksi', 'status_asuransi_umum', 'kelas_umum', 'kelas_umum_lain_text', 'biaya_min', 'biaya_max', 'no_bpjs', 'bpjs_status_kelas', 'bpjs_naik_tingkat', 'nama_asuransi_lain']),
+            "persetujuanRanap" => $this->cekSemuaKolom($persetujuanRanap, ['ttdWali', 'ttdSaksi', 'isi_kecuali', 'status_asuransi_umum', 'kelas_umum', 'kelas_umum_lain_text', 'biaya_min', 'biaya_max', 'no_bpjs', 'bpjs_status_kelas', 'bpjs_naik_tingkat', 'nama_asuransi_lain']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
