@@ -289,7 +289,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>9.</td>
+                            <td>11.</td>
                             <td>Persetujuan Rawat Inap</td>
                             <td>
                                 <?= $data->persetujuanRanap ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/persetujuanRanap/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
