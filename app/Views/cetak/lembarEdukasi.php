@@ -156,7 +156,7 @@
                     </div>
                     <div class="col-5">
                         <div style="text-align: end;">
-                            RM 23f
+                            RM 16
                         </div>
                         <div class="border border-dark" style="display: flex; justify-content: center;">
                             <table class="table table-borderless table-sm  mt-1 mb-1 tabel" style="font-size: xx-small;">

@@ -9,6 +9,7 @@ use App\Models\RegPeriksaModel;
 use App\Models\SysLogModel;
 use App\Models\PengaturanModel;
 use App\Models\PjPasienModel;
+use App\Models\DokterModel;
 use App\Models\PetugasModel;
 
 class LembarEdukasi extends BaseController
@@ -18,6 +19,7 @@ class LembarEdukasi extends BaseController
     protected $sysLog;
     protected $pengaturan;
     protected $pjPasienModel;
+    protected $dokterModel;
     protected $petugasModel;
 
     public function __construct()
@@ -31,12 +33,14 @@ class LembarEdukasi extends BaseController
         $this->sysLog = new SysLogModel();
         $this->pengaturan = new PengaturanModel();
         $this->pjPasienModel = new PjPasienModel();
+        $this->dokterModel = new DokterModel();
         $this->petugasModel = new PetugasModel();
     }
 
     public function index($noRawat)
     {
         $petugas =  $this->petugasModel->where('nip !=', '-')->findAll();
+        $dokter =  $this->dokterModel->where('kd_dokter !=', '-')->findAll();
 
         $noRawat = str_replace('-', '/', $noRawat);
         $pasien = $this->regPeriksaModel
@@ -64,6 +68,7 @@ class LembarEdukasi extends BaseController
         // Tambahkan (object) di depan variabel agar array berubah jadi object
         $data = (object) [
             'pasien'     => $pasien,      // Jangan pakai (object) di sini
+            'dokter'     => $dokter,      // Jangan pakai (object) di sini
             'lembarEdukasi' => $lembarEdukasi,
             'pjPasien' => $pjPasien,
             'petugas'     => $petugas,      // Jangan pakai (object) di sini

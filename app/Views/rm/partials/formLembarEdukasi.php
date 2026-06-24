@@ -358,8 +358,7 @@ $indikasiJanin = !empty($data->icSesar['indikasiJanin']) ? explode('|', $data->i
                     <div class="col">
                         <div class="card h-100 border-info shadow-sm">
                             <div class="card-header bg-info text-white fw-bold py-2">
-                                ADMINISTRASI [<?=
-                                                print_r($metode_1_arr); ?>]
+                                ADMINISTRASI
                             </div>
                             <div class="card-body">
                                 <div class="row g-3">
@@ -505,8 +504,8 @@ $indikasiJanin = !empty($data->icSesar['indikasiJanin']) ? explode('|', $data->i
                                             <select name="petugas[2]" class="form-select">
                                                 <option value="" <?= empty($petugas_terpilih_2) ? 'selected' : '' ?>>-- Pilih Petugas --</option>
 
-                                                <?php for ($i = 0; $i < count($data->petugas); $i++) {
-                                                    $nama_petugas = $data->petugas[$i]["nama"];
+                                                <?php for ($i = 0; $i < count($data->dokter); $i++) {
+                                                    $nama_petugas = $data->dokter[$i]["nm_dokter"];
 
                                                     // Cek apakah nama petugas ini sama dengan data yang tersimpan di database
                                                     $selected = ($nama_petugas === $petugas_terpilih_2) ? 'selected' : '';
