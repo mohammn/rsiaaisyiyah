@@ -39,8 +39,11 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
-$routes->post('/rm/lukaOperasi/ubahWaktu', 'Rm\LukaOperasi::ubahWaktu');
-$routes->post('/rm/lukaOperasi/simpanTtd', 'Rm\LukaOperasi::simpanTtd');
+$routes->post('/rm/rm27cPlebitis/hapus', 'Rm\Rm27cPlebitis::hapus');
+$routes->get('/rm/rm27cPlebitis/cetak/(:any)', 'Rm\Rm27cPlebitis::cetak/$1');
+$routes->post('/rm/rm27cPlebitis/simpan', 'Rm\Rm27cPlebitis::simpan');
+$routes->get('/rm/rm27cPlebitis/(:any)', 'Rm\Rm27cPlebitis::index/$1');
+
 $routes->post('/rm/lukaOperasi/hapus', 'Rm\LukaOperasi::hapus');
 $routes->get('/rm/lukaOperasi/cetak/(:any)', 'Rm\LukaOperasi::cetak/$1');
 $routes->post('/rm/lukaOperasi/simpan', 'Rm\LukaOperasi::simpan');

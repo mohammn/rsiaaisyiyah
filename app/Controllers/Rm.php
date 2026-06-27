@@ -16,6 +16,7 @@ use App\Models\IcPembiusanLokalModel;
 use App\Models\LembarEdukasiModel;
 use App\Models\PersetujuanRanapModel;
 use App\Models\LukaOperasiModel;
+use App\Models\Rm27cPlebitisModel;
 
 use function PHPSTORM_META\type;
 
@@ -35,6 +36,7 @@ class Rm extends BaseController
     protected $lembarEdukasiModel;
     protected $persetujuanRanapModel;
     protected $lukaOperasiModel;
+    protected $rm27cPlebitisModel;
 
     public function __construct()
     {
@@ -56,6 +58,7 @@ class Rm extends BaseController
         $this->lembarEdukasiModel = new LembarEdukasiModel();
         $this->persetujuanRanapModel = new PersetujuanRanapModel();
         $this->lukaOperasiModel = new LukaOperasiModel();
+        $this->rm27cPlebitisModel = new Rm27cPlebitisModel();
     }
     public function index($no_rawat)
     {
@@ -89,6 +92,7 @@ class Rm extends BaseController
         $lembarEdukasi = $this->lembarEdukasiModel->where('noRawat', $no_rawat)->first();
         $persetujuanRanap = $this->persetujuanRanapModel->where('noRawat', $no_rawat)->first();
         $lukaOperasi = $this->lukaOperasiModel->where('noRawat', $no_rawat)->first();
+        $rm27cPlebitis = $this->rm27cPlebitisModel->where('noRawat', $no_rawat)->first();
 
 
         //===========status data=====================
@@ -117,6 +121,17 @@ class Rm extends BaseController
             $pengecualianLukaOperasi[] = 'petugas' . $i;
         }
 
+        $pengecualianRm27cPlebitis = ['isilokasiPemasanganLainnya', 'isigolObatLainnya', 'isiivCath'];
+        for ($i = 1; $i <= 10; $i++) {
+            $pengecualianRm27cPlebitis[] = 'petugas' . $i;
+            $pengecualianRm27cPlebitis[] = 'tgl' . $i;
+        }
+        for ($i = 1; $i <= 17; $i++) {
+            $pengecualianRm27cPlebitis[] = 'ket' . $i;
+            $pengecualianRm27cPlebitis[] = 'c' . $i;
+        }
+
+
         $status = [
             "skorPoudji" => $statusSKorPoudji,
             "persRajal" => $this->cekSemuaKolom($persRajal, ['selesai', 'ttdWali', 'ttdSaksi']),
@@ -130,6 +145,7 @@ class Rm extends BaseController
             "lembarEdukasi" => $this->cekSemuaKolom($lembarEdukasi, $pengecualianLembarEdukasi),
             "persetujuanRanap" => $this->cekSemuaKolom($persetujuanRanap, ['ttdWali', 'ttdSaksi', 'isi_kecuali', 'status_asuransi_umum', 'kelas_umum', 'kelas_umum_lain_text', 'biaya_min', 'biaya_max', 'no_bpjs', 'bpjs_status_kelas', 'bpjs_naik_tingkat', 'nama_asuransi_lain']),
             "lukaOperasi" => $this->cekSemuaKolom($lukaOperasi, $pengecualianLukaOperasi),
+            "rm27cPlebitis" => $this->cekSemuaKolom($rm27cPlebitis, $pengecualianRm27cPlebitis),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -147,6 +163,7 @@ class Rm extends BaseController
             'lembarEdukasi'  => $lembarEdukasi,    // Biarkan null jika data tidak ada
             'persetujuanRanap'  => $persetujuanRanap,    // Biarkan null jika data tidak ada
             'lukaOperasi'  => $lukaOperasi,    // Biarkan null jika data tidak ada
+            'rm27cPlebitis'  => $rm27cPlebitis,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 
