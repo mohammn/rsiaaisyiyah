@@ -194,6 +194,20 @@
                             </td>
                         </tr>
                     <?php endif; ?>
+                    <?php if ($data->lukaOperasi) : ?>
+                        <tr>
+                            <td>Surveilans Infeksi Luka Operasi</td>
+                            <td>
+                                <span class="badge-estetik <?= $data->status["lukaOperasi"] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["lukaOperasi"] ?></span>
+                            </td>
+                            <td><?= !empty($data->lukaOperasi['petugasPreOperasi']) && !empty($data->lukaOperasi['petugasRuangOperasi']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                            <td>
+                                <a href="<?= base_url(" rm/lukaOperasi/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                <?= !empty($data->lukaOperasi['petugasPreOperasi'] && $data->lukaOperasi['petugasRuangOperasi']) ? '<a href="' . base_url('/rm/persetujuanRanap/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/persetujuanRanap/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
+                                <a href="<?= base_url('/rm/lukaOperasi/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
@@ -293,6 +307,13 @@
                             <td>Persetujuan Rawat Inap</td>
                             <td>
                                 <?= $data->persetujuanRanap ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/persetujuanRanap/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>12.</td>
+                            <td>Surveilans Infeksi Luka Operasi</td>
+                            <td>
+                                <?= $data->lukaOperasi ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/lukaOperasi/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
                             </td>
                         </tr>
                     </tbody>
