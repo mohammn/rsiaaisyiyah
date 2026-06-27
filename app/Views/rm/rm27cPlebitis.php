@@ -120,7 +120,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <?= $this->include("rm/partials/formrm27cPlebitis.php") ?>
+                <?= $this->include("rm/partials/formRm27cPlebitis.php") ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-estetik btn-batal" data-bs-dismiss="modal"><i class="fas fa-ban me-1"></i> Batal</button>
