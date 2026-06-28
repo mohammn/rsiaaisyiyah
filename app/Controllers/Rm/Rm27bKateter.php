@@ -131,7 +131,7 @@ class Rm27bKateter extends BaseController
             $noRawat = $this->request->getPost("noRawat");
             unset($data['noRawat']);
 
-            $this->catatLog('ubah', 'rm27c_plebitis', $noRawat, $this->rm27bKateterModel->where('noRawat', $noRawat)->first(), $data);
+            $this->catatLog('ubah', 'rm27b_kateter', $noRawat, $this->rm27bKateterModel->where('noRawat', $noRawat)->first(), $data);
 
             $this->rm27bKateterModel->where('noRawat', $noRawat)->set($data)->update();
         }
@@ -146,7 +146,7 @@ class Rm27bKateter extends BaseController
     {
         $noRawat = $this->request->getPost("noRawat");
         $noRawat = str_replace('-', '/', $noRawat);
-        $this->catatLog('hapus', 'rm27c_plebitis', $noRawat, $this->rm27bKateterModel->where('noRawat', $noRawat)->first());
+        $this->catatLog('hapus', 'rm27b_kateter', $noRawat, $this->rm27bKateterModel->where('noRawat', $noRawat)->first());
 
         $this->rm27bKateterModel->where("noRawat", $noRawat)->delete();
         echo json_encode("");
