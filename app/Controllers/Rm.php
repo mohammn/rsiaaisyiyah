@@ -17,6 +17,7 @@ use App\Models\LembarEdukasiModel;
 use App\Models\PersetujuanRanapModel;
 use App\Models\LukaOperasiModel;
 use App\Models\Rm27cPlebitisModel;
+use App\Models\Rm27bKateterModel;
 
 use function PHPSTORM_META\type;
 
@@ -37,6 +38,7 @@ class Rm extends BaseController
     protected $persetujuanRanapModel;
     protected $lukaOperasiModel;
     protected $rm27cPlebitisModel;
+    protected $rm27bKateterModel;
 
     public function __construct()
     {
@@ -59,6 +61,7 @@ class Rm extends BaseController
         $this->persetujuanRanapModel = new PersetujuanRanapModel();
         $this->lukaOperasiModel = new LukaOperasiModel();
         $this->rm27cPlebitisModel = new Rm27cPlebitisModel();
+        $this->rm27bKateterModel = new Rm27bKateterModel();
     }
     public function index($no_rawat)
     {
@@ -93,6 +96,7 @@ class Rm extends BaseController
         $persetujuanRanap = $this->persetujuanRanapModel->where('noRawat', $no_rawat)->first();
         $lukaOperasi = $this->lukaOperasiModel->where('noRawat', $no_rawat)->first();
         $rm27cPlebitis = $this->rm27cPlebitisModel->where('noRawat', $no_rawat)->first();
+        $rm27bKateter = $this->rm27bKateterModel->where('noRawat', $no_rawat)->first();
 
 
         //===========status data=====================
@@ -130,6 +134,17 @@ class Rm extends BaseController
             $pengecualianRm27cPlebitis[] = 'ket' . $i;
             $pengecualianRm27cPlebitis[] = 'c' . $i;
         }
+        $pengecualianRm27bKateter = ['isiJenisCath', 'isiivCath'];
+        for ($i = 1; $i <= 10; $i++) {
+            $pengecualianRm27bKateter[] = 'petugas' . $i;
+            $pengecualianRm27bKateter[] = 'tgl' . $i;
+        }
+
+        // Auto-generate ket1 sampai ket17 dan c1 sampai c17
+        for ($i = 1; $i <= 19; $i++) {
+            $pengecualianRm27bKateter[] = 'ket' . $i;
+            $pengecualianRm27bKateter[] = 'c' . $i; // <-- TAMBAHAN: Menyisipkan field c1 sampai c17
+        }
 
 
         $status = [
@@ -146,6 +161,7 @@ class Rm extends BaseController
             "persetujuanRanap" => $this->cekSemuaKolom($persetujuanRanap, ['ttdWali', 'ttdSaksi', 'isi_kecuali', 'status_asuransi_umum', 'kelas_umum', 'kelas_umum_lain_text', 'biaya_min', 'biaya_max', 'no_bpjs', 'bpjs_status_kelas', 'bpjs_naik_tingkat', 'nama_asuransi_lain']),
             "lukaOperasi" => $this->cekSemuaKolom($lukaOperasi, $pengecualianLukaOperasi),
             "rm27cPlebitis" => $this->cekSemuaKolom($rm27cPlebitis, $pengecualianRm27cPlebitis),
+            "rm27bKateter" => $this->cekSemuaKolom($rm27bKateter, $pengecualianRm27bKateter),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -164,6 +180,7 @@ class Rm extends BaseController
             'persetujuanRanap'  => $persetujuanRanap,    // Biarkan null jika data tidak ada
             'lukaOperasi'  => $lukaOperasi,    // Biarkan null jika data tidak ada
             'rm27cPlebitis'  => $rm27cPlebitis,    // Biarkan null jika data tidak ada
+            'rm27bKateter'  => $rm27bKateter,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 

@@ -39,6 +39,11 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm27bKateter/hapus', 'Rm\Rm27bKateter::hapus');
+$routes->get('/rm/rm27bKateter/cetak/(:any)', 'Rm\Rm27bKateter::cetak/$1');
+$routes->post('/rm/rm27bKateter/simpan', 'Rm\Rm27bKateter::simpan');
+$routes->get('/rm/rm27bKateter/(:any)', 'Rm\Rm27bKateter::index/$1');
+
 $routes->post('/rm/rm27cPlebitis/hapus', 'Rm\Rm27cPlebitis::hapus');
 $routes->get('/rm/rm27cPlebitis/cetak/(:any)', 'Rm\Rm27cPlebitis::cetak/$1');
 $routes->post('/rm/rm27cPlebitis/simpan', 'Rm\Rm27cPlebitis::simpan');
