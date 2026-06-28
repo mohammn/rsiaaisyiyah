@@ -1057,7 +1057,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
             <table class="table table-sm table-bordered">
                 <thead>
                     <tr>
-                        <th colspan="32" class="text-center">
+                        <th colspan="11" class="text-center">
                             Beri Tanda (√) Sesuai Tindakan dan Gejala.
                         </th>
                         <th rowspan="2" class="text-center align-middle">
