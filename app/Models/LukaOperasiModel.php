@@ -105,7 +105,7 @@ class LukaOperasiModel extends Model
         // --- POST OPERASI (DATA TABEL 1-31) -------
         // ==========================================
         'isiAntibiotik',
-        'bulan',
+        'tgl',
 
         // Checkbox Tindakan Per Hari (Array JSON/Text di DB)
         'rawatLuka',

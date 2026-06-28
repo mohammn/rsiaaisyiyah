@@ -106,7 +106,7 @@
 
     .tabelTindakan td,
     .tabelTindakan th {
-        padding: 0;
+        padding: 0.3mm;
     }
 </style>
 
@@ -359,9 +359,9 @@
                 </div>
                 <?php
                 // --- 1. CHECKBOX TINDAKAN PER HARI ---
-                $bulan = $data->lukaOperasi['bulan'] ?? [];
-                if (is_string($bulan)) {
-                    $bulan = json_decode($bulan, true) ?? explode(',', $bulan);
+                $tgl = $data->lukaOperasi['tgl'] ?? [];
+                if (is_string($tgl)) {
+                    $tgl = json_decode($tgl, true) ?? explode(',', $tgl);
                 }
 
                 $rawatLuka = $data->lukaOperasi['rawatLuka'] ?? [];
@@ -459,276 +459,273 @@
                 }
                 ?>
 
-                <table class="table table-bordered table-striped tabelTindakan">
+                <?php
+                // 1. Ambil hanya kolom hari yang memiliki petugas
+                $kolomAktif = [];
+                for ($i = 1; $i <= 10; $i++) {
+                    if (!empty($data->lukaOperasi["petugas" . $i])) {
+                        $kolomAktif[] = $i;
+                    }
+                }
+
+                // 2. Hitung sisa kolom untuk menyeimbangkan colspan
+                $jumlahKolomAktif = count($kolomAktif);
+                $totalColspanHeader = $jumlahKolomAktif + 1; // Label + Kolom Aktif
+                $totalColspanILO    = $jumlahKolomAktif + 2; // Total kolom dalam satu baris normal
+
+                // Bagi sisa kolom bawah secara proporsional agar tidak pecah
+                $colspanBawahKiri = max(2, ceil($totalColspanILO / 3));
+                $colspanBawahKanan = $totalColspanILO - $colspanBawahKiri;
+                ?>
+
+                <table class="table table-bordered table-striped tabelTindakan mb-0">
                     <tr>
                         <th rowspan="25" class="text-center" style="writing-mode: vertical-lr; transform: rotate(180deg); white-space: nowrap; margin: 0 auto;">POST OPERASI</th>
-                        <th colspan="32" class="text-center">
+                        <th colspan="<?= $totalColspanHeader ?>" class="text-center">
                             Beri Tanda (√) Sesuai Tindakan dan Gejala.
                         </th>
-                        <th rowspan="2" class="text-center align-middle">
-                            Ket.
-                        </th>
+                        <th rowspan="2" class="text-center align-middle">Ket.</th>
                     </tr>
                     <tr>
                         <th>Post Ops Hari ke-</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle"><?= $i ?></td>
-                        <?php endfor; ?>
+                        <?php endforeach; ?>
                     </tr>
                     <tr>
-                        <th class="align-middle bg-light text-secondary small fw-bold">Bulan</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <th class="align-middle bg-light text-secondary small fw-bold">Tanggal</th>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= $bulan[$i - 1] ?? '' ?>
+                                <?= !empty($tgl[$i - 1]) ? (new DateTime($tgl[$i - 1]))->format('d/m/Y') : '' ?>
                             </td>
-                        <?php endfor; ?>
+                        <?php endforeach; ?>
                         <td></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Rwt Luka</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $rawatLuka) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketRawatLuka'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketRawatLuka'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Dressing : Transparan</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $transparan) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketTransparan'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketTransparan'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Dressing : Thypafix</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $thypafix) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketThypafix'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketThypafix'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">
                             Buang cairan/membuka drain (<?= $data->lukaOperasi["buangCairan"] ?? '' ?>)
                         </th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $drain) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketDrain'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketDrain'] ?? '' ?></td>
                     </tr>
 
                     <tr>
-                        <th class="align-middle bg-light text-secondary small fw-bold">Aff drain, oleh
-                            <?= $data->lukaOperasi["affDrain"] ?? '' ?>
-                        </th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <th class="align-middle bg-light text-secondary small fw-bold">Aff drain, oleh <?= $data->lukaOperasi["affDrain"] ?? '' ?></th>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $aff) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketAff'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketAff'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Angkat Jahitan</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $angkat) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketAngkat'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketAngkat'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Antibiotik (<?= $data->lukaOperasi['isiAntibiotik'] ?? '' ?>) </th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $antibiotik) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketAntibiotik'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketAntibiotik'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">KRS. Kontrol Tgl</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $krs) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketKrs'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketKrs'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Kontrol Poli</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $kontrol) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketKontrol'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketKontrol'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">MRS ulang</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $mrs) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketMrs'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketMrs'] ?? '' ?></td>
                     </tr>
+
                     <tr>
-                        <th colspan="33" class="text-center align-middle bg-warning bg-opacity-25 text-dark small fw-bold text-uppercase" style="letter-spacing: 0.5px;">
+                        <th class="align-middle bg-warning bg-opacity-25 text-dark small fw-bold text-uppercase" style="letter-spacing: 0.5px;">
                             IDENTIFIKASI ILO
                         </th>
+                        <?php foreach ($kolomAktif as $i): ?>
+                            <td class="bg-warning bg-opacity-10"></td>
+                        <?php endforeach; ?>
+                        <td class="bg-warning bg-opacity-10"></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Nyeri lokal dan sakit</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $nyeri) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketNyeri'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketNyeri'] ?? '' ?></td>
                     </tr>
+
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Demam (&ge; 38&deg;C)</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $demam) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketDemam'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketDemam'] ?? '' ?></td>
                     </tr>
+
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Kemerahan</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $kemerahan) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketKemerahan'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketKemerahan'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Drainase purulen / pus</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $drainase) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketDrainase'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketDrainase'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Bengkak terlokalisir</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $bengkak) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketBengkak'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketBengkak'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Kuman pada kultur pus</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $kuman) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketKuman'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketKuman'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Ada abses saat re-operasai /pemeriksaan radiologi/PA</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $ada) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketAda'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketAda'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Diagnosa Dokter : SSI</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
                                 <?= in_array($i, $diagnosa) ? '√' : '' ?>
                             </td>
-                        <?php endfor; ?>
-                        <td>
-                            <?= $data->lukaOperasi['ketDiagnosa'] ?? '' ?>
-                        </td>
+                        <?php endforeach; ?>
+                        <td><?= $data->lukaOperasi['ketDiagnosa'] ?? '' ?></td>
                     </tr>
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Nama Petugas</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle" style="font-size: 0.4rem;">
                                 <div id='qr<?= $i ?>'></div>
                                 <?= $data->lukaOperasi["petugas" . $i] ?? '' ?>
                             </td>
-                        <?php endfor; ?>
+                        <?php endforeach; ?>
                         <td></td>
                     </tr>
 
                     <tr>
-                        <td colspan="11">
+                        <td colspan="<?= $colspanBawahKiri ?>">
                             <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Jenis lokasi infeksi : </label>
-                            <?= $data->lukaOperasi["jenisLokasi"] ?>
+                            <?= $data->lukaOperasi["jenisLokasi"] ?? '' ?>
                         </td>
-                        <td colspan="22">
-                            <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Lokasi Spesifik Untuk Infeksi Organ / Rongga : </label> <?= $data->lukaOperasi["lokasiSpesifik"] === 'lainnya' ? $data->lukaOperasi['isiLokasiSpesifikLainnya'] : $data->lukaOperasi["lokasiSpesifik"] ?>
+                        <td colspan="<?= $colspanBawahKanan ?>">
+                            <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Lokasi Spesifik Untuk Infeksi Organ / Rongga : </label>
+                            <?= (isset($data->lukaOperasi["lokasiSpesifik"]) && $data->lukaOperasi["lokasiSpesifik"] === 'lainnya') ? ($data->lukaOperasi['isiLokasiSpesifikLainnya'] ?? '') : ($data->lukaOperasi["lokasiSpesifik"] ?? '') ?>
                         </td>
                     </tr>
                 </table>
+
+                <div class="row m-2">
+                    <div class="col-4 border border-secondary">
+                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Jenis lokasi infeksi : </label>
+                        <?= $data->lukaOperasi["jenisLokasi"] ?>
+                    </div>
+                    <div class="col-8 border border-secondary">
+                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Lokasi Spesifik Untuk Infeksi Organ / Rongga : </label> <?= $data->lukaOperasi["lokasiSpesifik"] === 'lainnya' ? $data->lukaOperasi['isiLokasiSpesifikLainnya'] : $data->lukaOperasi["lokasiSpesifik"] ?>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-sm-6">
@@ -768,7 +765,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs/qrcode.min.js"></script>
 <script>
-    <?php for ($i = 1; $i <= 31; $i++):
+    <?php for ($i = 1; $i <= 10; $i++):
         if ($data->lukaOperasi["petugas" . $i]):
             echo 'var qrcode = new QRCode(document.getElementById("qr' . $i . '"), { width: 30, height: 30, colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.L});';
             echo 'qrcode.makeCode("ttd' . $data->lukaOperasi["petugas" . $i] . '");';

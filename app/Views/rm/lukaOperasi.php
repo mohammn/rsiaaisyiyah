@@ -289,10 +289,10 @@
             // Input Text Tambahan di baris Antibiotik
             isiAntibiotik: $('#isiAntibiotik').val() || '',
 
-            // Array Input Text Bulan (Looping presisi dari ID bulan1 sampai bulan31)
-            bulan: Array.from({
-                length: 31
-            }, (_, i) => $(`#bulan${i+1}`).val() || ''),
+            // Array Input Text Bulan (Looping presisi dari ID bulan1 sampai bulan10)
+            tgl: Array.from({
+                length: 10
+            }, (_, i) => $(`#tgl${i+1}`).val() || ''),
 
             // 1. Checkbox Tindakan Per Hari (Mengembalikan array berisi angka hari jika di-centang)
             rawatLuka: $('input[id^="rawatLuka"]:checked').map(function() {
@@ -352,9 +352,9 @@
                 return this.id.replace('diagnosa', '');
             }).get(),
 
-            // 3. Petugas Dinamis petugas1 s/d petugas31
+            // 3. Petugas Dinamis petugas1 s/d petugas10
             ...Object.fromEntries(Array.from({
-                length: 31
+                length: 10
             }, (_, i) => [`petugas${i+1}`, $(`#petugas${i+1}`).val() || ''])),
 
             // 4. Input Text Keterangan Flat (Kolom Kanan)

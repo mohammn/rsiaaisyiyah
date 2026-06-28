@@ -952,9 +952,9 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
             </style>
 
             <?php
-            $bulan = $data->lukaOperasi['bulan'] ?? [];
-            if (is_string($bulan)) {
-                $bulan = json_decode($bulan, true) ?? explode(',', $bulan);
+            $tgl = $data->lukaOperasi['tgl'] ?? [];
+            if (is_string($tgl)) {
+                $tgl = json_decode($tgl, true) ?? explode(',', $tgl);
             }
 
 
@@ -1066,24 +1066,22 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
                     </tr>
                     <tr>
                         <th>Post Ops Hari ke-</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle"><?= $i ?></td>
                         <?php endfor; ?>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th class="align-middle bg-light text-secondary small fw-bold">Bulan</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <th class="align-middle bg-light text-secondary small fw-bold">Tanggal</th>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle">
-                                <input type="number"
-                                    name="bulan[]"
-                                    id="bulan<?= $i ?>"
+                                <input type="date"
+                                    name="tgl[]"
+                                    id="tgl<?= $i ?>"
                                     class="form-control form-control-sm border-info text-center p-0 no-spin"
-                                    min="1"
-                                    max="12"
-                                    style="width: 18px; font-size: 0.8rem;" aria-label="Bulan Kolom <?= $i ?>"
-                                    value="<?= $bulan[$i - 1] ?? '' ?>">
+                                    style="width: 50px; font-size: 0.5rem;" aria-label="Tgl Kolom <?= $i ?>"
+                                    value="<?= $tgl[$i - 1] ?? '' ?>">
                             </td>
                         <?php endfor; ?>
                         <td></td>
@@ -1091,7 +1089,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Rwt Luka</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1108,7 +1106,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Dressing : Transparan</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1125,7 +1123,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Dressing : Thypafix</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1152,7 +1150,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
                                 <label class="form-check-label small" for="buangCairanTerbuka">Terbuka</label>
                             </div>
                         </th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1178,7 +1176,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
                                 <label class="form-check-label small" for="affDrainPerawat">Perawat</label>
                             </div>
                         </th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1195,7 +1193,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Angkat Jahitan</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1212,7 +1210,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Antibiotik <input type="text" name="isiAntibiotik" id="isiAntibiotik" value="<?= $data->lukaOperasi['isiAntibiotik'] ?? '' ?>" class="form-control form-control-sm"> </th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1229,7 +1227,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">KRS. Kontrol Tgl</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1246,7 +1244,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Kontrol Poli</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1263,7 +1261,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">MRS ulang</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1285,7 +1283,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Nyeri lokal dan sakit</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1301,7 +1299,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
                     </tr>
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Demam (&ge; 38&deg;C)</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1317,7 +1315,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
                     </tr>
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Kemerahan</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1334,7 +1332,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Drainase purulen / pus</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1351,7 +1349,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Bengkak terlokalisir</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1368,7 +1366,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Kuman pada kultur pus</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1385,7 +1383,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Ada abses saat re-operasai /pemeriksaan radiologi/PA</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1402,7 +1400,7 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Diagnosa Dokter : SSI</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
                                     <input class="form-check-input m-0"
@@ -1419,12 +1417,12 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
 
                     <tr>
                         <th class="align-middle bg-light text-secondary small fw-bold">Nama Petugas</th>
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-1">
                                 <select name="petugas<?= $i ?>"
                                     id="petugas<?= $i ?>"
                                     class="form-select form-select-sm text-center appearance-none border-info p-1"
-                                    style="width: 25px; font-size: 0.6rem; background: none !important; padding-right: 0.25rem !important;"
+                                    style="width: 60px; font-size: 0.6rem; background: none !important; padding-right: 0.25rem !important;"
                                     aria-label="Petugas Kolom <?= $i ?>">
                                     <option value="" <?= ($data->lukaOperasi["petugas" . $i] ?? '') === '' ? 'selected' : '' ?>>Pilih</option>
                                     <?php

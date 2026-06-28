@@ -171,10 +171,10 @@ class LukaOperasi extends BaseController
             "disinfeksiKulit"           => $this->request->getPost("disinfeksiKulit") ?? '',
 
             // ==========================================
-            // --- POST OPERASI (DATA TABEL 1-31) -------
+            // --- POST OPERASI (DATA TABEL 1-10) -------
             // ==========================================
             "isiAntibiotik"             => $this->request->getPost("isiAntibiotik"),
-            "bulan"                     => $this->request->getPost("bulan") ?? [],
+            "tgl"                     => $this->request->getPost("tgl") ?? [],
 
             // Checkbox Tindakan Per Hari
             "rawatLuka"                 => $this->request->getPost("rawatLuka") ?? [],
@@ -226,8 +226,8 @@ class LukaOperasi extends BaseController
             "isiLokasiSpesifikLainnya"  => $this->request->getPost("isiLokasiSpesifikLainnya"),
         ];
 
-        // --- GENERATE PETUGAS DINAMIS (petugas1 s/d petugas31) ---
-        for ($i = 1; $i <= 31; $i++) {
+        // --- GENERATE PETUGAS DINAMIS (petugas1 s/d petugas10) ---
+        for ($i = 1; $i <= 10; $i++) {
             $data["petugas" . $i] = $this->request->getPost("petugas" . $i) ?? '';
         }
 
@@ -239,7 +239,7 @@ class LukaOperasi extends BaseController
             'kualifikasi',
             'penyakitInfeksi',
             'prosedurOperasi',
-            'bulan',
+            'tgl',
             'rawatLuka',
             'transparan',
             'thypafix',
