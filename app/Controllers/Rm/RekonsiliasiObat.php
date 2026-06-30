@@ -349,7 +349,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'ETANYL',
                     "ruangan"            => 'ko',
                     "dosis"              => '-',
-                    "frekuensi"          => '1X11',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -369,7 +369,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'METHYLERGOMETHRINE 0,2 MG INJ',
                     "ruangan"            => 'ko',
                     "dosis"              => '0,2 MG INJ',
-                    "frekuensi"          => '1X11',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
@@ -379,7 +379,7 @@ class RekonsiliasiObat extends BaseController
                     "namaObat"           => 'METOCLOPRAMIDE HYDROCHLORIDE', // Disesuaikan typo teks gambar GYDROCHLORIDE -> HYDROCHLORIDE
                     "ruangan"            => 'ko',
                     "dosis"              => '-',
-                    "frekuensi"          => '1X11',
+                    "frekuensi"          => '1X1',
                     "caraPemberian"      => 'IV',
                     "waktuTerakhir"      => str_replace('T', ' ', $waktu) . ':00'
                 ],
