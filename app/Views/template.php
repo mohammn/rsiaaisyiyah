@@ -25,13 +25,25 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.js"></script>
     <style>
+        /* Container Utama yang membungkus Gambar + Teks */
+        .marquee-wrapper {
+            display: flex;
+            align-items: center;
+            width: 45%;
+            /* Menggantikan fungsi width 30% + margin Anda agar pas di navbar */
+            margin-left: auto;
+            /* Otomatis menggeser seluruh komponen ke kanan navbar */
+            overflow: hidden;
+        }
+
+        /* Container khusus teks berjalan */
         .running-text-container {
-            width: 30%;
+            flex-grow: 1;
+            /* Mengisi sisa ruang di sebelah kanan gambar */
             overflow: hidden;
             white-space: nowrap;
             box-sizing: border-box;
             padding: 5px;
-            margin-left: 65%;
         }
 
         .running-text {
@@ -40,6 +52,7 @@
             animation: marquee 17s linear infinite;
         }
 
+        /* Animasi Marquee (Pastikan ini sudah ada di CSS Anda) */
         @keyframes marquee {
             0% {
                 transform: translate(0, 0);
@@ -187,11 +200,19 @@
         <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
         </div>
         <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="running-text-container">
-                <div class="running-text">
-                    <img src="<?= base_url() ?>public/assets/img/gif/pokemon.gif" alt="run" style="width:5%;"> Selamat datang "<?= session()->get('nama') ?>" di aplikasi rekam medis elektronik RSIA Aisyiyah Bangkalan. Jl. Letnan Ramli No.21, Rw. 02, Keraton, Bangkalan.
+
+            <div class="marquee-wrapper">
+                <div class="me-2 flex-shrink-0">
+                    <img src="<?= base_url() ?>public/assets/img/gif/sun.gif" alt="run" style="width: 35px; height: auto;">
+                </div>
+
+                <div class="running-text-container">
+                    <div class="running-text">
+                        Selamat datang "<?= session()->get('nama') ?>" di aplikasi rekam medis elektronik RSIA Aisyiyah Bangkalan. Jl. Letnan Ramli No.21, Rw. 02, Keraton, Bangkalan.
+                    </div>
                 </div>
             </div>
+
         </div>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
