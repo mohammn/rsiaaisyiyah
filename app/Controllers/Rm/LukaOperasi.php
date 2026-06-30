@@ -85,8 +85,8 @@ class LukaOperasi extends BaseController
             "noRawat"                   => $this->request->getPost("noRawat"),
             "unit"                      => $this->request->getPost("unit"),
             "petugasPreOperasi"         => $this->request->getPost("petugasPreOperasi"),
-            "tglMrs"                    => $this->request->getPost("tglMrs"),
-            "tglOperasi"                => $this->request->getPost("tglOperasi"),
+            "tglMrs"     => (!empty($this->request->getPost("tglMrs"))) ? $this->request->getPost("tglMrs") : NULL,
+            "tglOperasi" => (!empty($this->request->getPost("tglOperasi"))) ? $this->request->getPost("tglOperasi") : NULL,
             "beratBadan"                => $this->request->getPost("beratBadan"),
             "albumin"                   => $this->request->getPost("albumin"),
             "isiGulaDarah"              => $this->request->getPost("isiGulaDarah"),
@@ -177,9 +177,9 @@ class LukaOperasi extends BaseController
             "isiAntibiotik"             => $this->request->getPost("isiAntibiotik"),
             "tgl"                     => $this->request->getPost("tgl") ?? [],
 
-            "tglKrs"                     => $this->request->getPost("tglKrs") ?? '',
-            "tglKontrol"                     => $this->request->getPost("tglKontrol") ?? '',
-            "tglMrsTindakan"                     => $this->request->getPost("tglMrsTindakan") ?? '',
+            "tglKrs"          => (!empty($this->request->getPost("tglKrs"))) ? $this->request->getPost("tglKrs") : NULL,
+            "tglKontrol"      => (!empty($this->request->getPost("tglKontrol"))) ? $this->request->getPost("tglKontrol") : NULL,
+            "tglMrsTindakan"  => (!empty($this->request->getPost("tglMrsTindakan"))) ? $this->request->getPost("tglMrsTindakan") : NULL,
 
             // Checkbox Tindakan Per Hari
             "rawatLuka"                 => $this->request->getPost("rawatLuka") ?? [],
