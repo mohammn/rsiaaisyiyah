@@ -37,7 +37,7 @@ class LukaOperasi extends BaseController
         $this->petugasModel = new PetugasModel();
     }
 
-    public function index($noRawat)
+    public function index($noRawat, $id)
     {
         $petugas =  $this->petugasModel->where('nip !=', '-')->findAll();
         $dokter =  $this->dokterModel->where('kd_dokter !=', '-')->findAll();
@@ -59,7 +59,7 @@ class LukaOperasi extends BaseController
             ->where('reg_periksa.no_rawat', $noRawat)
             ->first();
 
-        $lukaOperasi = $this->lukaOperasiModel->where('noRawat', $noRawat)->first();
+        $lukaOperasi = $this->lukaOperasiModel->where('id', $id)->first();
 
         $pengaturan = $this->pengaturan->where('id', 1)->first();
         $pjPasien = $this->pjPasienModel->where('noRm', $pasien["no_rkm_medis"])->first();
@@ -81,6 +81,7 @@ class LukaOperasi extends BaseController
     {
         $data = [
             // --- Data Pasien & Petugas ---
+            "noRm"                   => $this->request->getPost("noRm"),
             "noRawat"                   => $this->request->getPost("noRawat"),
             "unit"                      => $this->request->getPost("unit"),
             "petugasPreOperasi"         => $this->request->getPost("petugasPreOperasi"),
@@ -175,6 +176,10 @@ class LukaOperasi extends BaseController
             // ==========================================
             "isiAntibiotik"             => $this->request->getPost("isiAntibiotik"),
             "tgl"                     => $this->request->getPost("tgl") ?? [],
+
+            "tglKrs"                     => $this->request->getPost("tglKrs") ?? '',
+            "tglKontrol"                     => $this->request->getPost("tglKontrol") ?? '',
+            "tglMrsTindakan"                     => $this->request->getPost("tglMrsTindakan") ?? '',
 
             // Checkbox Tindakan Per Hari
             "rawatLuka"                 => $this->request->getPost("rawatLuka") ?? [],
@@ -273,33 +278,41 @@ class LukaOperasi extends BaseController
 
         if ($this->request->getPost("tujuanSimpan") == 'tambah') {
             $this->lukaOperasiModel->save($data);
+
+            $nilaiBalik = $this->response->setJSON([
+                'status'  => 'success',
+                'message' => 'Data berhasil disimpan',
+                'id'      => $this->lukaOperasiModel->getInsertID()
+            ]);
         } else {
-            $noRawat = $this->request->getPost("noRawat");
+            $id = $this->request->getPost("id");
             unset($data['noRawat']);
 
-            $this->catatLog('ubah', 'luka_operasi', $noRawat, $this->lukaOperasiModel->where('noRawat', $noRawat)->first(), $data);
+            $this->catatLog('ubah', 'luka_operasi', $id, $this->lukaOperasiModel->where('id', $id)->first(), $data);
 
-            $this->lukaOperasiModel->where('noRawat', $noRawat)->set($data)->update();
+            $this->lukaOperasiModel->where('id', $id)->set($data)->update();
+
+            $nilaiBalik = $this->response->setJSON([
+                'status'  => 'success',
+                'message' => 'Data berhasil disimpan',
+                'id'      => $id
+            ]);
         }
 
-        return $this->response->setJSON([
-            'status'  => 'success',
-            'message' => 'Data berhasil disimpan'
-        ]);
+        return $nilaiBalik;
     }
 
     public function hapus()
     {
-        $noRawat = $this->request->getPost("noRawat");
-        $noRawat = str_replace('-', '/', $noRawat);
-        $this->catatLog('hapus', 'luka_operasi', $noRawat, $this->lukaOperasiModel->where('noRawat', $noRawat)->first());
+        $id = $this->request->getPost("id");
+        $this->catatLog('hapus', 'luka_operasi', $id, $this->lukaOperasiModel->where('id', $id)->first());
 
-        $this->lukaOperasiModel->where("noRawat", $noRawat)->delete();
+        $this->lukaOperasiModel->where("id", $id)->delete();
         echo json_encode("");
     }
 
 
-    public function cetak($noRawat)
+    public function cetak($noRawat, $id)
     {
         $noRawat = str_replace('-', '/', $noRawat);
         $pasien = $this->regPeriksaModel
@@ -322,7 +335,7 @@ class LukaOperasi extends BaseController
             ->where('reg_periksa.no_rawat', $noRawat)
             ->first();
 
-        $lukaOperasi = $this->lukaOperasiModel->where('noRawat', $noRawat)->first();
+        $lukaOperasi = $this->lukaOperasiModel->where('id', $id)->first();
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
         $data = (object) [

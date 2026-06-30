@@ -60,9 +60,9 @@ $routes->post('/rm/rm27cPlebitis/simpan', 'Rm\Rm27cPlebitis::simpan');
 $routes->get('/rm/rm27cPlebitis/(:any)', 'Rm\Rm27cPlebitis::index/$1');
 
 $routes->post('/rm/lukaOperasi/hapus', 'Rm\LukaOperasi::hapus');
-$routes->get('/rm/lukaOperasi/cetak/(:any)', 'Rm\LukaOperasi::cetak/$1');
+$routes->get('/rm/lukaOperasi/cetak/(:any)/(:any)', 'Rm\LukaOperasi::cetak/$1/$2');
 $routes->post('/rm/lukaOperasi/simpan', 'Rm\LukaOperasi::simpan');
-$routes->get('/rm/lukaOperasi/(:any)', 'Rm\LukaOperasi::index/$1');
+$routes->get('/rm/lukaOperasi/(:any)/(:any)', 'Rm\LukaOperasi::index/$1/$2');
 
 $routes->post('/rm/lembarEdukasi/ubahWaktu', 'Rm\LembarEdukasi::ubahWaktu');
 $routes->post('/rm/lembarEdukasi/simpanTtd', 'Rm\LembarEdukasi::simpanTtd');

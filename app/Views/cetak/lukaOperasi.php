@@ -506,7 +506,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Rwt Luka</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $rawatLuka) ? '√' : '' ?>
+                                <?= in_array($i, $rawatLuka) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketRawatLuka'] ?? '' ?></td>
@@ -516,7 +516,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Dressing : Transparan</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $transparan) ? '√' : '' ?>
+                                <?= in_array($i, $transparan) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketTransparan'] ?? '' ?></td>
@@ -526,7 +526,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Dressing : Thypafix</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $thypafix) ? '√' : '' ?>
+                                <?= in_array($i, $thypafix) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketThypafix'] ?? '' ?></td>
@@ -538,7 +538,7 @@
                         </th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $drain) ? '√' : '' ?>
+                                <?= in_array($i, $drain) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketDrain'] ?? '' ?></td>
@@ -548,7 +548,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Aff drain, oleh <?= $data->lukaOperasi["affDrain"] ?? '' ?></th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $aff) ? '√' : '' ?>
+                                <?= in_array($i, $aff) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketAff'] ?? '' ?></td>
@@ -558,7 +558,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Angkat Jahitan</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $angkat) ? '√' : '' ?>
+                                <?= in_array($i, $angkat) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketAngkat'] ?? '' ?></td>
@@ -568,37 +568,37 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Antibiotik (<?= $data->lukaOperasi['isiAntibiotik'] ?? '' ?>) </th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $antibiotik) ? '√' : '' ?>
+                                <?= in_array($i, $antibiotik) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketAntibiotik'] ?? '' ?></td>
                     </tr>
 
                     <tr>
-                        <th class="align-middle bg-light text-secondary small fw-bold">KRS. Kontrol Tgl</th>
+                        <th class="align-middle bg-light text-secondary small fw-bold">KRS. Kontrol Tgl : <?= !empty($data->lukaOperasi["tglKrs"]) ? date('d/m/Y', strtotime($data->lukaOperasi["tglKrs"])) : '' ?></th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $krs) ? '√' : '' ?>
+                                <?= in_array($i, $krs) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketKrs'] ?? '' ?></td>
                     </tr>
 
                     <tr>
-                        <th class="align-middle bg-light text-secondary small fw-bold">Kontrol Poli</th>
+                        <th class="align-middle bg-light text-secondary small fw-bold">Kontrol Poli : <?= !empty($data->lukaOperasi["tglKontrol"]) ? date('d/m/Y', strtotime($data->lukaOperasi["tglKontrol"])) : '' ?></th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $kontrol) ? '√' : '' ?>
+                                <?= in_array($i, $kontrol) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketKontrol'] ?? '' ?></td>
                     </tr>
 
                     <tr>
-                        <th class="align-middle bg-light text-secondary small fw-bold">MRS ulang</th>
+                        <th class="align-middle bg-light text-secondary small fw-bold">MRS ulang : <?= !empty($data->lukaOperasi["tglMrsTindakan"]) ? date('d/m/Y', strtotime($data->lukaOperasi["tglMrsTindakan"])) : '' ?></th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $mrs) ? '√' : '' ?>
+                                <?= in_array($i, $mrs) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketMrs'] ?? '' ?></td>
@@ -618,7 +618,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Nyeri lokal dan sakit</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $nyeri) ? '√' : '' ?>
+                                <?= in_array($i, $nyeri) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketNyeri'] ?? '' ?></td>
@@ -628,7 +628,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Demam (&ge; 38&deg;C)</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $demam) ? '√' : '' ?>
+                                <?= in_array($i, $demam) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketDemam'] ?? '' ?></td>
@@ -638,7 +638,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Kemerahan</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $kemerahan) ? '√' : '' ?>
+                                <?= in_array($i, $kemerahan) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketKemerahan'] ?? '' ?></td>
@@ -648,7 +648,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Drainase purulen / pus</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $drainase) ? '√' : '' ?>
+                                <?= in_array($i, $drainase) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketDrainase'] ?? '' ?></td>
@@ -658,7 +658,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Bengkak terlokalisir</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $bengkak) ? '√' : '' ?>
+                                <?= in_array($i, $bengkak) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketBengkak'] ?? '' ?></td>
@@ -668,7 +668,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Kuman pada kultur pus</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $kuman) ? '√' : '' ?>
+                                <?= in_array($i, $kuman) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketKuman'] ?? '' ?></td>
@@ -678,7 +678,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Ada abses saat re-operasai /pemeriksaan radiologi/PA</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $ada) ? '√' : '' ?>
+                                <?= in_array($i, $ada) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketAda'] ?? '' ?></td>
@@ -688,7 +688,7 @@
                         <th class="align-middle bg-light text-secondary small fw-bold">Diagnosa Dokter : SSI</th>
                         <?php foreach ($kolomAktif as $i): ?>
                             <td class="text-center align-middle">
-                                <?= in_array($i, $diagnosa) ? '√' : '' ?>
+                                <?= in_array($i, $diagnosa) ? '√' : '-' ?>
                             </td>
                         <?php endforeach; ?>
                         <td><?= $data->lukaOperasi['ketDiagnosa'] ?? '' ?></td>
@@ -717,15 +717,7 @@
                     </tr>
                 </table>
 
-                <div class="row m-2">
-                    <div class="col-4 border border-secondary">
-                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Jenis lokasi infeksi : </label>
-                        <?= $data->lukaOperasi["jenisLokasi"] ?>
-                    </div>
-                    <div class="col-8 border border-secondary">
-                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Lokasi Spesifik Untuk Infeksi Organ / Rongga : </label> <?= $data->lukaOperasi["lokasiSpesifik"] === 'lainnya' ? $data->lukaOperasi['isiLokasiSpesifikLainnya'] : $data->lukaOperasi["lokasiSpesifik"] ?>
-                    </div>
-                </div>
+
 
                 <div class="row">
                     <div class="col-sm-6">

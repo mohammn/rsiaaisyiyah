@@ -1149,6 +1149,10 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
                                 <input class="form-check-input" type="radio" name="buangCairan" id="buangCairanTerbuka" value="Terbuka" <?= (($data->lukaOperasi["buangCairan"] ?? '') === "Terbuka") ? 'checked' : '' ?>>
                                 <label class="form-check-label small" for="buangCairanTerbuka">Terbuka</label>
                             </div>
+                            <div class="form-check mb-0 me-1">
+                                <input class="form-check-input" type="radio" name="buangCairan" id="buangCairanTdk" value="Tidak ada" <?= (($data->lukaOperasi["buangCairan"] ?? '') === "Tidak ada") ? 'checked' : '' ?>>
+                                <label class="form-check-label small" for="buangCairanTdk">Tidak ada</label>
+                            </div>
                         </th>
                         <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
@@ -1174,6 +1178,10 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
                             <div class="form-check mb-0 me-1">
                                 <input class="form-check-input" type="radio" name="affDrain" id="affDrainPerawat" value="Perawat" <?= (($data->lukaOperasi["affDrain"] ?? '') === "Perawat") ? 'checked' : '' ?>>
                                 <label class="form-check-label small" for="affDrainPerawat">Perawat</label>
+                            </div>
+                            <div class="form-check mb-0 me-1">
+                                <input class="form-check-input" type="radio" name="affDrain" id="affDrainTdk" value="Tidak ada" <?= (($data->lukaOperasi["affDrain"] ?? '') === "Tidak ada") ? 'checked' : '' ?>>
+                                <label class="form-check-label small" for="affDrainTdk">Tidak ada</label>
                             </div>
                         </th>
                         <?php for ($i = 1; $i <= 10; $i++): ?>
@@ -1226,7 +1234,9 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
                     </tr>
 
                     <tr>
-                        <th class="align-middle bg-light text-secondary small fw-bold">KRS. Kontrol Tgl</th>
+                        <th class="align-middle bg-light text-secondary small fw-bold">KRS. Kontrol Tgl
+                            <input type="date" name="tglKrs" id="tglKrs" class="form-control form-control-sm border-info text-end p-0 no-spin" style="font-size: 0.7rem;" value="<?= $data->lukaOperasi['tglKrs'] ?? '' ?>">
+                        </th>
                         <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
@@ -1243,7 +1253,9 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
                     </tr>
 
                     <tr>
-                        <th class="align-middle bg-light text-secondary small fw-bold">Kontrol Poli</th>
+                        <th class="align-middle bg-light text-secondary small fw-bold">Kontrol Poli
+                            <input type="date" name="tglKontrol" id="tglKontrol" class="form-control form-control-sm border-info text-end p-0 no-spin" style="font-size: 0.7rem;" value="<?= $data->lukaOperasi['tglKontrol'] ?? '' ?>">
+                        </th>
                         <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
@@ -1260,7 +1272,9 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
                     </tr>
 
                     <tr>
-                        <th class="align-middle bg-light text-secondary small fw-bold">MRS ulang</th>
+                        <th class="align-middle bg-light text-secondary small fw-bold">MRS ulang
+                            <input type="date" name="tglMrsTindakan" id="tglMrsTindakan" class="form-control form-control-sm border-info text-end p-0 no-spin" style="font-size: 0.7rem;" value="<?= $data->lukaOperasi['tglMrsTindakan'] ?? '' ?>">
+                        </th>
                         <?php for ($i = 1; $i <= 10; $i++): ?>
                             <td class="text-center align-middle p-2">
                                 <div class="form-check hover-check d-inline-block m-0 p-0">
@@ -1460,8 +1474,12 @@ $prosedurOperasi = !empty($data->lukaOperasi['prosedurOperasi']) ? explode('|', 
                                             <label class="form-check-label small" for="organRongga">Organ Rongga</label>
                                         </div>
                                         <div class="form-check mb-0 me-1">
-                                            <input class="form-check-input" type="radio" name="jenisLokasi" id="dalamFascia" value="Dalam (Fascia/otot)" <?= (($data->lukaOperasi["dalamFascia"] ?? '') === "Dalam (Fascia/otot)") ? 'checked' : '' ?>>
+                                            <input class="form-check-input" type="radio" name="jenisLokasi" id="dalamFascia" value="Dalam (Fascia/otot)" <?= (($data->lukaOperasi["jenisLokasi"] ?? '') === "Dalam (Fascia/otot)") ? 'checked' : '' ?>>
                                             <label class="form-check-label small" for="dalamFascia">Dalam (Fascia/otot)</label>
+                                        </div>
+                                        <div class="form-check mb-0 me-1">
+                                            <input class="form-check-input" type="radio" name="jenisLokasi" id="jenisLokasiTidak" value="Tidak ada" <?= (($data->lukaOperasi["jenisLokasi"] ?? '') === "Tidak ada") ? 'checked' : '' ?>>
+                                            <label class="form-check-label small" for="jenisLokasiTidak">Tidak ada</label>
                                         </div>
                                     </div>
                                 </div>

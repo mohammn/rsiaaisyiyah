@@ -100,7 +100,7 @@ class Rm extends BaseController
         $icPembiusanLokal = $this->icPembiusanLokalModel->where('noRawat', $no_rawat)->first();
         $lembarEdukasi = $this->lembarEdukasiModel->where('noRawat', $no_rawat)->first();
         $persetujuanRanap = $this->persetujuanRanapModel->where('noRawat', $no_rawat)->first();
-        $lukaOperasi = $this->lukaOperasiModel->where('noRawat', $no_rawat)->first();
+        $lukaOperasi = $this->lukaOperasiModel->where('noRm', $pasien['no_rkm_medis'])->findAll();
         $rm27cPlebitis = $this->rm27cPlebitisModel->where('noRawat', $no_rawat)->first();
         $rm27bKateter = $this->rm27bKateterModel->where('noRawat', $no_rawat)->first();
         // ================khusus SBAR=========================
@@ -161,9 +161,13 @@ class Rm extends BaseController
 
         $pengecualianLembarEdukasi = ['ttd_1', 'ttd_2', 'ttd_3', 'ttd_4', 'ttd_5', 'ttd_6', 'ttd_7', 'ttd_8', 'ttdWali', 'lainnya_1', 'lainnya_2', 'lainnya_3', 'lainnya_4', 'lainnya_5', 'lainnya_6', 'lainnya_7', 'lainnya_8', 'tgl_8', 'metode_8', 'evaluasi_8', 'media_8', 'petugas_8', 'wali_8'];
 
-        $pengecualianLukaOperasi = ['isiAntibiotik', 'bulan', 'rawatLuka', 'transparan', 'thypafix', 'drainTindakan', 'aff', 'angkat', 'antibiotikTindakan', 'krs', 'kontrol', 'mrs', 'nyeri', 'demam', 'kemerahan', 'drainase', 'bengkak', 'kuman', 'ada', 'diagnosa', 'ketRawatLuka', 'ketTransparan', 'ketThypafix', 'ketDrain', 'ketAff', 'ketAngkat', 'ketAntibiotik', 'ketKrs', 'ketKontrol', 'ketMrs', 'ketNyeri', 'ketDemam', 'ketKemerahan', 'ketDrainase', 'ketBengkak', 'ketKuman', 'ketAda', 'ketDiagnosa', 'buangCairan', 'affDrain', 'jenisLokasi', 'lokasiSpesifik', 'isiLokasiSpesifikLainnya'];
+        $pengecualianLukaOperasi = ['skintest', 'hasilMrsa', 'isiDisinfeksiKulitLainnya', 'antibiotikDosis', 'antibiotikJam', 'antibiotikObat', 'implantJenis', 'drainJenis', 'isiprosedurOperasiLainnya', 'isiprosedurOperasiLainnya2', 'skintestHasil', 'profilaksisDosis', 'profilaksisJam', 'profilaksisObat', 'isipenyakitInfeksiLainnya', 'isiKualifikasiLainnya', 'isiSteroid', 'isiPenyakitLainnya', 'persiapanUsusDg', 'isiAntibiotik', 'tgl', 'rawatLuka', 'transparan', 'thypafix', 'drainTindakan', 'aff', 'angkat', 'antibiotikTindakan', 'krs', 'kontrol', 'mrs', 'nyeri', 'demam', 'kemerahan', 'drainase', 'bengkak', 'kuman', 'ada', 'diagnosa', 'ketRawatLuka', 'ketTransparan', 'ketThypafix', 'ketDrain', 'ketAff', 'ketAngkat', 'ketAntibiotik', 'ketKrs', 'ketKontrol', 'ketMrs', 'ketNyeri', 'ketDemam', 'ketKemerahan', 'ketDrainase', 'ketBengkak', 'ketKuman', 'ketAda', 'ketDiagnosa', 'buangCairan', 'affDrain', 'jenisLokasi', 'lokasiSpesifik', 'isiLokasiSpesifikLainnya'];
         for ($i = 1; $i <= 31; $i++) {
             $pengecualianLukaOperasi[] = 'petugas' . $i;
+        }
+        $statusLukaOperasi = [];
+        for ($i = 0; $i < count($lukaOperasi); $i++) {
+            $statusLukaOperasi[$i] = $this->cekSemuaKolom($lukaOperasi[$i], $pengecualianLukaOperasi);
         }
 
         $pengecualianRm27cPlebitis = ['isilokasiPemasanganLainnya', 'isigolObatLainnya', 'isiivCath'];
@@ -200,7 +204,7 @@ class Rm extends BaseController
             "icPembiusanLokal" => $this->cekSemuaKolom($icPembiusanLokal, ['ttdWali', 'ttdSaksi']),
             "lembarEdukasi" => $this->cekSemuaKolom($lembarEdukasi, $pengecualianLembarEdukasi),
             "persetujuanRanap" => $this->cekSemuaKolom($persetujuanRanap, ['ttdWali', 'ttdSaksi', 'isi_kecuali', 'status_asuransi_umum', 'kelas_umum', 'kelas_umum_lain_text', 'biaya_min', 'biaya_max', 'no_bpjs', 'bpjs_status_kelas', 'bpjs_naik_tingkat', 'nama_asuransi_lain']),
-            "lukaOperasi" => $this->cekSemuaKolom($lukaOperasi, $pengecualianLukaOperasi),
+            "lukaOperasi" => $statusLukaOperasi,
             "rm27cPlebitis" => $this->cekSemuaKolom($rm27cPlebitis, $pengecualianRm27cPlebitis),
             "rm27bKateter" => $this->cekSemuaKolom($rm27bKateter, $pengecualianRm27bKateter),
             "rm0Sbar" => [$statusRm0Sbar, $statusTtdRm0Sbar],

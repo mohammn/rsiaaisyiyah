@@ -175,7 +175,9 @@
 
         var data = {
             tujuanSimpan: tujuanSimpan,
+            id: "<?= $data->lukaOperasi['id'] ?? 0 ?>",
             noRawat: "<?= $data->pasien['no_rawat'] ?>",
+            noRm: "<?= $data->pasien['no_rkm_medis'] ?>",
 
             // Input Text, Date, Time
             unit: $('#unit').val(),
@@ -274,6 +276,11 @@
             jamSelesaiOps: $('#jamSelesaiOps').val(),
             isiDisinfeksiKulitLainnya: $('#isiDisinfeksiKulitLainnya').val(),
             diagnosaPost: $('#diagnosaPost').val(),
+
+            tglKrs: $('#tglKrs').val(),
+            tglKontrol: $('#tglKontrol').val(),
+            tglMrsTindakan: $('#tglMrsTindakan').val(),
+
 
             // Radio Buttons
             sterilisasi: $('input[name="sterilisasi"]:checked').val() || '',
@@ -392,7 +399,7 @@
             data: data,
             dataType: 'json',
             success: function(data) {
-                location.reload();
+                location.href = "<?= base_url('rm/lukaOperasi/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>/" + data.id;
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
@@ -412,12 +419,12 @@
         }
 
         function hapus() {
-            var noRawat = "<?= $data->lukaOperasi['noRawat'] ?? '' ?>";
+            var id = "<?= $data->lukaOperasi['id'] ?? '' ?>";
 
             $.ajax({
                 url: '<?= base_url() ?>rm/lukaOperasi/hapus',
                 method: 'post',
-                data: "noRawat=" + noRawat,
+                data: "id=" + id,
                 dataType: 'json',
                 success: function(data) {
                     location.href = "<?= base_url('rm/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>";

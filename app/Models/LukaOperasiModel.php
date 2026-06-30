@@ -12,6 +12,7 @@ class LukaOperasiModel extends Model
     // Daftarkan semua field yang boleh diisi di sini
     protected $allowedFields = [
         // --- Data Pasien & Petugas ---
+        'noRm',
         'noRawat',
         'unit',
         'petugasPreOperasi',
@@ -49,6 +50,10 @@ class LukaOperasiModel extends Model
         'skintestHasil',
         'ronde',
         'isiSuhuPasien',
+
+        'tglKrs',
+        'tglKontrol',
+        'tglMrsTindakan',
 
         // --- Radio Buttons Bagian 2 ---
         'steroid',
