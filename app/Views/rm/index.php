@@ -241,7 +241,7 @@
                         <?php endif; ?><?php if ($data->rm0Sbar): ?>
                         <?php for ($i = 0; $i < count($data->rm0Sbar); $i++) : ?>
                             <tr>
-                                <td>SBAR ( <?= $data->rm0Sbar[$i]["judul"] ?>) </td>
+                                <td>Catatan Komunikasi SBAR ( <?= $data->rm0Sbar[$i]["judul"] ?>) </td>
                                 <td>
                                     <span class="badge-estetik <?= $data->status["rm0Sbar"][0][$i] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["rm0Sbar"][0][$i] ?></span>
                                 </td>
