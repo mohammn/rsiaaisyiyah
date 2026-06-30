@@ -206,7 +206,7 @@
                                 <td>
                                     <a href="<?= base_url(" rm/lukaOperasi/" . str_replace('/', '-', $data->pasien["no_rawat"])) . "/" . $data->lukaOperasi[$i]["id"] ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
                                     <?= !empty($data->lukaOperasi[$i]['petugasPreOperasi'] && $data->lukaOperasi[$i]['petugasRuangOperasi']) ? '<a href="' . base_url('/rm/lukaOperasi/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . "/" . $data->lukaOperasi[$i]["id"] . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/lukaOperasi/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . "/" . $data->lukaOperasi[$i]["id"] . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
-                                    <a href="<?= base_url('/rm/lukaOperasi/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                                    <a href="<?= base_url('/rm/lukaOperasi/' . str_replace('/', '-', $data->pasien['no_rawat'])) . "/" . $data->lukaOperasi[$i]["id"]  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
                                 </td>
                             </tr>
                         <?php endfor; ?>
@@ -378,7 +378,7 @@
                         </tr>
                         <tr>
                             <td>15.</td>
-                            <td>SBAR</td>
+                            <td>Catatan Komunikasi SBAR</td>
                             <td>
                                 <a href="<?= base_url("rm/rm0Sbar/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>/0" class="btn-estetik btn-sm-estetik bg-vibrant-blue" style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>
                             </td>
