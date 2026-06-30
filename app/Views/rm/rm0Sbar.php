@@ -427,7 +427,7 @@
                     $('#dtglVerif').html(data.tglVerif);
                 } else {
                     $('#dtglVerif').html('<span class="badge-estetik bg-vibrant-red">Belum</span>');
-                    if (data.dokter == '<?= session()->get('nama') ?>') {
+                    if (data.dokter === '<?= session()->get('nama') ?>') {
                         $('#tombolVerif').show();
                     }
                 }
