@@ -18,6 +18,8 @@ use App\Models\PersetujuanRanapModel;
 use App\Models\LukaOperasiModel;
 use App\Models\Rm27cPlebitisModel;
 use App\Models\Rm27bKateterModel;
+use App\Models\Rm0SbarModel;
+use App\Models\Rm0SbarDataModel;
 
 use function PHPSTORM_META\type;
 
@@ -39,6 +41,8 @@ class Rm extends BaseController
     protected $lukaOperasiModel;
     protected $rm27cPlebitisModel;
     protected $rm27bKateterModel;
+    protected $rm0SbarModel;
+    protected $rm0SbarDataModel;
 
     public function __construct()
     {
@@ -62,6 +66,8 @@ class Rm extends BaseController
         $this->lukaOperasiModel = new LukaOperasiModel();
         $this->rm27cPlebitisModel = new Rm27cPlebitisModel();
         $this->rm27bKateterModel = new Rm27bKateterModel();
+        $this->rm0SbarModel = new Rm0SbarModel();
+        $this->rm0SbarDataModel = new Rm0SbarDataModel();
     }
     public function index($no_rawat)
     {
@@ -97,7 +103,42 @@ class Rm extends BaseController
         $lukaOperasi = $this->lukaOperasiModel->where('noRawat', $no_rawat)->first();
         $rm27cPlebitis = $this->rm27cPlebitisModel->where('noRawat', $no_rawat)->first();
         $rm27bKateter = $this->rm27bKateterModel->where('noRawat', $no_rawat)->first();
+        // ================khusus SBAR=========================
+        $rm0Sbar = $this->rm0SbarModel->where('noRawat', $no_rawat)->findAll();
+        $rm0SbarData = [];
+        $rm0Sbar = $this->rm0SbarModel->where('noRawat', $no_rawat)->findAll();
+        $rm0SbarData = [];
+        for ($i = 0; $i < count($rm0Sbar); $i++) {
+            // Mengambil semua data anak yang memiliki idSbar sesuai ID induk saat ini
+            $rm0SbarData[] = $this->rm0SbarDataModel->where('idSbar', $rm0Sbar[$i]["id"])->findAll();
+        }
+        $statusRm0Sbar = [];
+        for ($i = 0; $i < count($rm0SbarData); $i++) {
+            $statusRm0Sbar[] = [];
+            for ($j = 0; $j < count($rm0SbarData[$i]); $j++) {
+                $statusRm0Sbar[$i][] = $this->cekSemuaKolom($rm0SbarData[$i][$j], ['tglVerif']);
+            }
+        }
+        for ($i = 0; $i < count($statusRm0Sbar); $i++) {
+            if (in_array("Tidak Lengkap", $statusRm0Sbar[$i])) {
+                $statusRm0Sbar[$i] = 'Tidak Lengkap';
+            } else {
+                $statusRm0Sbar[$i] = 'Lengkap';
+            }
+        }
 
+        $statusTtdRm0Sbar = [];
+        for ($i = 0; $i < count($rm0SbarData); $i++) {
+            $status = 'Sudah';
+            for ($j = 0; $j < count($rm0SbarData[$i]); $j++) {
+                if (empty($rm0SbarData[$i][$j]["tglVerif"]) || empty($rm0SbarData[$i][$j]["petugas"])) {
+                    $status = 'Belum';
+                    break;
+                }
+            }
+            $statusTtdRm0Sbar[] = $status;
+        }
+        // ================ end khusus SBAR=========================
 
         //===========status data=====================
         $statusSKorPoudji = [];
@@ -162,6 +203,7 @@ class Rm extends BaseController
             "lukaOperasi" => $this->cekSemuaKolom($lukaOperasi, $pengecualianLukaOperasi),
             "rm27cPlebitis" => $this->cekSemuaKolom($rm27cPlebitis, $pengecualianRm27cPlebitis),
             "rm27bKateter" => $this->cekSemuaKolom($rm27bKateter, $pengecualianRm27bKateter),
+            "rm0Sbar" => [$statusRm0Sbar, $statusTtdRm0Sbar],
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -181,6 +223,7 @@ class Rm extends BaseController
             'lukaOperasi'  => $lukaOperasi,    // Biarkan null jika data tidak ada
             'rm27cPlebitis'  => $rm27cPlebitis,    // Biarkan null jika data tidak ada
             'rm27bKateter'  => $rm27bKateter,    // Biarkan null jika data tidak ada
+            'rm0Sbar'  => $rm0Sbar,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 

@@ -235,6 +235,21 @@
                                 <a href="<?= base_url('/rm/rm27bKateter/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
                             </td>
                         </tr>
+                        <?php endif; ?><?php if ($data->rm0Sbar): ?>
+                        <?php for ($i = 0; $i < count($data->rm0Sbar); $i++) : ?>
+                            <tr>
+                                <td>SBAR ( <?= ucwords(strtolower($data->rm0Sbar[$i]["judul"])) ?>) </td>
+                                <td>
+                                    <span class="badge-estetik <?= $data->status["rm0Sbar"][0][$i] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["rm0Sbar"][0][$i] ?></span>
+                                </td>
+                                <td><?= $data->status["rm0Sbar"][1][$i] === 'Sudah' ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                                <td>
+                                    <a href="<?= base_url(" rm/rm0Sbar/" . str_replace('/', '-', $data->pasien["no_rawat"])) . "/" . $data->rm0Sbar[$i]["id"]  ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                    <a href="<?= base_url('/rm/rm0Sbar/cetak/' .  $data->rm0Sbar[$i]["id"]) ?>" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>
+                                    <a href="<?= base_url('/rm/rm0Sbar/' . str_replace('/', '-', $data->pasien["no_rawat"]) . "/" .  $data->rm0Sbar[$i]["id"])  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                                </td>
+                            </tr>
+                        <?php endfor; ?>
                     <?php endif; ?>
                 </tbody>
             </table>
@@ -356,6 +371,13 @@
                             <td>Surveilans Pemakaian Kateter Urin</td>
                             <td>
                                 <?= $data->rm27bKateter ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/rm27bKateter/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>15.</td>
+                            <td>SBAR</td>
+                            <td>
+                                <a href="<?= base_url("rm/rm0Sbar/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>/0" class="btn-estetik btn-sm-estetik bg-vibrant-blue" style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>
                             </td>
                         </tr>
                     </tbody>

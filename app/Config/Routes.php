@@ -39,6 +39,16 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm0Sbar/hapus', 'Rm\Rm0Sbar::hapus');
+$routes->post('/rm/rm0Sbar/hapusJudul', 'Rm\Rm0Sbar::hapusJudul');
+$routes->get('/rm/rm0Sbar/cetak/(:any)/(:any)', 'Rm\Rm0Sbar::cetak/$1/$2');
+$routes->post('/rm/rm0Sbar/muatData', 'Rm\Rm0Sbar::muatData');
+$routes->post('/rm/rm0Sbar/verif', 'Rm\Rm0Sbar::verif');
+$routes->post('/rm/rm0Sbar/lihat', 'Rm\Rm0Sbar::lihat');
+$routes->post('/rm/rm0Sbar/simpan', 'Rm\Rm0Sbar::simpan');
+$routes->post('/rm/rm0Sbar/simpanJudul', 'Rm\Rm0Sbar::simpanJudul');
+$routes->get('/rm/rm0Sbar/(:any)/(:any)', 'Rm\Rm0Sbar::index/$1/$2');
+
 $routes->post('/rm/rm27bKateter/hapus', 'Rm\Rm27bKateter::hapus');
 $routes->get('/rm/rm27bKateter/cetak/(:any)', 'Rm\Rm27bKateter::cetak/$1');
 $routes->post('/rm/rm27bKateter/simpan', 'Rm\Rm27bKateter::simpan');
