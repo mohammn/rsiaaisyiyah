@@ -241,15 +241,15 @@
                         <?php endif; ?><?php if ($data->rm0Sbar): ?>
                         <?php for ($i = 0; $i < count($data->rm0Sbar); $i++) : ?>
                             <tr>
-                                <td>SBAR ( <?= ucwords(strtolower($data->rm0Sbar[$i]["judul"])) ?>) </td>
+                                <td>SBAR ( <?= $data->rm0Sbar[$i]["judul"] ?>) </td>
                                 <td>
                                     <span class="badge-estetik <?= $data->status["rm0Sbar"][0][$i] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["rm0Sbar"][0][$i] ?></span>
                                 </td>
                                 <td><?= $data->status["rm0Sbar"][1][$i] === 'Sudah' ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
                                 <td>
                                     <a href="<?= base_url(" rm/rm0Sbar/" . str_replace('/', '-', $data->pasien["no_rawat"])) . "/" . $data->rm0Sbar[$i]["id"]  ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
-                                    <a href="<?= base_url('/rm/rm0Sbar/cetak/' .  $data->rm0Sbar[$i]["id"]) ?>" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>
-                                    <a href="<?= base_url('/rm/rm0Sbar/' . str_replace('/', '-', $data->pasien["no_rawat"]) . "/" .  $data->rm0Sbar[$i]["id"])  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                                    <a href="<?= base_url('/rm/rm0Sbar/cetak/'  . str_replace('/', '-', $data->pasien['no_rawat']) . '/' .   $data->rm0Sbar[$i]["id"]) ?>" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>
+                                    <a href="<?= base_url('/rm/rm0Sbar/' . str_replace('/', '-', $data->pasien["no_rawat"]) . "/" .  $data->rm0Sbar[$i]["id"])  ?>#modalHapusJudul" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
                                 </td>
                             </tr>
                         <?php endfor; ?>

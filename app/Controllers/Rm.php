@@ -120,24 +120,26 @@ class Rm extends BaseController
             }
         }
         for ($i = 0; $i < count($statusRm0Sbar); $i++) {
-            if (in_array("Tidak Lengkap", $statusRm0Sbar[$i])) {
-                $statusRm0Sbar[$i] = 'Tidak Lengkap';
-            } else {
+            if (in_array("Lengkap", $statusRm0Sbar[$i])) {
                 $statusRm0Sbar[$i] = 'Lengkap';
+            } else {
+                $statusRm0Sbar[$i] = 'Tidak Lengkap';
             }
         }
 
         $statusTtdRm0Sbar = [];
         for ($i = 0; $i < count($rm0SbarData); $i++) {
-            $status = 'Sudah';
+            $status = 'Belum';
             for ($j = 0; $j < count($rm0SbarData[$i]); $j++) {
-                if (empty($rm0SbarData[$i][$j]["tglVerif"]) || empty($rm0SbarData[$i][$j]["petugas"])) {
-                    $status = 'Belum';
+                if ($rm0SbarData[$i][$j]["tglVerif"] && $rm0SbarData[$i][$j]["petugas"]) {
+                    $status = 'Sudah';
                     break;
                 }
             }
             $statusTtdRm0Sbar[] = $status;
         }
+
+
         // ================ end khusus SBAR=========================
 
         //===========status data=====================

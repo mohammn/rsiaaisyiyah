@@ -15,7 +15,7 @@
         </div>
         <div class="card-body" style="overflow-y: auto;">
             <div class="text-center">
-                <h5 class="text-uppercase">FORMULIR DATA SURVEILLANS PEMAKAIAN ALAT INVASIF KATETER URIN MENETAP</h5>
+                <h5 class="text-uppercase">CATATAN KOMUNIKASI SBAR <?= $data->rm0Sbar['judul'] ?? '' ?></h5>
                 Untuk pasien : <b><?= $data->pasien["nm_pasien"] ?></b> (<?= $data->pasien["no_rkm_medis"] ?>). NIK: <?= $data->pasien["no_ktp"] ?><br>
                 No Rawat : <b><?= $data->pasien["no_rawat"] ?></b>. Lahir : <?= $data->pasien["tgl_lahir"] ?> <br>
                 Alamat : <?= $data->pasien["alamat"] ?>
@@ -576,8 +576,8 @@
         }
 
         $(document).ready(function() {
-            if (window.location.hash === '#modalHapus') {
-                tryHapus();
+            if (window.location.hash === '#modalHapusJudul') {
+                tryHapusJudul();
             }
         });
 
