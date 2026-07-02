@@ -20,6 +20,8 @@ use App\Models\Rm27cPlebitisModel;
 use App\Models\Rm27bKateterModel;
 use App\Models\Rm0SbarModel;
 use App\Models\Rm0SbarDataModel;
+use App\Models\Rm20bUddsModel;
+use App\Models\Rm20bUddsDataModel;
 
 use function PHPSTORM_META\type;
 
@@ -43,6 +45,8 @@ class Rm extends BaseController
     protected $rm27bKateterModel;
     protected $rm0SbarModel;
     protected $rm0SbarDataModel;
+    protected $rm20bUddsModel;
+    protected $rm20bUddsDataModel;
 
     public function __construct()
     {
@@ -68,6 +72,8 @@ class Rm extends BaseController
         $this->rm27bKateterModel = new Rm27bKateterModel();
         $this->rm0SbarModel = new Rm0SbarModel();
         $this->rm0SbarDataModel = new Rm0SbarDataModel();
+        $this->rm20bUddsModel = new Rm20bUddsModel();
+        $this->rm20bUddsDataModel = new Rm20bUddsDataModel();
     }
     public function index($no_rawat)
     {
@@ -103,6 +109,8 @@ class Rm extends BaseController
         $lukaOperasi = $this->lukaOperasiModel->where('noRm', $pasien['no_rkm_medis'])->findAll();
         $rm27cPlebitis = $this->rm27cPlebitisModel->where('noRawat', $no_rawat)->first();
         $rm27bKateter = $this->rm27bKateterModel->where('noRawat', $no_rawat)->first();
+        $rm20bUdds = $this->rm20bUddsModel->where('noRawat', $no_rawat)->first();
+        $rm20bUddsData = $this->rm20bUddsDataModel->where('noRawat', $no_rawat)->first();
         // ================khusus SBAR=========================
         $rm0Sbar = $this->rm0SbarModel->where('noRawat', $no_rawat)->findAll();
         $rm0SbarData = [];
@@ -209,6 +217,7 @@ class Rm extends BaseController
             "lukaOperasi" => $statusLukaOperasi,
             "rm27cPlebitis" => $this->cekSemuaKolom($rm27cPlebitis, $pengecualianRm27cPlebitis),
             "rm27bKateter" => $this->cekSemuaKolom($rm27bKateter, $pengecualianRm27bKateter),
+            "rm20bUdds" => (!empty($rm20bUddsData) && count((array)$rm20bUddsData) > 0) ? $this->cekSemuaKolom($rm20bUdds, []) : 'Tidak Lengkap',
             "rm0Sbar" => [$statusRm0Sbar, $statusTtdRm0Sbar],
         ];
 
@@ -230,6 +239,7 @@ class Rm extends BaseController
             'rm27cPlebitis'  => $rm27cPlebitis,    // Biarkan null jika data tidak ada
             'rm27bKateter'  => $rm27bKateter,    // Biarkan null jika data tidak ada
             'rm0Sbar'  => $rm0Sbar,    // Biarkan null jika data tidak ada
+            'rm20bUdds'  => $rm20bUdds,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 
