@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 
 use App\Models\Rm20bUddsModel;
 use App\Models\Rm20bUddsDataModel;
+use App\Models\Rm20bUddsDataJamModel;
 use App\Models\RegPeriksaModel;
 use App\Models\SysLogModel;
 use App\Models\PengaturanModel;
@@ -19,6 +20,7 @@ class Rm20bUdds extends BaseController
     protected $regPeriksaModel;
     protected $rm20bUddsModel;
     protected $rm20bUddsDataModel;
+    protected $rm20bUddsDataJamModel;
     protected $sysLog;
     protected $pengaturan;
     protected $pjPasienModel;
@@ -34,6 +36,7 @@ class Rm20bUdds extends BaseController
         }
         $this->rm20bUddsModel = new Rm20bUddsModel();
         $this->rm20bUddsDataModel = new Rm20bUddsDataModel();
+        $this->rm20bUddsDataJamModel = new Rm20bUddsDataJamModel();
         $this->regPeriksaModel = new RegPeriksaModel();
         $this->sysLog = new SysLogModel();
         $this->pengaturan = new PengaturanModel();
@@ -99,9 +102,6 @@ class Rm20bUdds extends BaseController
 
             // --- Data Petugas & Medis ---
             "dokter"          => $this->request->getPost("dokter") ?? '',
-            "apoteker"        => $this->request->getPost("apoteker") ?? '',
-            "pemberiObatOral" => $this->request->getPost("pemberiObatOral") ?? '',
-            "pemberiObat"     => $this->request->getPost("pemberiObat") ?? '',
             "diagnosa"        => $this->request->getPost("diagnosa") ?? '',
         ];
 
@@ -132,6 +132,66 @@ class Rm20bUdds extends BaseController
         $this->catatLog('hapus', 'rm20b_udds', $noRawat, $this->rm20bUddsModel->where('noRawat', $noRawat)->first());
 
         $this->rm20bUddsModel->where("noRawat", $noRawat)->delete();
+        echo json_encode("");
+    }
+
+    public function muatJam()
+    {
+        echo json_encode($this->rm20bUddsDataJamModel->where('idObat', $this->request->getPost("idObat"))->findAll());
+    }
+
+    public function simpanJam()
+    {
+        // 1. Definisikan data dasar Anda terlebih dahulu
+        $data = [
+            // --- Data Utama ---
+            "idObat"     => $this->request->getPost("idObat"),
+            "noRawat"     => $this->request->getPost("noRawat"),
+            // --- Kondisi Tanggal (Jika kosong, masukkan NULL) ---
+
+            "apoteker"        => $this->request->getPost("apoteker") ?? '',
+            "pemberiObatOral" => $this->request->getPost("pemberiObatOral") ?? '',
+            "pemberiObat"     => $this->request->getPost("pemberiObat") ?? '',
+
+            "tanggal"     => !empty($this->request->getPost("tanggal")) ? $this->request->getPost("tanggal") : null,
+            // --- Data Jam Pemberian ---
+            "pagi"  => (!empty($this->request->getPost("jam[pagi]")) && $this->request->getPost("jam[pagi]") !== '00:00') ? $this->request->getPost("jam[pagi]") : null,
+            "siang" => (!empty($this->request->getPost("jam[siang]")) && $this->request->getPost("jam[siang]") !== '00:00') ? $this->request->getPost("jam[siang]") : null,
+            "sore"  => (!empty($this->request->getPost("jam[sore]")) && $this->request->getPost("jam[sore]") !== '00:00') ? $this->request->getPost("jam[sore]") : null,
+            "malam" => (!empty($this->request->getPost("jam[malam]")) && $this->request->getPost("jam[malam]") !== '00:00') ? $this->request->getPost("jam[malam]") : null,
+        ];
+
+        // =====================================================================
+
+        if ($this->request->getPost("tujuanSimpan") == 'tambah') {
+            // 1. Jalankan query untuk mengecek apakah data dengan idObat dan tanggal tersebut SUDAH ADA
+            $dataEksis = $this->rm20bUddsDataJamModel
+                ->where('idObat', $this->request->getPost("idObat"))
+                ->where('tanggal', $this->request->getPost("tanggal"))
+                ->first(); // Mengambil data pertama jika ada, atau null jika tidak ada
+            if (!$dataEksis) {
+                $this->rm20bUddsDataJamModel->save($data);
+
+                $insertId = $this->rm20bUddsDataJamModel->getInsertID();
+                $dataBaru = $this->rm20bUddsDataJamModel->find($insertId);
+                $this->catatLog('tambah', 'rm20b_udds_data_jam', $insertId, $dataBaru);
+            }
+        } else {
+        }
+
+        return $this->response->setJSON([
+            'status'  => 'success',
+            'message' => 'Data berhasil disimpan',
+            'id' => $this->request->getPost("idObat")
+        ]);
+    }
+
+    public function hapusJam()
+    {
+        $id = $this->request->getPost("id");
+        $this->catatLog('hapus', 'rm20b_udds_data_jam', $id, $this->rm20bUddsDataJamModel->where('id', $id)->first());
+
+        $this->rm20bUddsDataJamModel->where("id", $id)->delete();
         echo json_encode("");
     }
 
@@ -318,14 +378,17 @@ class Rm20bUdds extends BaseController
 
         $rm20bUdds = $this->rm20bUddsModel->where('noRawat', $noRawat)->first();
         $rm20bUddsData = $this->rm20bUddsDataModel->where('noRawat', $noRawat)->findAll();
+        $rm20bUddsDataJam = $this->rm20bUddsDataJamModel->where('noRawat', $noRawat)->findAll();
 
-        $tanggalUnik = $this->rm20bUddsDataModel->select('tanggal')->distinct()->where('noRawat', $noRawat)->findAll();
+        $tanggalUnik = $this->rm20bUddsDataJamModel->select('tanggal')->distinct()->where('noRawat', $noRawat)->findAll();
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
+        // dd($rm20bUddsDataJam);
         $data = (object) [
             'pasien'     => $pasien,      // Jangan pakai (object) di sini
             'rm20bUdds' => $rm20bUdds,
             'rm20bUddsData' => $rm20bUddsData,
+            'rm20bUddsDataJam' => $rm20bUddsDataJam,
             'tanggalUnik' => $tanggalUnik
         ];
         echo view("cetak/rm20bUdds", ["data" => $data]);

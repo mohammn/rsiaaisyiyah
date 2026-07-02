@@ -166,38 +166,6 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-2">
-                                <div class="col-12">
-                                    <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Tanggal :</label>
-                                    <input type="date" id="tgl" name="tgl" class="form-control">
-                                </div>
-                            </div>
-                            <div class=" border border-info rounded p-2">
-                                <label class=" form-label fw-bold mb-0">Jam :</label>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Pagi :</label>
-                                        <input type="time" id="pagi" name="pagi" class="form-control form-control-sm">
-                                    </div>
-                                    <div class="col-6">
-                                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Siang :</label>
-                                        <input type="time" id="siang" name="siang" class="form-control form-control-sm">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Sore :</label>
-                                        <input type="time" id="sore" name="sore" class="form-control form-control-sm">
-                                    </div>
-                                    <div class="col-6">
-                                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Malam :</label>
-                                        <input type="time" id="malam" name="malam" class="form-control form-control-sm">
-                                    </div>
-                                </div>
-
-                            </div>
-
                             <div class="row mt-3">
                                 <div class="col-12 text-center">
 
@@ -228,11 +196,6 @@
                                     <th>Nama</th>
                                     <th>Dosis</th>
                                     <th>Jumlah</th>
-                                    <th>Tanggal</th>
-                                    <th>Pagi</th>
-                                    <th>Siang</th>
-                                    <th>Sore</th>
-                                    <th>Malam</th>
                                     <th></th>
                                 </thead>
                                 <tbody id="dataTabelObat">
@@ -347,6 +310,125 @@
     </div>
 </div>
 
+<!-- Modal data-->
+<div class="modal modal-lg fade  modal-dialog-scrollable" id="modalJam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Data Obat : <b id="judulObat"></b></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="alert alert-info">
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <input type="hidden" id="idObatJam" name="idObatJam">
+                                    <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Tanggal :</label>
+                                    <input type="date" id="tgl" name="tgl" class="form-control">
+                                </div>
+                            </div>
+                            <div class=" border border-info rounded p-2">
+                                <label class=" form-label fw-bold mb-0">Jam :</label>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Pagi :</label>
+                                        <input type="time" id="pagi" name="pagi" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Siang :</label>
+                                        <input type="time" id="siang" name="siang" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Sore :</label>
+                                        <input type="time" id="sore" name="sore" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Malam :</label>
+                                        <input type="time" id="malam" name="malam" class="form-control form-control-sm">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="alert alert-info mb-1">
+                            <div class="mb-1">
+                                <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Supervisi Apoterker :</label>
+                                <select name="apoteker" id="apoteker" class="form-select form-select-sm">
+                                    <option value="">-- Pilih Petugas --</option>
+                                    <?php for ($i = 0; $i < count($data->petugas); $i++) {
+                                        echo '<option value="' . $data->petugas[$i]["nama"] . '">' . $data->petugas[$i]["nama"] . '</option>';
+                                    } ?>
+                                </select>
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Pembari Obat Oral :</label>
+                                <select name="pemberiObatOral" id="pemberiObatOral" class="form-select form-select-sm">
+                                    <option value="">-- Pilih Petugas --</option>
+                                    <?php for ($i = 0; $i < count($data->petugas); $i++) {
+                                        echo '<option value="' . $data->petugas[$i]["nama"] . '" >' . $data->petugas[$i]["nama"] . '</option>';
+                                    } ?>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Pembari Obat :</label>
+                                <select name="pemberiObat" id="pemberiObat" class="form-select form-select-sm">
+                                    <option value="">-- Pilih Petugas --</option>
+                                    <?php for ($i = 0; $i < count($data->petugas); $i++) {
+                                        echo '<option value="' . $data->petugas[$i]["nama"] . '" >' . $data->petugas[$i]["nama"] . '</option>';
+                                    } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn btn-estetik btn-simpan" onclick="simpanJam('tambah')">
+                            <i class="fa fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-info">
+                            Data Tanggal dan Jam
+                            <hr>
+
+                            <table class="table table-sm">
+                                <thead>
+                                    <th>Tanggal</th>
+                                    <th>Pagi</th>
+                                    <th>Siang</th>
+                                    <th>Sore</th>
+                                    <th>Malam</th>
+                                    <th>Apotker</th>
+                                    <th>Pemberi Obat Oral</th>
+                                    <th>Pemberi Obat</th>
+                                    <th>Hapus</th>
+                                </thead>
+                                <tbody id="dataTabelJam">
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-estetik btn-batal" data-bs-dismiss="modal"><i class="fas fa-close me-1"></i> Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function simpan(tujuanSimpan) {
         // Inisialisasi variabel untuk menampung data berbentuk object/array asosiatif
@@ -360,9 +442,6 @@
 
             // Data Petugas
             dokter: $('#dokter').val(),
-            apoteker: $('#apoteker').val(),
-            pemberiObatOral: $('#pemberiObatOral').val(),
-            pemberiObat: $('#pemberiObat').val(),
             diagnosa: $('#diagnosa').val()
         };
 
@@ -403,16 +482,23 @@
                     let hasil = '';
                     for (let i = 0; i < data.length; i++) {
                         hasil += '<tr>';
-                        hasil += '<td>' + data[i].jenis_obat + '</td>';
+                        hasil += '<td>';
+                        if (data[i].jenis_obat == 'oral') {
+                            hasil += '<span class="badge-estetik bg-vibrant-blue">';
+                        } else if (data[i].jenis_obat == 'injeksi') {
+                            hasil += '<span class="badge-estetik bg-vibrant-teal">';
+                        } else if (data[i].jenis_obat == 'infus') {
+                            hasil += '<span class="badge-estetik bg-vibrant-purple">';
+                        } else {
+                            hasil += '<span class="badge-estetik bg-vibrant-red">';
+                        }
+                        hasil += data[i].jenis_obat
+                        hasil += '</td>';
                         hasil += '<td>' + data[i].nama_obat + '</td>';
                         hasil += '<td>' + data[i].dosis + '</td>';
                         hasil += '<td>' + data[i].jumlah + '</td>';
-                        hasil += '<td>' + (data[i].tanggal ? data[i].tanggal.split('-').reverse().join('-') : '-') + '</td>';
-                        hasil += `<td>${data[i].pagi ? data[i].pagi.slice(0, 5) : '-'}</td>`;
-                        hasil += `<td>${data[i].siang ? data[i].siang.slice(0, 5) : '-'}</td>`;
-                        hasil += `<td>${data[i].sore ? data[i].sore.slice(0, 5) : '-'}</td>`;
-                        hasil += `<td>${data[i].malam ? data[i].malam.slice(0, 5) : '-'}</td>`;
                         hasil += '<td>';
+                        hasil += '<a href="javascript:void(0);" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple" onclick="lihatJam(' + data[i].id + ', `' + data[i].nama_obat + '`)"><i class="fas fa-clock"></i> Jam</a> ';
                         hasil += '<a href="javascript:void(0);" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue" onclick="tryEditObat(' + data[i].id + ')"><i class="fas fa-pen"></i> Edit</a> ';
                         hasil += '<a href="javascript:void(0);" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"  onclick="tryHapusObat(' + data[i].id + ', `' + data[i].nama_obat + '`)"><i class="fas fa-trash-alt"></i> Hapus</a>';
                         hasil += '</td>';
@@ -449,6 +535,107 @@
                             [0, "desc"]
                         ] // Mengurutkan berdasarkan kolom waktu terbaru
                     });
+                }
+            });
+        }
+
+        function muatJam(idObat) {
+            $.ajax({
+                url: '<?= base_url() ?>rm/rm20bUdds/muatJam',
+                method: 'post',
+                // Perbaikan format data string: tanda kutip dipindahkan agar dibaca sebagai key-value yang valid
+                data: "idObat=" + idObat,
+                dataType: 'json',
+                success: function(data) {
+                    let hasil = '';
+                    for (let i = 0; i < data.length; i++) {
+                        hasil += '<tr>';
+                        hasil += '<td>' + (data[i].tanggal ? data[i].tanggal.split('-').reverse().join('-') : '-') + '</td>';
+                        hasil += `<td>${data[i].pagi ? data[i].pagi.slice(0, 5) : '-'}</td>`;
+                        hasil += `<td>${data[i].siang ? data[i].siang.slice(0, 5) : '-'}</td>`;
+                        hasil += `<td>${data[i].sore ? data[i].sore.slice(0, 5) : '-'}</td>`;
+                        hasil += `<td>${data[i].malam ? data[i].malam.slice(0, 5) : '-'}</td>`;
+                        hasil += `<td>${data[i].apoteker ?? '-'}</td>`;
+                        hasil += `<td>${data[i].pemberiObatOral ?? '-'}</td>`;
+                        hasil += `<td>${data[i].pemberiObat ?? '-'}</td>`;
+                        hasil += '<td>';
+                        hasil += '<a href="javascript:void(0);" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"  onclick="hapusJam(' + data[i].id + ',' + data[i].idObat + ')"><i class="fas fa-trash-alt"></i></a>';
+                        hasil += '</td>';
+                        hasil += '</tr>';
+
+                    }
+                    if (data.length < 1) {
+                        hasil += '<tr><td colspan="9" class="text-center">Data Kosong.</td></tr>';
+                    }
+
+                    $("#dataTabelJam").html(hasil);
+                }
+            });
+        }
+
+        function lihatJam(id, namaObat) {
+            $("#judulObat").html(namaObat);
+            $("#idObatJam").val(id);
+            muatJam(id);
+            $("#modalJam").modal('show');
+
+        }
+
+        function simpanJam(tujuanSimpan) {
+            let data = {
+                tujuanSimpan: tujuanSimpan,
+                idObat: $('#idObatJam').val(),
+                noRawat: "<?= $data->pasien['no_rawat'] ?>",
+
+                apoteker: $('#apoteker').val(),
+                pemberiObatOral: $('#pemberiObatOral').val(),
+                pemberiObat: $('#pemberiObat').val(),
+
+                tanggal: $('#tgl').val(),
+                jam: {
+                    pagi: $('#pagi').val(),
+                    siang: $('#siang').val(),
+                    sore: $('#sore').val(),
+                    malam: $('#malam').val()
+                }
+            };
+
+            $.ajax({
+                url: '<?= base_url("rm/rm20bUdds/simpanJam") ?>',
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function(data) {
+                    muatJam(data.id);
+
+                    console.log(data)
+
+                    $('#tgl').val('');
+                    $('#pagi').val('');
+                    $('#siang').val('');
+                    $('#sore').val('');
+                    $('#malam').val('');
+                    $('#apoteker').val('');
+                    $('#pemberiObatOral').val('');
+                    $('#pemberiObat').val('');
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("Terjadi kesalahan: " + error);
+                }
+            });
+
+        }
+
+        function hapusJam(id, idObat) {
+            console.log(id)
+            $.ajax({
+                url: '<?= base_url() ?>rm/rm20bUdds/hapusJam',
+                method: 'post',
+                data: "id=" + id,
+                dataType: 'json',
+                success: function(data) {
+                    muatJam(idObat);
                 }
             });
         }
@@ -495,11 +682,6 @@
             $("input[name='namaObat']").val('');
             $('#dosis').val('')
             $('#jumlah').val('');
-            $('#tgl').val('');
-            $('#pagi').val('');
-            $('#siang').val('');
-            $('#sore').val('');
-            $('#malam').val('');
             // 2. Kosongkan TomSelect Nama Obat
             if (typeof tomSelectObat !== 'undefined') {
                 tomSelectObat.clear(); // <-- Ini akan membuat select kembali kosong/placeholder

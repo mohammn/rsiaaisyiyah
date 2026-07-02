@@ -17,10 +17,5 @@ class Rm20bUddsDataModel extends Model
         'nama_obat',
         'dosis',
         'jumlah',
-        'tanggal',
-        'pagi',
-        'siang',
-        'sore',
-        'malam',
     ];
 }

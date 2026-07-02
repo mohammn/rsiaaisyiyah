@@ -21,9 +21,6 @@ class Rm20bUddsModel extends Model
 
         // --- Data Petugas & Medis ---
         'dokter',
-        'apoteker',
-        'pemberiObatOral',
-        'pemberiObat',
         'diagnosa',
     ];
 }

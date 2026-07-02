@@ -175,7 +175,10 @@
                     <tr>
                         <td>Ruang</td>
                         <td>: <?= $data->rm20bUdds['ruang'] ?? ''  ?></td>
-                        <td rowspan="4" class="text-center align-middle"><?= $data->rm20bUdds['dokter'] ?? ''  ?></td>
+                        <td rowspan="4" class="text-center align-middle">
+                            <div id="ttdDokter" class="mb-1"></div>
+                            <?= $data->rm20bUdds['dokter'] ?? ''  ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>Kamar</td>
@@ -220,30 +223,43 @@
                     <tbody>
                         <?php for ($i = 0; $i < count($data->rm20bUddsData); $i++) : ?>
                             <?php if ($data->rm20bUddsData[$i]['jenis_obat'] === 'oral'): ?>
+                                <?php
+                                $idDicari = $data->rm20bUddsData[$i]["id"];
+                                $hasilFilter = array_filter((array) $data->rm20bUddsDataJam, function ($item) use ($idDicari) {
+                                    // Pastikan key 'idObat' sesuai dengan huruf besar/kecil di array (di gambar tertulis 'idObat')
+                                    return isset($item['idObat']) && $item['idObat'] == $idDicari;
+                                });
+                                $hasilFilter = array_values($hasilFilter);
+                                ?>
                                 <tr>
                                     <td><?= $data->rm20bUddsData[$i]["nama_obat"] ?></td>
                                     <td><?= $data->rm20bUddsData[$i]["dosis"] ?></td>
                                     <td><?= $data->rm20bUddsData[$i]["jumlah"] ?></td>
                                     <?php for ($j = 0; $j < count($data->tanggalUnik); $j++) : ?>
-                                        <?php if ($data->rm20bUddsData[$i]['tanggal'] === $data->tanggalUnik[$j]['tanggal']): ?>
-                                            <?php $formatJam = (count($data->tanggalUnik) > 3) ? 'H: i' : 'H:i'; ?>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['pagi']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['pagi'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['siang']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['siang'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['sore']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['sore'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['malam']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['malam'])) : '-' ?></td>
-                                        <?php else: ?>
+                                        <?php $kosong = true; ?>
+                                        <?php for ($k = 0; $k < count($hasilFilter); $k++) : ?>
+                                            <?php if ($hasilFilter[$k]['tanggal'] === $data->tanggalUnik[$j]['tanggal']): ?>
+                                                <?php $formatJam = (count($data->tanggalUnik) > 3) ? 'H: i' : 'H:i'; ?>
+                                                <td><?= !empty($hasilFilter[$k]['pagi']) ? date($formatJam, strtotime($hasilFilter[$k]['pagi'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['siang']) ? date($formatJam, strtotime($hasilFilter[$k]['siang'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['sore']) ? date($formatJam, strtotime($hasilFilter[$k]['sore'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['malam']) ? date($formatJam, strtotime($hasilFilter[$k]['malam'])) : '-' ?></td>
+                                                <?php $kosong = false;
+                                                break; ?>
+                                            <?php endif; ?>
+                                        <?php endfor; ?>
+                                        <?php if ($kosong): ?>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                         <?php endif; ?>
-
                                     <?php endfor; ?>
                                 </tr>
                                 <?php
                                 $barisGolobal++; // Tambahkan hitungan baris global setiap data di-loop
 
-                                if ($barisGolobal == 18) {
+                                if ($barisGolobal == 13) {
                                     $jumlahTanggal = count($data->tanggalUnik);
                                     $colspanRencana = $jumlahTanggal * 4;
 
@@ -302,23 +318,71 @@
                             echo "</tr>";
                         } ?>
                         <tr>
+                            <td colspan="3" class="text-center align-middle">Pemberi Obat</td>
+                            <?php
+                            $petugasPerTanggal = [];
+
+                            foreach ($data->rm20bUddsDataJam as $row) {
+                                $tanggal = $row['tanggal'];
+                                $pemberiObat = $row['pemberiObatOral'];
+
+                                // Pastikan kolom pemberiObat tidak null atau kosong
+                                if (!empty($pemberiObat)) {
+                                    // Buat array kosong untuk tanggal tersebut jika belum ada
+                                    if (!isset($petugasPerTanggal[$tanggal])) {
+                                        $petugasPerTanggal[$tanggal] = [];
+                                    }
+
+                                    // Cek agar nama petugas pemberiObat tidak double di tanggal yang sama
+                                    if (!in_array($pemberiObat, $petugasPerTanggal[$tanggal])) {
+                                        $petugasPerTanggal[$tanggal][] = $pemberiObat;
+                                    }
+                                }
+                            }
+
+                            for ($j = 0; $j < count($data->tanggalUnik); $j++) :
+                                $petugas = '';
+                                for ($i = 0; $i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]); $i++) :
+                                    $petugas .= $petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]][$i];
+                                    if ($i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]) - 1) {
+                                        $petugas .= ' & ';
+                                    }
+                                endfor;
+                                echo '<td colspan="4" class="text-center"> <div id="qrPemObatOral' . $j . '"></div> <small style="font-size:6pt;" id="namaPemObatOral' . $j . '">' . $petugas . '</td>';
+                            endfor; ?>
+                        </tr>
+                        <tr>
                             <th style="background-color: #eaeaea;">Obat Injeksi</th>
                             <td style="background-color: #eaeaea;" colspan="<?= 3 + (count($data->tanggalUnik) * 4) ?> "></td>
                         </tr>
                         <?php for ($i = 0; $i < count($data->rm20bUddsData); $i++) : ?>
                             <?php if ($data->rm20bUddsData[$i]['jenis_obat'] === 'injeksi'): ?>
+                                <?php
+                                $idDicari = $data->rm20bUddsData[$i]["id"];
+                                $hasilFilter = array_filter((array) $data->rm20bUddsDataJam, function ($item) use ($idDicari) {
+                                    // Pastikan key 'idObat' sesuai dengan huruf besar/kecil di array (di gambar tertulis 'idObat')
+                                    return isset($item['idObat']) && $item['idObat'] == $idDicari;
+                                });
+                                $hasilFilter = array_values($hasilFilter);
+                                ?>
                                 <tr>
                                     <td><?= $data->rm20bUddsData[$i]["nama_obat"] ?></td>
                                     <td><?= $data->rm20bUddsData[$i]["dosis"] ?></td>
                                     <td><?= $data->rm20bUddsData[$i]["jumlah"] ?></td>
                                     <?php for ($j = 0; $j < count($data->tanggalUnik); $j++) : ?>
-                                        <?php if ($data->rm20bUddsData[$i]['tanggal'] === $data->tanggalUnik[$j]['tanggal']): ?>
-                                            <?php $formatJam = (count($data->tanggalUnik) > 3) ? 'H: i' : 'H:i'; ?>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['pagi']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['pagi'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['siang']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['siang'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['sore']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['sore'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['malam']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['malam'])) : '-' ?></td>
-                                        <?php else: ?>
+                                        <?php $kosong = true; ?>
+                                        <?php for ($k = 0; $k < count($hasilFilter); $k++) : ?>
+                                            <?php if ($hasilFilter[$k]['tanggal'] === $data->tanggalUnik[$j]['tanggal']): ?>
+                                                <?php $formatJam = (count($data->tanggalUnik) > 3) ? 'H: i' : 'H:i'; ?>
+                                                <td><?= !empty($hasilFilter[$k]['pagi']) ? date($formatJam, strtotime($hasilFilter[$k]['pagi'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['siang']) ? date($formatJam, strtotime($hasilFilter[$k]['siang'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['sore']) ? date($formatJam, strtotime($hasilFilter[$k]['sore'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['malam']) ? date($formatJam, strtotime($hasilFilter[$k]['malam'])) : '-' ?></td>
+                                                <?php $kosong = false;
+                                                break; ?>
+                                            <?php endif; ?>
+                                        <?php endfor; ?>
+                                        <?php if ($kosong): ?>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -330,7 +394,7 @@
                                 <?php
                                 $barisGolobal++; // Tambahkan hitungan baris global setiap data di-loop
 
-                                if ($barisGolobal == 18) {
+                                if ($barisGolobal == 13) {
                                     $jumlahTanggal = count($data->tanggalUnik);
                                     $colspanRencana = $jumlahTanggal * 4;
 
@@ -394,18 +458,32 @@
                         </tr>
                         <?php for ($i = 0; $i < count($data->rm20bUddsData); $i++) : ?>
                             <?php if ($data->rm20bUddsData[$i]['jenis_obat'] === 'infus'): ?>
+                                <?php
+                                $idDicari = $data->rm20bUddsData[$i]["id"];
+                                $hasilFilter = array_filter((array) $data->rm20bUddsDataJam, function ($item) use ($idDicari) {
+                                    // Pastikan key 'idObat' sesuai dengan huruf besar/kecil di array (di gambar tertulis 'idObat')
+                                    return isset($item['idObat']) && $item['idObat'] == $idDicari;
+                                });
+                                $hasilFilter = array_values($hasilFilter);
+                                ?>
                                 <tr>
                                     <td><?= $data->rm20bUddsData[$i]["nama_obat"] ?></td>
                                     <td><?= $data->rm20bUddsData[$i]["dosis"] ?></td>
                                     <td><?= $data->rm20bUddsData[$i]["jumlah"] ?></td>
                                     <?php for ($j = 0; $j < count($data->tanggalUnik); $j++) : ?>
-                                        <?php if ($data->rm20bUddsData[$i]['tanggal'] === $data->tanggalUnik[$j]['tanggal']): ?>
-                                            <?php $formatJam = (count($data->tanggalUnik) > 3) ? 'H: i' : 'H:i'; ?>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['pagi']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['pagi'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['siang']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['siang'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['sore']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['sore'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['malam']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['malam'])) : '-' ?></td>
-                                        <?php else: ?>
+                                        <?php $kosong = true; ?>
+                                        <?php for ($k = 0; $k < count($hasilFilter); $k++) : ?>
+                                            <?php if ($hasilFilter[$k]['tanggal'] === $data->tanggalUnik[$j]['tanggal']): ?>
+                                                <?php $formatJam = (count($data->tanggalUnik) > 3) ? 'H: i' : 'H:i'; ?>
+                                                <td><?= !empty($hasilFilter[$k]['pagi']) ? date($formatJam, strtotime($hasilFilter[$k]['pagi'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['siang']) ? date($formatJam, strtotime($hasilFilter[$k]['siang'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['sore']) ? date($formatJam, strtotime($hasilFilter[$k]['sore'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['malam']) ? date($formatJam, strtotime($hasilFilter[$k]['malam'])) : '-' ?></td>
+                                                <?php $kosong = false;
+                                                break; ?>
+                                            <?php endif; ?>
+                                        <?php endfor; ?>
+                                        <?php if ($kosong): ?>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -417,7 +495,7 @@
                                 <?php
                                 $barisGolobal++; // Tambahkan hitungan baris global setiap data di-loop
 
-                                if ($barisGolobal == 18) {
+                                if ($barisGolobal == 13) {
                                     $jumlahTanggal = count($data->tanggalUnik);
                                     $colspanRencana = $jumlahTanggal * 4;
 
@@ -483,18 +561,32 @@
                         </tr>
                         <?php for ($i = 0; $i < count($data->rm20bUddsData); $i++) : ?>
                             <?php if ($data->rm20bUddsData[$i]['jenis_obat'] === 'lain'): ?>
+                                <?php
+                                $idDicari = $data->rm20bUddsData[$i]["id"];
+                                $hasilFilter = array_filter((array) $data->rm20bUddsDataJam, function ($item) use ($idDicari) {
+                                    // Pastikan key 'idObat' sesuai dengan huruf besar/kecil di array (di gambar tertulis 'idObat')
+                                    return isset($item['idObat']) && $item['idObat'] == $idDicari;
+                                });
+                                $hasilFilter = array_values($hasilFilter);
+                                ?>
                                 <tr>
                                     <td><?= $data->rm20bUddsData[$i]["nama_obat"] ?></td>
                                     <td><?= $data->rm20bUddsData[$i]["dosis"] ?></td>
                                     <td><?= $data->rm20bUddsData[$i]["jumlah"] ?></td>
                                     <?php for ($j = 0; $j < count($data->tanggalUnik); $j++) : ?>
-                                        <?php if ($data->rm20bUddsData[$i]['tanggal'] === $data->tanggalUnik[$j]['tanggal']): ?>
-                                            <?php $formatJam = (count($data->tanggalUnik) > 3) ? 'H: i' : 'H:i'; ?>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['pagi']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['pagi'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['siang']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['siang'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['sore']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['sore'])) : '-' ?></td>
-                                            <td><?= !empty($data->rm20bUddsData[$i]['malam']) ? date($formatJam, strtotime($data->rm20bUddsData[$i]['malam'])) : '-' ?></td>
-                                        <?php else: ?>
+                                        <?php $kosong = true; ?>
+                                        <?php for ($k = 0; $k < count($hasilFilter); $k++) : ?>
+                                            <?php if ($hasilFilter[$k]['tanggal'] === $data->tanggalUnik[$j]['tanggal']): ?>
+                                                <?php $formatJam = (count($data->tanggalUnik) > 3) ? 'H: i' : 'H:i'; ?>
+                                                <td><?= !empty($hasilFilter[$k]['pagi']) ? date($formatJam, strtotime($hasilFilter[$k]['pagi'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['siang']) ? date($formatJam, strtotime($hasilFilter[$k]['siang'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['sore']) ? date($formatJam, strtotime($hasilFilter[$k]['sore'])) : '-' ?></td>
+                                                <td><?= !empty($hasilFilter[$k]['malam']) ? date($formatJam, strtotime($hasilFilter[$k]['malam'])) : '-' ?></td>
+                                                <?php $kosong = false;
+                                                break; ?>
+                                            <?php endif; ?>
+                                        <?php endfor; ?>
+                                        <?php if ($kosong): ?>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -506,7 +598,7 @@
                                 <?php
                                 $barisGolobal++; // Tambahkan hitungan baris global setiap data di-loop
 
-                                if ($barisGolobal == 18) {
+                                if ($barisGolobal == 13) {
                                     $jumlahTanggal = count($data->tanggalUnik);
                                     $colspanRencana = $jumlahTanggal * 4;
 
@@ -567,6 +659,75 @@
                             }
                             echo "</tr>";
                         } ?>
+
+                        <tr>
+                            <td colspan="3" class="text-center align-middle">Pemberi Obat</td>
+                            <?php
+                            $petugasPerTanggal = [];
+
+                            foreach ($data->rm20bUddsDataJam as $row) {
+                                $tanggal = $row['tanggal'];
+                                $pemberiObat = $row['pemberiObat'];
+
+                                // Pastikan kolom pemberiObat tidak null atau kosong
+                                if (!empty($pemberiObat)) {
+                                    // Buat array kosong untuk tanggal tersebut jika belum ada
+                                    if (!isset($petugasPerTanggal[$tanggal])) {
+                                        $petugasPerTanggal[$tanggal] = [];
+                                    }
+
+                                    // Cek agar nama petugas pemberiObat tidak double di tanggal yang sama
+                                    if (!in_array($pemberiObat, $petugasPerTanggal[$tanggal])) {
+                                        $petugasPerTanggal[$tanggal][] = $pemberiObat;
+                                    }
+                                }
+                            }
+
+                            for ($j = 0; $j < count($data->tanggalUnik); $j++) :
+                                $petugas = '';
+                                for ($i = 0; $i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]); $i++) :
+                                    $petugas .= $petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]][$i];
+                                    if ($i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]) - 1) {
+                                        $petugas .= ' & ';
+                                    }
+                                endfor;
+                                echo '<td colspan="4" class="text-center"> <div id="qrPemObat' . $j . '"></div> <small style="font-size:6pt;" id="namaPemObat' . $j . '">' . $petugas . '</td>';
+                            endfor; ?>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-center align-middle">Apoteker</td>
+                            <?php
+                            $petugasPerTanggal = [];
+
+                            foreach ($data->rm20bUddsDataJam as $row) {
+                                $tanggal = $row['tanggal'];
+                                $pemberiObat = $row['apoteker'];
+
+                                // Pastikan kolom pemberiObat tidak null atau kosong
+                                if (!empty($pemberiObat)) {
+                                    // Buat array kosong untuk tanggal tersebut jika belum ada
+                                    if (!isset($petugasPerTanggal[$tanggal])) {
+                                        $petugasPerTanggal[$tanggal] = [];
+                                    }
+
+                                    // Cek agar nama petugas pemberiObat tidak double di tanggal yang sama
+                                    if (!in_array($pemberiObat, $petugasPerTanggal[$tanggal])) {
+                                        $petugasPerTanggal[$tanggal][] = $pemberiObat;
+                                    }
+                                }
+                            }
+
+                            for ($j = 0; $j < count($data->tanggalUnik); $j++) :
+                                $petugas = '';
+                                for ($i = 0; $i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]); $i++) :
+                                    $petugas .= $petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]][$i];
+                                    if ($i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]) - 1) {
+                                        $petugas .= ' & ';
+                                    }
+                                endfor;
+                                echo '<td colspan="4" class="text-center"> <div id="qrApoteker' . $j . '"></div> <small style="font-size:6pt;" id="namaApoteker' . $j . '">' . $petugas . '</td>';
+                            endfor; ?>
+                        </tr>
                     </tbody>
 
                 </table>
@@ -596,26 +757,55 @@
 
 <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs/qrcode.min.js"></script>
 <script>
-    // Create a new QRCode instance
-    var qrcode = new QRCode(document.getElementById("qrcode"), {
-        width: 100, // Set the width of the QR code
-        height: 100, // Set the height of the QR code
-        colorDark: "#000000", // Color of the dark modules (e.g., black squares)
-        colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
-        correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+    // Ganti $("#ttdDokter")[0] dengan document.getElementById('ttdDokter')
+    var ttdDokter = new QRCode(document.getElementById("ttdDokter"), {
+        width: 50,
+        height: 50,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.L
     });
 
-    var qrKecil = new QRCode(document.getElementById("qrKecil"), {
-        width: 50, // Set the width of the QR code
-        height: 50, // Set the height of the QR code
-        colorDark: "#000000", // Color of the dark modules (e.g., black squares)
-        colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
-        correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
-    });
+    ttdDokter.makeCode("Di ttd <?= $data->rm20bUdds['dokter'] ?? ''  ?> untuk UDDS. No Rawat : <?= $data->pasien['no_rawat'] ?? ''  ?>"); // Replace with your desired text or URL
 
-    // Generate the QR code with the desired content
-    qrcode.makeCode("Di ttd oleh " + $("#dokter").val() + " untuk Informed concent. No Rawat : " + $("#noRawat").val()); // Replace with your desired text or URL
-    qrKecil.makeCode("Di ttd oleh " + $("#dokter").val() + " untuk Informed concent. No Rawat : " + $("#noRawat").val()); // Replace with your desired text or URL
+    <?php for ($i = 0; $i < count($data->tanggalUnik); $i++) : ?>
+        var ttd = new QRCode(document.getElementById("qrPemObat<?= $i ?>"), {
+            width: 40,
+            height: 40,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.L
+        });
+
+        var nama = $("#namaPemObat<?= $i ?>").html();
+
+        ttd.makeCode("Di ttd " + nama + " untuk UDDS. No Rawat : <?= $data->pasien['no_rawat'] ?? ''  ?>");
+
+        var apoteker = new QRCode(document.getElementById("qrApoteker<?= $i ?>"), {
+            width: 40,
+            height: 40,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.L
+        });
+
+        var nama = $("#namaApoteker<?= $i ?>").html();
+
+        apoteker.makeCode("Di ttd " + nama + " untuk UDDS. No Rawat : <?= $data->pasien['no_rawat'] ?? ''  ?>"); // Replace with your desired text or URL
+
+
+        var ttd = new QRCode(document.getElementById("qrPemObatOral<?= $i ?>"), {
+            width: 40,
+            height: 40,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.L
+        });
+
+        var nama = $("#namaPemObatOral<?= $i ?>").html();
+
+        ttd.makeCode("Di ttd " + nama + " untuk UDDS. No Rawat : <?= $data->pasien['no_rawat'] ?? ''  ?>");
+    <?php endfor; ?>
 </script>
 
 </html>

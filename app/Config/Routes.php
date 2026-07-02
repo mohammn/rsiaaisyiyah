@@ -39,6 +39,9 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm20bUdds/hapusJam', 'Rm\Rm20bUdds::hapusJam');
+$routes->post('/rm/rm20bUdds/muatJam', 'Rm\Rm20bUdds::muatJam');
+$routes->post('/rm/rm20bUdds/simpanJam', 'Rm\Rm20bUdds::simpanJam');
 $routes->post('/rm/rm20bUdds/hapus', 'Rm\Rm20bUdds::hapus');
 $routes->get('/rm/rm20bUdds/cetak/(:any)', 'Rm\Rm20bUdds::cetak/$1');
 $routes->post('/rm/rm20bUdds/tambahPaket', 'Rm\Rm20bUdds::tambahPaket');
