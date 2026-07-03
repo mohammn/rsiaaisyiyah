@@ -39,6 +39,13 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm3TataTertib/ubahWaktu', 'Rm\Rm3TataTertib::ubahWaktu');
+$routes->post('/rm/rm3TataTertib/simpanTtd', 'Rm\Rm3TataTertib::simpanTtd');
+$routes->post('/rm/rm3TataTertib/hapus', 'Rm\Rm3TataTertib::hapus');
+$routes->get('/rm/rm3TataTertib/cetak/(:any)', 'Rm\Rm3TataTertib::cetak/$1');
+$routes->post('/rm/rm3TataTertib/simpan', 'Rm\Rm3TataTertib::simpan');
+$routes->get('/rm/rm3TataTertib/(:any)', 'Rm\Rm3TataTertib::index/$1');
+
 $routes->post('/rm/rm20bUdds/hapusJam', 'Rm\Rm20bUdds::hapusJam');
 $routes->post('/rm/rm20bUdds/muatJam', 'Rm\Rm20bUdds::muatJam');
 $routes->post('/rm/rm20bUdds/simpanJam', 'Rm\Rm20bUdds::simpanJam');
