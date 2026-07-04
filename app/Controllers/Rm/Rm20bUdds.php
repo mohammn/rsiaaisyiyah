@@ -207,15 +207,6 @@ class Rm20bUdds extends BaseController
             "nama_obat"   => $this->request->getPost("nama_obat") ?? '',
             "dosis"       => $this->request->getPost("dosis") ?? '',
             "jumlah"      => $this->request->getPost("jumlah") ?? '',
-
-            // --- Kondisi Tanggal (Jika kosong, masukkan NULL) ---
-            "tanggal"     => !empty($this->request->getPost("tanggal")) ? $this->request->getPost("tanggal") : null,
-
-            // --- Data Jam Pemberian ---
-            "pagi"        => $this->request->getPost("jam[pagi]") ?? null,
-            "siang"       => $this->request->getPost("jam[siang]") ?? null,
-            "sore"        => $this->request->getPost("jam[sore]") ?? null,
-            "malam"       => $this->request->getPost("jam[malam]") ?? null,
         ];
 
         // =====================================================================
