@@ -39,6 +39,13 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm26nIzinKeluar/ubahWaktu', 'Rm\Rm26nIzinKeluar::ubahWaktu');
+$routes->post('/rm/rm26nIzinKeluar/simpanTtd', 'Rm\Rm26nIzinKeluar::simpanTtd');
+$routes->post('/rm/rm26nIzinKeluar/hapus', 'Rm\Rm26nIzinKeluar::hapus');
+$routes->get('/rm/rm26nIzinKeluar/cetak/(:any)', 'Rm\Rm26nIzinKeluar::cetak/$1');
+$routes->post('/rm/rm26nIzinKeluar/simpan', 'Rm\Rm26nIzinKeluar::simpan');
+$routes->get('/rm/rm26nIzinKeluar/(:any)', 'Rm\Rm26nIzinKeluar::index/$1');
+
 $routes->post('/rm/rm26ePendapatLain/ubahWaktu', 'Rm\Rm26ePendapatLain::ubahWaktu');
 $routes->post('/rm/rm26ePendapatLain/simpanTtd', 'Rm\Rm26ePendapatLain::simpanTtd');
 $routes->post('/rm/rm26ePendapatLain/hapus', 'Rm\Rm26ePendapatLain::hapus');
