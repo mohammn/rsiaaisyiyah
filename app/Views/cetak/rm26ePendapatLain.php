@@ -198,7 +198,7 @@ if ($data->rm26ePendapatLain) {
 
                 Saya yang bertanda tangan dibawah ini :
 
-                <table class="table table-sm mt-2">
+                <table class="table table-sm table-borderless mt-2">
                     <tr>
                         <td style="width:20%">Nama</td>
                         <td>: <?= $data->rm26ePendapatLain['nama'] ?? '' ?></td>
@@ -222,7 +222,7 @@ if ($data->rm26ePendapatLain) {
                 </table>
                 <br>
                 Telah mendengar penjelasan dari Dokter mengenai kondisi medis <?= $data->rm26ePendapatLain['sebagai'] ?? '' ?> :
-                <table class="table table-sm mt-2">
+                <table class="table table-sm table-borderless mt-2">
                     <tr>
                         <td style="width:20%">Nama</td>
                         <td>: <?= $data->pasien["nm_pasien"] ?? '' ?></td>
@@ -256,7 +256,7 @@ if ($data->rm26ePendapatLain) {
                 <br>
                 Dengan ini saya memohon untuk mendapatkan Pendapat lain (<i>second opinion</i>) dari Dokter Ahli yang bertugas di dalam/ luar Rumah
                 Sakit Ibu dan Anak Aisyiyah.
-                <table class="table table-sm mt-2">
+                <table class="table table-sm table-borderless mt-2">
                     <tr>
                         <td style="width:20%">Nama Dokter</td>
                         <td>: <?= $data->rm26ePendapatLain["dokterLain"] ?? '' ?></td>
