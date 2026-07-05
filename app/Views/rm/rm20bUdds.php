@@ -44,10 +44,6 @@
                                     <td>Alergi</td>
                                     <td>: <?= $data->rm20bUdds["alergi"] ?? '' ?></td>
                                 </tr>
-                                <tr>
-                                    <td>Diagnosa</td>
-                                    <td>: <?= $data->rm20bUdds["diagnosa"] ?? '' ?></td>
-                                </tr>
                             </table>
                         </div>
                     </div>
@@ -64,16 +60,8 @@
                                     <td>: <?= $data->rm20bUdds["dokter"] ?? '' ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Apoteker</td>
-                                    <td>: <?= $data->rm20bUdds["apoteker"] ?? '' ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Pemberi Obat Oral</td>
-                                    <td>: <?= $data->rm20bUdds["pemberiObatOral"] ?? '' ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Pemberi Obat</td>
-                                    <td>: <?= $data->rm20bUdds["pemberiObat"] ?? '' ?></td>
+                                    <td>Diagnosa</td>
+                                    <td>: <?= $data->rm20bUdds["diagnosa"] ?? '' ?></td>
                                 </tr>
                             </table>
                         </div>
@@ -315,11 +303,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Data Obat : <b id="judulObat"></b></h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Jenis Obat : <b id="judulObat"></b></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="row">
+                <mark>Mengedit Obat dg nama : <b id="namaObatJudul"></b></mark>
+                <div class="row mt-2">
                     <div class="col-sm-6">
                         <div class="alert alert-info">
                             <div class="row mb-2">
@@ -366,8 +355,8 @@
                                     } ?>
                                 </select>
                             </div>
-                            <div class="mb-1">
-                                <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Pembari Obat Oral :</label>
+                            <div class="mb-1" id="formPemberiObatOral">
+                                <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Pemberi Obat Oral :</label>
                                 <select name="pemberiObatOral" id="pemberiObatOral" class="form-select form-select-sm">
                                     <option value="">-- Pilih Petugas --</option>
                                     <?php for ($i = 0; $i < count($data->petugas); $i++) {
@@ -375,8 +364,8 @@
                                     } ?>
                                 </select>
                             </div>
-                            <div>
-                                <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Pembari Obat :</label>
+                            <div id="formPemberiObat">
+                                <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Pemberi Obat :</label>
                                 <select name="pemberiObat" id="pemberiObat" class="form-select form-select-sm">
                                     <option value="">-- Pilih Petugas --</option>
                                     <?php for ($i = 0; $i < count($data->petugas); $i++) {
@@ -385,6 +374,7 @@
                                 </select>
                             </div>
                         </div>
+                        <br>
                         <button class="btn btn-estetik btn-simpan" onclick="simpanJam('tambah')">
                             <i class="fa fa-plus"></i> Tambah
                         </button>
@@ -498,7 +488,7 @@
                         hasil += '<td>' + data[i].dosis + '</td>';
                         hasil += '<td>' + data[i].jumlah + '</td>';
                         hasil += '<td>';
-                        hasil += '<a href="javascript:void(0);" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple" onclick="lihatJam(' + data[i].id + ', `' + data[i].nama_obat + '`)"><i class="fas fa-clock"></i> Jam</a> ';
+                        hasil += '<a href="javascript:void(0);" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple" onclick="lihatJam(' + data[i].id + ', `' + data[i].nama_obat + '`, `' + data[i].jenis_obat + '`)"><i class="fas fa-clock"></i> Jam</a> ';
                         hasil += '<a href="javascript:void(0);" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue" onclick="tryEditObat(' + data[i].id + ')"><i class="fas fa-pen"></i> Edit</a> ';
                         hasil += '<a href="javascript:void(0);" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"  onclick="tryHapusObat(' + data[i].id + ', `' + data[i].nama_obat + '`)"><i class="fas fa-trash-alt"></i> Hapus</a>';
                         hasil += '</td>';
@@ -573,10 +563,19 @@
             });
         }
 
-        function lihatJam(id, namaObat) {
-            $("#judulObat").html(namaObat);
+        function lihatJam(id, namaObat, jenisObat) {
+            $("#judulObat").html(jenisObat);
+            $("#namaObatJudul").html(namaObat);
             $("#idObatJam").val(id);
             muatJam(id);
+
+            if (jenisObat == 'oral') {
+                $('#formPemberiObatOral').show();
+                $('#formPemberiObat').hide();
+            } else {
+                $('#formPemberiObatOral').hide();
+                $('#formPemberiObat').show();
+            }
             $("#modalJam").modal('show');
 
         }

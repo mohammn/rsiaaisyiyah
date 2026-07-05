@@ -259,7 +259,7 @@
                                 <?php
                                 $barisGolobal++; // Tambahkan hitungan baris global setiap data di-loop
 
-                                if ($barisGolobal == 13) {
+                                if ($barisGolobal == 16) {
                                     $jumlahTanggal = count($data->tanggalUnik);
                                     $colspanRencana = $jumlahTanggal * 4;
 
@@ -342,13 +342,17 @@
 
                             for ($j = 0; $j < count($data->tanggalUnik); $j++) :
                                 $petugas = '';
-                                for ($i = 0; $i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]); $i++) :
-                                    $petugas .= $petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]][$i];
-                                    if ($i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]) - 1) {
-                                        $petugas .= ' & ';
-                                    }
-                                endfor;
-                                echo '<td colspan="4" class="text-center"> <div id="qrPemObatOral' . $j . '"></div> <small style="font-size:6pt;" id="namaPemObatOral' . $j . '">' . $petugas . '</td>';
+                                if (isset($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]])):
+                                    for ($i = 0; $i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]); $i++) :
+                                        $petugas .= $petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]][$i];
+                                        if ($i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]) - 1) {
+                                            $petugas .= ' & ';
+                                        }
+                                    endfor;
+                                    echo '<td colspan="4" class="text-center"> <div id="qrPemObatOral' . $j . '"></div> <small style="font-size:6pt;" id="namaPemObatOral' . $j . '">' . $petugas . '</td>';
+                                else:
+                                    echo '<td colspan="4" class="text-center"> </td>';
+                                endif;
                             endfor; ?>
                         </tr>
                         <tr>
@@ -394,7 +398,7 @@
                                 <?php
                                 $barisGolobal++; // Tambahkan hitungan baris global setiap data di-loop
 
-                                if ($barisGolobal == 13) {
+                                if ($barisGolobal == 16) {
                                     $jumlahTanggal = count($data->tanggalUnik);
                                     $colspanRencana = $jumlahTanggal * 4;
 
@@ -495,7 +499,7 @@
                                 <?php
                                 $barisGolobal++; // Tambahkan hitungan baris global setiap data di-loop
 
-                                if ($barisGolobal == 13) {
+                                if ($barisGolobal == 16) {
                                     $jumlahTanggal = count($data->tanggalUnik);
                                     $colspanRencana = $jumlahTanggal * 4;
 
@@ -598,7 +602,7 @@
                                 <?php
                                 $barisGolobal++; // Tambahkan hitungan baris global setiap data di-loop
 
-                                if ($barisGolobal == 13) {
+                                if ($barisGolobal == 16) {
                                     $jumlahTanggal = count($data->tanggalUnik);
                                     $colspanRencana = $jumlahTanggal * 4;
 
@@ -685,13 +689,17 @@
 
                             for ($j = 0; $j < count($data->tanggalUnik); $j++) :
                                 $petugas = '';
-                                for ($i = 0; $i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]); $i++) :
-                                    $petugas .= $petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]][$i];
-                                    if ($i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]) - 1) {
-                                        $petugas .= ' & ';
-                                    }
-                                endfor;
-                                echo '<td colspan="4" class="text-center"> <div id="qrPemObat' . $j . '"></div> <small style="font-size:6pt;" id="namaPemObat' . $j . '">' . $petugas . '</td>';
+                                if (isset($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]])):
+                                    for ($i = 0; $i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]); $i++) :
+                                        $petugas .= $petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]][$i];
+                                        if ($i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]) - 1) {
+                                            $petugas .= ' & ';
+                                        }
+                                    endfor;
+                                    echo '<td colspan="4" class="text-center"> <div id="qrPemObat' . $j . '"></div> <small style="font-size:6pt;" id="namaPemObat' . $j . '">' . $petugas . '</td>';
+                                else:
+                                    echo '<td colspan="4" class="text-center"> </td>';
+                                endif;
                             endfor; ?>
                         </tr>
                         <tr>
@@ -701,31 +709,35 @@
 
                             foreach ($data->rm20bUddsDataJam as $row) {
                                 $tanggal = $row['tanggal'];
-                                $pemberiObat = $row['apoteker'];
+                                $petugasapotker = $row['apoteker'];
 
-                                // Pastikan kolom pemberiObat tidak null atau kosong
-                                if (!empty($pemberiObat)) {
+                                // Pastikan kolom apoteker tidak null atau kosong
+                                if (!empty($petugasapotker)) {
                                     // Buat array kosong untuk tanggal tersebut jika belum ada
                                     if (!isset($petugasPerTanggal[$tanggal])) {
                                         $petugasPerTanggal[$tanggal] = [];
                                     }
 
-                                    // Cek agar nama petugas pemberiObat tidak double di tanggal yang sama
-                                    if (!in_array($pemberiObat, $petugasPerTanggal[$tanggal])) {
-                                        $petugasPerTanggal[$tanggal][] = $pemberiObat;
+                                    // Cek agar nama petugas petugasapotker tidak double di tanggal yang sama
+                                    if (!in_array($petugasapotker, $petugasPerTanggal[$tanggal])) {
+                                        $petugasPerTanggal[$tanggal][] = $petugasapotker;
                                     }
                                 }
                             }
 
                             for ($j = 0; $j < count($data->tanggalUnik); $j++) :
                                 $petugas = '';
-                                for ($i = 0; $i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]); $i++) :
-                                    $petugas .= $petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]][$i];
-                                    if ($i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]) - 1) {
-                                        $petugas .= ' & ';
-                                    }
-                                endfor;
-                                echo '<td colspan="4" class="text-center"> <div id="qrApoteker' . $j . '"></div> <small style="font-size:6pt;" id="namaApoteker' . $j . '">' . $petugas . '</td>';
+                                if (isset($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]])):
+                                    for ($i = 0; $i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]); $i++) :
+                                        $petugas .= $petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]][$i];
+                                        if ($i < count($petugasPerTanggal[$data->tanggalUnik[$j]["tanggal"]]) - 1) {
+                                            $petugas .= ' & ';
+                                        }
+                                    endfor;
+                                    echo '<td colspan="4" class="text-center"> <div id="qrApoteker' . $j . '"></div> <small style="font-size:6pt;" id="namaApoteker' . $j . '">' . $petugas . '</td>';
+                                else:
+                                    echo '<td colspan="4" class="text-center"> </td>';
+                                endif;
                             endfor; ?>
                         </tr>
                     </tbody>
@@ -769,42 +781,44 @@
     ttdDokter.makeCode("Di ttd <?= $data->rm20bUdds['dokter'] ?? ''  ?> untuk UDDS. No Rawat : <?= $data->pasien['no_rawat'] ?? ''  ?>"); // Replace with your desired text or URL
 
     <?php for ($i = 0; $i < count($data->tanggalUnik); $i++) : ?>
-        var ttd = new QRCode(document.getElementById("qrPemObat<?= $i ?>"), {
-            width: 40,
-            height: 40,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.L
-        });
+        if ($("#namaPemObat<?= $i ?>").length > 0) {
+            var ttd = new QRCode(document.getElementById("qrPemObat<?= $i ?>"), {
+                width: 40,
+                height: 40,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.L
+            });
 
-        var nama = $("#namaPemObat<?= $i ?>").html();
+            var nama = $("#namaPemObat<?= $i ?>").html();
+            ttd.makeCode("Di ttd " + nama + " untuk UDDS. No Rawat : <?= $data->pasien['no_rawat'] ?? ''  ?>");
+        }
 
-        ttd.makeCode("Di ttd " + nama + " untuk UDDS. No Rawat : <?= $data->pasien['no_rawat'] ?? ''  ?>");
+        if ($("#namaApoteker<?= $i ?>").length > 0) {
+            var petugasapotker = new QRCode(document.getElementById("qrApoteker<?= $i ?>"), {
+                width: 40,
+                height: 40,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.L
+            });
 
-        var apoteker = new QRCode(document.getElementById("qrApoteker<?= $i ?>"), {
-            width: 40,
-            height: 40,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.L
-        });
+            var nama = $("#namaApoteker<?= $i ?>").html();
+            petugasapotker.makeCode("Di ttd " + nama + " untuk UDDS. No Rawat : <?= $data->pasien['no_rawat'] ?? ''  ?>"); // Replace with your desired text or URL
+        }
 
-        var nama = $("#namaApoteker<?= $i ?>").html();
+        if ($("#namaPemObatOral<?= $i ?>").length > 0) {
+            var ttd = new QRCode(document.getElementById("qrPemObatOral<?= $i ?>"), {
+                width: 40,
+                height: 40,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.L
+            });
 
-        apoteker.makeCode("Di ttd " + nama + " untuk UDDS. No Rawat : <?= $data->pasien['no_rawat'] ?? ''  ?>"); // Replace with your desired text or URL
-
-
-        var ttd = new QRCode(document.getElementById("qrPemObatOral<?= $i ?>"), {
-            width: 40,
-            height: 40,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.L
-        });
-
-        var nama = $("#namaPemObatOral<?= $i ?>").html();
-
-        ttd.makeCode("Di ttd " + nama + " untuk UDDS. No Rawat : <?= $data->pasien['no_rawat'] ?? ''  ?>");
+            var nama = $("#namaPemObatOral<?= $i ?>").html();
+            ttd.makeCode("Di ttd " + nama + " untuk UDDS. No Rawat : <?= $data->pasien['no_rawat'] ?? ''  ?>");
+        }
     <?php endfor; ?>
 </script>
 
