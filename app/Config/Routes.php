@@ -39,6 +39,13 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm26fKerohanian/ubahWaktu', 'Rm\Rm26fKerohanian::ubahWaktu');
+$routes->post('/rm/rm26fKerohanian/simpanTtd', 'Rm\Rm26fKerohanian::simpanTtd');
+$routes->post('/rm/rm26fKerohanian/hapus', 'Rm\Rm26fKerohanian::hapus');
+$routes->get('/rm/rm26fKerohanian/cetak/(:any)', 'Rm\Rm26fKerohanian::cetak/$1');
+$routes->post('/rm/rm26fKerohanian/simpan', 'Rm\Rm26fKerohanian::simpan');
+$routes->get('/rm/rm26fKerohanian/(:any)', 'Rm\Rm26fKerohanian::index/$1');
+
 $routes->post('/rm/rm26nIzinKeluar/ubahWaktu', 'Rm\Rm26nIzinKeluar::ubahWaktu');
 $routes->post('/rm/rm26nIzinKeluar/simpanTtd', 'Rm\Rm26nIzinKeluar::simpanTtd');
 $routes->post('/rm/rm26nIzinKeluar/hapus', 'Rm\Rm26nIzinKeluar::hapus');

@@ -25,6 +25,7 @@ use App\Models\Rm20bUddsDataModel;
 use App\Models\Rm3TataTertibModel;
 use App\Models\Rm26ePendapatLainModel;
 use App\Models\Rm26nIzinKeluarModel;
+use App\Models\Rm26fKerohanianModel;
 
 use function PHPSTORM_META\type;
 
@@ -53,6 +54,7 @@ class Rm extends BaseController
     protected $rm3TataTertibModel;
     protected $rm26ePendapatLainModel;
     protected $rm26nIzinKeluarModel;
+    protected $rm26fKerohanianModel;
 
     public function __construct()
     {
@@ -83,6 +85,7 @@ class Rm extends BaseController
         $this->rm3TataTertibModel = new Rm3TataTertibModel();
         $this->rm26ePendapatLainModel = new Rm26ePendapatLainModel();
         $this->rm26nIzinKeluarModel = new Rm26nIzinKeluarModel();
+        $this->rm26fKerohanianModel = new Rm26fKerohanianModel();
     }
     public function index($no_rawat)
     {
@@ -123,6 +126,7 @@ class Rm extends BaseController
         $rm3TataTertib = $this->rm3TataTertibModel->where('noRawat', $no_rawat)->first();
         $rm26ePendapatLain = $this->rm26ePendapatLainModel->where('noRawat', $no_rawat)->first();
         $rm26nIzinKeluar = $this->rm26nIzinKeluarModel->where('noRawat', $no_rawat)->first();
+        $rm26fKerohanian = $this->rm26fKerohanianModel->where('noRawat', $no_rawat)->first();
         // ================khusus SBAR=========================
         $rm0Sbar = $this->rm0SbarModel->where('noRawat', $no_rawat)->findAll();
         $rm0SbarData = [];
@@ -234,6 +238,7 @@ class Rm extends BaseController
             "rm3TataTertib" => $this->cekSemuaKolom($rm3TataTertib, ['ttdWali']),
             "rm26ePendapatLain" => $this->cekSemuaKolom($rm26ePendapatLain, ['ttdWali']),
             "rm26nIzinKeluar" => $this->cekSemuaKolom($rm26nIzinKeluar, ['ttdWali']),
+            "rm26fKerohanian" => $this->cekSemuaKolom($rm26fKerohanian, ['ttdWali']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -258,6 +263,7 @@ class Rm extends BaseController
             'rm3TataTertib'  => $rm3TataTertib,    // Biarkan null jika data tidak ada
             'rm26ePendapatLain'  => $rm26ePendapatLain,    // Biarkan null jika data tidak ada
             'rm26nIzinKeluar'  => $rm26nIzinKeluar,    // Biarkan null jika data tidak ada
+            'rm26fKerohanian'  => $rm26fKerohanian,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 
