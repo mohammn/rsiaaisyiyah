@@ -190,8 +190,7 @@ if ($data->rm26nIzinKeluar) {
                 <br>
                 <div class="row">
                     <div class="col-12 text-center">
-                        <p style="font-size: 14pt; margin:10px;" class="text-uppercase fw-bold"> PERMOHONAN PERMINTAAN PENDAPAT LAIN
-                            (<i>SECOND OPINION </i>)
+                        <p style="font-size: 14pt; margin:10px;" class="text-uppercase fw-bold"> PERNYATAAN IZIN KELUAR RUMAH SAKIT SEMENTARA
                         </p>
                     </div>
                 </div>

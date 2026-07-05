@@ -32,7 +32,6 @@
                     <div class="col-12 text-center">Data Penanggung Jawab :</div>
                     <hr>
                 </div>
-                <input type="hidden" class="form-control" id="petugas" value="<?= $data->rm26ePendapatLain['petugas'] ?? session()->get('nama') ?>">
                 <mark>Yang bertanda tangan di bawah ini :</mark>
                 <div class="row mb-3 mt-2">
                     <div class="col-7"><input type="text" class="form-control" id="nama" placeholder="Nama" value="<?= $data->rm26ePendapatLain['nama'] ?? '' ?>"></div>

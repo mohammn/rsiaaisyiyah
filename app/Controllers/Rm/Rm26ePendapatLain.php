@@ -74,10 +74,6 @@ class Rm26ePendapatLain extends BaseController
 
     public function simpan()
     {
-        // Ambil dulu datanya secara murni ke dalam variabel terpisah
-        $indikasiIbu = $this->request->getPost("indikasiIbu");
-        $indikasiJanin = $this->request->getPost("indikasiJanin");
-
         $data = [
             // Data Pasien & Petugas
             "noRawat"      => $this->request->getPost("noRawat"),
