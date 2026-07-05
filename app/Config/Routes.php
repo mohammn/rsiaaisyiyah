@@ -39,6 +39,13 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm26hKepercayaan/ubahWaktu', 'Rm\Rm26hKepercayaan::ubahWaktu');
+$routes->post('/rm/rm26hKepercayaan/simpanTtd', 'Rm\Rm26hKepercayaan::simpanTtd');
+$routes->post('/rm/rm26hKepercayaan/hapus', 'Rm\Rm26hKepercayaan::hapus');
+$routes->get('/rm/rm26hKepercayaan/cetak/(:any)', 'Rm\Rm26hKepercayaan::cetak/$1');
+$routes->post('/rm/rm26hKepercayaan/simpan', 'Rm\Rm26hKepercayaan::simpan');
+$routes->get('/rm/rm26hKepercayaan/(:any)', 'Rm\Rm26hKepercayaan::index/$1');
+
 $routes->post('/rm/rm26fKerohanian/ubahWaktu', 'Rm\Rm26fKerohanian::ubahWaktu');
 $routes->post('/rm/rm26fKerohanian/simpanTtd', 'Rm\Rm26fKerohanian::simpanTtd');
 $routes->post('/rm/rm26fKerohanian/hapus', 'Rm\Rm26fKerohanian::hapus');
