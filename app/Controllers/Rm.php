@@ -27,6 +27,8 @@ use App\Models\Rm26ePendapatLainModel;
 use App\Models\Rm26nIzinKeluarModel;
 use App\Models\Rm26fKerohanianModel;
 use App\Models\Rm26hKepercayaanModel;
+use App\Models\Rm26iPeyimpananBarangModel;
+use App\Models\Rm26iPeyimpananBarangDataModel;
 
 use function PHPSTORM_META\type;
 
@@ -57,6 +59,8 @@ class Rm extends BaseController
     protected $rm26nIzinKeluarModel;
     protected $rm26fKerohanianModel;
     protected $rm26hKepercayaanModel;
+    protected $rm26iPenyimpananBarangModel;
+    protected $rm26iPenyimpananBarangDataModel;
 
     public function __construct()
     {
@@ -89,6 +93,8 @@ class Rm extends BaseController
         $this->rm26nIzinKeluarModel = new Rm26nIzinKeluarModel();
         $this->rm26fKerohanianModel = new Rm26fKerohanianModel();
         $this->rm26hKepercayaanModel = new Rm26hKepercayaanModel();
+        $this->rm26iPenyimpananBarangModel = new Rm26iPeyimpananBarangModel();
+        $this->rm26iPenyimpananBarangDataModel = new Rm26iPeyimpananBarangDataModel();
     }
     public function index($no_rawat)
     {
@@ -131,6 +137,8 @@ class Rm extends BaseController
         $rm26nIzinKeluar = $this->rm26nIzinKeluarModel->where('noRawat', $no_rawat)->first();
         $rm26fKerohanian = $this->rm26fKerohanianModel->where('noRawat', $no_rawat)->first();
         $rm26hKepercayaan = $this->rm26hKepercayaanModel->where('noRawat', $no_rawat)->first();
+        $rm26iPenyimpananBarang = $this->rm26iPenyimpananBarangModel->where('noRawat', $no_rawat)->first();
+        $rm26iPenyimpananBarangData = $this->rm26iPenyimpananBarangDataModel->where('idPenyimpanan', $rm26iPenyimpananBarang['id'] ?? 0)->first();
         // ================khusus SBAR=========================
         $rm0Sbar = $this->rm0SbarModel->where('noRawat', $no_rawat)->findAll();
         $rm0SbarData = [];
@@ -244,6 +252,7 @@ class Rm extends BaseController
             "rm26nIzinKeluar" => $this->cekSemuaKolom($rm26nIzinKeluar, ['ttdWali']),
             "rm26fKerohanian" => $this->cekSemuaKolom($rm26fKerohanian, ['ttdWali']),
             "rm26hKepercayaan" => $this->cekSemuaKolom($rm26hKepercayaan, ['ttdWali']),
+            "rm26iPenyimpananBarang" => (!empty($rm26iPenyimpananBarangData) && count((array)$rm26iPenyimpananBarangData) > 0) ? $this->cekSemuaKolom($rm26iPenyimpananBarang, ['ttdWali']) : 'Tidak Lengkap',
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -270,6 +279,7 @@ class Rm extends BaseController
             'rm26nIzinKeluar'  => $rm26nIzinKeluar,    // Biarkan null jika data tidak ada
             'rm26fKerohanian'  => $rm26fKerohanian,    // Biarkan null jika data tidak ada
             'rm26hKepercayaan'  => $rm26hKepercayaan,    // Biarkan null jika data tidak ada
+            'rm26iPenyimpananBarang'  => $rm26iPenyimpananBarang,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 

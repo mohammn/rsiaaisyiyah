@@ -39,6 +39,16 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm26iPenyimpananBarang/ubahWaktu', 'Rm\Rm26iPenyimpananBarang::ubahWaktu');
+$routes->post('/rm/rm26iPenyimpananBarang/simpanTtd', 'Rm\Rm26iPenyimpananBarang::simpanTtd');
+$routes->post('/rm/rm26iPenyimpananBarang/hapus', 'Rm\Rm26iPenyimpananBarang::hapus');
+$routes->post('/rm/rm26iPenyimpananBarang/hapusBarang', 'Rm\Rm26iPenyimpananBarang::hapusBarang');
+$routes->get('/rm/rm26iPenyimpananBarang/cetak/(:any)', 'Rm\Rm26iPenyimpananBarang::cetak/$1');
+$routes->post('/rm/rm26iPenyimpananBarang/simpanBarang', 'Rm\Rm26iPenyimpananBarang::simpanBarang');
+$routes->post('/rm/rm26iPenyimpananBarang/muatData', 'Rm\Rm26iPenyimpananBarang::muatData');
+$routes->post('/rm/rm26iPenyimpananBarang/simpan', 'Rm\Rm26iPenyimpananBarang::simpan');
+$routes->get('/rm/rm26iPenyimpananBarang/(:any)', 'Rm\Rm26iPenyimpananBarang::index/$1');
+
 $routes->post('/rm/rm26hKepercayaan/ubahWaktu', 'Rm\Rm26hKepercayaan::ubahWaktu');
 $routes->post('/rm/rm26hKepercayaan/simpanTtd', 'Rm\Rm26hKepercayaan::simpanTtd');
 $routes->post('/rm/rm26hKepercayaan/hapus', 'Rm\Rm26hKepercayaan::hapus');
