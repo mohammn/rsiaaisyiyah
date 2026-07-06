@@ -58,10 +58,10 @@
                     <div class="col-sm-6">
                         <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Satpam / yang menerima barang :</label>
                         <select name="satpam" id="satpam" class="form-select">
-                            <option value="" <?= $data->rm26iPenyimpananBarang['satpam'] == '' ? ' selected' : '' ?>>-- Pilih Petugas --</option>
+                            <option value="" <?= ($data->rm26iPenyimpananBarang['satpam'] ?? '') == '' ? ' selected' : '' ?>>-- Pilih Petugas --</option>
                             <?php for ($i = 0; $i < count($data->petugas); $i++) {
                                 echo '<option value="' . $data->petugas[$i]["nama"] . '"';
-                                if ($data->petugas[$i]["nama"] === $data->rm26iPenyimpananBarang['satpam']) {
+                                if ($data->petugas[$i]["nama"] === ($data->rm26iPenyimpananBarang['satpam'] ?? '')) {
                                     echo ' selected';
                                 }
                                 echo '>' . $data->petugas[$i]["nama"] . '</option>';
