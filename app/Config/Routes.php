@@ -95,9 +95,14 @@ $routes->get('/rm/rm3TataTertib/cetak/(:any)', 'Rm\Rm3TataTertib::cetak/$1');
 $routes->post('/rm/rm3TataTertib/simpan', 'Rm\Rm3TataTertib::simpan');
 $routes->get('/rm/rm3TataTertib/(:any)', 'Rm\Rm3TataTertib::index/$1');
 
-$routes->post('/rm/rm20bUdds/hapusJam', 'Rm\Rm20bUdds::hapusJam');
-$routes->post('/rm/rm20bUdds/muatJam', 'Rm\Rm20bUdds::muatJam');
+
+$routes->post('/rm/rm20bUdds/muatJamSementara', 'Rm\Rm20bUdds::muatJamSementara');
+$routes->post('/rm/rm20bUdds/hapusJamSementara', 'Rm\Rm20bUdds::hapusJamSementara');
+$routes->post('/rm/rm20bUdds/simpanJamSementara', 'Rm\Rm20bUdds::simpanJamSementara');
 $routes->post('/rm/rm20bUdds/simpanJam', 'Rm\Rm20bUdds::simpanJam');
+$routes->post('/rm/rm20bUdds/hapusTgl', 'Rm\Rm20bUdds::hapusTgl');
+$routes->post('/rm/rm20bUdds/muatTgl', 'Rm\Rm20bUdds::muatTgl');
+$routes->post('/rm/rm20bUdds/simpanTgl', 'Rm\Rm20bUdds::simpanTgl');
 $routes->post('/rm/rm20bUdds/hapus', 'Rm\Rm20bUdds::hapus');
 $routes->get('/rm/rm20bUdds/cetak/(:any)', 'Rm\Rm20bUdds::cetak/$1');
 $routes->post('/rm/rm20bUdds/tambahPaket', 'Rm\Rm20bUdds::tambahPaket');

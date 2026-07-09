@@ -12,7 +12,7 @@ class Rm20bUddsDataModel extends Model
     // Daftarkan semua field yang boleh diisi di sini
     protected $allowedFields = [
         // --- Data Utama ---
-        'noRawat',
+        'idUdds',
         'jenis_obat',
         'nama_obat',
         'dosis',

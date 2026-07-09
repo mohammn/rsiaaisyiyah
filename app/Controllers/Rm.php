@@ -137,7 +137,7 @@ class Rm extends BaseController
         $rm27cPlebitis = $this->rm27cPlebitisModel->where('noRawat', $no_rawat)->first();
         $rm27bKateter = $this->rm27bKateterModel->where('noRawat', $no_rawat)->first();
         $rm20bUdds = $this->rm20bUddsModel->where('noRawat', $no_rawat)->first();
-        $rm20bUddsData = $this->rm20bUddsDataModel->where('noRawat', $no_rawat)->first();
+        $rm20bUddsData = $this->rm20bUddsDataModel->where('idUdds', ($rm20bUdds['id'] ?? 0))->first();
         $rm3TataTertib = $this->rm3TataTertibModel->where('noRawat', $no_rawat)->first();
         $rm26ePendapatLain = $this->rm26ePendapatLainModel->where('noRawat', $no_rawat)->first();
         $rm26nIzinKeluar = $this->rm26nIzinKeluarModel->where('noRawat', $no_rawat)->first();
