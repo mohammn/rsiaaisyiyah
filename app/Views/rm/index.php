@@ -367,6 +367,20 @@
                             </td>
                         </tr>
                     <?php endif; ?>
+                    <?php if ($data->hiv) : ?>
+                        <tr>
+                            <td>Hasil Tes dan Konseling HIV</td>
+                            <td>
+                                <span class="badge-estetik <?= $data->status["hiv"] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["hiv"] ?></span>
+                            </td>
+                            <td><?= !empty($data->hiv['petugas']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                            <td>
+                                <a href="<?= base_url(" rm/hiv/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                <?= !empty($data->hiv['petugas']) ? '<a href="' . base_url('/rm/hiv/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/hiv/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
+                                <a href="<?= base_url('/rm/hiv/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
@@ -532,24 +546,31 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>20.</td>
+                            <td>21.</td>
                             <td>Identifikasi Nilai-nilai dan Kepercayaan Pasien</td>
                             <td>
                                 <?= $data->rm26hKepercayaan ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/rm26hKepercayaan/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
                             </td>
                         </tr>
                         <tr>
-                            <td>21.</td>
+                            <td>22.</td>
                             <td>Daftar Penyimpanan Barang Pasien</td>
                             <td>
                                 <?= $data->rm26iPenyimpananBarang ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/rm26iPenyimpananBarang/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
                             </td>
                         </tr>
                         <tr>
-                            <td>21.</td>
+                            <td>23.</td>
                             <td>Rujuk Ke Rumah Sakit Lain</td>
                             <td>
                                 <?= $data->rm26bRujukKeluar ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/rm26bRujukKeluar/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>24.</td>
+                            <td>Formulir Tes dan Konseling HIV</td>
+                            <td>
+                                <?= $data->hiv ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/hiv/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
                             </td>
                         </tr>
                     </tbody>

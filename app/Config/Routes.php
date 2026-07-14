@@ -39,6 +39,10 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/hiv/hapus', 'Rm\Hiv::hapus');
+$routes->get('/rm/hiv/cetak/(:any)', 'Rm\Hiv::cetak/$1');
+$routes->post('/rm/hiv/simpan', 'Rm\Hiv::simpan');
+$routes->get('/rm/hiv/(:any)', 'Rm\Hiv::index/$1');
 
 $routes->post('/rm/rm26bRujukKeluar/ubahWaktu', 'Rm\Rm26bRujukKeluar::ubahWaktu');
 $routes->post('/rm/rm26bRujukKeluar/simpanTtd', 'Rm\Rm26bRujukKeluar::simpanTtd');
