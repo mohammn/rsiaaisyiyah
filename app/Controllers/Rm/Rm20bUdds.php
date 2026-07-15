@@ -553,6 +553,7 @@ class Rm20bUdds extends BaseController
         // dd($rm20bUddsDataJam);
         $data = (object) [
             'pasien'     => $pasien,
+            'rm20bUdds' => $rm20bUdds,
             'rm20bUddsData' => $rm20bUddsData,
             'rm20bUddsDataTgl' => $rm20bUddsDataTgl,
             'rm20bUddsDataJam' => $rm20bUddsDataJam,
