@@ -44,6 +44,13 @@ $routes->get('/rm/hiv/cetak/(:any)', 'Rm\Hiv::cetak/$1');
 $routes->post('/rm/hiv/simpan', 'Rm\Hiv::simpan');
 $routes->get('/rm/hiv/(:any)', 'Rm\Hiv::index/$1');
 
+$routes->post('/rm/rm4PermintaanMasuk/ubahWaktu', 'Rm\Rm4PermintaanMasuk::ubahWaktu');
+$routes->post('/rm/rm4PermintaanMasuk/simpanTtd', 'Rm\Rm4PermintaanMasuk::simpanTtd');
+$routes->post('/rm/rm4PermintaanMasuk/hapus', 'Rm\Rm4PermintaanMasuk::hapus');
+$routes->get('/rm/rm4PermintaanMasuk/cetak/(:any)', 'Rm\Rm4PermintaanMasuk::cetak/$1');
+$routes->post('/rm/rm4PermintaanMasuk/simpan', 'Rm\Rm4PermintaanMasuk::simpan');
+$routes->get('/rm/rm4PermintaanMasuk/(:any)', 'Rm\Rm4PermintaanMasuk::index/$1');
+
 $routes->post('/rm/rm26bRujukKeluar/ubahWaktu', 'Rm\Rm26bRujukKeluar::ubahWaktu');
 $routes->post('/rm/rm26bRujukKeluar/simpanTtd', 'Rm\Rm26bRujukKeluar::simpanTtd');
 $routes->post('/rm/rm26bRujukKeluar/hapus', 'Rm\Rm26bRujukKeluar::hapus');
