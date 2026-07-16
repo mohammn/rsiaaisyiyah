@@ -79,6 +79,45 @@
             /* Standar CSS modern, ada baiknya ditulis berdampingan */
         }
     }
+
+    /* Garis luar solid untuk tabel */
+    .tabelHiv {
+        border: 2px solid #000000 !important;
+        border-collapse: separate !important;
+        /* Mengizinkan border dalam tampil penuh */
+        border-spacing: 0 !important;
+        /* Menghilangkan jarak antar sel agar tetap rapi */
+    }
+
+    /* Warna background dan reset border bawaan agar tidak double */
+    .tabelHiv th,
+    .tabelHiv td {
+        background-color: #eaeaea;
+        border: none !important;
+        /* MENGHAPUS semua garis solid bawaan/pengganggu */
+
+        /* Garis horizontal putus-putus menggunakan border-bottom */
+        border-bottom: 1px dashed #000000 !important;
+
+        /* Garis vertikal putus-putus murni menggunakan gradient */
+        background-image: linear-gradient(to bottom, #000000 60%, rgba(255, 255, 255, 0) 40%) !important;
+        background-position: right !important;
+        background-size: 1px 8px !important;
+        /* Tinggi garis (60%) dan jaraknya (40%) */
+        background-repeat: repeat-y !important;
+    }
+
+    /* Menghilangkan border horizontal putus-putus di paling bawah */
+    .tabelHiv tr:last-child td,
+    .tabelHiv tr:last-child th {
+        border-bottom: none !important;
+    }
+
+    /* Menghilangkan garis vertikal putus-putus di paling kanan */
+    .tabelHiv tr th:last-child,
+    .tabelHiv tr td:last-child {
+        background-image: none !important;
+    }
 </style>
 
 <head>
@@ -104,26 +143,29 @@
                         <img src="<?= base_url() ?>public/assets/img/aids.png" width="80%" alt="">
                     </div>
                 </div>
-                <hr style="height: 5px; background-color: black; border: none;">
+                <hr style="height: 5px; border: none; border-top: 5px solid #000000; opacity: 1; margin: 0;">
 
-                <table class="table table-borderless table-sm mb-1">
+                <table class="table table-borderless table-sm mb-1" style="border-collapse: separate !important; border-spacing: 0 8px !important;">
                     <tr>
                         <td>NO. REKAM MEDIS</td>
-                        <td>: <?= $data->pasien['no_rkm_medis'] ?? '' ?></td>
+                        <td style="border: 1px solid #000; padding: 4px 8px;">: <?= $data->pasien['no_rkm_medis'] ?? '' ?></td>
                         <td>NIK</td>
-                        <td>: <?= $data->pasien['no_ktp'] ?? '' ?></td>
+                        <td style="border: 1px solid #000; padding: 4px 8px;">: <?= $data->pasien['no_ktp'] ?? '' ?></td>
+                        <td rowspan="2" class="text-center">
+                            <div class="p-2 fw-bold" style="background-color: red; color:white;">RAHASIA</div>
+                        </td>
                     </tr>
                     <tr>
                         <td>NO. REGISTER</td>
-                        <td>: <?= $data->pasien['no_rawat'] ?? '' ?></td>
+                        <td style="border: 1px solid #000; padding: 4px 8px;">: <?= $data->pasien['no_rawat'] ?? '' ?></td>
                         <td></td>
                         <td></td>
                     </tr>
                 </table>
 
-                <table class="table table-sm table-bordered">
+                <table class="table table-sm table-bordered tabelHiv">
                     <tr>
-                        <td colspan="4" style="background-color: #eaeaea;"><b>DATA KLIEN</b></td>
+                        <td colspan="4" style="background-color: #000000; color: #fff;"><b>DATA KLIEN</b></td>
                     </tr>
                     <tr>
                         <td>
@@ -203,34 +245,37 @@
                         </td>
 
                         <td colspan="2" rowspan="5">
-                            <table class="table table-sm table-bordered mb-0">
+                            <table class="table table-sm table-bordered mb-0 tabelHiv">
                                 <tr>
-                                    <td style="background-color: #eaeaea;">PASANGAN KLIEN</td>
+                                    <td style="background-color: #000000; color: #fff;">PASANGAN KLIEN</td>
                                 </tr>
                                 <tr>
-                                    <td style="background-color: #eaeaea; font-size:8pt;">JIKA KLIEN PEREMPUAN</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                    <td><b>KLIEN PUNYA PASANGAN TETAP ?</b> <?= $data->hiv['pasanganTetap'] ?? '-' ?> </td>
+                                    <td style="background-color: #000000; color: #fff; font-size:8pt;">JIKA KLIEN PEREMPUAN</td>
                                 </tr>
                                 <tr>
-                                    <td style="background-color: #eaeaea; font-size:8pt;">JIKA KLIEN LAKI-LAKI</td>
+                                    <td style="font-size: 8pt;"><b>KLIEN PUNYA PASANGAN TETAP ?</b> <?= $data->hiv['pasanganTetap'] ?? '-' ?> </td>
                                 </tr>
                                 <tr>
-                                    <td><b>KLIEN PUNYA PASANGAN TETAP ?</b> <?= $data->hiv['pasanganPerempuan'] ?? '-' ?> </td>
+                                    <td style="background-color: #000000; color: #fff; font-size:8pt;">JIKA KLIEN LAKI-LAKI</td>
                                 </tr>
                                 <tr>
-                                    <td><b>APAKAH PASANGAN HAMIL ?</b> <?= $data->hiv['pasanganHamil'] ?? '-' ?> </td>
+                                    <td style="font-size: 8pt;"><b>KLIEN PUNYA PASANGAN PEREMPUAN ?</b> <?= $data->hiv['pasanganPerempuan'] ?? '-' ?> </td>
                                 </tr>
                                 <tr>
-                                    <td style="background-color: #eaeaea; font-size:8pt;"></td>
+                                    <td style="font-size: 8pt;"><b>APAKAH PASANGAN HAMIL ?</b> <?= $data->hiv['pasanganHamil'] ?? '-' ?> </td>
                                 </tr>
                                 <tr>
-                                    <td><b>TANGGAL LAHIR PASANGAN :</b> <?= !empty($data->hiv['tglLahirPasangan']) && $data->hiv['tglLahirPasangan'] !== '0000-00-00' ? date('d-m-Y', strtotime($data->hiv['tglLahirPasangan'])) : '-' ?> </td>
+                                    <td style="background-color: #000000; color: #fff; font-size:8pt;"></td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <b>STATUS PASANGAN : </b> <?= $data->hiv['hasilTesPasangan'] ?? '-' ?> <br>
+                                    <td style="font-size: 8pt;"><b>TANGGAL LAHIR PASANGAN :</b> <?= !empty($data->hiv['tglLahirPasangan']) && $data->hiv['tglLahirPasangan'] !== '0000-00-00' ? date('d-m-Y', strtotime($data->hiv['tglLahirPasangan'])) : '-' ?> </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 8pt;">
+                                        <b>STATUS PASANGAN :</b> <?= $data->hiv['hasilTesPasangan'] ?? '-' ?> <br>
                                         <b>TANGGAL TES TERAKHIR PASANGAN :</b> <?= !empty($data->hiv['tglTesPasangan']) && $data->hiv['tglTesPasangan'] !== '0000-00-00' ? date('d-m-Y', strtotime($data->hiv['tglTesPasangan'])) : '-' ?>
                                     </td>
                                 </tr>
@@ -265,25 +310,25 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color: #eaeaea;"><b>POPULASI KHUSUS</b></td>
+                        <td colspan="4" style="background-color: #000000; color: #fff;"><b>POPULASI KHUSUS</b></td>
                     </tr>
                     <tr>
                         <td colspan="4"><b>Klien WBP (Warga Binaan Pemasyarakatan) ? </b> <?= $data->hiv['wbp'] ?? '-' ?></td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color: #eaeaea;"><b>KONSELING PRA TES</b></td>
+                        <td colspan="4" style="background-color: #000000; color: #fff;"><b>KONSELING PRA TES</b></td>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;">
                             <b>TANGGAL KONSELING PRA TES HIV</b>
                         </td>
                         <td>
                             <?= !empty($data->hiv['tglKonselingPra']) && $data->hiv['tglKonselingPra'] !== '0000-00-00' ? date('d-m-Y', strtotime($data->hiv['tglKonselingPra'])) : '-' ?>
                         </td>
-                        <td colspan="2"><b>STATUS KLIEN : </b> <?= $data->hiv['statusKlien'] ?? '-' ?></td>
+                        <td colspan="2"><b style="font-size: 8pt;">STATUS KLIEN : </b> <?= $data->hiv['statusKlien'] ?? '-' ?></td>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;">
                             <b>ALASAN TES HIV</b>
                         </td>
                         <td colspan="3">
@@ -297,14 +342,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><b>MENGETAHUI ADANYA TES DARI</b></td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;"><b>MENGETAHUI ADANYA TES DARI</b></td>
                         <td colspan="3"><?= $data->hiv['infoTes'] ?? '-' ?></td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="fw-bold" style="background-color: #f6f6f6;">KONSELING PRA TES</td>
+                        <td colspan="4" class="fw-bold">KAJIAN TINGKAT RISIKO</td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">HUBUNGAN SEKS VAGINAL BERISIKO</td>
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">HUBUNGAN SEKS VAGINAL BERISIKO</td>
                         <td>
                             <?= !empty($data->hiv['hubVag'])
                                 ? ($data->hiv['hubVag'] === 'Ya'
@@ -313,7 +358,7 @@
                                 : '-'
                             ?>
                         </td>
-                        <td>
+                        <td style="font-size: 8pt;">
                             <b>ANAL SEKS BERISIKO</b>
                         </td>
                         <td>
@@ -326,7 +371,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">BERGANTIAN PERALATAN SUNTIK</td>
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">BERGANTIAN PERALATAN SUNTIK</td>
                         <td>
                             <?= !empty($data->hiv['gantianSuntik'])
                                 ? ($data->hiv['gantianSuntik'] === 'Ya'
@@ -335,7 +380,7 @@
                                 : '-'
                             ?>
                         </td>
-                        <td>
+                        <td style="font-size: 8pt;">
                             <b>TRANSFUSI DARAH</b>
                         </td>
                         <td>
@@ -348,7 +393,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">TRANSMISI IBU KE ANAK</td>
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">TRANSMISI IBU KE ANAK</td>
                         <td>
                             <?= !empty($data->hiv['transmisiIbu'])
                                 ? ($data->hiv['transmisiIbu'] === 'Ya'
@@ -357,7 +402,7 @@
                                 : '-'
                             ?>
                         </td>
-                        <td>
+                        <td style="font-size: 8pt;">
                             <b>LAINNYA (SEBUTKAN)</b>
                         </td>
                         <td>
@@ -370,7 +415,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><b>PERIODE JENDELA</b><small>(Window periode)</small></td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;"><b>PERIODE JENDELA</b><small>(Window periode)</small></td>
                         <td>
                             <?= !empty($data->hiv['periodeJendela'])
                                 ? ($data->hiv['periodeJendela'] === 'Ya'
@@ -379,7 +424,7 @@
                                 : '-'
                             ?>
                         </td>
-                        <td>
+                        <td style="font-size: 8pt;">
                             <b>KESEDIAAN TES</b>
                         </td>
                         <td>
@@ -387,7 +432,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;">
                             <b>PERNAH TES HIV SEBELUMNYA</b>
                         </td>
                         <td colspan="3">
@@ -418,39 +463,48 @@
                         <img src="<?= base_url() ?>public/assets/img/aids.png" width="80%" alt="">
                     </div>
                 </div>
-                <hr style="height: 5px; background-color: black; border: none;">
+                <hr style="height: 5px; border: none; border-top: 5px solid #000000; opacity: 1; margin: 0;">
 
-                <table class="table table-borderless table-sm mb-1">
+                <table class="table table-borderless table-sm mb-1" style="border-collapse: separate !important; border-spacing: 0 8px !important;">
                     <tr>
                         <td>NO. REKAM MEDIS</td>
-                        <td>: <?= $data->pasien['no_rkm_medis'] ?? '' ?></td>
+                        <td style="border: 1px solid #000; padding: 4px 8px;">: <?= $data->pasien['no_rkm_medis'] ?? '' ?></td>
                         <td>NIK</td>
-                        <td>: <?= $data->pasien['no_ktp'] ?? '' ?></td>
+                        <td style="border: 1px solid #000; padding: 4px 8px;">: <?= $data->pasien['no_ktp'] ?? '' ?></td>
+                        <td rowspan="2" class="text-center">
+                            <div class="p-2 fw-bold" style="background-color: red; color:white;">RAHASIA</div>
+                        </td>
                     </tr>
                     <tr>
                         <td>NO. REGISTER</td>
-                        <td>: <?= $data->pasien['no_rawat'] ?? '' ?></td>
+                        <td style="border: 1px solid #000; padding: 4px 8px;">: <?= $data->pasien['no_rawat'] ?? '' ?></td>
                         <td></td>
                         <td></td>
                     </tr>
                 </table>
 
 
-                <table class="table table-sm table-bordered">
+                <table class="table table-sm table-bordered tabelHiv">
                     <tr>
-                        <td colspan="4" style="background-color: #eaeaea;">
+                        <td colspan="4" style="background-color: #000; color:#fff;">
                             <b>PEMBERIAN INFORMASI</b> <small><i>isikan bila penawaran tes oleh petugas kesehatan (TIPK)</i></small>
                         </td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">PERNAH TES HIV SEBELUMNYA</td>
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">TANGGAL PEMBERIAN INFORMASI</td>
+                        <td colspan="3">
+                            <?= !empty($data->hiv['tglPemberianInfo']) && $data->hiv['tglPemberianInfo'] !== '0000-00-00' ? date('d-m-Y', strtotime($data->hiv['tglPemberianInfo'])) : '-' ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">PERNAH TES HIV SEBELUMNYA</td>
                         <td colspan="3">
                             <?= !empty($data->hiv['pernahTes2']) ? ($data->hiv['pernahTes2'] === 'Ya' ? 'Ya, Dimana ? di : ' . (!empty($data->hiv['pernahTesDmn2']) ? $data->hiv['pernahTesDmn2'] : '-') . '. Tanggal : ' .  (!empty($data->hiv['pernahTesTgl2']) ? $data->hiv['pernahTesTgl2'] : '-') . '. Hasil : ' . (!empty($data->hiv['hasilTesSebelumnya2']) ? $data->hiv['hasilTesSebelumnya2'] : '-') : 'Tidak') : '-' ?>
                         </td>
 
                     </tr>
                     <tr>
-                        <td class="fw-bold">PENYAKIT TERKAIT PASIEN</td>
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">PENYAKIT TERKAIT PASIEN</td>
                         <td colspan="3">
                             <?php
                             // 1. Ambil data JSON dan decode menjadi Array PHP
@@ -477,26 +531,26 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;">
                             <b>KESEDIAAN UNTUK TES</b>
                         </td>
-                        <td>
+                        <td colspan="3">
                             <?= $data->hiv['kesediaanTes2'] ?? '' ?>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" style="background-color: #eaeaea;">
+                        <td colspan="4" style="background-color: #000; color:#fff;">
                             <b>TES ANTIBODI HIV</b>
                         </td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">
                             TANGGAL TES HIV
                         </td>
                         <td>
                             <?= !empty($data->hiv['tglTesHiv']) && $data->hiv['tglTesHiv'] !== '0000-00-00' ? date('d-m-Y', strtotime($data->hiv['tglTesHiv'])) : '-' ?>
                         </td>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="font-size: 8pt;">
                             JENIS TES HIV
                         </td>
                         <td>
@@ -504,13 +558,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">
                             HASIL TES R1
                         </td>
                         <td>
                             <?= $data->hiv['hasilTesR1'] ?? '' ?>
                         </td>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="font-size: 8pt;">
                             NAMA REAGEN
                         </td>
                         <td>
@@ -518,13 +572,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">
                             HASIL TES R2
                         </td>
                         <td>
                             <?= $data->hiv['hasilTesR2'] ?? '' ?>
                         </td>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="font-size: 8pt;">
                             NAMA REAGEN
                         </td>
                         <td>
@@ -532,13 +586,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">
                             HASIL TES R3
                         </td>
                         <td>
                             <?= $data->hiv['hasilTesR3'] ?? '' ?>
                         </td>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="font-size: 8pt;">
                             NAMA REAGEN
                         </td>
                         <td>
@@ -546,13 +600,21 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">
+                            KESIMPULAN HASIL TEST HIV
+                        </td>
+                        <td colspan="3">
+                            <?= $data->hiv['kesimpulanTes'] ?? '' ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">
                             NOMOR REGISTRASI NASIONAL PDP
                         </td>
                         <td>
                             <?= $data->hiv['noPdp'] ?? '' ?>
                         </td>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="font-size: 8pt;">
                             Tgl Masuk PDP
                         </td>
                         <td>
@@ -560,7 +622,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="background-color:#D3D3D3; font-size: 8pt;">
                             TINDAK LANJUT (TIPK)
                         </td>
                         <td colspan="3">
@@ -592,12 +654,12 @@
                     </tr>
 
                     <tr>
-                        <td colspan="4" style="background-color: #eaeaea;">
+                        <td colspan="4" style="background-color: #000; color:#fff;">
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="fw-bold">
+                        <td class="fw-bold" style="background-color:#D3D3D3; ">
                             Bagaimana Status HIV Pasangan ?
                         </td>
                         <td colspan="3">
@@ -606,13 +668,13 @@
                     </tr>
 
                     <tr>
-                        <td colspan="4" style="background-color: #eaeaea;">
+                        <td colspan="4" style="background-color: #000; color:#fff;">
                             <b>KONSELING PASCA TES</b>
                         </td>
                     </tr>
 
                     <tr>
-                        <td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;">
                             <b>TANGGAL KONSELING PASCA TES</b>
                         </td>
                         <td colspan="3">
@@ -620,21 +682,21 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;">
                             <b>TERIMA HASIL</b>
                         </td>
                         <td>
                             <?= $data->hiv['terimaHasil'] ?? '-' ?>
                         </td>
-                        <td>
+                        <td style="font-size: 8pt;">
                             <b>KAJI GELAJA TB :</b> <?= $data->hiv['gejalaTb'] ?? '-' ?>
                         </td>
-                        <td>
+                        <td style="font-size: 8pt;">
                             <b>Jumlah Kondom yang diberikan : </b> <?= $data->hiv['jmlKondom'] ?? '-' ?> Buah
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;">
                             <b>TINDAK LANJUT (KTS)</b>
                         </td>
                         <td colspan="3">
@@ -666,7 +728,7 @@
                     </tr>
 
                     <tr>
-                        <td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;">
                             <b>NAMA KONSELOR / PETUGAS KESEHATAN</b>
                         </td>
                         <td colspan="3">
@@ -675,7 +737,7 @@
                     </tr>
 
                     <tr>
-                        <td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;">
                             <b>STATUS Layanan</b>
                         </td>
                         <td colspan="3">
@@ -684,7 +746,7 @@
                     </tr>
 
                     <tr>
-                        <td>
+                        <td style="background-color:#D3D3D3; font-size: 8pt;">
                             <b>JENIS PELAYANAN</b>
                         </td>
                         <td colspan="3">
