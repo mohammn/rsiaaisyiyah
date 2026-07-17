@@ -21,44 +21,86 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
 
-<body class="login" style="background :url(<?= base_url() . "public/assets/img/login.jpg" ?>); height:100%; background-position:center; background-size: cover; no-repeat;">
-    <div>
-        <div class="login_wrapper bg-info" style="padding:20px;">
-            <form method="post" action="<?= base_url() ?>login/auth">
-                <img src="<?= base_url() ?>public/assets/img/logorsia.png" width="90%" alt="">
-                <h3 class="inline-block text-white">Login</h3>
-                <div class="form-group row mt-2">
-                    <select class="form-control" id="nama" name="nama">
-                        <?php for ($i = 0; $i < count($user); $i++) : ?>
-                            <option value="<?= $user[$i]["id"] ?>"><?= $user[$i]["id"] . ". " . $user[$i]["nama"] ?></option>
-                        <?php endfor; ?>
-                    </select>
-                </div>
-                <div class="form-group row">
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
-                </div>
-                <div class="form-group row">
-                    <input type="submit" class="btn btn-primary" value="Log in" />
-                </div>
+<body class="bg-light d-flex align-items-center justify-content-center min-vh-100" style="background: linear-gradient(135deg, rgba(240,244,248,0.9), rgba(209,230,245,0.0)), url('<?= base_url() . "public/assets/img/login.jpg" ?>') no-repeat center center; background-size: cover;">
 
-                <div class="row">
-                    <div class="col-12 text-center"><?php echo session()->getFlashdata('message'); ?></div>
-                </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
 
-                <div class="clearfix"></div>
+                <!-- Card Login -->
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                    <div class="card-body p-4 p-sm-5 bg-white">
 
-                <div class="separator">
+                        <!-- Logo & Title -->
+                        <div class="text-center mb-4">
+                            <img src="<?= base_url() ?>public/assets/img/logorsia.png" class="img-fluid mb-3" style="max-height: 70px; object-fit: contain;" alt="Logo RSIA">
+                            <h4 class="fw-bold text-secondary m-0">Selamat Datang</h4>
+                            <small class="text-muted">Silahkan masuk ke akun Anda</small>
+                        </div>
 
-                    <div class="clearfix"></div>
+                        <!-- Flash Message / Alert -->
+                        <?php if (session()->getFlashdata('message')) : ?>
+                            <div class="alert alert-danger text-center py-2 small" role="alert">
+                                <?= session()->getFlashdata('message'); ?>
+                            </div>
+                        <?php endif; ?>
 
-                    <div>
-                        <sub>Made by <b>MN Dev</b> with <i class="fa fa-heart text-danger" aria-hidden="true"></i> for : </sub><br>
-                        <h4 style="display: inline;"><i style="color: white;" class="fa fa-hospital"></i> RSIA Aisyiyah </h4><sub>Bangkalan</sub>
+                        <!-- Form -->
+                        <form method="post" action="<?= base_url() ?>login/auth">
+
+                            <!-- Input Nama / User (Dropdown) -->
+                            <div class="mb-3">
+                                <label for="nama" class="form-label small fw-semibold text-muted">Pilih Pengguna</label>
+                                <select class="form-select" id="nama" name="nama" required>
+                                    <option value="" disabled selected hidden>Pilih nama Anda...</option>
+                                    <?php for ($i = 0; $i < count($user); $i++) : ?>
+                                        <option value="<?= $user[$i]["id"] ?>">
+                                            <?= $user[$i]["id"] . ". " . $user[$i]["nama"] ?>
+                                        </option>
+                                    <?php endfor; ?>
+                                </select>
+                            </div>
+
+                            <!-- Input Password -->
+                            <div class="mb-4">
+                                <label for="password" class="form-label small fw-semibold text-muted">Kata Sandi</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" required />
+                            </div>
+
+                            <!-- Tombol Submit -->
+                            <div class="d-grid mb-4">
+                                <button type="submit" class="btn btn-primary fw-semibold py-2 rounded-3 shadow-sm">
+                                    <i class="fa fa-sign-in-alt me-2"></i> Log in
+                                </button>
+                            </div>
+
+                            <hr class="text-muted opacity-25">
+
+                            <!-- Footer Instansi -->
+                            <div class="text-center mt-3 pt-2">
+                                <p class="m-0 text-secondary fw-semibold small">
+                                    <i class="fa fa-hospital text-primary me-1"></i> RSIA Aisyiyah
+                                </p>
+                                <span class="badge bg-secondary-subtle text-secondary px-2 py-1 rounded-pill style=" font-size: 0.75rem;">Bangkalan</span>
+                            </div>
+
+                            <!-- Footer Developer -->
+                            <div class="text-center mt-4">
+                                <sub class="text-muted text-opacity-70 d-block" style="font-size: 0.7rem;">
+                                    Made by <b>MN Dev</b> with <i class="fa fa-heart text-danger"></i>
+                                </sub>
+                            </div>
+
+                        </form>
+
                     </div>
                 </div>
-            </form>
+                <!-- End Card -->
+
+            </div>
         </div>
     </div>
+
 </body>
 
 </html>
