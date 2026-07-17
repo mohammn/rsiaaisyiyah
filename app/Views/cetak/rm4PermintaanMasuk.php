@@ -197,7 +197,7 @@ if ($data->rm4PermintaanMasuk) {
                 <table class="table table-borderless table-sm mt-2">
                     <tr>
                         <td style="width:25%">Nama Pasien</td>
-                        <td>: <?= empty($data->rm4PermintaanMasuk["nama"]) ? $data->pasien["nm_pasien"] : $data->rm4PermintaanMasuk["nama"] ?></td>
+                        <td>: <?= $data->pasien["nm_pasien"] ?? '' ?></td>
                     </tr>
                     <tr>
                         <td>Tempat, Tanggal lahir :</td>
@@ -310,7 +310,7 @@ if ($data->rm4PermintaanMasuk) {
                                     } ?>
                                 </div>
                                 <br>
-                                (<?= $data->rm4PermintaanMasuk["nama"] ?> )
+                                (<?= empty($data->rm4PermintaanMasuk["nama"]) ? $data->pasien["nm_pasien"] : $data->rm4PermintaanMasuk["nama"] ?> )
                                 <br><br>
                                 <?php if (!$data->rm4PermintaanMasuk["ttdWali"]) { ?>
                                     <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdWali">
