@@ -228,7 +228,7 @@ if ($tgl_lahir && $tgl_skrining) {
                     </tr>
                     <tr>
                         <?php if ($usia < 5): ?>
-                            <th colspan="4" class="text-center bg-success">Usia &gt; 5 tahun: BB/PB sesuai kategori usia</th>
+                            <th colspan="4" class="text-center bg-success">Usia &lt; 5 tahun: BB/PB sesuai kategori usia</th>
                         <?php else: ?>
                             <th colspan="4" class="text-center bg-success">Usia 5-15 tahun: IMT/U</th>
                         <?php endif; ?>

@@ -23,6 +23,70 @@
     .hover-check .form-check-label {
         cursor: pointer;
     }
+
+    .tooltip-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Tombol agar cursor berubah menjadi pointer */
+    .tooltip-container button {
+        cursor: pointer;
+        border: none;
+        outline: none;
+    }
+
+    /* Styling Kotak Tooltip */
+    .tooltip-container .tooltip-text {
+        visibility: hidden;
+        width: 240px;
+        background-color: #2c3e50;
+        /* Warna gelap yang elegan */
+        color: #fff;
+        text-align: left;
+        border-radius: 8px;
+        padding: 12px;
+        position: absolute;
+        z-index: 99;
+        bottom: 125%;
+        /* Memunculkan tooltip di atas tombol */
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s, visibility 0.3s;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        font-family: sans-serif;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    /* Mengatur list di dalam tooltip agar rapi */
+    .tooltip-container .tooltip-text ul {
+        margin: 5px 0 0 0;
+        padding-left: 15px;
+    }
+
+    .tooltip-container .tooltip-text li {
+        margin-bottom: 3px;
+    }
+
+    /* Efek Panah Kecil di Bawah Kotak Tooltip */
+    .tooltip-container .tooltip-text::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #2c3e50 transparent transparent transparent;
+    }
+
+    /* Aksi saat Kursor di atas Tombol atau Container */
+    .tooltip-container:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+    }
 </style>
 <form>
     <div class="row">
@@ -59,7 +123,36 @@
                         <div class="row mt-2">
                             <div class="col-12">
                                 <div class="d-flex flex-wrap gap-2 border border-info rounded p-2 align-items-center">
-                                    <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Hasil Status Gizi :</label>
+                                    <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Hasil Status Gizi
+
+                                        <div class="tooltip-container" id="tool5Kurang">
+                                            <button type="button" class="btn-estetik btn-sm-estetik bg-vibrant-blue" aria-label="Informasi Hasil Skrining Gejala">
+                                                <i class="fas fa-info"></i>
+                                            </button>
+                                            <div class="tooltip-text">
+                                                <ul style="margin-left: 0px;">
+                                                    <li>
+                                                        &lt;2 tahun menggunakan <br> perhitungan BB/PB <br> dilihat berdasarkan <br>tabel z-score <br>
+                                                    </li>
+                                                    <li>
+                                                        2-5 tahun menggunakan <br> perhitungan BB/TB <br> dilihat berdasarkan <br>tabel z-score
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="tooltip-container" id="tool5Lebih">
+                                            <button type="button" class="btn-estetik btn-sm-estetik bg-vibrant-blue" aria-label="Informasi Hasil Skrining Gejala">
+                                                <i class="fas fa-info"></i>
+                                            </button>
+                                            <div class="tooltip-text">
+                                                5-15 tahun menggunakan <br> perhitungan IMT/U dilihat <br> berdasarkan tabel z-score
+                                            </div>
+                                        </div>
+
+
+                                        :
+                                    </label>
 
                                     <div class="form-check mb-0 me-1">
                                         <input class="form-check-input" type="radio" name="statusGizi" id="giziBuruk" value="Gizi buruk" <?= (($data->tbAnak["statusGizi"] ?? '') === "Gizi buruk") ? 'checked' : '' ?>>
@@ -746,12 +839,19 @@
             // Logika Tampil/Sembunyi elemen (Ganti #idElemenKamu dengan ID asli)
             if (usiaTahun < 5) {
                 $('#berisikoGiziLebih').show(); // Tampil jika < 5 tahun
+                $('#tool5Kurang').show(); // Tampil jika < 5 tahun
+                $('#tool5Lebih').hide(); // Tampil jika < 5 tahun
+
             } else {
                 $('#berisikoGiziLebih').hide(); // Sembunyi jika >= 5 tahun
+                $('#tool5Kurang').hide(); // Tampil jika < 5 tahun
+                $('#tool5Lebih').show(); // Tampil jika < 5 tahun
             }
         } else {
             // Jika tanggal skrining dikosongkan kembali oleh user
             $('#idElemenKamu').hide();
+            $('#tool5Kurang').hide(); // Tampil jika < 5 tahun
+            $('#tool5Lebih').show(); // Tampil jika < 5 tahun
         }
     }
 
