@@ -34,6 +34,7 @@ use App\Models\Rm26bRujukKeluarDataModel;
 use App\Models\HivModel;
 use App\Models\Rm4PermintaanMasukModel;
 use App\Models\TbAnakModel;
+use App\Models\TbIbuModel;
 
 use function PHPSTORM_META\type;
 
@@ -71,6 +72,7 @@ class Rm extends BaseController
     protected $hivModel;
     protected $rm4PermintaanMasukModel;
     protected $tbAnakModel;
+    protected $tbIbuModel;
 
     public function __construct()
     {
@@ -110,6 +112,7 @@ class Rm extends BaseController
         $this->hivModel = new HivModel();
         $this->rm4PermintaanMasukModel = new Rm4PermintaanMasukModel();
         $this->tbAnakModel = new TbAnakModel();
+        $this->tbIbuModel = new TbIbuModel();
     }
     public function index($no_rawat)
     {
@@ -159,6 +162,7 @@ class Rm extends BaseController
         $hiv = $this->hivModel->where('noRawat', $no_rawat)->first();
         $rm4PermintaanMasuk = $this->rm4PermintaanMasukModel->where('noRawat', $no_rawat)->first();
         $tbAnak = $this->tbAnakModel->where('noRawat', $no_rawat)->first();
+        $tbIbu = $this->tbIbuModel->where('noRawat', $no_rawat)->first();
         // ================khusus SBAR=========================
         $rm0Sbar = $this->rm0SbarModel->where('noRawat', $no_rawat)->findAll();
         $rm0SbarData = [];
@@ -277,6 +281,7 @@ class Rm extends BaseController
             "hiv" => $this->cekSemuaKolom($hiv, ['isiLsm', 'reagenR1', 'reagenR2', 'reagenR3', 'jenisKonselingKts', 'jenisPetugasPendukung', 'jumlahAnak', 'umurAnakTerakhir', 'jenisPs', 'lamanya', 'pasanganTetap', 'pasanganPerempuan', 'pasanganHamil', 'tglLahirPasangan', 'tglTesPasangan', 'isiAlasanTesLainnya', 'hubVagTgl', 'hubAnalTgl', 'gantianSuntikTgl', 'transfusiDarahTgl', 'transmisiIbuTgl', 'isiLainnya', 'isiLainnyaTgl', 'pernahTesDmn', 'pernahTesTgl', 'hasilTesSebelumnya', 'pernahTesDmn2', 'pernahTesTgl2', 'hasilTesSebelumnya2', 'isiImsLainnya', 'isiPenyakitLainnya', 'isiRujukKe', 'isiRujukKonseling']),
             "rm4PermintaanMasuk" => $this->cekSemuaKolom($rm4PermintaanMasuk, ['ttdWali', 'nama', 'isiBiayaLain']),
             "tbAnak" => $this->cekSemuaKolom($tbAnak, ['ttdWali', 'jenisKontak', 'indeksTbc', 'jenisTbc', 'tglBerobatTbc', 'tglWbp', 'statusWbp', 'durasiBatuk', 'fasyankes']),
+            "tbIbu" => $this->cekSemuaKolom($tbAnak, ['ttdWali', 'imt', 'jenisKontak', 'indeksTbc', 'jenisTbc', 'tglBerobatTbc', 'tglWbp', 'statusWbp', 'durasiBatuk', 'fasyankes']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -308,6 +313,7 @@ class Rm extends BaseController
             'hiv'  => $hiv,    // Biarkan null jika data tidak ada
             'rm4PermintaanMasuk'  => $rm4PermintaanMasuk,    // Biarkan null jika data tidak ada
             'tbAnak'  => $tbAnak,    // Biarkan null jika data tidak ada
+            'tbIbu'  => $tbIbu,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 
