@@ -26,6 +26,7 @@ class TbIbuModel extends Model
         // --- PEMERIKSAAN RIWAYAT KONTAK TBC ---
         'kontakTbc',
         'jenisKontak',
+        'isiJenisKontakLainnya',
         'indeksTbc',
         'jenisTbc',
 

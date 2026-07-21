@@ -280,8 +280,8 @@ class Rm extends BaseController
             "rm26bRujukKeluar" => (!empty($rm26bRujukKeluarData) && count((array)$rm26bRujukKeluarData) > 0) ? $this->cekSemuaKolom($rm26bRujukKeluar, ['isiKlinikal', 'isiNonKlinikal', 'petugasDihubungi', 'noPetugasDihubungi', 'jamTiba', 'isiAlergi', 'isiPenyakit', 'alat', 'isiAlatLainnya']) : 'Tidak Lengkap',
             "hiv" => $this->cekSemuaKolom($hiv, ['tglTesHiv', 'jenisTes', 'hasilTesR1', 'reagenR1', 'hasilTesR2', 'reagenR2', 'hasilTesR3', 'reagenR3', 'kesimpulanTes', 'noPdp', 'tglPdp', 'tindakLanjut', 'isiLsm', 'reagenR1', 'reagenR2', 'reagenR3', 'jenisKonselingKts', 'jenisPetugasPendukung', 'jumlahAnak', 'umurAnakTerakhir', 'jenisPs', 'lamanya', 'pasanganTetap', 'pasanganPerempuan', 'pasanganHamil', 'tglLahirPasangan', 'tglTesPasangan', 'isiAlasanTesLainnya', 'hubVagTgl', 'hubAnalTgl', 'gantianSuntikTgl', 'transfusiDarahTgl', 'transmisiIbuTgl', 'isiLainnya', 'isiLainnyaTgl', 'pernahTesDmn', 'pernahTesTgl', 'hasilTesSebelumnya', 'pernahTesDmn2', 'pernahTesTgl2', 'hasilTesSebelumnya2', 'isiImsLainnya', 'isiPenyakitLainnya', 'isiRujukKe', 'isiRujukKonseling']),
             "rm4PermintaanMasuk" => $this->cekSemuaKolom($rm4PermintaanMasuk, ['ttdWali', 'nama', 'isiBiayaLain']),
-            "tbAnak" => $this->cekSemuaKolom($tbAnak, ['ttdWali', 'jenisKontak', 'indeksTbc', 'jenisTbc', 'tglBerobatTbc', 'tglWbp', 'statusWbp', 'durasiBatuk', 'fasyankes']),
-            "tbIbu" => $this->cekSemuaKolom($tbAnak, ['ttdWali', 'imt', 'jenisKontak', 'indeksTbc', 'jenisTbc', 'tglBerobatTbc', 'tglWbp', 'statusWbp', 'durasiBatuk', 'fasyankes']),
+            "tbAnak" => $this->cekSemuaKolom($tbAnak, ['ttdWali', 'jenisKontak', 'isiJenisKontakLainnya', 'indeksTbc', 'jenisTbc', 'tglBerobatTbc', 'tglWbp', 'statusWbp', 'durasiBatuk', 'fasyankes']),
+            "tbIbu" => $this->cekSemuaKolom($tbAnak, ['ttdWali', 'imt', 'jenisKontak', 'isiJenisKontakLainnya', 'indeksTbc', 'jenisTbc', 'tglBerobatTbc', 'tglWbp', 'statusWbp', 'durasiBatuk', 'fasyankes']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object

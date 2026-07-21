@@ -175,6 +175,7 @@
             // --- PEMERIKSAAN RIWAYAT KONTAK TBC ---
             kontakTbc: $('input[name="kontakTbc"]:checked').val() || '',
             jenisKontak: $('input[name="jenisKontak"]:checked').val() || '',
+            isiJenisKontakLainnya: $('#isiJenisKontakLainnya').val(),
             indeksTbc: $('#indeksTbc').val(),
             jenisTbc: $('input[name="jenisTbc"]:checked').val() || '',
 

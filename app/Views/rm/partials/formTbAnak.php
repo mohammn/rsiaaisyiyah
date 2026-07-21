@@ -238,6 +238,15 @@
                                             <input class="form-check-input" type="radio" name="jenisKontak" id="erat" value="Kontak Erat" <?= (($data->tbAnak["jenisKontak"] ?? '') === "Kontak Erat") ? 'checked' : '' ?>>
                                             <label class="form-check-label small" for="erat">Kontak Erat</label>
                                         </div>
+
+                                        <div class="form-check mb-0 me-1 d-inline-flex align-items-center gap-2">
+                                            <input class="form-check-input mt-0" type="radio" name="jenisKontak" id="kontakLainnya" value="Lainnya" <?= (($data->tbAnak["jenisKontak"] ?? '') === "Lainnya") ? 'checked' : '' ?>>
+                                            <label class="form-check-label small text-nowrap" for="kontakLainnya">
+                                                Lainnya :
+                                            </label>
+                                            <!-- PERBAIKAN: Menambahkan set value durasiBatuk -->
+                                            <input type="text" id="isiJenisKontakLainnya" name="isiJenisKontakLainnya" class="form-control form-control-sm" style="width: auto;" value="<?= $data->tbAnak['isiJenisKontakLainnya'] ?? '' ?>">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

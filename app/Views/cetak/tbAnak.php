@@ -259,26 +259,26 @@ if ($tgl_lahir && $tgl_skrining) {
                     </tr>
                     <tr>
                         <td colspan="2">Apakah ada kontak dengan pasien TBC?</td>
-                        <td colspan="2"><?php $data->tbAnak['kontakTbc'] ?? '-' ?></td>
+                        <td colspan="2"><?= $data->tbAnak['kontakTbc'] ?? '-' ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">Jika Ya, jenis kontak TBC :</td>
-                        <td colspan="2"><?php $data->tbAnak['jenisKontak'] ?? '-' ?></td>
+                        <td colspan="2"><?= $data->tbAnak['jenisKontak'] === 'Lainnya' ? 'Lainnya : ' . ($data->tbAnak['isiJenisKontakLainnya'] ?? '-') : ($data->tbAnak['jenisKontak'] ?? '-') ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">Jika Ya, sebutkan nama kasus indeks TBC :</td>
-                        <td colspan="2"><?php $data->tbAnak['indeksTbc'] ?? '-' ?></td>
+                        <td colspan="2"><?= $data->tbAnak['indeksTbc'] ?? '-' ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">Jika Ya, pilih jenis TBC yang diderita oleh kasus indeks :</td>
-                        <td colspan="2"><?php $data->tbAnak['jenisTbc'] ?? '-' ?></td>
+                        <td colspan="2"><?= $data->tbAnak['jenisTbc'] ?? '-' ?></td>
                     </tr>
                     <tr>
                         <th colspan="4" class="text-center bg-info">FAKTOR RISIKO</th>
                     </tr>
                     <tr>
                         <td colspan="2">Pernah terdiagnosis/berobat TBC</td>
-                        <td colspan="2"><?php $data->tbAnak['berobatTbc'] === 'Ya' ? 'Ya, Tanggal : ' . $data->tbAnak['tglBerobatTbc'] : ($data->tbAnak['berobatTbc'] ?? '-') ?></td>
+                        <td colspan="2"><?= $data->tbAnak['berobatTbc'] === 'Ya' ? 'Ya, Tanggal : ' . $data->tbAnak['tglBerobatTbc'] : ($data->tbAnak['berobatTbc'] ?? '-') ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">Kekurangan Gizi</td>

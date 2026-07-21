@@ -269,26 +269,26 @@ if ($tgl_lahir && $tgl_skrining) {
                     </tr>
                     <tr>
                         <td colspan="2">Apakah ada kontak dengan pasien TBC?</td>
-                        <td colspan="2"><?php $data->tbIbu['kontakTbc'] ?? '-' ?></td>
+                        <td colspan="2"><?= $data->tbIbu['kontakTbc'] ?? '-' ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">Jika Ya, jenis kontak TBC :</td>
-                        <td colspan="2"><?php $data->tbIbu['jenisKontak'] ?? '-' ?></td>
+                        <td colspan="2"><?= $data->tbIbu['jenisKontak'] === 'Lainnya' ? 'Lainnya : ' . ($data->tbIbu['isiJenisKontakLainnya'] ?? '-') : ($data->tbIbu['jenisKontak'] ?? '-') ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">Jika Ya, sebutkan nama kasus indeks TBC :</td>
-                        <td colspan="2"><?php $data->tbIbu['indeksTbc'] ?? '-' ?></td>
+                        <td colspan="2"><?= $data->tbIbu['indeksTbc'] ?? '-' ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">Jika Ya, pilih jenis TBC yang diderita oleh kasus indeks :</td>
-                        <td colspan="2"><?php $data->tbIbu['jenisTbc'] ?? '-' ?></td>
+                        <td colspan="2"><?= $data->tbIbu['jenisTbc'] ?? '-' ?></td>
                     </tr>
                     <tr>
                         <th colspan="4" class="text-center bg-info">FAKTOR RISIKO</th>
                     </tr>
                     <tr>
                         <td colspan="2">Pernah terdiagnosis/berobat TBC</td>
-                        <td colspan="2"><?php $data->tbIbu['berobatTbc'] === 'Ya' ? 'Ya, Tanggal : ' . $data->tbIbu['tglBerobatTbc'] : ($data->tbIbu['berobatTbc'] ?? '-') ?></td>
+                        <td colspan="2"><?= $data->tbIbu['berobatTbc'] === 'Ya' ? 'Ya, Tanggal : ' . $data->tbIbu['tglBerobatTbc'] : ($data->tbIbu['berobatTbc'] ?? '-') ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">Kekurangan Gizi</td>

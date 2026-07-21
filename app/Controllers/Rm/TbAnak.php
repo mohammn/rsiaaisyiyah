@@ -87,6 +87,7 @@ class TbAnak extends BaseController
             "statusGizi"          => $this->request->getPost("statusGizi"),
             "kontakTbc"           => $this->request->getPost("kontakTbc"),
             "jenisKontak"         => $this->request->getPost("jenisKontak"),
+            "isiJenisKontakLainnya"         => $this->request->getPost("isiJenisKontakLainnya"),
             "indeksTbc"           => $this->request->getPost("indeksTbc"),
             "jenisTbc"            => $this->request->getPost("jenisTbc"),
             "berobatTbc"          => $this->request->getPost("berobatTbc"),
