@@ -169,6 +169,7 @@ class Hiv extends BaseController
             "tindakLanjut"          => json_encode($this->request->getPost("tindakLanjut") ?? []),
             "isiRujukKonseling"     => $this->request->getPost("isiRujukKonseling"),
             "isiRujukKe"            => $this->request->getPost("isiRujukKe"),
+            "isitindakLanjutLainnya"            => $this->request->getPost("isitindakLanjutLainnya"),
             "hivPasangan"           => $this->request->getPost("hivPasangan")
         ];
 

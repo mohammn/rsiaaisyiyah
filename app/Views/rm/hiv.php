@@ -263,6 +263,7 @@
             }).get(),
             isiRujukKonseling: $('#isiRujukKonseling').val(),
             isiRujukKe: $('#isiRujukKe').val(),
+            isitindakLanjutLainnya: $('#isitindakLanjutLainnya').val(),
             hivPasangan: $('input[name="hivPasangan"]:checked').val() || ''
         };
 

@@ -94,6 +94,7 @@ class HivModel extends Model
         'tindakLanjut',
         'isiRujukKonseling',
         'isiRujukKe',
+        'isitindakLanjutLainnya',
         'hivPasangan',
     ];
 }

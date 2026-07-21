@@ -1088,6 +1088,17 @@
                                             <input class="form-check-input" type="checkbox" name="tindakLanjut[]" value="Rujuk ke PDP dan PPIA" id="rujukPdpPpia" <?= in_array('Rujuk ke PDP dan PPIA', $tindakLanjut) ? 'checked' : '' ?>>
                                             <label class="form-check-label small" for="rujukPdpPpia">Rujuk ke PDP dan PPIA</label>
                                         </div>
+
+
+                                        <div class="form-check hover-check pt-1 pe-1">
+                                            <div class="d-flex flex-wrap align-items-center gap-1">
+                                                <div class="d-flex align-items-center">
+                                                    <input class="form-check-input me-1" type="checkbox" name="tindakLanjut[]" value="Lainnya" id="tindakLanjutLainnya" <?= in_array('Lainnya', $tindakLanjut) ? 'checked' : '' ?>>
+                                                    <label class="form-check-label small me-1" for="tindakLanjutLainnya">Lainnya :</label>
+                                                </div>
+                                                <input type="text" class="form-control form-control-sm border-info" style="max-width: 150px;" name="isitindakLanjutLainnya" id="isitindakLanjutLainnya" placeholder="sebutkan..." value="<?= $data->hiv['isitindakLanjutLainnya'] ?? '' ?>">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

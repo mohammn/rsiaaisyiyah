@@ -643,6 +643,12 @@
                                     $tindakLanjutArray[$keyRujukKonseling] = 'Rujuk konseling' . $detailKonseling;
                                 }
 
+                                // 4. Manipulasi "Lainnya" -> ditambahkan info dari $data->hiv['isitindakLanjutLainnya']
+                                if (($keyRujukKonseling = array_search('Lainnya', $tindakLanjutArray)) !== false) {
+                                    $detailKonseling = !empty($data->hiv['isitindakLanjutLainnya']) ? ' : ' . $data->hiv['isitindakLanjutLainnya'] : '';
+                                    $tindakLanjutArray[$keyRujukKonseling] = 'Lainnya' . $detailKonseling;
+                                }
+
                                 // 4. Cetak menjadi string dipisahkan koma (a, b, c, d)
                                 echo implode(', ', $tindakLanjutArray);
                             } else {
