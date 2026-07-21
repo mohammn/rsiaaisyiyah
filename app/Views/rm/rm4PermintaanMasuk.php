@@ -82,7 +82,7 @@
 
                     <br><br>
                     <div class="text-center">
-                        <?php if ($data->rm4PermintaanMasuk['ttdWali']): ?>
+                        <?php if ($data->rm4PermintaanMasuk['ttdWali'] and $data->rm4PermintaanMasuk['ttdDokter'] and $data->rm4PermintaanMasuk['ttdPetugas']): ?>
                             <a class="btn btn-estetik btn-cetak" href="<?= base_url('/rm/rm4PermintaanMasuk/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->rm4PermintaanMasuk['id']) ?>" target="_blank">
                                 <i class="fas fa-print me-1"></i> Cetak
                             </a>

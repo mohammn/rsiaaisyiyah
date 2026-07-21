@@ -194,6 +194,16 @@ class Rm4PermintaanMasuk extends BaseController
         ];
 
         $noRawat = str_replace('-', '/', $noRawat);
+        $cekTtd = $this->rm4PermintaanMasukModel->where('noRawat', $noRawat)->first();
+        if ($cekTtd['ttdWali']) {
+            unset($data['ttdWali']);
+        }
+        if ($cekTtd['ttdDokter']) {
+            unset($data['ttdDokter']);
+        }
+        if ($cekTtd['ttdPetugas']) {
+            unset($data['ttdPetugas']);
+        }
         $this->rm4PermintaanMasukModel->where('noRawat', $noRawat)->set($data)->update();
 
         return $this->response->setJSON([

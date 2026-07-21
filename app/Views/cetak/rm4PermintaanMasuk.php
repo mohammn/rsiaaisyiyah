@@ -357,7 +357,7 @@ if ($data->rm4PermintaanMasuk) {
                     <div class="row mt-2">
                         <div class="col-12 text-center">
                             <div class="" id="pesanError"></div>
-                            <?php if (!$data->rm4PermintaanMasuk["ttdWali"] and !$data->rm4PermintaanMasuk["ttdDokter"] and !$data->rm4PermintaanMasuk["ttdPetugas"]) { ?>
+                            <?php if (!$data->rm4PermintaanMasuk["ttdWali"] or !$data->rm4PermintaanMasuk["ttdDokter"] or !$data->rm4PermintaanMasuk["ttdPetugas"]) { ?>
                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalKunci">Selesaikan dan kunci Tanda tangan.</button>
                             <?php } ?>
                         </div>
