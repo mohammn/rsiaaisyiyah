@@ -288,14 +288,25 @@ if ($data->rm4PermintaanMasuk) {
                     <table class="table table-borderless">
                         <tr class="text-center" style="margin:auto;">
                             <td>
-                            <td>
                                 DPJP
+                                <br><br>
+
+                                <div id="ttdDokter">
+                                    <?php if ($data->rm4PermintaanMasuk["ttdDokter"]) {
+                                        // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
+                                        echo '<img src="' . base_url('public/ttd/rm4PermintaanMasuk/' . $data->rm4PermintaanMasuk["ttdDokter"]) . '" alt="tanda tangan Dokter" style="max-width: 150px;" data-is-new="false">';
+                                    } else {
+                                        echo '<br><br><br><br><br>';
+                                    } ?>
+                                </div>
                                 <br>
-                                <br>
-                                <div id="qrDokter" class="pt-2"></div>
-                                <br>
-                                (<?= $data->rm4PermintaanMasuk["dokter"] ?> )
-                            </td>
+                                (<?= $data->rm4PermintaanMasuk["dokter"] ?? '-' ?> )
+                                <br><br>
+                                <?php if (!$data->rm4PermintaanMasuk["ttdDokter"]) { ?>
+                                    <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdDokter">
+                                        Tanda tangan
+                                    </button>
+                                <?php } ?>
                             </td>
                             <td style="width:40%;">
                                 Pasien / Wali Pasien
@@ -320,11 +331,24 @@ if ($data->rm4PermintaanMasuk) {
                             </td>
                             <td>
                                 Petugas
+                                <br><br>
+
+                                <div id="ttdPetugas">
+                                    <?php if ($data->rm4PermintaanMasuk["ttdPetugas"]) {
+                                        // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
+                                        echo '<img src="' . base_url('public/ttd/rm4PermintaanMasuk/' . $data->rm4PermintaanMasuk["ttdPetugas"]) . '" alt="tanda tangan Petugas" style="max-width: 150px;" data-is-new="false">';
+                                    } else {
+                                        echo '<br><br><br><br><br>';
+                                    } ?>
+                                </div>
                                 <br>
-                                <br>
-                                <div id="qrPetugas" class="pt-2"></div>
-                                <br>
-                                (<?= $data->rm4PermintaanMasuk["petugas"] ?> )
+                                (<?= $data->rm4PermintaanMasuk["petugas"] ?? '-' ?> )
+                                <br><br>
+                                <?php if (!$data->rm4PermintaanMasuk["ttdPetugas"]) { ?>
+                                    <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdPetugas">
+                                        Tanda tangan
+                                    </button>
+                                <?php } ?>
                             </td>
                         </tr>
                     </table>
@@ -333,7 +357,7 @@ if ($data->rm4PermintaanMasuk) {
                     <div class="row mt-2">
                         <div class="col-12 text-center">
                             <div class="" id="pesanError"></div>
-                            <?php if (!$data->rm4PermintaanMasuk["ttdWali"]) { ?>
+                            <?php if (!$data->rm4PermintaanMasuk["ttdWali"] and !$data->rm4PermintaanMasuk["ttdDokter"] and !$data->rm4PermintaanMasuk["ttdPetugas"]) { ?>
                                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalKunci">Selesaikan dan kunci Tanda tangan.</button>
                             <?php } ?>
                         </div>
@@ -389,29 +413,79 @@ if ($data->rm4PermintaanMasuk) {
     </div>
 </div>
 
+<!-- Modal ttd Dokter-->
+<div class="modal fade" id="modalTtdDokter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Tanda tangan dokter</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bodyTtd">
+                <div class="signature-container">
+                    <canvas class="tempatTtd" id="tempatTtdDokter" width="300" height="200"></canvas>
+                    <div class="controls">
+                        <button class="btn btn-sm btn-secondary" id="hapusTtdDokter">Bersihkan</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" id="simpanTtdDokter" disabled>Selesai</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal ttd Petugas-->
+<div class="modal fade" id="modalTtdPetugas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Tanda tangan petugas</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bodyTtd">
+                <div class="signature-container">
+                    <canvas class="tempatTtd" id="tempatTtdPetugas" width="300" height="200"></canvas>
+                    <div class="controls">
+                        <button class="btn btn-sm btn-secondary" id="hapusTtdPetugas">Bersihkan</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" id="simpanTtdPetugas" disabled>Selesai</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs/qrcode.min.js"></script>
 <script>
-    var qrPetugas = new QRCode(document.getElementById("qrPetugas"), {
-        width: 100, // Set the width of the QR code
-        height: 100, // Set the height of the QR code
-        colorDark: "#000000", // Color of the dark modules (e.g., black squares)
-        colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
-        correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
-    });
+    // var qrPetugas = new QRCode(document.getElementById("qrPetugas"), {
+    //     width: 100, // Set the width of the QR code
+    //     height: 100, // Set the height of the QR code
+    //     colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+    //     colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+    //     correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+    // });
 
     // Generate the QR code with the desired content
-    qrPetugas.makeCode("Di ttd <?= $data->rm4PermintaanMasuk["petugas"] ?>  untuk Permintaan masuk RS. No Rawat : " + $("#noRawat").val()); // Replace with your desired text or URL
+    // qrPetugas.makeCode("Di ttd ?= $data->rm4PermintaanMasuk["petugas"] ?  untuk Permintaan masuk RS. No Rawat : " + $("#noRawat").val()); // Replace with your desired text or URL
 
-    var qrDokter = new QRCode(document.getElementById("qrDokter"), {
-        width: 100, // Set the width of the QR code
-        height: 100, // Set the height of the QR code
-        colorDark: "#000000", // Color of the dark modules (e.g., black squares)
-        colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
-        correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
-    });
+    // var qrDokter = new QRCode(document.getElementById("qrDokter"), {
+    //     width: 100, // Set the width of the QR code
+    //     height: 100, // Set the height of the QR code
+    //     colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+    //     colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+    //     correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+    // });
 
-    // Generate the QR code with the desired content
-    qrDokter.makeCode("Di ttd <?= $data->rm4PermintaanMasuk["dokter"] ?>  untuk Permintaan masuk RS. No Rawat : " + $("#noRawat").val()); // Replace with your desired text or URL
+    // // Generate the QR code with the desired content
+    // qrDokter.makeCode("Di ttd ?= $data->rm4PermintaanMasuk["dokter"] ? untuk Permintaan masuk RS. No Rawat : " + $("#noRawat").val()); // Replace with your desired text or URL
 
 
 
@@ -424,8 +498,18 @@ if ($data->rm4PermintaanMasuk) {
 
         // Ambil elemen gambar
         var imgWaliEl = $("#ttdWali img");
+        var imgDokterEl = $("#ttdDokter img");
+        var imgPetugasEl = $("#ttdPetugas img");
         if (imgWaliEl.length === 0) {
             $("#pesanError").addClass("alert alert-danger").html("Wali belum tanda tangan.");
+            $("#modalKunci").modal("hide");
+            return;
+        } else if (imgDokterEl.length === 0) {
+            $("#pesanError").addClass("alert alert-danger").html("Dokter belum tanda tangan.");
+            $("#modalKunci").modal("hide");
+            return;
+        } else if (imgPetugasEl.length === 0) {
+            $("#pesanError").addClass("alert alert-danger").html("Petugas belum tanda tangan.");
             $("#modalKunci").modal("hide");
             return;
         }
@@ -434,6 +518,12 @@ if ($data->rm4PermintaanMasuk) {
         var isWaliNew = (imgWaliEl.attr('data-is-new') === 'true' || imgWaliEl.data('is-new') === true);
         var ttdWali = isWaliNew ? imgWaliEl.attr('src') : '';
 
+        var isDokterNew = (imgDokterEl.attr('data-is-new') === 'true' || imgDokterEl.data('is-new') === true);
+        var ttdDokter = isDokterNew ? imgDokterEl.attr('src') : '';
+
+        var isPetugasNew = (imgPetugasEl.attr('data-is-new') === 'true' || imgPetugasEl.data('is-new') === true);
+        var ttdPetugas = isPetugasNew ? imgPetugasEl.attr('src') : '';
+
 
         $.ajax({
             url: '<?= base_url() ?>rm/rm4PermintaanMasuk/simpanTtd',
@@ -441,6 +531,8 @@ if ($data->rm4PermintaanMasuk) {
             data: {
                 noRawat: noRawat,
                 ttdWali: ttdWali,
+                ttdDokter: ttdDokter,
+                ttdPetugas: ttdPetugas,
                 "<?= csrf_token() ?>": "<?= csrf_hash() ?>"
             },
             dataType: 'json',
@@ -534,6 +626,157 @@ if ($data->rm4PermintaanMasuk) {
             hasilTtdWali.innerHTML = '';
             hasilTtdWali.appendChild(imgWali);
             $("#modalTtdWali").modal("hide");
+        });
+
+        // =============untuk ttd dokter===============
+        //ttd dokter
+        const canvasDokter = document.getElementById('tempatTtdDokter');
+        const ctxDokter = canvasDokter.getContext('2d');
+        const hapusTtdDokter = document.getElementById('hapusTtdDokter');
+        const simpanTtdDokter = document.getElementById('simpanTtdDokter');
+        const hasilTtdDokter = document.getElementById('ttdDokter');
+
+
+        //=====Dokteriii====
+        let drawingDokter = false;
+        let lastXDokter = 0;
+        let lastYDokter = 0;
+
+        // Set drawing styles
+        ctxDokter.lineWidth = 2;
+        ctxDokter.lineCap = 'round';
+        ctxDokter.strokeStyle = '#000';
+
+        function startDrawingDokter(e) {
+            drawingDokter = true;
+            [lastXDokter, lastYDokter] = [e.offsetX || e.touches[0].clientX - canvasDokter.getBoundingClientRect().left, e.offsetY || e.touches[0].clientY - canvasDokter.getBoundingClientRect().top];
+        }
+
+        function drawDokter(e) {
+            if (!drawingDokter) return;
+            $("#simpanTtdDokter").prop('disabled', false);
+            const currentXDokter = e.offsetX || e.touches[0].clientX - canvasDokter.getBoundingClientRect().left;
+            const currentYDokter = e.offsetY || e.touches[0].clientY - canvasDokter.getBoundingClientRect().top;
+
+            ctxDokter.beginPath();
+            ctxDokter.moveTo(lastXDokter, lastYDokter);
+            ctxDokter.lineTo(currentXDokter, currentYDokter);
+            ctxDokter.stroke();
+
+            [lastXDokter, lastYDokter] = [currentXDokter, currentYDokter];
+        }
+
+        function stopDrawingDokter() {
+            drawingDokter = false;
+        }
+
+        // Dokteriii  Event Listeners for mouse and touch
+        canvasDokter.addEventListener('mousedown', startDrawingDokter);
+        canvasDokter.addEventListener('mousemove', drawDokter);
+        canvasDokter.addEventListener('mouseup', stopDrawingDokter);
+        canvasDokter.addEventListener('mouseout', stopDrawingDokter); // Stop drawing if mouse leaves canvas
+
+        canvasDokter.addEventListener('touchstart', startDrawingDokter);
+        canvasDokter.addEventListener('touchmove', drawDokter);
+        canvasDokter.addEventListener('touchend', stopDrawingDokter);
+
+        // Clear button functionality
+        hapusTtdDokter.addEventListener('click', () => {
+            $("#simpanTtdDokter").prop('disabled', true);
+            ctxDokter.clearRect(0, 0, canvasDokter.width, canvasDokter.height);
+        });
+
+        // Save button functionality
+        simpanTtdDokter.addEventListener('click', () => {
+            const dataURLDokter = canvasDokter.toDataURL('image/png');
+            const imgDokter = document.createElement('img');
+            imgDokter.src = dataURLDokter;
+            imgDokter.alt = 'Tanda tangan dokter pasien';
+            imgDokter.style.maxWidth = '150px';
+            imgDokter.style.maxHeight = '100px';
+
+            // TAMBAHKAN BARIS INI SEBAGAI PENANDA GAMBAR BARU
+            imgDokter.setAttribute('data-is-new', 'true');
+
+            hasilTtdDokter.innerHTML = '';
+            hasilTtdDokter.appendChild(imgDokter);
+            $("#modalTtdDokter").modal("hide");
+        });
+
+
+        // =============untuk ttd petugas===============
+        //ttd petugas
+        const canvasPetugas = document.getElementById('tempatTtdPetugas');
+        const ctxPetugas = canvasPetugas.getContext('2d');
+        const hapusTtdPetugas = document.getElementById('hapusTtdPetugas');
+        const simpanTtdPetugas = document.getElementById('simpanTtdPetugas');
+        const hasilTtdPetugas = document.getElementById('ttdPetugas');
+
+
+        //=====Petugasiii====
+        let drawingPetugas = false;
+        let lastXPetugas = 0;
+        let lastYPetugas = 0;
+
+        // Set drawing styles
+        ctxPetugas.lineWidth = 2;
+        ctxPetugas.lineCap = 'round';
+        ctxPetugas.strokeStyle = '#000';
+
+        function startDrawingPetugas(e) {
+            drawingPetugas = true;
+            [lastXPetugas, lastYPetugas] = [e.offsetX || e.touches[0].clientX - canvasPetugas.getBoundingClientRect().left, e.offsetY || e.touches[0].clientY - canvasPetugas.getBoundingClientRect().top];
+        }
+
+        function drawPetugas(e) {
+            if (!drawingPetugas) return;
+            $("#simpanTtdPetugas").prop('disabled', false);
+            const currentXPetugas = e.offsetX || e.touches[0].clientX - canvasPetugas.getBoundingClientRect().left;
+            const currentYPetugas = e.offsetY || e.touches[0].clientY - canvasPetugas.getBoundingClientRect().top;
+
+            ctxPetugas.beginPath();
+            ctxPetugas.moveTo(lastXPetugas, lastYPetugas);
+            ctxPetugas.lineTo(currentXPetugas, currentYPetugas);
+            ctxPetugas.stroke();
+
+            [lastXPetugas, lastYPetugas] = [currentXPetugas, currentYPetugas];
+        }
+
+        function stopDrawingPetugas() {
+            drawingPetugas = false;
+        }
+
+        // Petugasiii  Event Listeners for mouse and touch
+        canvasPetugas.addEventListener('mousedown', startDrawingPetugas);
+        canvasPetugas.addEventListener('mousemove', drawPetugas);
+        canvasPetugas.addEventListener('mouseup', stopDrawingPetugas);
+        canvasPetugas.addEventListener('mouseout', stopDrawingPetugas); // Stop drawing if mouse leaves canvas
+
+        canvasPetugas.addEventListener('touchstart', startDrawingPetugas);
+        canvasPetugas.addEventListener('touchmove', drawPetugas);
+        canvasPetugas.addEventListener('touchend', stopDrawingPetugas);
+
+        // Clear button functionality
+        hapusTtdPetugas.addEventListener('click', () => {
+            $("#simpanTtdPetugas").prop('disabled', true);
+            ctxPetugas.clearRect(0, 0, canvasPetugas.width, canvasPetugas.height);
+        });
+
+        // Save button functionality
+        simpanTtdPetugas.addEventListener('click', () => {
+            const dataURLPetugas = canvasPetugas.toDataURL('image/png');
+            const imgPetugas = document.createElement('img');
+            imgPetugas.src = dataURLPetugas;
+            imgPetugas.alt = 'Tanda tangan petugas pasien';
+            imgPetugas.style.maxWidth = '150px';
+            imgPetugas.style.maxHeight = '100px';
+
+            // TAMBAHKAN BARIS INI SEBAGAI PENANDA GAMBAR BARU
+            imgPetugas.setAttribute('data-is-new', 'true');
+
+            hasilTtdPetugas.innerHTML = '';
+            hasilTtdPetugas.appendChild(imgPetugas);
+            $("#modalTtdPetugas").modal("hide");
         });
     });
 </script>

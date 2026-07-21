@@ -182,13 +182,15 @@ class Rm4PermintaanMasuk extends BaseController
         $noRawat    = $this->request->getPost("noRawat");
         $noRawat = str_replace('/', '-', $noRawat);
         $ttdWali    = $this->request->getPost("ttdWali");
-        $ttdSaksi    = $this->request->getPost("ttdSaksi");
+        $ttdDokter    = $this->request->getPost("ttdDokter");
+        $ttdPetugas    = $this->request->getPost("ttdPetugas");
 
         $lokasiFolder = 'rm4PermintaanMasuk';
 
         $data = [
             "ttdWali" => $this->uploadTtd($ttdWali, $noRawat . '_wali', $lokasiFolder),
-            "ttdSaksi" => $this->uploadTtd($ttdSaksi, $noRawat . '_saksi', $lokasiFolder)
+            "ttdDokter" => $this->uploadTtd($ttdDokter, $noRawat . '_dokter', $lokasiFolder),
+            "ttdPetugas" => $this->uploadTtd($ttdPetugas, $noRawat . '_petugas', $lokasiFolder)
         ];
 
         $noRawat = str_replace('-', '/', $noRawat);

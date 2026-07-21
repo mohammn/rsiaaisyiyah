@@ -31,5 +31,7 @@ class Rm4PermintaanMasukModel extends Model
         // Kolom wajib yang diminta untuk dibiarkan saja
         'tglinput',
         'ttdWali',
+        'ttdDokter',
+        'ttdPetugas',
     ];
 }
