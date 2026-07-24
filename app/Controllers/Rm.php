@@ -35,6 +35,7 @@ use App\Models\HivModel;
 use App\Models\Rm4PermintaanMasukModel;
 use App\Models\TbAnakModel;
 use App\Models\TbIbuModel;
+use App\Models\Rm11b1ChecklistModel;
 
 use function PHPSTORM_META\type;
 
@@ -73,6 +74,7 @@ class Rm extends BaseController
     protected $rm4PermintaanMasukModel;
     protected $tbAnakModel;
     protected $tbIbuModel;
+    protected $rm11B1ChecklistModel;
 
     public function __construct()
     {
@@ -113,6 +115,7 @@ class Rm extends BaseController
         $this->rm4PermintaanMasukModel = new Rm4PermintaanMasukModel();
         $this->tbAnakModel = new TbAnakModel();
         $this->tbIbuModel = new TbIbuModel();
+        $this->rm11B1ChecklistModel = new Rm11b1ChecklistModel();
     }
     public function index($no_rawat)
     {
@@ -163,6 +166,7 @@ class Rm extends BaseController
         $rm4PermintaanMasuk = $this->rm4PermintaanMasukModel->where('noRawat', $no_rawat)->first();
         $tbAnak = $this->tbAnakModel->where('noRawat', $no_rawat)->first();
         $tbIbu = $this->tbIbuModel->where('noRawat', $no_rawat)->first();
+        $rm11B1Checklist = $this->rm11B1ChecklistModel->where('noRawat', $no_rawat)->first();
         // ================khusus SBAR=========================
         $rm0Sbar = $this->rm0SbarModel->where('noRawat', $no_rawat)->findAll();
         $rm0SbarData = [];
@@ -282,6 +286,7 @@ class Rm extends BaseController
             "rm4PermintaanMasuk" => $this->cekSemuaKolom($rm4PermintaanMasuk, ['ttdWali', 'nama', 'isiBiayaLain']),
             "tbAnak" => $this->cekSemuaKolom($tbAnak, ['ttdWali', 'jenisKontak', 'isiJenisKontakLainnya', 'indeksTbc', 'jenisTbc', 'tglBerobatTbc', 'tglWbp', 'statusWbp', 'durasiBatuk', 'fasyankes']),
             "tbIbu" => $this->cekSemuaKolom($tbAnak, ['ttdWali', 'imt', 'jenisKontak', 'isiJenisKontakLainnya', 'indeksTbc', 'jenisTbc', 'tglBerobatTbc', 'tglWbp', 'statusWbp', 'durasiBatuk', 'fasyankes']),
+            "rm11b1Checklist" => $this->cekSemuaKolom($rm11B1Checklist, ['isiKelengkapanLainnya', 'isijenisLainnya', 'profilaksisObat', 'profilaksisJam', 'profilaksisDosis', 'ttdPerawatAnestesi', 'ttdDokterAnestesi1', 'ttdSirkuler', 'ttdInstrumen', 'ttdAsisten', 'ttdOperator', 'ttdDokterAnestesi2']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -314,6 +319,7 @@ class Rm extends BaseController
             'rm4PermintaanMasuk'  => $rm4PermintaanMasuk,    // Biarkan null jika data tidak ada
             'tbAnak'  => $tbAnak,    // Biarkan null jika data tidak ada
             'tbIbu'  => $tbIbu,    // Biarkan null jika data tidak ada
+            'rm11b1Checklist'  => $rm11B1Checklist,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 

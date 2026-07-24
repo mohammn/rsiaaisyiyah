@@ -39,6 +39,12 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm11b1Checklist/simpanTtd', 'Rm\Rm11b1Checklist::simpanTtd');
+$routes->post('/rm/rm11b1Checklist/hapus', 'Rm\Rm11b1Checklist::hapus');
+$routes->get('/rm/rm11b1Checklist/cetak/(:any)', 'Rm\Rm11b1Checklist::cetak/$1');
+$routes->post('/rm/rm11b1Checklist/simpan', 'Rm\Rm11b1Checklist::simpan');
+$routes->get('/rm/rm11b1Checklist/(:any)', 'Rm\Rm11b1Checklist::index/$1');
+
 $routes->post('/rm/hiv/hapus', 'Rm\Hiv::hapus');
 $routes->get('/rm/hiv/cetak/(:any)', 'Rm\Hiv::cetak/$1');
 $routes->post('/rm/hiv/simpan', 'Rm\Hiv::simpan');
