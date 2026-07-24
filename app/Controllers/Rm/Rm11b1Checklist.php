@@ -4,7 +4,7 @@ namespace App\Controllers\Rm;
 
 use App\Controllers\BaseController;
 
-use App\Models\rm11b1ChecklistModel;
+use App\Models\Rm11b1ChecklistModel;
 use App\Models\RegPeriksaModel;
 use App\Models\SysLogModel;
 use App\Models\PengaturanModel;
