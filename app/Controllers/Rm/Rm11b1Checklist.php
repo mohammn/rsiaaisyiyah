@@ -28,7 +28,7 @@ class Rm11b1Checklist extends BaseController
             header('Location: ' . base_url('login'));
             exit();
         }
-        $this->rm11b1ChecklistModel = new rm11b1ChecklistModel();
+        $this->rm11b1ChecklistModel = new Rm11b1ChecklistModel();
         $this->regPeriksaModel = new RegPeriksaModel();
         $this->sysLog = new SysLogModel();
         $this->pengaturan = new PengaturanModel();
