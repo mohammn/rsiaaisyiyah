@@ -154,12 +154,12 @@ class Rm11b1Checklist extends BaseController
 
         if ($this->request->getPost("tujuanSimpan") == 'tambah') {
             $this->rm11b1ChecklistModel->save($data);
-            $this->catatLog('tambah', 'rm4_permintaan_masuk', $this->request->getPost("noRawat"), $this->rm11b1ChecklistModel->where('noRawat', $this->request->getPost("noRawat"))->first());
+            $this->catatLog('tambah', 'rm11b1_checklist', $this->request->getPost("noRawat"), $this->rm11b1ChecklistModel->where('noRawat', $this->request->getPost("noRawat"))->first());
         } else {
             $noRawat = $this->request->getPost("noRawat");
             unset($data['noRawat']);
 
-            $this->catatLog('ubah', 'rm4_permintaan_masuk', $noRawat, $this->rm11b1ChecklistModel->where('noRawat', $noRawat)->first(), $data);
+            $this->catatLog('ubah', 'rm11b1_checklist', $noRawat, $this->rm11b1ChecklistModel->where('noRawat', $noRawat)->first(), $data);
 
             $this->rm11b1ChecklistModel->where('noRawat', $noRawat)->set($data)->update();
         }
@@ -188,7 +188,7 @@ class Rm11b1Checklist extends BaseController
     {
         $noRawat = $this->request->getPost("noRawat");
         $noRawat = str_replace('-', '/', $noRawat);
-        $this->catatLog('hapus', 'ic_darah', $noRawat, $this->rm11b1ChecklistModel->where('noRawat', $noRawat)->first());
+        $this->catatLog('hapus', 'rm11b1_checklist', $noRawat, $this->rm11b1ChecklistModel->where('noRawat', $noRawat)->first());
 
         $this->rm11b1ChecklistModel->where("noRawat", $noRawat)->delete();
         echo json_encode("");
