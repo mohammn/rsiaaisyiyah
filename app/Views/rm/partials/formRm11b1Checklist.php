@@ -195,16 +195,23 @@
                         <div class="row mt-2">
                             <div class="col-sm-12">
                                 <p class="form-label fw-bold small text-secondary mb-0">Perawat Anestesi :</p>
-                                <select name="perawatAnestesi" id="perawatAnestesi" class="form-select form-select-sm" style="max-width: 250px;">
-                                    <option value="" <?= ($data->rm11b1Checklist["perawatAnestesi"] ?? '') === '' ? 'selected' : '' ?>>Pilih</option>
+                                <input type="text"
+                                    name="perawatAnestesi"
+                                    id="perawatAnestesi"
+                                    list="listPerawatAnestesi"
+                                    class="form-control form-control-sm"
+                                    style="max-width: 250px;"
+                                    placeholder="Pilih atau ketik nama..."
+                                    value="<?= $data->rm11b1Checklist['perawatAnestesi'] ?? '' ?>">
+
+                                <datalist id="listPerawatAnestesi">
                                     <?php
                                     for ($j = 0; $j < count($data->petugas); $j++) {
                                         $nama_petugas = $data->petugas[$j]["nama"];
-                                        $selected = ($nama_petugas === ($data->rm11b1Checklist["perawatAnestesi"] ?? '')) ? 'selected' : '';
-                                        echo '<option value="' . $nama_petugas . '" ' . $selected . '>' . $nama_petugas . '</option>';
+                                        echo '<option value="' . $nama_petugas . '">';
                                     }
                                     ?>
-                                </select>
+                                </datalist>
                             </div>
                         </div>
 
@@ -219,20 +226,29 @@
                             <div class="col-sm-6">
                                 <label class="form-label fw-bold text-secondary mb-0" style="font-size: x-small;">Kesadaran</label>
                                 <input type="text" id="kesadaran" name="kesadaran" class="form-control form-control-sm" value="<?= $data->rm11b1Checklist['kesadaran'] ?? '' ?>">
-
                                 <label class="form-label fw-bold text-secondary mb-0" style="font-size: x-small;">Tekanan Darah</label>
-                                <input type="text" id="tekananDarah" name="tekananDarah" class="form-control form-control-sm" value="<?= $data->rm11b1Checklist['tekananDarah'] ?? '' ?>">
+                                <div class="input-group input-group-sm mb-0">
+                                    <input type="text" id="tekananDarah" name="tekananDarah" class="form-control" value="<?= $data->rm11b1Checklist['tekananDarah'] ?? '' ?>">
+                                    <span class="input-group-text">mmHg</span>
+                                </div>
 
                                 <label class="form-label fw-bold text-secondary mb-0" style="font-size: x-small;">Nadi</label>
-                                <input type="text" id="nadi" name="nadi" class="form-control form-control-sm" value="<?= $data->rm11b1Checklist['nadi'] ?? '' ?>">
+                                <div class="input-group input-group-sm mb-0">
+                                    <input type="text" id="nadi" name="nadi" class="form-control" value="<?= $data->rm11b1Checklist['nadi'] ?? '' ?>">
+                                    <span class="input-group-text">x/m</span>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label class="form-label fw-bold text-secondary mb-0" style="font-size: x-small;">Saturasi Oksigin</label>
-                                <input type="text" id="saturasiOksigen" name="saturasiOksigen" class="form-control form-control-sm" value="<?= $data->rm11b1Checklist['saturasiOksigen'] ?? '' ?>">
+                            <div class="col-sm-6"><label class="form-label fw-bold text-secondary mb-0" style="font-size: x-small;">Saturasi Oksigen</label>
+                                <div class="input-group input-group-sm mb-0">
+                                    <input type="text" id="saturasiOksigen" name="saturasiOksigen" class="form-control" value="<?= $data->rm11b1Checklist['saturasiOksigen'] ?? '' ?>">
+                                    <span class="input-group-text">%</span>
+                                </div>
 
                                 <label class="form-label fw-bold text-secondary mb-0" style="font-size: x-small;">Suhu</label>
-                                <input type="text" id="suhu" name="suhu" class="form-control form-control-sm" value="<?= $data->rm11b1Checklist['suhu'] ?? '' ?>">
-
+                                <div class="input-group input-group-sm mb-0">
+                                    <input type="text" id="suhu" name="suhu" class="form-control" value="<?= $data->rm11b1Checklist['suhu'] ?? '' ?>">
+                                    <span class="input-group-text">&deg;C</span>
+                                </div>
                                 <label class="form-label fw-bold text-secondary mb-0" style="font-size: x-small;">Skala Nyeri</label>
                                 <input type="text" id="skalaNyeri" name="skalaNyeri" class="form-control form-control-sm" value="<?= $data->rm11b1Checklist['skalaNyeri'] ?? '' ?>">
                             </div>
@@ -467,29 +483,43 @@
                         <div class="row mt-2">
                             <div class="col-sm-6">
                                 <p class="form-label fw-bold small text-secondary mb-0">Sirkuler :</p>
-                                <select name="sirkuler" id="sirkuler" class="form-select form-select-sm" style="max-width: 250px;">
-                                    <option value="" <?= ($data->rm11b1Checklist["sirkuler"] ?? '') === '' ? 'selected' : '' ?>>Pilih</option>
+                                <input type="text"
+                                    name="sirkuler"
+                                    id="sirkuler"
+                                    list="listSirkuler"
+                                    class="form-control form-control-sm"
+                                    style="max-width: 250px;"
+                                    placeholder="Pilih atau ketik nama..."
+                                    value="<?= $data->rm11b1Checklist['sirkuler'] ?? '' ?>">
+
+                                <datalist id="listSirkuler">
                                     <?php
                                     for ($j = 0; $j < count($data->petugas); $j++) {
                                         $nama_petugas = $data->petugas[$j]["nama"];
-                                        $selected = ($nama_petugas === ($data->rm11b1Checklist["sirkuler"] ?? '')) ? 'selected' : '';
-                                        echo '<option value="' . $nama_petugas . '" ' . $selected . '>' . $nama_petugas . '</option>';
+                                        echo '<option value="' . $nama_petugas . '">';
                                     }
                                     ?>
-                                </select>
+                                </datalist>
                             </div>
                             <div class="col-sm-6">
                                 <p class="form-label fw-bold small text-secondary mb-0">Instrumen :</p>
-                                <select name="instrumen" id="instrumen" class="form-select form-select-sm" style="max-width: 250px;">
-                                    <option value="" <?= ($data->rm11b1Checklist["instrumen"] ?? '') === '' ? 'selected' : '' ?>>Pilih</option>
+                                <input type="text"
+                                    name="instrumen"
+                                    id="instrumen"
+                                    list="listInstrumen"
+                                    class="form-control form-control-sm"
+                                    style="max-width: 250px;"
+                                    placeholder="Pilih atau ketik nama..."
+                                    value="<?= $data->rm11b1Checklist['instrumen'] ?? '' ?>">
+
+                                <datalist id="listInstrumen">
                                     <?php
                                     for ($j = 0; $j < count($data->petugas); $j++) {
                                         $nama_petugas = $data->petugas[$j]["nama"];
-                                        $selected = ($nama_petugas === ($data->rm11b1Checklist["instrumen"] ?? '')) ? 'selected' : '';
-                                        echo '<option value="' . $nama_petugas . '" ' . $selected . '>' . $nama_petugas . '</option>';
+                                        echo '<option value="' . $nama_petugas . '">';
                                     }
                                     ?>
-                                </select>
+                                </datalist>
                             </div>
                         </div>
                     </div>
@@ -738,16 +768,23 @@
                         <div class="row mt-2">
                             <div class="col-sm-6">
                                 <p class="form-label fw-bold small text-secondary mb-0">Asisten :</p>
-                                <select name="asisten" id="asisten" class="form-select form-select-sm" style="max-width: 250px;">
-                                    <option value="" <?= ($data->rm11b1Checklist["asisten"] ?? '') === '' ? 'selected' : '' ?>>Pilih</option>
+                                <input type="text"
+                                    name="asisten"
+                                    id="asisten"
+                                    list="listAsisten"
+                                    class="form-control form-control-sm"
+                                    style="max-width: 250px;"
+                                    placeholder="Pilih atau ketik nama..."
+                                    value="<?= $data->rm11b1Checklist['asisten'] ?? '' ?>">
+
+                                <datalist id="listAsisten">
                                     <?php
                                     for ($j = 0; $j < count($data->petugas); $j++) {
                                         $nama_petugas = $data->petugas[$j]["nama"];
-                                        $selected = ($nama_petugas === ($data->rm11b1Checklist["asisten"] ?? '')) ? 'selected' : '';
-                                        echo '<option value="' . $nama_petugas . '" ' . $selected . '>' . $nama_petugas . '</option>';
+                                        echo '<option value="' . $nama_petugas . '">';
                                     }
                                     ?>
-                                </select>
+                                </datalist>
                             </div>
                             <div class="col-sm-6">
                             </div>

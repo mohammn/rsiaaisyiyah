@@ -355,23 +355,23 @@
                                 <table class="table table-sm table-striped tabel mb-0" style="font-size: 10px;">
                                     <tr>
                                         <td>Kesadaran</td>
-                                        <td>: <?= $data->rm11b1Checklist["kesadaran"] ?? '-' ?></td>
+                                        <td>: <?= $data->rm11b1Checklist["kesadaran"] ?? '-' ?> </td>
                                     </tr>
                                     <tr>
                                         <td>Tekanan Darah</td>
-                                        <td>: <?= $data->rm11b1Checklist["tekananDarah"] ?? '-' ?></td>
+                                        <td>: <?= $data->rm11b1Checklist["tekananDarah"] ?? '-' ?> mmHg</td>
                                     </tr>
                                     <tr>
                                         <td>Nadi</td>
-                                        <td>: <?= $data->rm11b1Checklist["nadi"] ?? '-' ?></td>
+                                        <td>: <?= $data->rm11b1Checklist["nadi"] ?? '-' ?> x/m</td>
                                     </tr>
                                     <tr>
                                         <td>Saturasi Oksigen</td>
-                                        <td>: <?= $data->rm11b1Checklist["saturasiOksigen"] ?? '-' ?></td>
+                                        <td>: <?= $data->rm11b1Checklist["saturasiOksigen"] ?? '-' ?> %</td>
                                     </tr>
                                     <tr>
                                         <td>Suhu</td>
-                                        <td>: <?= $data->rm11b1Checklist["suhu"] ?? '-' ?></td>
+                                        <td>: <?= $data->rm11b1Checklist["suhu"] ?? '-' ?> &deg;c</td>
                                     </tr>
                                     <tr>
                                         <td>Skala Nyeri</td>
