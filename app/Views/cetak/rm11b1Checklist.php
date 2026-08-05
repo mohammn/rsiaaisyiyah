@@ -225,7 +225,7 @@
                         <td class="text-center small">Dilakukan oleh Perawat Sirkuler dan Perawat Anestesi</td>
                         <td class="text-center small">Dilakukan oleh Perawat Sirkuler, Dokter Operator, dan Dokter Anestesi</td>
                     </tr>
-                    <tr style="font-size: 12px;">
+                    <tr style="font-size: 13px;">
                         <td>
                             <div>
                                 <b><u>VERIFIKASI</u></b>
@@ -340,7 +340,7 @@
                                 }
                                 ?>
 
-                                <div style="font-size: 10px;">
+                                <div style="font-size: 12px;">
                                     <?php foreach ($masterKelengkapan as $item): ?>
                                         <div>
                                             <span><?= renderCheckbox($item, $kelengkapan) ?></span> <?= htmlspecialchars($item) ?>
@@ -352,7 +352,7 @@
                             <div class="mt-1">
                                 <b><u>PEMERIKSAAN TANDA VITAL :</u></b>
 
-                                <table class="table table-sm table-striped tabel mb-0" style="font-size: 10px;">
+                                <table class="table table-sm table-striped tabel mb-0" style="font-size: 12px;">
                                     <tr>
                                         <td>Kesadaran</td>
                                         <td>: <?= $data->rm11b1Checklist["kesadaran"] ?? '-' ?> </td>
@@ -383,26 +383,26 @@
                             <div class="mt-1">
                                 <b><u>RIWAYAT ALERGI :</u></b>
                                 <br>
-                                <p class="mb-0" style="font-size: 10px;"><?= ($data->rm11b1Checklist["alergi"] ?? '') === 'Ada' ? 'Ada, Sebutkan : ' . ($data->rm11b1Checklist["isiAlergi"] ?? '-') : ($data->rm11b1Checklist["alergi"] ?? '-') ?></p>
+                                <p class="mb-0" style="font-size: 12px;"><?= ($data->rm11b1Checklist["alergi"] ?? '') === 'Ada' ? 'Ada, Sebutkan : ' . ($data->rm11b1Checklist["isiAlergi"] ?? '-') : ($data->rm11b1Checklist["alergi"] ?? '-') ?></p>
                             </div>
 
                             <div class="mt-1">
                                 <b><u>RISIKO ASPIRASI DAN GANGGUAN PERNAFASAN :</u></b>
                                 <br>
-                                <p class="mb-0" style="font-size: 10px;"><?= ($data->rm11b1Checklist["aspirasi"] ?? '') ?></p>
+                                <p class="mb-0" style="font-size: 12px;"><?= ($data->rm11b1Checklist["aspirasi"] ?? '') ?></p>
                             </div>
 
                             <div class="mt-2">
                                 <b><u>RISIKO ASPIRASI DAN GANGGUAN PERNAFASAN :</u></b>
                                 <br>
                                 <small class="fw-bold">Kehilangan darah &gt; 500 ml :</small>
-                                <p class="mb-0" style="font-size: 10px;"><?= ($data->rm11b1Checklist["pendrahan"] ?? '') === 'Ya' ? 'Ya, (satu IV line/CVP)' : ($data->rm11b1Checklist["pendrahan"] ?? '') ?></p>
+                                <p class="mb-0" style="font-size: 12px;"><?= ($data->rm11b1Checklist["pendrahan"] ?? '') === 'Ya' ? 'Ya, (satu IV line/CVP)' : ($data->rm11b1Checklist["pendrahan"] ?? '') ?></p>
                             </div>
 
                             <div class="mt-2">
                                 <b><u>RENCANA ANESTESI :</u></b>
                                 <br>
-                                <p class="mb-0" style="font-size: 10px; margin: 0;">
+                                <p class="mb-0" style="font-size: 12px; margin: 0;">
                                     <?php
                                     $rencana = json_decode($data->rm11b1Checklist["rencanaAnestesi"] ?? '[]', true);
 
@@ -448,7 +448,7 @@
                                 ];
                                 ?>
 
-                                <div style="margin-top: 5px; font-size: 10px;">
+                                <div style="margin-top: 5px; font-size: 12px;">
                                     <?php foreach ($itemsVerbal as $item): ?>
                                         <div>
                                             <span><?= renderBox(in_array($item, $verbal1)) ?></span> <?= htmlspecialchars($item) ?>
@@ -460,7 +460,7 @@
 
                             <div class="mt-2">
                                 <b><u>KELENGKAPAN TIM DAN FASILITAS OPERASI</u></b>
-                                <p style="font-size: 10px;">
+                                <p style="font-size: 12px;">
                                     <?= $data->rm11b1Checklist["fasilitasOperasi"] ?? '-' ?>
                                 </p>
                             </div>
@@ -478,7 +478,7 @@
 
                             <div class="mt-2">
                                 <b><u>ANTISIPASI KEJADIAN KRITIS</u></b>
-                                <ul style="font-size: 10px;" class="ps-3">
+                                <ul style="font-size: 12px;" class="ps-3">
                                     <li>
                                         <b>Bagian Bedah :</b> Langkah apa yang
                                         dilakukan bila kondisi kritis atau
@@ -510,7 +510,7 @@
                         <td>
                             <div>
                                 <b><u>BACA SECARA VERBAL :</u></b>
-                                <p style="font-size: 10px;"><?= !empty($data->rm11b1Checklist["verbal2"]) ? '&#10004;' : '[&nbsp;&nbsp;&nbsp;]' ?>Nama tindakan : <?= ($data->rm11b1Checklist["verbal2"] ?? '-') ?></p>
+                                <p style="font-size: 12px;"><?= !empty($data->rm11b1Checklist["verbal2"]) ? '&#10004;' : '[&nbsp;&nbsp;&nbsp;]' ?>Nama tindakan : <?= ($data->rm11b1Checklist["verbal2"] ?? '-') ?></p>
                             </div>
 
 
@@ -537,7 +537,7 @@
                                     : '...........';
                                 ?>
 
-                                <table class="table table-sm table-striped" style="font-size: 10px; width: 100%;">
+                                <table class="table table-sm table-striped" style="font-size: 12px; width: 100%;">
                                     <!-- Baris 1 -->
                                     <tr>
                                         <td style="width: 50%;">
@@ -570,12 +570,16 @@
 
                             <div class="mt-2">
                                 <b><u>PERIKSA KELENGKAPAN BAHAN PEMERIKSAAN :</u></b>
-                                <ol type="a" class="ps-3">
-                                    <li>
-                                        Preparat : <u><?= $data->rm11b1Checklist["preparat"] ?? '-' ?></u>
-                                    </li>
-                                    <li>
-                                        Jenis : <u>
+                                <table class="table table-sm table-striped tabel mb-0" style="font-size: 12px;">
+                                    <tr>
+                                        <td>a.</td>
+                                        <td>Preparat</td>
+                                        <td>: <?= $data->rm11b1Checklist["preparat"] ?? '-' ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>b.</td>
+                                        <td>Jenis</td>
+                                        <td>:
                                             <?php
                                             // 1. Decode JSON jenis
                                             $jenisList = json_decode($data->rm11b1Checklist["jenis"] ?? '[]', true);
@@ -600,15 +604,18 @@
                                                 echo '-';
                                             }
                                             ?>
-                                        </u>
-                                    </li>
-                                    <li>
-                                        Formulir : <u><?= $data->rm11b1Checklist["formulir"] ?? '-' ?></u>
-                                    </li>
-                                    <li>
-                                        Telah dilengkapi identitas Pasien : <u><?= $data->rm11b1Checklist["lengkapiIdentitas"] ?? '-' ?></u>
-                                    </li>
-                                </ol>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>c.</td>
+                                        <td>Formulir</td>
+                                        <td>: <?= $data->rm11b1Checklist["formulir"] ?? '-' ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>d.</td>
+                                        <td colspan="2">Telah dilengkapi identitas pasien : <?= $data->rm11b1Checklist["lengkapiIdentitas"] ?? '-' ?></td>
+                                    </tr>
+                                </table>
                             </div>
 
                             <div class="mt-2">
@@ -631,22 +638,22 @@
 
                             <div class="mt-2">
                                 <b><u>APAKAH PASIEN SUDAH BISA PINDAH KE RUANG PEMULIHAN :</u></b>
-                                <p style="font-size: 10px;"><?= $data->rm11b1Checklist["ruangPemulihan"] ?? '-' ?></p>
+                                <p style="font-size: 12px;"><?= $data->rm11b1Checklist["ruangPemulihan"] ?? '-' ?></p>
                             </div>
 
                             <div class="mt-2">
                                 <b><u>PERIKSA KEMBALI LUKA OPERASI :</u></b>
-                                <p style="font-size: 10px;"><?= $data->rm11b1Checklist["periksaKembali"] ?? '-' ?></p>
+                                <p style="font-size: 12px;"><?= $data->rm11b1Checklist["periksaKembali"] ?? '-' ?></p>
                             </div>
 
                             <div class="mt-2">
                                 <b><u>INSTRUKSI KHUSUS :</u></b>
-                                <p style="font-size: 10px;"><?= $data->rm11b1Checklist["instruksiKhusus"] ?? '...................................' ?></p>
+                                <p style="font-size: 12px;"><?= $data->rm11b1Checklist["instruksiKhusus"] ?? '...................................' ?></p>
                             </div>
 
                         </td>
                     </tr>
-                    <tr style="font-size: 10px;">
+                    <tr style="font-size: 12px;">
                         <td class="p-0">
                             <table class="table table-sm table-borderless mb-0 text-center">
                                 <tr>
