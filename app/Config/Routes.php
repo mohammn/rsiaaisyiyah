@@ -39,6 +39,16 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm11a1Bedah/simpanPenandaan', 'Rm\Rm11a1Bedah::simpanPenandaan');
+$routes->get('/rm/rm11a1Bedah/penandaan/(:any)', 'Rm\Rm11a1Bedah::penandaan/$1');
+$routes->get('/rm/rm11a1Bedah/penandaan/(:any)', 'Rm\Rm11a1Bedah::penandaan/$1');
+$routes->post('/rm/rm11a1Bedah/ubahWaktu', 'Rm\Rm11a1Bedah::ubahWaktu');
+$routes->post('/rm/rm11a1Bedah/simpanTtd', 'Rm\Rm11a1Bedah::simpanTtd');
+$routes->post('/rm/rm11a1Bedah/hapus', 'Rm\Rm11a1Bedah::hapus');
+$routes->get('/rm/rm11a1Bedah/cetak/(:any)', 'Rm\Rm11a1Bedah::cetak/$1');
+$routes->post('/rm/rm11a1Bedah/simpan', 'Rm\Rm11a1Bedah::simpan');
+$routes->get('/rm/rm11a1Bedah/(:any)', 'Rm\Rm11a1Bedah::index/$1');
+
 $routes->post('/rm/rm11b1Checklist/simpanTtd', 'Rm\Rm11b1Checklist::simpanTtd');
 $routes->post('/rm/rm11b1Checklist/hapus', 'Rm\Rm11b1Checklist::hapus');
 $routes->get('/rm/rm11b1Checklist/cetak/(:any)', 'Rm\Rm11b1Checklist::cetak/$1');
