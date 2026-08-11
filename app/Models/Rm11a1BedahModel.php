@@ -72,6 +72,7 @@ class Rm11a1BedahModel extends Model
         'petugas',
         'tglinput',
         'ttdWali',
+        'ttdDokter',
 
         //penandaan
         'badan',

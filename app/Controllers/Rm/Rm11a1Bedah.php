@@ -304,14 +304,25 @@ class Rm11a1Bedah extends BaseController
         $noRawat    = $this->request->getPost("noRawat");
         $noRawat = str_replace('/', '-', $noRawat);
         $ttdWali    = $this->request->getPost("ttdWali");
+        $ttdDokter    = $this->request->getPost("ttdDokter");
 
         $lokasiFolder = 'rm11a1Bedah';
 
         $data = [
-            "ttdWali" => $this->uploadTtd($ttdWali, $noRawat . '_wali', $lokasiFolder)
+            "ttdWali" => $this->uploadTtd($ttdWali, $noRawat . '_wali', $lokasiFolder),
+            "ttdDokter" => $this->uploadTtd($ttdDokter, $noRawat . '_dokter', $lokasiFolder)
         ];
 
         $noRawat = str_replace('-', '/', $noRawat);
+
+        $cekTtd = $this->rm11a1BedahModel->where('noRawat', $noRawat)->first();
+        if ($cekTtd['ttdWali']) {
+            unset($data['ttdWali']);
+        }
+        if ($cekTtd['ttdDokter']) {
+            unset($data['ttdDokter']);
+        }
+
         $this->rm11a1BedahModel->where('noRawat', $noRawat)->set($data)->update();
 
         return $this->response->setJSON([

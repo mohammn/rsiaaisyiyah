@@ -193,7 +193,7 @@
 
                 <table class="table table-bordered table-sm mb-0">
                     <tr>
-                        <td>
+                        <td class="fw-bold">
                             1. ANAMNESA
                         </td>
                     </tr>
@@ -201,7 +201,7 @@
                         <td>
                             <table class="table table-borderless table-sm mb-0">
                                 <tr>
-                                    <td>a. Tempat Pengkajian</td>
+                                    <td style="width:35%;">a. Tempat Pengkajian</td>
                                     <td>: <?= $data->rm11a1Bedah['tempatPengkajian'] ?? '-' ?></td>
                                 </tr>
                                 <tr>
@@ -261,7 +261,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>2. PEMERIKSAAN FISIK</td>
+                        <td class="fw-bold">2. PEMERIKSAAN FISIK</td>
                     </tr>
                     <tr>
                         <td>
@@ -286,13 +286,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>3. HASIL PEMERIKSAAN PENUNJANG <i>(Diisi dengan hasil terbaru)</i></td>
+                        <td class="fw-bold">3. HASIL PEMERIKSAAN PENUNJANG <i>(Diisi dengan hasil terbaru)</i></td>
                     </tr>
                     <tr>
                         <td>
                             <table class="table table-sm table-borderless mb-0">
                                 <tr>
-                                    <td>a. Laboratorium</td>
+                                    <td style="width:35%;">a. Laboratorium</td>
                                     <td>: <?= ($data->rm11a1Bedah['laboratorium'] ?? '') ?: '-' ?></td>
                                 </tr>
                                 <tr>
@@ -313,7 +313,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td class="fw-bold">
                             4. DIAGNOSA / ASESMEN
                         </td>
                     </tr>
@@ -321,7 +321,7 @@
                         <td>
                             <table class="table table-sm table-borderless mb-0">
                                 <tr>
-                                    <td>a. Dianosa Preoperatif / Tindakan Invasif</td>
+                                    <td style="width:35%;">a. Dianosa Preoperatif / Tindakan Invasif</td>
                                     <td>: <?= ($data->rm11a1Bedah['diagnosaPreoperatif'] ?? '') ?: '-' ?></td>
                                 </tr>
                                 <tr>
@@ -347,13 +347,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>5. RENCANA TATA LAKSANA</td>
+                        <td class="fw-bold">5. RENCANA TATA LAKSANA</td>
                     </tr>
                     <tr>
                         <td>
                             <table class="table table-sm table-borderless mb-0">
                                 <tr>
-                                    <td>a. Rencana Operasi / Tindakan</td>
+                                    <td style="width:35%;">a. Rencana Operasi / Tindakan</td>
                                     <td>: <?= ($data->rm11a1Bedah['rencanaOperasi'] ?? '') ?: '-' ?></td>
                                 </tr>
                                 <tr>
@@ -652,12 +652,25 @@
                     <table class="table table-borderless">
                         <tr class="text-center" style="margin:auto;">
                             <td>
-                                DPJP Operator
+                                DPJP Opertor
+                                <br><br>
+
+                                <div id="ttdDokter">
+                                    <?php if ($data->rm11a1Bedah["ttdDokter"]) {
+                                        // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
+                                        echo '<img src="' . base_url('public/ttd/rm11a1Bedah/' . $data->rm11a1Bedah["ttdDokter"]) . '" alt="tanda tangan Dokter" style="max-width: 150px;" data-is-new="false">';
+                                    } else {
+                                        echo '<br><br><br><br><br>';
+                                    } ?>
+                                </div>
                                 <br>
-                                <br>
-                                <div id="qrDokter" class="pt-2"></div>
-                                <br>
-                                (<?= $data->rm11a1Bedah["dokter"] ?> )
+                                (<?= $data->rm11a1Bedah["dokter"] ?? '-' ?> )
+                                <br><br>
+                                <?php if (!$data->rm11a1Bedah["ttdDokter"]) { ?>
+                                    <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdDokter">
+                                        Tanda tangan
+                                    </button>
+                                <?php } ?>
                             </td>
                             <td></td>
                             <td>
@@ -748,6 +761,30 @@
     </div>
 </div>
 
+<!-- Modal ttd Dokter-->
+<div class="modal fade" id="modalTtdDokter" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Tanda tangan dokter</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bodyTtd">
+                <div class="signature-container">
+                    <canvas class="tempatTtd" id="tempatTtdDokter" width="300" height="200"></canvas>
+                    <div class="controls">
+                        <button class="btn btn-sm btn-secondary" id="hapusTtdDokter">Bersihkan</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" id="simpanTtdDokter" disabled>Selesai</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs/qrcode.min.js"></script>
 <script>
     function kunciTtd() {
@@ -758,8 +795,13 @@
 
         // Ambil elemen gambar
         var imgWaliEl = $("#ttdWali img");
+        var imgDokterEl = $("#ttdDokter img");
         if (imgWaliEl.length === 0) {
             $("#pesanError").addClass("alert alert-danger").html("Wali belum tanda tangan.");
+            $("#modalKunci").modal("hide");
+            return;
+        } else if (imgDokterEl.length === 0) {
+            $("#pesanError").addClass("alert alert-danger").html("Dokter belum tanda tangan.");
             $("#modalKunci").modal("hide");
             return;
         }
@@ -768,6 +810,9 @@
         var isWaliNew = (imgWaliEl.attr('data-is-new') === 'true' || imgWaliEl.data('is-new') === true);
         var ttdWali = isWaliNew ? imgWaliEl.attr('src') : '';
 
+        var isDokterNew = (imgDokterEl.attr('data-is-new') === 'true' || imgDokterEl.data('is-new') === true);
+        var ttdDokter = isDokterNew ? imgDokterEl.attr('src') : '';
+
 
         $.ajax({
             url: '<?= base_url() ?>rm/rm11a1Bedah/simpanTtd',
@@ -775,6 +820,7 @@
             data: {
                 noRawat: noRawat,
                 ttdWali: ttdWali,
+                ttdDokter: ttdDokter,
                 "<?= csrf_token() ?>": "<?= csrf_hash() ?>"
             },
             dataType: 'json',
@@ -794,16 +840,16 @@
     }
 
     // Create a new QRCode instance
-    var qrDokter = new QRCode(document.getElementById("qrDokter"), {
-        width: 100, // Set the width of the QR code
-        height: 100, // Set the height of the QR code
-        colorDark: "#000000", // Color of the dark modules (e.g., black squares)
-        colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
-        correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
-    });
+    // var qrDokter = new QRCode(document.getElementById("qrDokter"), {
+    //     width: 100, // Set the width of the QR code
+    //     height: 100, // Set the height of the QR code
+    //     colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+    //     colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+    //     correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+    // });
 
     // Generate the QR code with the desired content
-    qrDokter.makeCode("Di ttd " + $("#dokter").val() + " untuk Tata Tertib. No Rawat : " + $("#noRawat").val()); // Replace with your desired text or URL
+    // qrDokter.makeCode("Di ttd " + $("#dokter").val() + " untuk Tata Tertib. No Rawat : " + $("#noRawat").val()); // Replace with your desired text or URL
 
     //========================================================
 
@@ -881,6 +927,82 @@
             hasilTtdWali.appendChild(imgWali);
             $("#modalTtdWali").modal("hide");
         });
+
+        // =============untuk ttd dokter===============
+        //ttd dokter
+        const canvasDokter = document.getElementById('tempatTtdDokter');
+        const ctxDokter = canvasDokter.getContext('2d');
+        const hapusTtdDokter = document.getElementById('hapusTtdDokter');
+        const simpanTtdDokter = document.getElementById('simpanTtdDokter');
+        const hasilTtdDokter = document.getElementById('ttdDokter');
+
+
+        //=====Dokteriii====
+        let drawingDokter = false;
+        let lastXDokter = 0;
+        let lastYDokter = 0;
+
+        // Set drawing styles
+        ctxDokter.lineWidth = 2;
+        ctxDokter.lineCap = 'round';
+        ctxDokter.strokeStyle = '#000';
+
+        function startDrawingDokter(e) {
+            drawingDokter = true;
+            [lastXDokter, lastYDokter] = [e.offsetX || e.touches[0].clientX - canvasDokter.getBoundingClientRect().left, e.offsetY || e.touches[0].clientY - canvasDokter.getBoundingClientRect().top];
+        }
+
+        function drawDokter(e) {
+            if (!drawingDokter) return;
+            $("#simpanTtdDokter").prop('disabled', false);
+            const currentXDokter = e.offsetX || e.touches[0].clientX - canvasDokter.getBoundingClientRect().left;
+            const currentYDokter = e.offsetY || e.touches[0].clientY - canvasDokter.getBoundingClientRect().top;
+
+            ctxDokter.beginPath();
+            ctxDokter.moveTo(lastXDokter, lastYDokter);
+            ctxDokter.lineTo(currentXDokter, currentYDokter);
+            ctxDokter.stroke();
+
+            [lastXDokter, lastYDokter] = [currentXDokter, currentYDokter];
+        }
+
+        function stopDrawingDokter() {
+            drawingDokter = false;
+        }
+
+        // Dokteriii  Event Listeners for mouse and touch
+        canvasDokter.addEventListener('mousedown', startDrawingDokter);
+        canvasDokter.addEventListener('mousemove', drawDokter);
+        canvasDokter.addEventListener('mouseup', stopDrawingDokter);
+        canvasDokter.addEventListener('mouseout', stopDrawingDokter); // Stop drawing if mouse leaves canvas
+
+        canvasDokter.addEventListener('touchstart', startDrawingDokter);
+        canvasDokter.addEventListener('touchmove', drawDokter);
+        canvasDokter.addEventListener('touchend', stopDrawingDokter);
+
+        // Clear button functionality
+        hapusTtdDokter.addEventListener('click', () => {
+            $("#simpanTtdDokter").prop('disabled', true);
+            ctxDokter.clearRect(0, 0, canvasDokter.width, canvasDokter.height);
+        });
+
+        // Save button functionality
+        simpanTtdDokter.addEventListener('click', () => {
+            const dataURLDokter = canvasDokter.toDataURL('image/png');
+            const imgDokter = document.createElement('img');
+            imgDokter.src = dataURLDokter;
+            imgDokter.alt = 'Tanda tangan dokter pasien';
+            imgDokter.style.maxWidth = '150px';
+            imgDokter.style.maxHeight = '100px';
+
+            // TAMBAHKAN BARIS INI SEBAGAI PENANDA GAMBAR BARU
+            imgDokter.setAttribute('data-is-new', 'true');
+
+            hasilTtdDokter.innerHTML = '';
+            hasilTtdDokter.appendChild(imgDokter);
+            $("#modalTtdDokter").modal("hide");
+        });
+
     });
 </script>
 

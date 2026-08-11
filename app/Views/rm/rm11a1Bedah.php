@@ -324,7 +324,11 @@
                 data: data,
                 dataType: 'json',
                 success: function(data) {
-                    location.reload();
+                    if (tujuanSimpan == 'tambah') {
+                        location.href = "<?= base_url('rm/rm11a1Bedah/penandaan/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>";
+                    } else {
+                        location.reload();
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
