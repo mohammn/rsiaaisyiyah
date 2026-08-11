@@ -117,7 +117,7 @@
                                 <i class="fa fa-edit me-1"></i> Edit
                             </button>
                             <a class="btn btn-estetik btn-cetak" href="<?= base_url('/rm/rm11a1Bedah/penandaan/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>">
-                                <i class="fas fa-pencil me-1"></i> Tandai Lokasi Ops
+                                <i class="fas fa-pencil me-1"></i> Edit Lokasi Ops
                             </a>
                         <?php endif ?>
                         <button class="btn btn-estetik btn-hapus" onclick="tryHapus()">
