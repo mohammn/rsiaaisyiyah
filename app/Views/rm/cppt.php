@@ -48,23 +48,37 @@
 
     <div class="card mb-4">
         <!-- Card Header: Navigasi Kiri & Toolbar Aksi Kanan -->
-        <div class="card-header bg-white border-0 pt-2 pb-2 position-relative d-flex align-items-center justify-content-center">
+        <div class="card-header bg-white border-0 pt-3 pb-3 d-flex flex-column flex-lg-row align-items-center justify-content-between gap-3">
 
-            <!-- Banner Info Pasien (Presisi di Tengah) -->
-            <div class="alert alert-primary d-inline-flex align-items-center mb-0 py-2 px-3 border-0 bg-primary-subtle text-primary-emphasis rounded-pill shadow-xs">
-                <i class="fas fa-id-badge me-2 fs-6"></i>
-                <span class="small">
-                    Menampilkan CPPT pasien:
-                    <strong class="bg-vibrant-blue text-white px-2 py-1 rounded-pill ms-1">
-                        <?= $data->pasien["nm_pasien"] ?> . (<?= $data->pasien["no_rawat"] ?>)
-                    </strong>
-                </span>
+            <!-- 1. DPJP (Kiri) -->
+            <div class="flex-shrink-0">
+                <div class="alert alert-secondary d-inline-flex align-items-center mb-0 py-2 px-3 border-0 bg-secondary-subtle text-secondary-emphasis rounded-pill shadow-xs">
+                    <i class="fas fa-user-md me-2"></i>
+                    <span class="small fw-bold">
+                        DPJP : <?= $data->dpjp['dokter'] ?? 'Belum diisi.' ?>
+                    </span>
+                </div>
             </div>
 
-            <!-- Tombol Cetak (Dikunci di Pojok Kanan) -->
-            <a href="<?= base_url('rm/cetakCppt/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>" target="_blank" class="btn btn-sm btn-primary rounded-pill px-3 py-1 border-0 fw-medium shadow-none position-absolute end-0 me-3">
-                <i class="fas fa-print me-1"></i> Cetak
-            </a>
+            <!-- 2. Info Pasien (Tengah) -->
+            <div class="flex-grow-1 text-center">
+                <div class="alert alert-primary d-inline-flex flex-wrap align-items-center justify-content-center mb-0 py-2 px-3 border-0 bg-primary-subtle text-primary-emphasis rounded-pill shadow-xs">
+                    <i class="fas fa-id-badge me-2 fs-6"></i>
+                    <span class="small">
+                        Menampilkan CPPT pasien:
+                        <strong class="bg-vibrant-blue text-white px-3 py-1 rounded-pill ms-1 d-inline-block mt-1 mt-sm-0">
+                            <?= $data->pasien["nm_pasien"] ?> . (<?= $data->pasien["no_rawat"] ?>)
+                        </strong>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 3. Tombol Cetak (Kanan - Tanpa position-absolute!) -->
+            <div class="flex-shrink-0">
+                <a href="<?= base_url('rm/cetakCppt/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>" target="_blank" class="btn btn-sm btn-primary rounded-pill px-3 py-2 border-0 fw-medium shadow-none">
+                    <i class="fas fa-print me-1"></i> Cetak
+                </a>
+            </div>
 
         </div>
 
@@ -186,7 +200,7 @@
                                                 <?= esc($item['jenis_pelaksana']) ?>
                                             </span>
 
-                                            <?php if (($item['jenis_pelaksana'] ?? '') === 'Dokter'): ?>
+                                            <?php if (($item['jenis_pelaksana'] ?? '') != 'Dokter'): ?>
 
                                                 <?php if (!empty($item['waktuVerif'])): ?>
                                                     <!-- Tampilan Jika Dokter & Sudah Diverifikasi -->
@@ -199,7 +213,7 @@
                                                         Belum Verif
                                                     </span>
 
-                                                    <?php if (($item['nama_pelaksana'] ?? '') === session()->get('nama')): ?>
+                                                    <?php if (($data->dpjp['dokter'] ?? '') === session()->get('nama')): ?>
                                                         <button type="button"
                                                             class="btn btn-info btn-sm ms-1"
                                                             style="padding: 1px 6px; font-size: 0.75rem;"
@@ -209,7 +223,6 @@
                                                     <?php endif; ?>
                                                 <?php endif; ?>
 
-                                            <?php else: ?>
                                                 <?php if (!empty($item['penerima'])): ?>
                                                     <!-- Jika Sudah Ada Penerima -->
                                                     <span style="background: #fef9c3; border: 1px solid #ffc107; color: #334155; padding: 2px 6px; font-size: 0.75rem; border-radius: 4px; display: inline-block;">

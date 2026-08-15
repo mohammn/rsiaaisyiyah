@@ -347,6 +347,7 @@ class Rm extends BaseController
     {
         $petugas = $this->petugasModel->where('nip !=', '-')->findAll();
         $noRawat = str_replace('-', '/', $noRawat);
+        $dpjp = $this->dpjpModel->where('noRawat', $noRawat)->first();
         $pasien = $this->regPeriksaModel
             ->select('
                 reg_periksa.no_rawat, 
@@ -365,6 +366,7 @@ class Rm extends BaseController
         $data = (object) [
             'petugas'     => $petugas,
             'pasien'     => $pasien,
+            'dpjp'     => $dpjp,
             'cppt' => $this->getDataCppt($noRawat)
         ];
 
@@ -440,6 +442,7 @@ class Rm extends BaseController
     public function cetakCppt($noRawat)
     {
         $noRawat = str_replace('-', '/', $noRawat);
+        $dpjp = $this->dpjpModel->where('noRawat', $noRawat)->first();
         $pasien = $this->regPeriksaModel
             ->select('
                 reg_periksa.no_rawat, 
@@ -457,6 +460,7 @@ class Rm extends BaseController
 
         $data = (object) [
             'pasien'     => $pasien,
+            'dpjp'     => $dpjp,
             'cppt' => $this->getDataCppt($noRawat)
         ];
 

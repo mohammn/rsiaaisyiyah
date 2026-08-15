@@ -292,9 +292,10 @@
 
                                         <?php if ($item['jenis_pelaksana'] != 'Dokter' && ($item['jenis_hasil'] ?? '') === 'SOAP' && empty($item['penerima'])): ?>
                                             <br>
-                                            <div id="qrPetSoap<?= $index ?>"></div>
-                                            <?= esc($item['nama_pelaksana']) ?>
-
+                                            <div class="d-flex flex-column align-items-center justify-content-center text-center">
+                                                <div id="qrPetSoap<?= $index ?>"></div>
+                                                <span class="mt-1"><?= esc($item['nama_pelaksana']) ?></span>
+                                            </div>
 
                                             <script>
                                                 new QRCode(document.getElementById("qrPetSoap<?= $index ?>"), {
@@ -374,7 +375,7 @@
                                                         colorDark: "#0033cc", // Color of the dark modules (e.g., black squares)
                                                         colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
                                                         correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
-                                                    }).makeCode("Di ttd oleh <?= $item['nama_pelaksana'] ?> "); // Replace with your desired text or URL
+                                                    }).makeCode("Di ttd oleh <?= $item['penerima'] ?> "); // Replace with your desired text or URL
                                                 </script>
                                             <?php endif; ?>
                                         <?php endif; ?>
@@ -384,7 +385,7 @@
 
                                         <?php if (($item['jenis_hasil'] ?? '') != 'SBAR' && !empty($item['jenis_pelaksana'])): ?>
 
-                                            <?php if ($item['jenis_pelaksana'] === 'Dokter' && !empty($item['waktuVerif'])): ?>
+                                            <?php if ($item['jenis_pelaksana'] != 'Dokter' && !empty($item['waktuVerif'])): ?>
                                                 <table class="table table-sm text-center table-bordered fw-bold" style="border: 2px solid #000; width: 200px;">
                                                     <tr>
                                                         <th colspan="2">VERIFIKASI</th>
@@ -398,7 +399,7 @@
                                                             <?= date('d/m/Y - H:i', strtotime($item['waktuVerif'])) ?>
                                                         </td>
                                                         <td>
-                                                            <span class="fw-normal" style="font-size: 7pt;"><?= esc($item['nama_pelaksana']) ?></span>
+                                                            <span class="fw-normal" style="font-size: 7pt;"><?= esc($data->dpjp['dokter']) ?></span>
                                                             <br>
                                                             <div id="qrDPJP<?= $index ?>"></div>
                                                         </td>
@@ -412,9 +413,29 @@
                                                         colorDark: "#000000", // Color of the dark modules (e.g., black squares)
                                                         colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
                                                         correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+                                                    }).makeCode("Di ttd oleh <?= $data->dpjp['dokter'] ?> "); // Replace with your desired text or URL
+                                                </script>
+                                            <?php endif; ?>
+
+                                            <?php if ($item['jenis_pelaksana'] === 'Dokter'): ?>
+                                                <br>
+                                                <div class="d-flex flex-column align-items-center justify-content-center text-center">
+                                                    <div id="qrDokSoap<?= $index ?>"></div>
+                                                    <span class="mt-1"><?= esc($item['nama_pelaksana']) ?></span>
+                                                </div>
+
+
+                                                <script>
+                                                    new QRCode(document.getElementById("qrDokSoap<?= $index ?>"), {
+                                                        width: 30, // Set the width of the QR code
+                                                        height: 30, // Set the height of the QR code
+                                                        colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+                                                        colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+                                                        correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
                                                     }).makeCode("Di ttd oleh <?= $item['nama_pelaksana'] ?> "); // Replace with your desired text or URL
                                                 </script>
                                             <?php endif; ?>
+
                                         <?php endif; ?>
 
                                         <?php if (($item['jenis_hasil'] ?? '') === 'SBAR' && !empty($item['dokter'])): ?>
@@ -431,22 +452,20 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="py-1">
-                                                            <span class="fw-normal" style="font-size: 7pt;"><?= esc($item['petugas']) ?></span>
-                                                            <br>
                                                             <span class="fw-normal" style="font-size: 7pt;">
                                                                 <?= date('d/m/Y - H:i', strtotime($item['tanggal_hasil'] . ' ' . $item['jam_hasil'])) ?>
                                                             </span>
                                                             <br>
                                                             <div id="qrPet<?= $item['id'] ?>"></div>
+                                                            <span class="fw-normal" style="font-size: 7pt;"><?= esc($item['petugas']) ?></span>
                                                         </td>
                                                         <td class="py-1">
-                                                            <span class="fw-normal" style="font-size: 7pt;"><?= esc($item['dokter']) ?></span>
-                                                            <br>
                                                             <span class="fw-normal" style="font-size: 7pt;">
                                                                 <?= date('d/m/Y - H:i', strtotime($item['tanggal_hasil'] . ' ' . $item['jam_hasil'])) ?>
                                                             </span>
                                                             <br>
                                                             <div id="qrDok<?= $item['id'] ?>"></div>
+                                                            <span class="fw-normal" style="font-size: 7pt;"><?= esc($item['dokter']) ?></span>
                                                         </td>
                                                     </tr>
                                                 </tbody>
