@@ -256,6 +256,11 @@ $routes->post('/rm/rekonsiliasiObat/simpan', 'Rm\RekonsiliasiObat::simpan');
 $routes->get('/rm/rekonsiliasiObat/muatData/(:any)', 'Rm\RekonsiliasiObat::muatData/$1');
 $routes->get('/rm/rekonsiliasiObat/(:any)', 'Rm\RekonsiliasiObat::index/$1');
 
+$routes->get('/rm/cetakCppt/(:any)', 'Rm::cetakCppt/$1');
+$routes->post('/rm/verifCppt', 'Rm::verifCppt');
+$routes->post('/rm/serahTerima', 'Rm::serahTerima');
+$routes->post('/rm/hapusSerahTerima', 'Rm::hapusSerahTerima');
+$routes->get('/rm/cppt/(:any)', 'Rm::cppt/$1');
 $routes->get('/rm/(:any)', 'Rm::Index/$1');
 
 $routes->get('/pasien', 'Pasien::Index');

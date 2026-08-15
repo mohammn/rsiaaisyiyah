@@ -9,17 +9,68 @@
 
 
 <div class="container-fluid px-4">
-    <h3 class="mt-4">Rekam Medis Pasien</h3>
-    <div class="card mb-4">
-        <div class="card-header d-flex align-items-center">
-            <span class="me-2">
-                <a class="btn btn-estetik btn-simpan" href="<?= base_url(session()->get('kembali')) ?>">Kembali</a>
-                <button type="button" class="btn btn-estetik btn-lihat" data-bs-toggle="modal" data-bs-target="#modalTambahForm">
-                    Daftar Form
-                </button>
-                Menampilkan data Rekam Medis pasien : <span class="bg-vibrant-blue text-white p-1"> <?= $data->pasien["nm_pasien"] ?> . (<?= $data->pasien["no_rawat"] ?>)</span></span>
+    <h4 class="mt-2 text-center">Rekam Medis Pasien</h4>
+
+    <!-- Container Utama Toolbar Tengah -->
+    <div class="d-flex justify-content-center mb-4">
+        <!-- Floating Pill Bar -->
+        <div class="d-inline-flex align-items-center bg-light p-1 rounded-pill border shadow-sm">
+            <a class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium me-1 shadow-none"
+                href="<?= base_url(session()->get('kembali')) ?>">
+                <i class="fas fa-arrow-left me-1"></i> Kembali
+            </a>
+            <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
+
+            <!-- Daftar Form (Primary Accent) -->
+            <button type="button"
+                class="btn btn-sm btn-primary rounded-pill px-3 py-1 fw-semibold mx-1 shadow-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#modalTambahForm">
+                <i class="fas fa-file-medical me-1"></i> Daftar Form
+            </button>
+
+            <!-- Garis Pemisah 2 -->
+            <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
+
+            <!-- CPPT (Catatan Perkembangan Pasien Terintegrasi) -->
+            <a type="button" class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
+                href="<?= base_url('rm/cppt/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>">
+                <i class="fas fa-notes-medical me-1"></i> CPPT
+            </a>
+
+            <!-- Garis Pemisah 3 -->
+            <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
+
+            <!-- Operasi / Bedah -->
+            <button type="button" class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium ms-1 shadow-none">
+                <i class="fas fa-bed-pulse me-1"></i> Operasi
+            </button>
+
         </div>
-        <div class="card-body" style="overflow-y: auto;">
+    </div>
+
+
+    <div class="card mb-4">
+        <!-- Card Header: Navigasi Kiri & Toolbar Aksi Kanan -->
+        <div class="card-header bg-white border-0 pt-2 pb-2 position-relative d-flex align-items-center justify-content-center">
+            <!-- Banner Info Pasien (Presisi di Tengah) -->
+            <div class="alert alert-primary d-inline-flex align-items-center mb-0 py-2 px-3 border-0 bg-primary-subtle text-primary-emphasis rounded-pill shadow-xs">
+                <i class="fas fa-id-badge me-2 fs-6"></i>
+                <span class="small">
+                    Menampilkan CPPT pasien:
+                    <strong class="bg-vibrant-blue text-white px-2 py-1 rounded-pill ms-1">
+                        <?= $data->pasien["nm_pasien"] ?> . (<?= $data->pasien["no_rawat"] ?>)
+                    </strong>
+                </span>
+            </div>
+
+        </div>
+
+        <!-- Card Body: Highlight Pasien & Data Tabel -->
+        <div class="card-body" style="overflow-y: auto; max-height: calc(100vh - 300px);">
+
+            <!-- Tabel Data Anda Berada di Bawah Ini -->
+
             <table class="table table-striped table-responsive-lg" id="tabelRm">
                 <thead>
                     <tr>
@@ -689,6 +740,7 @@
 
 <script>
     $('#tabelRm').DataTable({
+        "pageLength": 25, // <-- Menyetel tampilan awal menjadi 25 entri
         "language": {
             "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
             "sProcessing": "Sedang memproses...",
@@ -700,7 +752,7 @@
             "sInfoPostFix": "",
             "sSearch": "Cari:",
             "sUrl": "",
-            "paginate": { // <-- Di sini diubah dari oPaginate menjadi paginate
+            "paginate": {
                 "sFirst": "Pertama",
                 "sPrevious": "Sebelumnya",
                 "sNext": "Selanjutnya",

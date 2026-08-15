@@ -63,129 +63,415 @@
             }
         }
 
-        /* Base Style */
+        /* ==========================================================================
+   1. BUTTON ESTETIK (Solid Fill & Kontras Tinggi)
+   ========================================================================== */
+
         .btn-estetik {
-            border: none;
+            border: none !important;
             color: #ffffff !important;
-            padding: 8px 18px;
+            padding: 6px 14px;
             border-radius: 6px;
             font-weight: 600;
-            /* Sedikit lebih tebal agar teks lebih jelas di warna cerah */
-            font-size: 13px;
+            font-size: 12px;
             transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
-            box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.1);
-            /* Efek matte dalam */
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            text-decoration: none !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
         }
 
         .btn-estetik:hover {
-            /* Gunakan 0.9 agar warna sedikit lebih deep/gelap saat disentuh mouse */
-            filter: brightness(0.9);
-
-            /* Efek mengangkat sedikit tetap dipertahankan */
-            transform: translateY(-2px);
-
-            /* Perkuat bayangan agar tombol terlihat benar-benar melayang di atas background putih */
-            box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.15);
-
-            /* Paksa teks tetap putih */
-            color: #000000 !important;
-
-            /* Opsional: tambah sedikit kontras */
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            filter: brightness(0.9) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            color: #000 !important;
+            /* Paksa teks tetap putih terang */
         }
 
-        /* PALET WARNA VIBRANT MATTE (Lebih Tegas) */
+        .btn-estetik:active {
+            transform: translateY(0);
+        }
 
-        /* Blue Steel (Solid & Profesional) */
+        /* Warna Solid Tombol (Class Asli Kamu) */
         .btn-simpan {
-            background-color: #10b981;
+            background-color: #10b981 !important;
         }
 
         .btn-lihat {
-            background-color: #4a90e2;
+            background-color: #4a90e2 !important;
         }
 
-        /* Electric Purple/Indigo (Modern & Tajam) */
         .btn-edit {
-            background-color: #6366f1;
+            background-color: #6366f1 !important;
         }
 
-        /* Fresh Teal (Cerah & Bersih) */
         .btn-cetak {
-            background-color: #0fb9b1;
+            background-color: #0fb9b1 !important;
         }
 
-        /* Bright Terracotta/Red (Tegas & Berani) */
         .btn-hapus {
-            background-color: #eb4d4b;
+            background-color: #eb4d4b !important;
         }
 
         .btn-batal {
-            background-color: #94a3b8;
+            background-color: #94a3b8 !important;
         }
 
         /* FontAwesome Spacing */
         .btn-estetik i {
-            width: 18px;
+            font-size: 12px;
             text-align: center;
         }
 
-        /* --- Varian Tombol Kecil (Small) --- */
+        /* Varian Tombol Kecil */
         .btn-sm-estetik {
-            /* Menimpa padding tombol besar menjadi seukuran badge */
-            padding: 3px 10px !important;
+            padding: 3px 9px !important;
             font-size: 11px !important;
             border-radius: 4px;
-            /* Radius lebih kecil agar proporsional */
         }
 
-        /* Penyesuaian Icon untuk tombol kecil */
         .btn-sm-estetik i {
-            width: 14px !important;
             font-size: 10px !important;
-            margin-right: 3px !important;
         }
 
-        /* --- Label Status (Badge) --- */
+
+        /* ==========================================================================
+   2. BADGE STATUS (Soft Transparan & Elegant Border)
+   ========================================================================== */
+
         .badge-estetik {
-            padding: 4px 10px;
+            padding: 3px 10px;
             border-radius: 50px;
-            /* Bentuk kapsul agar beda dengan tombol */
+            /* Bentuk Kapsul Modern */
             font-size: 11px;
-            font-weight: 700;
-            color: #ffffff !important;
-            /* Membuat teks status lebih tegas */
+            font-weight: 600;
             display: inline-block;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
+            border: 1px solid transparent;
         }
 
-        /* --- PALET WARNA (SERAGAM) --- */
+        /* Perubahan Warna Badge Transparan Elegan (Class Asli Kamu) */
 
-        /* Biru (Tambah / Lengkap / Sudah) */
+        /* Biru (Sudah / Lengkap) */
         .bg-vibrant-blue {
-            background-color: #4a90e2;
+            background-color: rgba(74, 144, 226, 0.12) !important;
+            border-color: rgba(74, 144, 226, 0.3) !important;
+            color: #2563eb !important;
         }
 
-        /* Ungu (Lihat / Sedang Proses) */
+        /* Ungu (Proses / Lihat) */
         .bg-vibrant-purple {
-            background-color: #6366f1;
+            background-color: rgba(99, 102, 241, 0.12) !important;
+            border-color: rgba(99, 102, 241, 0.3) !important;
+            color: #4f46e5 !important;
         }
 
-        /* Tosca/Teal (Cetak / TTD) */
+        /* Tosca / Teal (Cetak / TTD) */
         .bg-vibrant-teal {
-            background-color: #0fb9b1;
+            background-color: rgba(15, 185, 177, 0.12) !important;
+            border-color: rgba(15, 185, 177, 0.3) !important;
+            color: #0d9488 !important;
         }
 
-        /* Merah (Hapus / Belum / Tidak Lengkap) */
+        /* Merah (Belum / Hapus / Tidak Lengkap) */
         .bg-vibrant-red {
-            background-color: #eb4d4b;
+            background-color: rgba(235, 77, 75, 0.12) !important;
+            border-color: rgba(235, 77, 75, 0.3) !important;
+            color: #dc2626 !important;
         }
 
-        /* Abu-abu Matte (Tidak Perlu / Netral) */
+        /* Abu-abu Soft Netral */
         .bg-vibrant-gray {
-            background-color: #94a3b8;
+            background-color: rgba(148, 163, 184, 0.15) !important;
+            border-color: rgba(148, 163, 184, 0.3) !important;
+            color: #475569 !important;
+        }
+
+        /* ==========================================================================
+   GLOBAL TYPOGRAPHY & RESET (SB-ADMIN MODERN OVERRIDE)
+   ========================================================================== */
+
+        /* 1. Font System & Base Typography (Global) */
+        body,
+        .sb-nav-fixed,
+        #layoutSidenav_content {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+            font-size: 13px !important;
+            /* Ukuran dasar UI modern (ringkas & padat) */
+            color: #334155 !important;
+            /* Slate dark (nyaman di mata) */
+            background-color: #f8fafc !important;
+            /* Background halaman soft */
+        }
+
+        /* 2. Overrides Semua Heading (H1 - H6) */
+        h1,
+        .h1 {
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+            color: #0f172a !important;
+            letter-spacing: -0.3px;
+        }
+
+        h2,
+        .h2 {
+            font-size: 1.35rem !important;
+            font-weight: 700 !important;
+            color: #0f172a !important;
+            letter-spacing: -0.3px;
+        }
+
+        h3,
+        .h3 {
+            font-size: 1.2rem !important;
+            font-weight: 600 !important;
+            color: #1e293b !important;
+        }
+
+        h4,
+        .h4 {
+            font-size: 1.1rem !important;
+            font-weight: 600 !important;
+            color: #1e293b !important;
+        }
+
+        h5,
+        .h5 {
+            font-size: 0.95rem !important;
+            font-weight: 600 !important;
+            color: #1e293b !important;
+        }
+
+        h6,
+        .h6 {
+            font-size: 0.85rem !important;
+            font-weight: 600 !important;
+            color: #475569 !important;
+        }
+
+        /* 3. Header Navbar Atas (Top Navigation Bar) */
+        .sb-topnav,
+        .navbar {
+            font-size: 13px !important;
+            background-color: #ffffff !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+        }
+
+        .sb-topnav .navbar-brand {
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            color: #0f172a !important;
+            letter-spacing: -0.2px;
+        }
+
+        /* 4. Sidebar Navigasi Kiri */
+        .sb-sidenav {
+            background-color: #ffffff !important;
+            border-right: 1px solid #e2e8f0 !important;
+        }
+
+        .sb-sidenav .sb-sidenav-menu-heading,
+        .sidebar-heading {
+            font-size: 10px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.8px !important;
+            color: #94a3b8 !important;
+            text-transform: uppercase !important;
+            padding: 16px 16px 4px 16px !important;
+        }
+
+        .sb-sidenav .nav-link {
+            font-size: 12.5px !important;
+            font-weight: 500 !important;
+            color: #475569 !important;
+            padding: 8px 14px !important;
+            margin: 2px 10px !important;
+            border-radius: 6px !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .sb-sidenav .nav-link:hover {
+            color: #2563eb !important;
+            background-color: #f1f5f9 !important;
+        }
+
+        .sb-sidenav .nav-link .sb-nav-link-icon {
+            font-size: 13px !important;
+            color: #64748b !important;
+        }
+
+        .sb-sidenav .nav-link:hover .sb-nav-link-icon {
+            color: #2563eb !important;
+        }
+
+        /* 5. Card Container / Panel */
+        .card {
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 8px !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+            background-color: #ffffff !important;
+        }
+
+        .card-header {
+            background-color: #ffffff !important;
+            border-bottom: 1px solid #f1f5f9 !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            color: #1e293b !important;
+            padding: 12px 16px !important;
+        }
+
+        /* 6. SEMUA TABEL & DATATABLES GLOBAL */
+        table,
+        .table,
+        table.dataTable {
+            font-size: 12px !important;
+            color: #334155 !important;
+            border-color: #f1f5f9 !important;
+        }
+
+        table th,
+        .table th,
+        table.dataTable thead th {
+            font-size: 11.5px !important;
+            font-weight: 700 !important;
+            color: #475569 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            background-color: #f8fafc !important;
+            border-bottom: 2px solid #e2e8f0 !important;
+            padding: 10px 12px !important;
+        }
+
+        table td,
+        .table td,
+        table.dataTable tbody td {
+            padding: 8px 12px !important;
+            vertical-align: middle !important;
+        }
+
+        /* Kontrol DataTables (Show entries, Search, Pagination) */
+        .dataTables_wrapper {
+            font-size: 12px !important;
+            color: #64748b !important;
+        }
+
+        .dataTables_wrapper .dataTables_filter input,
+        .dataTables_wrapper .dataTables_length select,
+        .form-control,
+        .form-select {
+            font-size: 12px !important;
+            border-radius: 6px !important;
+            border: 1px solid #cbd5e1 !important;
+            padding: 5px 10px !important;
+            color: #334155 !important;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #4a90e2 !important;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15) !important;
+        }
+
+        /* 7. Modal & Popup */
+        .modal-content {
+            border-radius: 10px !important;
+            border: none !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #f1f5f9 !important;
+            padding: 14px 20px !important;
+        }
+
+        .modal-title {
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            color: #0f172a !important;
+        }
+
+
+        /* ==========================================================================
+   DATATABLES v2 PAGINATION & DROPDOWN OVERRIDE (PRESISI BANTUAN INSPECT)
+   ========================================================================== */
+
+        /* 1. PERBAIKAN DROPDOWN LENGTH (DataTables v2) */
+        .dt-container .dt-length select,
+        div.dt-container div.dt-length select {
+            padding-top: 4px !important;
+            padding-bottom: 4px !important;
+            padding-left: 10px !important;
+            padding-right: 26px !important;
+            /* Mencegah panah nindih angka */
+            font-size: 12px !important;
+            height: auto !important;
+            min-width: 60px !important;
+            border-radius: 6px !important;
+            border: 1px solid #cbd5e1 !important;
+            background-color: #ffffff !important;
+            cursor: pointer !important;
+            /* Custom Icon Panah Halus */
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%3c64748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 8px center !important;
+            background-size: 10px 10px !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            appearance: none !important;
+        }
+
+        /* 2. PERBAIKAN PAGINATION (DataTables v2 + Bootstrap 5) */
+        .dt-container .dt-paging ul.pagination {
+            gap: 5px !important;
+            /* Kasih jarak antar tombol pagination */
+            margin: 0 !important;
+        }
+
+        /* Base State Tombol Page (Menembak ke tag button.page-link) */
+        .dt-container .dt-paging .dt-paging-button .page-link {
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 6px !important;
+            /* Bikin tombol melengkung modern */
+            background: #ffffff !important;
+            color: #475569 !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            padding: 6px 12px !important;
+            margin: 0 !important;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+            transition: all 0.2s ease !important;
+        }
+
+        /* Hover State */
+        .dt-container .dt-paging .dt-paging-button:not(.active):not(.disabled) .page-link:hover {
+            background: #f1f5f9 !important;
+            color: #2563eb !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        /* Active State (Halaman Aktif) */
+        .dt-container .dt-paging .dt-paging-button.active .page-link {
+            background: #2563eb !important;
+            /* Biru Solid Modern */
+            color: #ffffff !important;
+            border-color: #2563eb !important;
+            font-weight: 600 !important;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25) !important;
+        }
+
+        /* Disabled State (Tombol Mati) */
+        .dt-container .dt-paging .dt-paging-button.disabled .page-link {
+            background: #f8fafc !important;
+            color: #94a3b8 !important;
+            border-color: #e2e8f0 !important;
+            cursor: not-allowed !important;
+            opacity: 0.6 !important;
         }
     </style>
 </head>
