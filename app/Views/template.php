@@ -529,7 +529,7 @@
 
             <div class="marquee-wrapper">
                 <div class="me-2 flex-shrink-0">
-                    <img src="<?= base_url() ?>public/assets/img/gif/sun.gif" alt="run" style="width: 35px; height: auto;">
+                    <img src="<?= base_url() ?>public/assets/img/gif/penguin.gif" alt="run" style="width: 35px; height: auto;">
                 </div>
 
                 <div class="running-text-container">
