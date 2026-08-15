@@ -343,6 +343,43 @@ class Rm extends BaseController
         return view('rm/index', ['data' => $data]);
     }
 
+    public function operasi($noRawat)
+    {
+        $noRawat = str_replace('-', '/', $noRawat);
+
+        $rm11B1Checklist = $this->rm11B1ChecklistModel->where('noRawat', $noRawat)->first();
+        $rm11a1Bedah = $this->rm11a1BedahModel->where('noRawat', $noRawat)->first();
+
+        $status = [
+            "rm11b1Checklist" => $this->cekSemuaKolom($rm11B1Checklist, ['isiAlergi', 'isiKelengkapanLainnya', 'isijenisLainnya', 'profilaksisObat', 'profilaksisJam', 'profilaksisDosis', 'ttdPerawatAnestesi', 'ttdDokterAnestesi1', 'ttdSirkuler', 'ttdInstrumen', 'ttdAsisten', 'ttdOperator', 'ttdDokterAnestesi2']),
+            "rm11a1Bedah" => $this->cekSemuaKolom($rm11a1Bedah, ['isiRiwayatLainnya', 'jenisOperasi', 'lokasiOperasi', 'tglOperasi', 'isiAlergi', 'isidiagnosaLain', 'isiElektif', 'isiMulaiJam', 'isiKonsultasi', 'isiPeralatanLain', 'isiWholeBlood', 'isiPackedRed', 'isiKomponenLain', 'catatan', 'ttdWali', 'badan', 'kepalaSamping', 'kepala', 'telapakTangan', 'kaki', 'punggungTangan']),
+        ];
+
+        $pasien = $this->regPeriksaModel
+            ->select('
+                reg_periksa.no_rawat, 
+                reg_periksa.no_rkm_medis, 
+                pasien.nm_pasien, 
+                pasien.alamat, 
+                pasien.no_tlp, 
+                pasien.no_ktp, 
+                pasien.jk, 
+                pasien.tgl_lahir
+            ')
+            ->join('pasien', 'pasien.no_rkm_medis = reg_periksa.no_rkm_medis', 'left')
+            ->where('reg_periksa.no_rawat', $noRawat)
+            ->first();
+
+        $data = (object) [
+            'pasien'     => $pasien,
+            'rm11b1Checklist'  => $rm11B1Checklist,    // Biarkan null jika data tidak ada
+            'rm11a1Bedah'  => $rm11a1Bedah,    // Biarkan null jika data tidak ada
+            'status'  => $status    // Biarkan null jika data tidak ada
+        ];
+
+        return view('rm/operasi', ['data' => $data]);
+    }
+
     public function cppt($noRawat)
     {
         $petugas = $this->petugasModel->where('nip !=', '-')->findAll();

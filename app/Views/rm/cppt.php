@@ -38,9 +38,9 @@
             <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
 
             <!-- Operasi / Bedah -->
-            <button type="button" class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium ms-1 shadow-none">
+            <a href="<?= base_url('rm/operasi/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>" class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium ms-1 shadow-none">
                 <i class="fas fa-bed-pulse me-1"></i> Operasi
-            </button>
+            </a>
 
         </div>
     </div>
@@ -75,7 +75,7 @@
 
             <!-- 3. Tombol Cetak (Kanan - Tanpa position-absolute!) -->
             <div class="flex-shrink-0">
-                <a href="<?= base_url('rm/cetakCppt/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>" target="_blank" class="btn btn-sm btn-primary rounded-pill px-3 py-2 border-0 fw-medium shadow-none">
+                <a href="<?= base_url('rm/cetakCppt/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>" target="_blank" class="btn btn-sm btn-primary rounded-pill px-3 py-1 border-0 fw-small shadow-none">
                     <i class="fas fa-print me-1"></i> Cetak
                 </a>
             </div>

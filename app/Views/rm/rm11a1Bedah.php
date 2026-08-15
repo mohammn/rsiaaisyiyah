@@ -12,6 +12,7 @@
         <div class="card-header">
             <a class="btn btn-estetik btn-simpan" href="<?= base_url(" rm/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>">Kembali</a>
             <a class="btn btn-estetik btn-lihat" href="<?= base_url(" rm/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>#modalTambahForm">Daftar Form</a>
+            <a class="btn btn-estetik btn-simpan" href="<?= base_url(" rm/operasi/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>">RM Operasi</a>
         </div>
         <div class="card-body" style="overflow-y: auto;">
             <div class="text-center">

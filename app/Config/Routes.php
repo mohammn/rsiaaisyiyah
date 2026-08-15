@@ -261,6 +261,7 @@ $routes->post('/rm/verifCppt', 'Rm::verifCppt');
 $routes->post('/rm/serahTerima', 'Rm::serahTerima');
 $routes->post('/rm/hapusSerahTerima', 'Rm::hapusSerahTerima');
 $routes->get('/rm/cppt/(:any)', 'Rm::cppt/$1');
+$routes->get('/rm/operasi/(:any)', 'Rm::operasi/$1');
 $routes->get('/rm/(:any)', 'Rm::Index/$1');
 
 $routes->get('/pasien', 'Pasien::Index');

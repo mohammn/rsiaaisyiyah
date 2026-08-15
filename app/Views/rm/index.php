@@ -33,7 +33,7 @@
             <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
 
             <!-- CPPT (Catatan Perkembangan Pasien Terintegrasi) -->
-            <a type="button" class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
+            <a class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
                 href="<?= base_url('rm/cppt/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>">
                 <i class="fas fa-notes-medical me-1"></i> CPPT
             </a>
@@ -42,9 +42,9 @@
             <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
 
             <!-- Operasi / Bedah -->
-            <button type="button" class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium ms-1 shadow-none">
+            <a href="<?= base_url('rm/operasi/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>" class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium ms-1 shadow-none">
                 <i class="fas fa-bed-pulse me-1"></i> Operasi
-            </button>
+            </a>
 
         </div>
     </div>
@@ -57,7 +57,7 @@
             <div class="alert alert-primary d-inline-flex align-items-center mb-0 py-2 px-3 border-0 bg-primary-subtle text-primary-emphasis rounded-pill shadow-xs">
                 <i class="fas fa-id-badge me-2 fs-6"></i>
                 <span class="small">
-                    Menampilkan CPPT pasien:
+                    Menampilkan Rekam medis pasien:
                     <strong class="bg-vibrant-blue text-white px-2 py-1 rounded-pill ms-1">
                         <?= $data->pasien["nm_pasien"] ?> . (<?= $data->pasien["no_rawat"] ?>)
                     </strong>
