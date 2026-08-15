@@ -4,16 +4,26 @@
 
 <div class="container-fluid px-4">
     <h3 class="mt-4">Pasien Rawat Jalan</h3>
-    <div class="card mb-4">
-        <div class="card-header d-flex align-items-center bg-vibrant-blue text-white">
+    <div class="card mb-4" style="border-radius: 20px !important; overflow: hidden !important; border: 1px solid #e2e8f0 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.03) !important;">
 
-            <span class="me-2">Menampilkan data pasien mulai tanggal:</span>
-            <input type="date" value="<?= date('Y-m-d'); ?>" onchange="muatData()" class="form-control me-3" id="tglMulai" style="width: auto;">
+        <!-- Card Header Soft Pill Style -->
+        <div class="card-header d-flex align-items-center flex-wrap gap-2" style="background-color: #dbeafe !important; border-radius: 50px !important; border: none !important; padding: 10px 20px !important; color: #1e3a8a !important; margin: 12px 12px 0 12px !important;">
 
-            <span class="me-2">Sampai tanggal:</span>
-            <input type="date" value="<?= date('Y-m-d'); ?>" onchange="muatData()" class="form-control" id="tglAkhir" style="width: auto;">
+            <!-- Icon & Text Utama -->
+            <i class="fas fa-filter me-1" style="color: #1e40af !important; font-size: 15px;"></i>
+            <span class="fw-semibold" style="color: #1e3a8a !important; font-size: 13px;">Menampilkan data pasien mulai tanggal:</span>
+
+            <!-- Input Tanggal Mulai -->
+            <input type="date" value="<?= date('Y-m-d'); ?>" onchange="muatData()" class="form-control form-control-sm" id="tglMulai" style="width: auto; background-color: #bfdbfe !important; color: #1d4ed8 !important; border: none !important; border-radius: 20px !important; font-weight: 700; padding: 4px 12px !important;">
+
+            <span class="fw-semibold ms-1" style="color: #1e3a8a !important; font-size: 13px;">Sampai tanggal:</span>
+
+            <!-- Input Tanggal Akhir -->
+            <input type="date" value="<?= date('Y-m-d'); ?>" onchange="muatData()" class="form-control form-control-sm" id="tglAkhir" style="width: auto; background-color: #bfdbfe !important; color: #1d4ed8 !important; border: none !important; border-radius: 20px !important; font-weight: 700; padding: 4px 12px !important;">
 
         </div>
+
+        <!-- Card Body & Table -->
         <div class="card-body" style="overflow-y: auto;">
             <table class="table table-striped table-responsive-lg" id="tabelPasien">
                 <thead>

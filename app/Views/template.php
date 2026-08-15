@@ -309,15 +309,17 @@
             color: #2563eb !important;
         }
 
-        /* 5. Card Container / Panel */
-        .card {
+        /* 5. Card Container / Panel (FIXED FOR WIDGETS & REGULAR CARDS) */
+
+        /* Card Default / Biasa */
+        .card:not([class*="bg-"]) {
             border: 1px solid #e2e8f0 !important;
-            border-radius: 8px !important;
+            border-radius: 10px !important;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
             background-color: #ffffff !important;
         }
 
-        .card-header {
+        .card:not([class*="bg-"]) .card-header {
             background-color: #ffffff !important;
             border-bottom: 1px solid #f1f5f9 !important;
             font-size: 13px !important;
@@ -325,6 +327,45 @@
             color: #1e293b !important;
             padding: 12px 16px !important;
         }
+
+        /* Fix Card Warna / Card Widget (Dashboard Stats) */
+        .card[class*="bg-"] {
+            border: none !important;
+            border-radius: 10px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+        }
+
+        .card[class*="bg-"],
+        .card[class*="bg-"] .card-body,
+        .card[class*="bg-"] .card-footer,
+        .card[class*="bg-"] .text-white,
+        .card[class*="bg-"] a,
+        .card[class*="bg-"] i {
+            color: #ffffff !important;
+            /* Paksa warna teks & elemen di dalamnya kembali putih */
+        }
+
+        /* Modern Gradient untuk Widget Warna Dashboard */
+        .card.bg-primary {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+        }
+
+        .card.bg-success {
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+        }
+
+        .card.bg-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+        }
+
+        .card.bg-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+        }
+
+        .card.bg-info {
+            background: linear-gradient(135deg, #06b6d4, #0891b2) !important;
+        }
+
 
         /* 6. SEMUA TABEL & DATATABLES GLOBAL */
         table,
@@ -395,7 +436,6 @@
             font-weight: 700 !important;
             color: #0f172a !important;
         }
-
 
         /* ==========================================================================
    DATATABLES v2 PAGINATION & DROPDOWN OVERRIDE (PRESISI BANTUAN INSPECT)
