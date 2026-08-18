@@ -570,7 +570,7 @@ class Rm extends BaseController
 
         // 7. Mapping SBAR
         $sbarMapped = array_map(function ($item) use ($registration) {
-            $item['sumber']            = $this->registrationSource($registration);
+            $item['sumber']            = $item['judul']; //$this->registrationSource($registration);
             $item['jenis_hasil']       = 'SBAR';
             $item['tanggal_hasil'] = date('Y-m-d', strtotime($item['waktu']));
             $item['jam_hasil']     = date('H:i:s', strtotime($item['waktu']));

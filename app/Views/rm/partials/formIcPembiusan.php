@@ -141,12 +141,12 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="jenis_anestesi" id="spinal" value="Spinal/Epidural"
                                                     <?= (($data->icPembiusan['jenisAnestesi'] ?? '') === 'Spinal/Epidural') ? 'checked' : '' ?>>
-                                                <label class="form-check-label" for="spinal">Spinal / Epidural</label>
+                                                <label class="form-check-label text-dark" for="spinal">Spinal / Epidural</label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="jenis_anestesi" id="blok" value="Blok Syaraf Perifer"
                                                     <?= (($data->icPembiusan['jenisAnestesi'] ?? '') === 'Blok Syaraf Perifer') ? 'checked' : '' ?>>
-                                                <label class="form-check-label" for="blok">Blok Syaraf Perifer</label>
+                                                <label class="form-check-label text-dark" for="blok">Blok Syaraf Perifer</label>
                                             </div>
                                         </div>
                                     </div>
