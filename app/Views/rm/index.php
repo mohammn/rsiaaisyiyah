@@ -122,6 +122,20 @@
                             </td>
                         </tr>
                     <?php endif; ?>
+                    <?php if ($data->rm11a2Timbang) : ?>
+                        <tr>
+                            <td>Timbang Terima Untuk Keselamatan Pembedahan</td>
+                            <td>
+                                <span class="badge-estetik <?= $data->status["rm11a2Timbang"] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["rm11a2Timbang"] ?></span>
+                            </td>
+                            <td><?= !empty($data->rm11a2Timbang['ttdPengantar']) && !empty($data->rm11a2Timbang['ttdPenerima']) && !empty($data->rm11a2Timbang['ttdPengantar2']) && !empty($data->rm11a2Timbang['ttdPenerima2']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                            <td>
+                                <a href="<?= base_url(" rm/rm11a2Timbang/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                <?= !empty($data->rm11a2Timbang['ttdPengantar']) && !empty($data->rm11a2Timbang['ttdPenerima']) && !empty($data->rm11a2Timbang['ttdPengantar2']) && !empty($data->rm11a2Timbang['ttdPenerima2']) ? '<a href="' . base_url('/rm/rm11a2Timbang/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/rm11a2Timbang/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
+                                <a href="<?= base_url('/rm/rm11a2Timbang/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
                     <?php if ($data->skorPoudji): ?>
                         <?php for ($i = 0; $i < count($data->skorPoudji); $i++) :
                             $tglinput = new \DateTime($data->skorPoudji[$i]["tglinput"]);
@@ -726,6 +740,13 @@
                             <td>Penandaan Lokasi Operasi</td>
                             <td>
                                 <?= $data->rm11a1Bedah ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/rm11a1Bedah/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>30.</td>
+                            <td>Timbang Terima Untuk Keselamatan Pembedahan</td>
+                            <td>
+                                <?= $data->rm11a2Timbang ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/rm11a2Timbang/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
                             </td>
                         </tr>
                     </tbody>

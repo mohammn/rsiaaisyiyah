@@ -513,6 +513,24 @@
             cursor: not-allowed !important;
             opacity: 0.6 !important;
         }
+
+
+        /* Styling untuk menu aktif pada SB Admin Light */
+        .sb-sidenav-light .sb-sidenav-menu .nav-link.active {
+            color: #0d6efd !important;
+            /* Warna teks (biru Bootstrap) */
+            background-color: #f0f4fe !important;
+            /* Latar belakang biru muda */
+            font-weight: 600;
+            /* Cetak tebal */
+            border-radius: 8px;
+            /* Sudut melengkung */
+        }
+
+        /* Memastikan ikon ikut berubah warna saat menu aktif */
+        .sb-sidenav-light .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
+            color: #0d6efd !important;
+        }
     </style>
 </head>
 
@@ -559,56 +577,52 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading" style="padding:1px;">
-                            <img src="<?= base_url() ?>public/assets/img/rsia.jpg" alt="" class="img-fluid" alt="Responsive image">
+                            <img src="<?= base_url('public/assets/img/rsia.jpg') ?>" class="img-fluid" alt="RSIA Logo">
                         </div>
+
                         <div class="sb-sidenav-menu-heading">Menu</div>
-                        <a class="nav-link <?= (uri_string() == 'dashboard') ? 'active' : '' ?>" href="<?= base_url() ?>dashboard">
+                        <a class="nav-link <?= url_is('dashboard*') ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
+
                         <?php if (session()->get('rule') == 2): ?>
-                            <a class="nav-link <?= (uri_string() == 'pengaturan') ? 'active' : '' ?>" href="<?= base_url() ?>pengaturan">
+                            <a class="nav-link <?= url_is('pengaturan*') ? 'active' : '' ?>" href="<?= base_url('pengaturan') ?>">
                                 <div class="sb-nav-link-icon"><i class="fas fa-gears"></i></div>
                                 Pengaturan
                             </a>
                         <?php endif; ?>
+
                         <div class="sb-sidenav-menu-heading">Layanan</div>
-                        <a class="nav-link <?= (uri_string() == 'ranap') ? 'active' : '' ?>" href="<?= base_url() ?>ranap">
+                        <a class="nav-link <?= url_is('ranap*') ? 'active' : '' ?>" href="<?= base_url('ranap') ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-bed"></i></div>
                             Rawat Inap
-                        </a><a class="nav-link <?= (uri_string() == 'rajal') ? 'active' : '' ?>" href="<?= base_url() ?>rajal">
+                        </a>
+                        <a class="nav-link <?= url_is('rajal*') ? 'active' : '' ?>" href="<?= base_url('rajal') ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-wheelchair"></i></div>
                             Rawat Jalan
-                        </a><a class="nav-link <?= (uri_string() == 'igd') ? 'active' : '' ?>" href="<?= base_url() ?>igd">
+                        </a>
+                        <a class="nav-link <?= url_is('igd*') ? 'active' : '' ?>" href="<?= base_url('igd') ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-ambulance"></i></div>
                             Ins. Gawat Darurat
                         </a>
-                        <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#rme" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                            Rekam Medis
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="rme" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="persetujuanRajal">Persetujuan rawat jalan</a>
-                            </nav>
-                        </div> -->
+
                         <div class="sb-sidenav-menu-heading">Data Master</div>
-                        <a class="nav-link <?= (uri_string() == 'pasien') ? 'active' : '' ?>" href="<?= base_url() ?>pasien">
+                        <a class="nav-link <?= url_is('pasien*') ? 'active' : '' ?>" href="<?= base_url('pasien') ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Pasien
                         </a>
-                        <?php if (session()->get('rule') == 1 or session()->get('rule') == 2) { ?>
-                            <a class="nav-link <?= (uri_string() == 'user') ? 'active' : '' ?>" href="<?= base_url() ?>user">
+
+                        <?php if (in_array(session()->get('rule'), [1, 2])): ?>
+                            <a class="nav-link <?= url_is('user*') ? 'active' : '' ?>" href="<?= base_url('user') ?>">
                                 <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                                 User
                             </a>
-                            <a class="nav-link <?= (uri_string() == 'log') ? 'active' : '' ?>" href="<?= base_url() ?>log">
+                            <a class="nav-link <?= url_is('log*') ? 'active' : '' ?>" href="<?= base_url('log') ?>">
                                 <div class="sb-nav-link-icon"><i class="fas fa-history"></i></div>
                                 Log
                             </a>
-                        <?php } ?>
-
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -617,6 +631,7 @@
                 </div>
             </nav>
         </div>
+
         <div id="layoutSidenav_content">
             <main>
                 <?php $this->renderSection('content'); ?>
@@ -624,8 +639,8 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Made by <b>MN Dev</b> with <i class="fa fa-heart text-danger" aria-hidden="true"></i> for <b>RSIA Aisyiyah Bangkalan</b></div>
-                        <div>
+                        <div class="text-muted">
+                            Made by <b>MN Dev</b> with <i class="fa fa-heart text-danger" aria-hidden="true"></i> for <b>RSIA Aisyiyah Bangkalan</b>
                         </div>
                     </div>
                 </div>
