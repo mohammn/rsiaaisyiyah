@@ -49,7 +49,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label class="form-label fw-bold small text-secondary mb-0">Dari unit lain :</label>
+                            <label class="form-label fw-bold small text-secondary mb-0">Dari unit lain : (IGD/RANAP)</label>
                             <input type="text" name="unitLain" id="unitLain" class="form-control" value="<?= $data->rm11a2Timbang['unitLain'] ?? '' ?>">
                         </div>
                         <div class="col-12">
@@ -120,7 +120,7 @@
         <div class="col-md-6">
             <div class="alert alert-info">
                 <div class="row mb-1">
-                    <div class="col-12 text-center fw-bold">Penyerahan dari Ruangan (Kiri) :</div>
+                    <div class="col-12 text-center fw-bold">Dari Unit Lain Ke R. Premedikasi :</div>
                     <hr>
                 </div>
 
@@ -782,7 +782,7 @@
         <div class="col-md-6">
             <div class="alert alert-success">
                 <div class="row mb-1">
-                    <div class="col-12 text-center fw-bold">Penerimaan di OK (Kanan) :</div>
+                    <div class="col-12 text-center fw-bold">dari R. Premedikasi ke Kamar Operasi :</div>
                     <hr>
                 </div>
 
@@ -1478,7 +1478,7 @@
         <div class="col-md-6">
             <div class="alert alert-success">
                 <div class="row mb-1">
-                    <div class="col-12 text-center fw-bold">Assessment 2 :</div>
+                    <div class="col-12 text-center fw-bold">Assessment :</div>
                     <hr>
                 </div>
                 <div class="row mt-2">
@@ -1583,7 +1583,7 @@
         <div class="col-md-6">
             <div class="alert alert-success">
                 <div class="row mb-1">
-                    <div class="col-12 text-center fw-bold">Recomendation 2 :</div>
+                    <div class="col-12 text-center fw-bold">Recomendation :</div>
                     <hr>
                 </div>
 
@@ -1708,7 +1708,7 @@
         <div class="col-md-6">
             <div class="alert alert-success">
                 <div class="row mb-1">
-                    <div class="col-12 text-center fw-bold">Petugas 2 :</div>
+                    <div class="col-12 text-center fw-bold">Petugas :</div>
                     <hr>
                 </div>
 

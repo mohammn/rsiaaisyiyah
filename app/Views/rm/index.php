@@ -761,6 +761,7 @@
 
 <script>
     $('#tabelRm').DataTable({
+        "order": [],
         "pageLength": 25, // <-- Menyetel tampilan awal menjadi 25 entri
         "language": {
             "sEmptyTable": "Tidak ada data yang tersedia pada tabel ini",
