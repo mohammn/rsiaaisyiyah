@@ -11,42 +11,7 @@
 <div class="container-fluid px-4">
     <h4 class="mt-2 text-center">Rekam Medis Pasien</h4>
 
-    <!-- Container Utama Toolbar Tengah -->
-    <div class="d-flex justify-content-center mb-4">
-        <!-- Floating Pill Bar -->
-        <div class="d-inline-flex align-items-center bg-light p-1 rounded-pill border shadow-sm">
-            <a class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium me-1 shadow-none"
-                href="<?= base_url(session()->get('kembali')) ?>">
-                <i class="fas fa-arrow-left me-1"></i> Kembali
-            </a>
-            <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
-
-            <!-- Daftar Form (Primary Accent) -->
-            <a class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium me-1 ms-1 shadow-none"
-                href="<?= base_url('rm/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>">
-                <i class="fas fa-file-medical me-1"></i> Daftar Form
-            </a>
-            <!-- Garis Pemisah 2 -->
-            <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
-
-            <!-- CPPT (Catatan Perkembangan Pasien Terintegrasi) -->
-            <a class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
-                href="<?= base_url('rm/cppt/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>">
-                <i class="fas fa-notes-medical me-1"></i> CPPT
-            </a>
-
-            <!-- Garis Pemisah 3 -->
-            <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
-
-            <!-- Operasi / Bedah -->
-
-            <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none">
-                <i class="fas fa-bed-pulse me-1"></i> Operasi
-            </button>
-
-        </div>
-    </div>
-
+    <?= view('jenis/menu', ['data' => $data]) ?>
 
     <div class="card mb-4">
         <!-- Card Header: Navigasi Kiri & Toolbar Aksi Kanan -->

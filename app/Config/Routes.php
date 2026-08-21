@@ -6,6 +6,13 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
+$routes->post('/farmasi/obatPulang/ubahWaktu', 'Farmasi\ObatPulang::ubahWaktu');
+$routes->post('/farmasi/obatPulang/simpanTtd', 'Farmasi\ObatPulang::simpanTtd');
+$routes->post('/farmasi/obatPulang/hapus', 'Farmasi\ObatPulang::hapus');
+$routes->post('/farmasi/obatPulang/simpan', 'Farmasi\ObatPulang::simpan');
+$routes->get('/farmasi/obatPulang/cetak/(:any)', 'Farmasi\ObatPulang::cetak/$1');
+$routes->get('/farmasi/obatPulang/(:any)', 'Farmasi\ObatPulang::index/$1');
+
 $routes->post('/rm/skorPoudji/tambahSkor', 'Rm\SkorPoudji::tambahSkor');
 $routes->post('/rm/skorPoudji/ubahskor', 'Rm\SkorPoudji::ubahSkor');
 $routes->post('/rm/skorPoudji/hapus', 'Rm\SkorPoudji::hapus');
@@ -262,13 +269,17 @@ $routes->post('/rm/rekonsiliasiObat/simpan', 'Rm\RekonsiliasiObat::simpan');
 $routes->get('/rm/rekonsiliasiObat/muatData/(:any)', 'Rm\RekonsiliasiObat::muatData/$1');
 $routes->get('/rm/rekonsiliasiObat/(:any)', 'Rm\RekonsiliasiObat::index/$1');
 
-$routes->get('/rm/cetakCppt/(:any)', 'Rm::cetakCppt/$1');
-$routes->post('/rm/verifCppt', 'Rm::verifCppt');
-$routes->post('/rm/serahTerima', 'Rm::serahTerima');
-$routes->post('/rm/hapusSerahTerima', 'Rm::hapusSerahTerima');
-$routes->get('/rm/cppt/(:any)', 'Rm::cppt/$1');
-$routes->get('/rm/operasi/(:any)', 'Rm::operasi/$1');
 $routes->get('/rm/(:any)', 'Rm::Index/$1');
+
+
+$routes->get('/jenis/cppt/cetakCppt/(:any)', 'Jenis\Cppt::cetakCppt/$1');
+$routes->post('/jenis/cppt/verifCppt', 'Jenis\Cppt::verifCppt');
+$routes->post('/jenis/cppt/serahTerima', 'Jenis\Cppt::serahTerima');
+$routes->post('/jenis/cppt/hapusSerahTerima', 'Jenis\Cppt::hapusSerahTerima');
+$routes->get('/jenis/cppt/(:any)', 'Jenis\Cppt::index/$1');
+
+$routes->get('/jenis/operasi/(:any)', 'Jenis\Operasi::index/$1');
+$routes->get('/jenis/farmasi/(:any)', 'Jenis\Farmasi::index/$1');
 
 $routes->get('/pasien', 'Pasien::Index');
 $routes->post('/pasien/lihatPj', 'Pasien::lihatPj');

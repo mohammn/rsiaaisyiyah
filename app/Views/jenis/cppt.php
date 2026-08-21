@@ -11,40 +11,7 @@
 <div class="container-fluid px-4">
     <h4 class="mt-2 text-center">Rekam Medis Pasien</h4>
 
-    <!-- Container Utama Toolbar Tengah -->
-    <div class="d-flex justify-content-center mb-4">
-        <!-- Floating Pill Bar -->
-        <div class="d-inline-flex align-items-center bg-light p-1 rounded-pill border shadow-sm">
-            <a class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium me-1 shadow-none"
-                href="<?= base_url(session()->get('kembali')) ?>">
-                <i class="fas fa-arrow-left me-1"></i> Kembali
-            </a>
-            <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
-
-            <a class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium me-1 ms-1 shadow-none"
-                href="<?= base_url('rm/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>">
-                <i class="fas fa-file-medical me-1"></i> Daftar Form
-            </a>
-
-            <!-- Garis Pemisah 2 -->
-            <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
-
-            <!-- CPPT (Catatan Perkembangan Pasien Terintegrasi) -->
-            <button type="button" class="btn btn-sm btn-primary rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none">
-                <i class="fas fa-notes-medical me-1"></i> CPPT
-            </button>
-
-            <!-- Garis Pemisah 3 -->
-            <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
-
-            <!-- Operasi / Bedah -->
-            <a href="<?= base_url('rm/operasi/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>" class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium ms-1 shadow-none">
-                <i class="fas fa-bed-pulse me-1"></i> Operasi
-            </a>
-
-        </div>
-    </div>
-
+    <?= view('jenis/menu', ['data' => $data]) ?>
 
     <div class="card mb-4">
         <!-- Card Header: Navigasi Kiri & Toolbar Aksi Kanan -->
@@ -75,7 +42,7 @@
 
             <!-- 3. Tombol Cetak (Kanan - Tanpa position-absolute!) -->
             <div class="flex-shrink-0">
-                <a href="<?= base_url('rm/cetakCppt/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>" target="_blank" class="btn btn-sm btn-primary rounded-pill px-3 py-1 border-0 fw-small shadow-none">
+                <a href="<?= base_url('jenis/cppt/cetakCppt/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>" target="_blank" class="btn btn-sm btn-primary rounded-pill px-3 py-1 border-0 fw-small shadow-none">
                     <i class="fas fa-print me-1"></i> Cetak
                 </a>
             </div>
@@ -312,7 +279,7 @@
     function verif(noRawat, tanggal, jam) {
         if (confirm('Apakah Anda yakin ingin memverifikasi data CPPT ini?')) {
             $.ajax({
-                url: '<?= base_url() ?>rm/verifCppt',
+                url: '<?= base_url() ?>jenis/cppt/verifCppt',
                 method: 'post',
                 data: {
                     noRawat: noRawat,
@@ -346,7 +313,7 @@
         }
 
         $.ajax({
-            url: '<?= base_url() ?>rm/serahTerima',
+            url: '<?= base_url() ?>jenis/cppt/serahTerima',
             method: 'post',
             data: data,
             dataType: 'json',
@@ -359,7 +326,7 @@
     function hapusSerahTerima(noRawat, tanggal, jam) {
         if (confirm('Apakah Anda yakin ingin menghapus data serah terima ini?')) {
             $.ajax({
-                url: '<?= base_url() ?>rm/hapusSerahTerima',
+                url: '<?= base_url() ?>jenis/cppt/hapusSerahTerima',
                 method: 'post',
                 data: {
                     noRawat: noRawat,
