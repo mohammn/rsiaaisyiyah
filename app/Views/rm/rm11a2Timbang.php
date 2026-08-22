@@ -76,9 +76,17 @@
 
                     <br><br>
                     <div class="text-center">
-                        <a class="btn btn-estetik btn-simpan" href="<?= base_url('/rm/rm11a2Timbang/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->rm11a2Timbang['id']) ?>" target="_blank">
-                            <i class="fas fa-pen-nib me-1"></i> TTD
-                        </a>
+
+                        <?php
+                        if (!empty($data->rm11a2Timbang['ttdPengantar']) && !empty($data->rm11a2Timbang['ttdPenerima']) && !empty($data->rm11a2Timbang['ttdPengantar2']) && !empty($data->rm11a2Timbang['ttdPenerima2'])): ?>
+                            <a class="btn btn-estetik btn-simpan" href="<?= base_url('/rm/rm11a2Timbang/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->rm11a2Timbang['id']) ?>" target="_blank">
+                                <i class="fas fa-print me-1"></i> Cetak
+                            </a>
+                        <?php else: ?>
+                            <a class="btn btn-estetik btn-simpan" href="<?= base_url('/rm/rm11a2Timbang/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->rm11a2Timbang['id']) ?>" target="_blank">
+                                <i class="fas fa-pen-nib me-1"></i> TTD
+                            </a>
+                        <?php endif ?>
                         <button class="btn btn-estetik btn-lihat" data-bs-toggle="modal" data-bs-target="#modalEdit">
                             <i class="fa fa-edit me-1"></i> Edit
                         </button>
