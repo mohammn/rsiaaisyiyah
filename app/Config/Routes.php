@@ -46,6 +46,13 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/penerjemah/simpanTtd', 'Rm\Penerjemah::simpanTtd');
+$routes->post('/rm/penerjemah/ubahWaktu', 'Rm\Penerjemah::ubahWaktu');
+$routes->post('/rm/penerjemah/hapus', 'Rm\Penerjemah::hapus');
+$routes->get('/rm/penerjemah/cetak/(:any)', 'Rm\Penerjemah::cetak/$1');
+$routes->post('/rm/penerjemah/simpan', 'Rm\Penerjemah::simpan');
+$routes->get('/rm/penerjemah/(:any)', 'Rm\Penerjemah::index/$1');
+
 $routes->post('/rm/rm11a2Timbang/simpanTtd', 'Rm\Rm11a2Timbang::simpanTtd');
 $routes->post('/rm/rm11a2Timbang/hapus', 'Rm\Rm11a2Timbang::hapus');
 $routes->get('/rm/rm11a2Timbang/cetak/(:any)', 'Rm\Rm11a2Timbang::cetak/$1');
