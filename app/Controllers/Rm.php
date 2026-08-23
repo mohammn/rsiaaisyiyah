@@ -42,6 +42,7 @@ use App\Models\Rm11b1ChecklistModel;
 use App\Models\Rm11a1BedahModel;
 use App\Models\Rm11a2TimbangModel;
 use App\Models\PenerjemahModel;
+use App\Models\Rm26jRujukanLuarModel;
 
 use function PHPSTORM_META\type;
 
@@ -87,6 +88,7 @@ class Rm extends BaseController
     protected $rm11a1BedahModel;
     protected $rm11a2TimbangModel;
     protected $penerjemahModel;
+    protected $rm26jRujukanLuarModel;
 
     public function __construct()
     {
@@ -134,6 +136,7 @@ class Rm extends BaseController
         $this->rm11a1BedahModel = new Rm11a1BedahModel();
         $this->rm11a2TimbangModel = new Rm11a2TimbangModel();
         $this->penerjemahModel = new PenerjemahModel();
+        $this->rm26jRujukanLuarModel = new Rm26jRujukanLuarModel();
     }
     public function index($no_rawat)
     {
@@ -188,6 +191,7 @@ class Rm extends BaseController
         $rm11a1Bedah = $this->rm11a1BedahModel->where('noRawat', $no_rawat)->first();
         $rm11a2Timbang = $this->rm11a2TimbangModel->where('noRawat', $no_rawat)->first();
         $penerjemah = $this->penerjemahModel->where('noRawat', $no_rawat)->first();
+        $rm26jRujukanLuar = $this->rm26jRujukanLuarModel->where('noRawat', $no_rawat)->first();
         // ================khusus SBAR=========================
         $rm0Sbar = $this->rm0SbarModel->where('noRawat', $no_rawat)->findAll();
         $rm0SbarData = [];
@@ -311,6 +315,7 @@ class Rm extends BaseController
             "rm11a1Bedah" => $this->cekSemuaKolom($rm11a1Bedah, ['isiRiwayatLainnya', 'jenisOperasi', 'lokasiOperasi', 'tglOperasi', 'isiAlergi', 'isidiagnosaLain', 'isiElektif', 'isiMulaiJam', 'isiKonsultasi', 'isiPeralatanLain', 'isiWholeBlood', 'isiPackedRed', 'isiKomponenLain', 'catatan', 'ttdWali', 'badan', 'kepalaSamping', 'kepala', 'telapakTangan', 'kaki', 'punggungTangan']),
             "rm11a2Timbang" => $this->cekSemuaKolom($rm11a2Timbang, ['ttdPengantar', 'ttdPenerima', 'ttdPengantar2', 'ttdPenerima2', 'rpd', 'isiRpdLainnya', 'rpd2', 'isiRpdLainnya2', 'isiAlergi', 'isiAlergi2', 'jumlahDarah', 'jumlahDarah2', 'tglTranfusi', 'jenisTranfusi', 'golTranfusi', 'jumlahTranfusi', 'tglTranfusi2', 'jenisTranfusi2', 'golTranfusi2', 'jumlahTranfusi2', 'isiLabJml', 'isiLabJml2', 'isiFotoJml', 'isiFotoJml2', 'isiFotoLainnya', 'isiFotoLainnya2', 'isiPuasaJam', 'isiLavementKet', 'isiPuasaJam2', 'isiLavementKet2', 'isiGigiDibawaOleh', 'isiGigiDibawaOleh2', 'isiKesadaranLain', 'isiKesadaranLain2',]),
             "penerjemah" => $this->cekSemuaKolom($penerjemah, ['ttdWali']),
+            "rm26jRujukanLuar" => $this->cekSemuaKolom($rm26jRujukanLuar, ['ttdWali', 'isiHandOverLainLain', 'alasanKeterangan']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -347,6 +352,7 @@ class Rm extends BaseController
             'rm11a1Bedah'  => $rm11a1Bedah,    // Biarkan null jika data tidak ada
             'rm11a2Timbang'  => $rm11a2Timbang,    // Biarkan null jika data tidak ada
             'penerjemah'  => $penerjemah,    // Biarkan null jika data tidak ada
+            'rm26jRujukanLuar'  => $rm26jRujukanLuar,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 
