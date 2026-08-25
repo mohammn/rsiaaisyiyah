@@ -46,6 +46,11 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm9aTransferPasien/hapus', 'Rm\Rm9aTransferPasien::hapus');
+$routes->get('/rm/rm9aTransferPasien/cetak/(:any)', 'Rm\Rm9aTransferPasien::cetak/$1');
+$routes->post('/rm/rm9aTransferPasien/simpan', 'Rm\Rm9aTransferPasien::simpan');
+$routes->get('/rm/rm9aTransferPasien/(:any)', 'Rm\Rm9aTransferPasien::index/$1');
+
 $routes->post('/rm/rm26jRujukanLuar/simpanTtd', 'Rm\Rm26jRujukanLuar::simpanTtd');
 $routes->post('/rm/rm26jRujukanLuar/ubahWaktu', 'Rm\Rm26jRujukanLuar::ubahWaktu');
 $routes->post('/rm/rm26jRujukanLuar/hapus', 'Rm\Rm26jRujukanLuar::hapus');
