@@ -104,7 +104,7 @@
 
             <?php else : ?>
                 <h6 class="text-center">Form isian :</h6>
-                <?= $this->include("rm/partials/formrm9aTransferPasien.php") ?>
+                <?= $this->include("rm/partials/formRm9aTransferPasien.php") ?>
 
                 <div class="text-center">
                     <div class="bg-info" id="pesanError"> </div>
@@ -129,7 +129,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <?= $this->include("rm/partials/formrm9aTransferPasien.php") ?>
+                <?= $this->include("rm/partials/formRm9aTransferPasien.php") ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-estetik btn-batal" data-bs-dismiss="modal"><i class="fas fa-ban me-1"></i> Batal</button>
