@@ -214,9 +214,9 @@ class Rm extends BaseController
         }
         for ($i = 0; $i < count($statusRm0Sbar); $i++) {
             if (in_array("Lengkap", $statusRm0Sbar[$i])) {
-                $statusRm0Sbar[$i] = 'Lengkap';
+                $statusRm0Sbar[$i] = ['Lengkap', ['Semua Kolom terisi']];
             } else {
-                $statusRm0Sbar[$i] = 'Tidak Lengkap';
+                $statusRm0Sbar[$i] = $statusRm0Sbar[$i];
             }
         }
 
