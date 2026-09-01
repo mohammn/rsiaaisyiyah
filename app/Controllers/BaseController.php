@@ -62,44 +62,53 @@ abstract class BaseController extends Controller
      * @param mixed $data - Hasil query (Object/Array)
      * @return string
      */
-    protected function cekSemuaKolom($data, array $kecualikan = []): string
+    protected function cekSemuaKolom($data, array $kecualikan = []): array
     {
         if (empty($data)) {
-            return "Belum Diisi";
+            return ["Belum Diisi", ["Data kosong"]];
         }
 
-        // Pastikan data dalam bentuk array agar bisa di-loop
         $dataArray = is_object($data) ? get_object_vars($data) : $data;
 
         $totalKolomDicek = 0;
         $kolomTerisi = 0;
+        $kolomKosong = [];
 
         foreach ($dataArray as $key => $value) {
-            // Jika nama kolom (key) ada di dalam daftar pengecualian, lewati (skip)
-            if (in_array($key, $kecualikan)) {
+            if (in_array($key, $kecualikan, true)) {
                 continue;
             }
 
             $totalKolomDicek++;
 
-            // Cek apakah kolom ini ada isinya (tidak null, tidak string kosong, dan bukan cuma spasi)
             if ($value !== null && trim((string)$value) !== "") {
                 $kolomTerisi++;
+            } else {
+                $kolomKosong[] = (string)$key;
             }
         }
 
         // =======================================================
         // PENENTUAN STATUS BERDASARKAN COUNTER
         // =======================================================
+
+        // 1. Jika tidak ada kolom yang bisa dicek (misal: semua masuk daftar kecualikan)
+        if ($totalKolomDicek === 0) {
+            return ["Belum Diisi", ["Tidak ada kolom untuk diperiksa"]];
+        }
+
+        // 2. Jika semua kolom kosong
         if ($kolomTerisi === 0) {
-            return "Belum Diisi"; // Semua kolom kosong
+            return ["Belum Diisi", $kolomKosong];
         }
 
+        // 3. Jika semua kolom terisi
         if ($kolomTerisi === $totalKolomDicek) {
-            return "Lengkap"; // Semua kolom terisi tanpa terkecuali
+            return ["Lengkap", ["Semua kolom terisi"]]; // Mengembalikan array berisi deskripsi ringkas
         }
 
-        return "Tidak Lengkap"; // Menggantung (ada yang terisi, ada yang kosong)
+        // 4. Jika terisi sebagian
+        return ["Tidak Lengkap", $kolomKosong];
     }
 
     protected function uploadTtd($canvasData, $fileName, $folderPath)

@@ -47,7 +47,10 @@
                     <tr>
                         <td>Obat Pulang</td>
                         <td>
-                            <span class="badge-estetik <?= $data->status["obatPulang"] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["obatPulang"] ?></span>
+                            <span class="badge-estetik <?= $data->status["obatPulang"][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
+                                title="<?= htmlspecialchars(implode(', ', $data->status["obatPulang"][1])) ?>">
+                                <?= $data->status["obatPulang"][0] ?>
+                            </span>
                         </td>
                         <td><?= !empty($data->obatPulang['ttdWali']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
                         <td>

@@ -48,7 +48,10 @@
                     <tr>
                         <td>Checklist Keselamatan di Kamar Bedah</td>
                         <td>
-                            <span class="badge-estetik <?= $data->status["rm11b1Checklist"] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["rm11b1Checklist"] ?></span>
+                            <span class="badge-estetik <?= $data->status["rm11b1Checklist"][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
+                                title="<?= htmlspecialchars(implode(', ', $data->status["rm11b1Checklist"][1])) ?>">
+                                <?= $data->status["rm11b1Checklist"][0] ?>
+                            </span>
                         </td>
                         <td><?= (!empty($data->rm11b1Checklist['ttdPerawatAnestesi']) && !empty($data->rm11b1Checklist['ttdDokterAnestesi1']) && !empty($data->rm11b1Checklist['ttdSirkuler']) && !empty($data->rm11b1Checklist['ttdInstrumen']) && !empty($data->rm11b1Checklist['ttdAsisten']) && !empty($data->rm11b1Checklist['ttdOperator']) && !empty($data->rm11b1Checklist['ttdDokterAnestesi2'])) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
                         <td>
@@ -63,7 +66,10 @@
                     <tr>
                         <td>Penandaan Lokasi Operasi</td>
                         <td>
-                            <span class="badge-estetik <?= $data->status["rm11a1Bedah"] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["rm11a1Bedah"] ?></span>
+                            <span class="badge-estetik <?= $data->status["rm11a1Bedah"][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
+                                title="<?= htmlspecialchars(implode(', ', $data->status["rm11a1Bedah"][1])) ?>">
+                                <?= $data->status["rm11a1Bedah"][0] ?>
+                            </span>
                         </td>
                         <td><?= !empty($data->rm11a1Bedah['ttdWali']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
                         <td>
@@ -79,7 +85,10 @@
                     <tr>
                         <td>Timbang Terima Untuk Keselamatan Pembedahan</td>
                         <td>
-                            <span class="badge-estetik <?= $data->status["rm11a2Timbang"] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["rm11a2Timbang"] ?></span>
+                            <span class="badge-estetik <?= $data->status["rm11a2Timbang"][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
+                                title="<?= htmlspecialchars(implode(', ', $data->status["rm11a2Timbang"][1])) ?>">
+                                <?= $data->status["rm11a2Timbang"][0] ?>
+                            </span>
                         </td>
                         <td><?= !empty($data->rm11a2Timbang['ttdPengantar']) && !empty($data->rm11a2Timbang['ttdPenerima']) && !empty($data->rm11a2Timbang['ttdPengantar2']) && !empty($data->rm11a2Timbang['ttdPenerima2']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
                         <td>
