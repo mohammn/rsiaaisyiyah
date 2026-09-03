@@ -180,7 +180,7 @@
                             <td>
                                 <span class="badge-estetik <?= $data->status["rekonsiliasiObat"] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["rekonsiliasiObat"] ?></span>
                             </td>
-                            <td><?= $data->status['rekonsiliasiObat'][0] === 'Lengkap' ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                            <td><?= $data->status['rekonsiliasiObat'] === 'Lengkap' ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
                             <td>
                                 <a href="<?= base_url(" rm/rekonsiliasiObat/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
                                 <a href=" <?= base_url('/rm/rekonsiliasiObat/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>

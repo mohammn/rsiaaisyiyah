@@ -3,7 +3,7 @@
 /** @var object $data */
 $uri              = service('uri');
 $segment1         = $uri->getSegment(1); // Mendapatkan 'rm' atau 'jenis'
-$currentJenis     = $uri->getSegment(2); // Mendapatkan 'cppt', 'operasi', 'farmasi', atau no_rawat
+$currentJenis     = $uri->getSegment(2); // Mendapatkan jenis modul atau no_rawat
 $noRawatFormatted = str_replace('/', '-', $data->pasien['no_rawat']);
 
 // Cek apakah halaman aktif adalah halaman utama 'rm'
@@ -12,7 +12,7 @@ $isHalamanRm = ($segment1 === 'rm' && $currentJenis !== 'cppt');
 
 <div class="d-flex justify-content-center mb-4">
     <!-- Floating Pill Bar -->
-    <div class="d-inline-flex align-items-center bg-light p-1 rounded-pill border shadow-sm">
+    <div class="d-inline-flex align-items-center bg-light p-1 rounded-pill border shadow-sm flex-wrap">
 
         <!-- Tombol Kembali -->
         <a class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium me-1 shadow-none"
@@ -28,12 +28,12 @@ $isHalamanRm = ($segment1 === 'rm' && $currentJenis !== 'cppt');
                 class="btn btn-sm btn-primary rounded-pill px-3 py-1 fw-semibold mx-1 shadow-sm"
                 data-bs-toggle="modal"
                 data-bs-target="#modalTambahForm">
-                <i class="fas fa-file-medical me-1"></i> Daftar Form
+                <i class="fas fa-file-medical me-1"></i> Semua Form
             </button>
         <?php else: ?>
             <a class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
                 href="<?= base_url('rm/' . $noRawatFormatted) ?>">
-                <i class="fas fa-file-medical me-1"></i> Daftar Form
+                <i class="fas fa-file-medical me-1"></i> Semua Form
             </a>
         <?php endif; ?>
 
@@ -59,6 +59,30 @@ $isHalamanRm = ($segment1 === 'rm' && $currentJenis !== 'cppt');
         <a class="btn btn-sm <?= ($currentJenis == 'farmasi') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
             href="<?= base_url('jenis/farmasi/' . $noRawatFormatted) ?>">
             <i class="fas fa-pills me-1"></i> Farmasi
+        </a>
+
+        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
+
+        <!-- Menu General -->
+        <a class="btn btn-sm <?= ($currentJenis == 'general') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
+            href="<?= base_url('jenis/general/' . $noRawatFormatted) ?>">
+            <i class="fas fa-hospital-user me-1"></i> General
+        </a>
+
+        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
+
+        <!-- Menu IGD -->
+        <a class="btn btn-sm <?= ($currentJenis == 'igd') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
+            href="<?= base_url('jenis/igd/' . $noRawatFormatted) ?>">
+            <i class="fas fa-ambulance me-1"></i> IGD
+        </a>
+
+        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
+
+        <!-- Menu Lain-lain -->
+        <a class="btn btn-sm <?= ($currentJenis == 'lain') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
+            href="<?= base_url('jenis/lain/' . $noRawatFormatted) ?>">
+            <i class="fas fa-ellipsis-h me-1"></i> Lain-lain
         </a>
 
     </div>

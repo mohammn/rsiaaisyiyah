@@ -297,6 +297,9 @@ $routes->post('/jenis/cppt/serahTerima', 'Jenis\Cppt::serahTerima');
 $routes->post('/jenis/cppt/hapusSerahTerima', 'Jenis\Cppt::hapusSerahTerima');
 $routes->get('/jenis/cppt/(:any)', 'Jenis\Cppt::index/$1');
 
+$routes->get('/jenis/igd/(:any)', 'Jenis\Igd::index/$1');
+$routes->get('/jenis/general/(:any)', 'Jenis\General::index/$1');
+$routes->get('/jenis/lain/(:any)', 'Jenis\Lain::index/$1');
 $routes->get('/jenis/operasi/(:any)', 'Jenis\Operasi::index/$1');
 $routes->get('/jenis/farmasi/(:any)', 'Jenis\Farmasi::index/$1');
 

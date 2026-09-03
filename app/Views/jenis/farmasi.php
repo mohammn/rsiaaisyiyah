@@ -55,10 +55,116 @@
                         <td><?= !empty($data->obatPulang['ttdWali']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
                         <td>
                             <?php if ($data->obatPulang) : ?>
-                                <a href="<?= base_url(" farmasi/obatPulang/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a><?= !empty($data->obatPulang['ttdWali'])  ? ' <a href="' . base_url('/farmasi/obatPulang/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : ' <a href="' . base_url('/farmasi/obatPulang/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
+                                <a href="<?= base_url(" farmasi/obatPulang/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                <?= !empty($data->obatPulang['ttdWali'])  ? ' <a href="' . base_url('/farmasi/obatPulang/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : ' <a href="' . base_url('/farmasi/obatPulang/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
                                 <a href="<?= base_url('/farmasi/obatPulang/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
                             <?php else: ?>
                                 <a href="<?= base_url(" farmasi/obatPulang/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" class="btn-estetik btn-sm-estetik bg-vibrant-blue" style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>'
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Rekonsiliasi Obat</td>
+                        <td>
+                            <span class="badge-estetik <?= $data->status["rekonsiliasiObat"] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?> "><?= $data->status["rekonsiliasiObat"] ?></span>
+                        </td>
+                        <td><?= $data->status['rekonsiliasiObat'] === 'Lengkap' ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                        <td>
+                            <?php if ($data->rekonsiliasiObat) : ?>
+                                <a href="<?= base_url(" rm/rekonsiliasiObat/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                <a href=" <?= base_url('/rm/rekonsiliasiObat/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>
+                                <a href="<?= base_url('/rm/rekonsiliasiObat/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                            <?php else: ?>
+                                <a href="<?= base_url(" rm/rekonsiliasiObat/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" class="btn-estetik btn-sm-estetik bg-vibrant-blue" style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Serah Terima Pemberian Unit UDDS</td>
+                        <td>
+                            <span class="badge-estetik <?= $data->status["rm20bUdds"][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
+                                title="<?= htmlspecialchars(implode(', ', $data->status["rm20bUdds"][1])) ?>">
+                                <?= $data->status["rm20bUdds"][0] ?>
+                            </span>
+                        </td>
+                        <td><?= (!empty($data->rm20bUdds['dokter']) || !empty($data->rm20bUdds['pemberiObat']) || !empty($data->rm20bUdds['pemberiObatOral']) || !empty($data->rm20bUdds['apoteker'])) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                        <td>
+                            <?php if ($data->rm20bUdds) : ?>
+                                <a href="<?= base_url(" rm/rm20bUdds/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                <?= (!empty($data->rm20bUdds['dokter']) || !empty($data->rm20bUdds['pemberiObat']) || !empty($data->rm20bUdds['pemberiObatOral']) || !empty($data->rm20bUdds['apoteker'])) ? '<a href="' . base_url('/rm/rm20bUdds/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/rm20bUdds/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
+                                <a href="<?= base_url('/rm/rm20bUdds/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                            <?php else: ?>
+                                <a href="<?= base_url(" rm/rm20bUdds/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" class="btn-estetik btn-sm-estetik bg-vibrant-blue" style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <?php if ($data->lukaOperasi) : ?>
+                        <?php for ($i = 0; $i < count($data->lukaOperasi); $i++) :
+                            $tglinput = new \DateTime($data->lukaOperasi[$i]["created_at"]) ?>
+                            <tr>
+                                <td>Surveilans Infeksi Luka Operasi (<?= $tglinput->format('d-m-Y'); ?>)</td>
+                                <td>
+                                    <span class="badge-estetik <?= $data->status["lukaOperasi"][$i][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
+                                        title="<?= htmlspecialchars(implode(', ', $data->status["lukaOperasi"][$i][1])) ?>">
+                                        <?= $data->status["lukaOperasi"][$i][0] ?>
+                                    </span>
+                                </td>
+                                <td><?= !empty($data->lukaOperasi[$i]['petugasPreOperasi']) && !empty($data->lukaOperasi[$i]['petugasRuangOperasi']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                                <td>
+                                    <a href="<?= base_url(" rm/lukaOperasi/" . str_replace('/', '-', $data->pasien["no_rawat"])) . "/" . $data->lukaOperasi[$i]["id"] ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                    <?= !empty($data->lukaOperasi[$i]['petugasPreOperasi'] && $data->lukaOperasi[$i]['petugasRuangOperasi']) ? '<a href="' . base_url('/rm/lukaOperasi/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . "/" . $data->lukaOperasi[$i]["id"] . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/lukaOperasi/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . "/" . $data->lukaOperasi[$i]["id"] . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
+                                    <a href="<?= base_url('/rm/lukaOperasi/' . str_replace('/', '-', $data->pasien['no_rawat'])) . "/" . $data->lukaOperasi[$i]["id"]  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                                </td>
+                            </tr>
+                        <?php endfor; ?>
+                    <?php endif; ?>
+                    <tr>
+                        <td>Surveilans Infeksi Luka Operasi</td>
+                        <td>
+                            <span class="badge-estetik bg-vibrant-red" title="Bisa ditambah berulang.">
+                                Belum
+                            </span>
+                        </td>
+                        <td><span class="badge-estetik bg-vibrant-red">Belum</span></td>
+                        <td>
+                            <a href="<?= base_url("rm/lukaOperasi/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>/0" class="btn-estetik btn-sm-estetik bg-vibrant-blue" style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Surveilans Pemakaian Kateter Urin</td>
+                        <td>
+                            <span class="badge-estetik <?= $data->status["rm27bKateter"][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
+                                title="<?= htmlspecialchars(implode(', ', $data->status["rm27bKateter"][1])) ?>">
+                                <?= $data->status["rm27bKateter"][0] ?>
+                            </span>
+                        </td>
+                        <td><?= (!empty($data->rm27bKateter['petugas1']) || !empty($data->rm27bKateter['petugas2']) || !empty($data->rm27bKateter['petugas3']) || !empty($data->rm27bKateter['petugas4']) || !empty($data->rm27bKateter['petugas5']) || !empty($data->rm27bKateter['petugas6']) || !empty($data->rm27bKateter['petugas7']) || !empty($data->rm27bKateter['petugas8']) || !empty($data->rm27bKateter['petugas9']) || !empty($data->rm27bKateter['petugas10'])) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                        <td>
+                            <?php if ($data->rm27bKateter) : ?>
+                                <a href="<?= base_url(" rm/rm27bKateter/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                <?= (!empty($data->rm27bKateter['petugas1']) || !empty($data->rm27bKateter['petugas2']) || !empty($data->rm27bKateter['petugas3']) || !empty($data->rm27bKateter['petugas4']) || !empty($data->rm27bKateter['petugas5']) || !empty($data->rm27bKateter['petugas6']) || !empty($data->rm27bKateter['petugas7']) || !empty($data->rm27bKateter['petugas8']) || !empty($data->rm27bKateter['petugas9']) || !empty($data->rm27bKateter['petugas10'])) ? '<a href="' . base_url('/rm/rm27bKateter/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/rm27bKateter/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
+                                <a href="<?= base_url('/rm/rm27bKateter/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                            <?php else: ?>
+                                <a href="<?= base_url("rm/rm27bKateter/" . str_replace('/', '-', $data->pasien["no_rawat"]))  ?>" class="btn-estetik btn-sm-estetik bg-vibrant-blue" style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bundle Infeksi Luka Infus</td>
+                        <td>
+                            <span class="badge-estetik <?= $data->status["rm27cPlebitis"][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
+                                title="<?= htmlspecialchars(implode(', ', $data->status["rm27cPlebitis"][1])) ?>">
+                                <?= $data->status["rm27cPlebitis"][0] ?>
+                            </span>
+                        </td>
+                        <td><?= (!empty($data->rm27cPlebitis['petugas1']) || !empty($data->rm27cPlebitis['petugas2']) || !empty($data->rm27cPlebitis['petugas3']) || !empty($data->rm27cPlebitis['petugas4']) || !empty($data->rm27cPlebitis['petugas5']) || !empty($data->rm27cPlebitis['petugas6']) || !empty($data->rm27cPlebitis['petugas7']) || !empty($data->rm27cPlebitis['petugas8']) || !empty($data->rm27cPlebitis['petugas9']) || !empty($data->rm27cPlebitis['petugas10'])) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                        <td>
+                            <?php if ($data->rm27cPlebitis) : ?>
+                                <a href="<?= base_url(" rm/rm27cPlebitis/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                <?= (!empty($data->rm27cPlebitis['petugas1']) || !empty($data->rm27cPlebitis['petugas2']) || !empty($data->rm27cPlebitis['petugas3']) || !empty($data->rm27cPlebitis['petugas4']) || !empty($data->rm27cPlebitis['petugas5']) || !empty($data->rm27cPlebitis['petugas6']) || !empty($data->rm27cPlebitis['petugas7']) || !empty($data->rm27cPlebitis['petugas8']) || !empty($data->rm27cPlebitis['petugas9']) || !empty($data->rm27cPlebitis['petugas10'])) ? '<a href="' . base_url('/rm/rm27cPlebitis/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/rm27cPlebitis/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
+                                <a href="<?= base_url('/rm/rm27cPlebitis/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                            <?php else: ?>
+                                <a href="<?= base_url("rm/rm27cPlebitis/" . str_replace('/', '-', $data->pasien["no_rawat"]))  ?>" class="btn-estetik btn-sm-estetik bg-vibrant-blue" style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>
                             <?php endif; ?>
                         </td>
                     </tr>

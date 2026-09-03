@@ -217,4 +217,56 @@ abstract class BaseController extends Controller
 
         return $hari . " " . $bulanNama . " " . $tahun . ", Pukul " . $jam . " WIB";
     }
+
+    public function statusRekonsiliasiObat($dataRekonsiliasiObat, $dataObat)
+    {
+        if (empty($dataRekonsiliasiObat)) {
+            return 'Belum Diisi';
+        }
+
+        if ($dataObat) {
+            $listRuangan = array_column($dataObat, 'ruangan');
+        } else {
+            $listRuangan = [];
+        }
+
+        $ada["igd"]  = true;
+        $ada["ko"]  = in_array('ko', $listRuangan);
+        $ada["rr"]  = in_array('rr', $listRuangan);
+        $ada["ri"]  = in_array('ri', $listRuangan);
+
+        $ruangan = ['Igd', 'Ko', 'Rr', 'Ri'];
+        $data = [];
+        $hasilCek = [];
+
+        foreach ($ruangan as $r) {
+            $keyLower = strtolower($r);
+
+            $data[$keyLower] = [
+                "perawat{$r}"      => $dataRekonsiliasiObat["perawat{$r}"] ?? null,
+                "dokter{$r}"       => $dataRekonsiliasiObat["dokter{$r}"] ?? null,
+                "farmasi{$r}"      => $dataRekonsiliasiObat["farmasi{$r}"] ?? null,
+                "waktuPerawat{$r}" => $dataRekonsiliasiObat["waktuPerawat{$r}"] ?? null,
+                "waktuDokter{$r}"  => $dataRekonsiliasiObat["waktuDokter{$r}"] ?? null,
+                "waktuFarmasi{$r}" => $dataRekonsiliasiObat["waktuFarmasi{$r}"] ?? null,
+            ];
+
+            $hasilCek[$keyLower] = $this->cekSemuaKolom($data[$keyLower]);
+        }
+
+        // dd($hasilCek);
+
+        foreach ($ruangan as $r) {
+            $keyLower = strtolower($r);
+
+            if ($hasilCek[$keyLower][0] === 'Tidak Lengkap') {
+                return 'Tidak Lengkap';
+            }
+
+            if ($keyLower != 'igd' && $ada[$keyLower] && $hasilCek[$keyLower][0] != 'Lengkap') {
+                return 'Tidak Lengkap';
+            }
+        }
+        return "Lengkap";
+    }
 }
