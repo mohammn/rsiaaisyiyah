@@ -91,9 +91,9 @@
     <div class="book">
         <div class="page">
             <div class="subpage">
-                <table class="table table-borderless table-sm mt-3 mb-1 tabel" style="font-size: xx-small; margin-left: 150px;">
+                <table class="table table-borderless table-sm mt-0 mb-1 tabel fw-bold" style="font-size:small ;margin-left: 100px;">
                     <tr>
-                        <td style="width: 50px;">Nama</td>
+                        <td style="width: 70px;">Nama</td>
                         <td>: <?= $data->pasien["nm_pasien"] ?></td>
                     </tr>
                     <tr>
