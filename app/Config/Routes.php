@@ -303,6 +303,7 @@ $routes->get('/jenis/lain/(:any)', 'Jenis\Lain::index/$1');
 $routes->get('/jenis/operasi/(:any)', 'Jenis\Operasi::index/$1');
 $routes->get('/jenis/farmasi/(:any)', 'Jenis\Farmasi::index/$1');
 
+$routes->get('/pasien/gelang/(:any)', 'Pasien::gelang/$1');
 $routes->get('/pasien', 'Pasien::Index');
 $routes->post('/pasien/lihatPj', 'Pasien::lihatPj');
 $routes->post('/pasien/simpanPj', 'Pasien::simpanPj');

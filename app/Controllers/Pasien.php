@@ -63,4 +63,14 @@ class Pasien extends BaseController
 
         echo json_encode('');
     }
+
+    public function gelang($noRm)
+    {
+        $pasien = $this->pasienModel->where('no_rkm_medis', $noRm)->first();
+
+        $data = (object) [
+            'pasien'     => $pasien
+        ];
+        echo view("cetak/gelang", ["data" => $data]);
+    }
 }
