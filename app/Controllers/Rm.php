@@ -197,8 +197,8 @@ class Rm extends BaseController
         $rm26jRujukanLuar = $this->rm26jRujukanLuarModel->where('noRawat', $no_rawat)->first();
         $rm9aTransferPasien = $this->rm9aTransferPasienModel->where('noRawat', $no_rawat)->first();
         // ================khusus SBAR=========================
-        $rm0Sbar = $this->rm0SbarModel->where('noRawat', $no_rawat)->findAll();
-        $rm0SbarData = [];
+
+
         $rm0Sbar = $this->rm0SbarModel->where('noRawat', $no_rawat)->findAll();
         $rm0SbarData = [];
         for ($i = 0; $i < count($rm0Sbar); $i++) {
@@ -208,15 +208,24 @@ class Rm extends BaseController
         $statusRm0Sbar = [];
         for ($i = 0; $i < count($rm0SbarData); $i++) {
             $statusRm0Sbar[] = [];
-            for ($j = 0; $j < count($rm0SbarData[$i]); $j++) {
-                $statusRm0Sbar[$i][] = $this->cekSemuaKolom($rm0SbarData[$i][$j], ['tglVerif']);
+            if (count($rm0SbarData[$i]) > 0) {
+                for ($j = 0; $j < count($rm0SbarData[$i]); $j++) {
+                    $statusRm0Sbar[$i][] = $this->cekSemuaKolom($rm0SbarData[$i][$j], ['tglVerif']);
+                }
+            } else {
+                $statusRm0Sbar[$i][] = ['Belum diisi', ['Data Masih Kosong']];
             }
         }
-        for ($i = 0; $i < count($statusRm0Sbar); $i++) {
-            if (in_array("Lengkap", $statusRm0Sbar[$i])) {
-                $statusRm0Sbar[$i] = ['Lengkap', ['Semua Kolom terisi']];
-            } else {
-                $statusRm0Sbar[$i] = $statusRm0Sbar[$i];
+        $statusFinalRm0Sbar = [];
+
+        foreach ($statusRm0Sbar as $i => $items) {
+            $statusFinalRm0Sbar[$i] = ['Lengkap', ['Semua kolom terisi']];
+
+            foreach ($items as $item) {
+                if (($item[0] ?? '') !== "Lengkap") {
+                    $statusFinalRm0Sbar[$i] = ['Tidak Lengkap', ['Cek data']];
+                    break;
+                }
             }
         }
 
@@ -303,7 +312,7 @@ class Rm extends BaseController
             "rm27cPlebitis" => $this->cekSemuaKolom($rm27cPlebitis, $pengecualianRm27cPlebitis),
             "rm27bKateter" => $this->cekSemuaKolom($rm27bKateter, $pengecualianRm27bKateter),
             "rm20bUdds" => (!empty($rm20bUddsData) && count((array)$rm20bUddsData) > 0) ? $this->cekSemuaKolom($rm20bUdds, []) : ['Tidak Lengkap', ['Data belum terisi']],
-            "rm0Sbar" => [$statusRm0Sbar, $statusTtdRm0Sbar],
+            "rm0Sbar" => [$statusFinalRm0Sbar, $statusTtdRm0Sbar],
             "rm3TataTertib" => $this->cekSemuaKolom($rm3TataTertib, ['ttdWali']),
             "rm26ePendapatLain" => $this->cekSemuaKolom($rm26ePendapatLain, ['ttdWali']),
             "rm26nIzinKeluar" => $this->cekSemuaKolom($rm26nIzinKeluar, ['ttdWali']),

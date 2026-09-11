@@ -381,9 +381,9 @@
                             <tr>
                                 <td>Catatan Komunikasi SBAR ( <?= $data->rm0Sbar[$i]["judul"] ?>) </td>
                                 <td>
-                                    <span class="badge-estetik <?= $data->status["rm0Sbar"][0][$i][0][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
-                                        title="<?= htmlspecialchars(implode(', ', $data->status["rm0Sbar"][0][$i][0][1])) ?>">
-                                        <?= $data->status["rm0Sbar"][0][$i][0][0] ?>
+                                    <span class="badge-estetik <?= $data->status["rm0Sbar"][0][$i][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
+                                        title="<?= htmlspecialchars(implode(', ', $data->status["rm0Sbar"][0][$i][1])) ?>">
+                                        <?= $data->status["rm0Sbar"][0][$i][0] ?>
                                     </span>
                                 </td>
                                 <td><?= $data->status["rm0Sbar"][1][$i] === 'Sudah' ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
