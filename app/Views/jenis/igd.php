@@ -139,6 +139,25 @@
                             <?php endif; ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Pengkajian Awal Kebidanan</td>
+                        <td>
+                            <span class="badge-estetik <?= $data->status["rm7bPengkajian"][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
+                                title="<?= htmlspecialchars(implode(', ', $data->status["rm7bPengkajian"][1])) ?>">
+                                <?= $data->status["rm7bPengkajian"][0] ?>
+                            </span>
+                        </td>
+                        <td><?= !empty($data->rm7bPengkajian['ttdPetugas']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                        <td>
+                            <?php if ($data->rm7bPengkajian) : ?>
+                                <a href="<?= base_url(" rm/rm7bPengkajian/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                <?= !empty($data->rm7bPengkajian['ttdPetugas']) ? '<a href="' . base_url('/rm/rm7bPengkajian/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/rm7bPengkajian/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
+                                <a href="<?= base_url('/rm/rm7bPengkajian/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                            <?php else: ?>
+                                <a href="<?= base_url(" rm/rm7bPengkajian/" . str_replace('/', '-', $data->pasien["no_rawat"]))  ?>" class="btn-estetik btn-sm-estetik bg-vibrant-blue" style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

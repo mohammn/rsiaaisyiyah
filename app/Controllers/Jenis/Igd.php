@@ -9,6 +9,7 @@ use App\Models\HivModel;
 use App\Models\TbAnakModel;
 use App\Models\TbIbuModel;
 use App\Models\Rm26jRujukanLuarModel;
+use App\Models\Rm7bPengkajianModel;
 
 
 use function PHPSTORM_META\type;
@@ -21,6 +22,7 @@ class Igd extends BaseController
     protected $tbAnakModel;
     protected $tbIbuModel;
     protected $rm26jRujukanLuarModel;
+    protected $rm7bPengkajianModel;
 
     public function __construct()
     {
@@ -34,6 +36,7 @@ class Igd extends BaseController
         $this->tbAnakModel = new TbAnakModel();
         $this->tbIbuModel = new TbIbuModel();
         $this->rm26jRujukanLuarModel = new Rm26jRujukanLuarModel();
+        $this->rm7bPengkajianModel = new Rm7bPengkajianModel();
     }
 
     public function index($noRawat)
@@ -61,6 +64,7 @@ class Igd extends BaseController
         $tbAnak = $this->tbAnakModel->where('noRawat', $noRawat)->first();
         $tbIbu = $this->tbIbuModel->where('noRawat', $noRawat)->first();
         $rm26jRujukanLuar = $this->rm26jRujukanLuarModel->where('noRawat', $noRawat)->first();
+        $rm7bPengkajian = $this->rm7bPengkajianModel->where('noRawat', $noRawat)->first();
 
         $status = [
             "dpjp" => $this->cekSemuaKolom($dpjp, ['ttdWali']),
@@ -68,6 +72,7 @@ class Igd extends BaseController
             "tbAnak" => $this->cekSemuaKolom($tbAnak, ['ttdWali', 'jenisKontak', 'isiJenisKontakLainnya', 'indeksTbc', 'jenisTbc', 'tglBerobatTbc', 'tglWbp', 'statusWbp', 'durasiBatuk', 'fasyankes']),
             "tbIbu" => $this->cekSemuaKolom($tbIbu, ['ttdWali', 'imt', 'jenisKontak', 'isiJenisKontakLainnya', 'indeksTbc', 'jenisTbc', 'tglBerobatTbc', 'tglWbp', 'statusWbp', 'durasiBatuk', 'fasyankes']),
             "rm26jRujukanLuar" => $this->cekSemuaKolom($rm26jRujukanLuar, ['ttdWali', 'isiHandOverLainLain', 'alasanKeterangan']),
+            "rm7bPengkajian" => $this->cekSemuaKolom($rm7bPengkajian, ['ttdPetugas']),
         ];
 
         $data = (object) [
@@ -77,6 +82,7 @@ class Igd extends BaseController
             'tbAnak'  => $tbAnak,    // Biarkan null jika data tidak ada
             'tbIbu'  => $tbIbu,    // Biarkan null jika data tidak ada
             'rm26jRujukanLuar'  => $rm26jRujukanLuar,    // Biarkan null jika data tidak ada
+            'rm7bPengkajian'  => $rm7bPengkajian,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 

@@ -547,7 +547,7 @@
 
             <div class="marquee-wrapper">
                 <div class="me-2 flex-shrink-0">
-                    <img src="<?= base_url() ?>public/assets/img/gif/cat-dance.gif" alt="run" style="width: 60px; height: auto;">
+                    <img src="<?= base_url() ?>public/assets/img/gif/sun-flower.gif" alt="run" style="width: 50px; height: auto;">
                 </div>
 
                 <div class="running-text-container">

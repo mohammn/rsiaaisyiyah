@@ -46,6 +46,16 @@ $routes->post('/user/muatData', 'User::muatData');
 $routes->post('/user/tambah', 'User::tambah');
 $routes->post('/user/hapus', 'User::hapus');
 
+$routes->post('/rm/rm7bPengkajian/muatRiwayat', 'Rm\Rm7bPengkajian::muatRiwayat');
+$routes->post('/rm/rm7bPengkajian/hapusRiwayat', 'Rm\Rm7bPengkajian::hapusRiwayat');
+$routes->post('/rm/rm7bPengkajian/tambahRiwayat', 'Rm\Rm7bPengkajian::tambahRiwayat');
+$routes->post('/rm/rm7bPengkajian/simpanTtd', 'Rm\Rm7bPengkajian::simpanTtd');
+$routes->post('/rm/rm7bPengkajian/ubahWaktu', 'Rm\Rm7bPengkajian::ubahWaktu');
+$routes->post('/rm/rm7bPengkajian/hapus', 'Rm\Rm7bPengkajian::hapus');
+$routes->get('/rm/rm7bPengkajian/cetak/(:any)', 'Rm\Rm7bPengkajian::cetak/$1');
+$routes->post('/rm/rm7bPengkajian/simpan', 'Rm\Rm7bPengkajian::simpan');
+$routes->get('/rm/rm7bPengkajian/(:any)', 'Rm\Rm7bPengkajian::index/$1');
+
 $routes->post('/rm/rm9aTransferPasien/hapus', 'Rm\Rm9aTransferPasien::hapus');
 $routes->get('/rm/rm9aTransferPasien/cetak/(:any)', 'Rm\Rm9aTransferPasien::cetak/$1');
 $routes->post('/rm/rm9aTransferPasien/simpan', 'Rm\Rm9aTransferPasien::simpan');

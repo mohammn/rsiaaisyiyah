@@ -44,6 +44,7 @@ use App\Models\Rm11a2TimbangModel;
 use App\Models\PenerjemahModel;
 use App\Models\Rm26jRujukanLuarModel;
 use App\Models\Rm9aTransferPasienModel;
+use App\Models\Rm7bPengkajianModel;
 
 use function PHPSTORM_META\type;
 
@@ -91,6 +92,7 @@ class Rm extends BaseController
     protected $penerjemahModel;
     protected $rm26jRujukanLuarModel;
     protected $rm9aTransferPasienModel;
+    protected $rm7bPengkajianModel;
 
     public function __construct()
     {
@@ -140,6 +142,7 @@ class Rm extends BaseController
         $this->penerjemahModel = new PenerjemahModel();
         $this->rm26jRujukanLuarModel = new Rm26jRujukanLuarModel();
         $this->rm9aTransferPasienModel = new Rm9aTransferPasienModel();
+        $this->rm7bPengkajianModel = new Rm7bPengkajianModel();
     }
     public function index($no_rawat)
     {
@@ -196,9 +199,10 @@ class Rm extends BaseController
         $penerjemah = $this->penerjemahModel->where('noRawat', $no_rawat)->first();
         $rm26jRujukanLuar = $this->rm26jRujukanLuarModel->where('noRawat', $no_rawat)->first();
         $rm9aTransferPasien = $this->rm9aTransferPasienModel->where('noRawat', $no_rawat)->first();
+        $rm7bPengkajian = $this->rm7bPengkajianModel->where('noRawat', $no_rawat)->first();
+
+
         // ================khusus SBAR=========================
-
-
         $rm0Sbar = $this->rm0SbarModel->where('noRawat', $no_rawat)->findAll();
         $rm0SbarData = [];
         for ($i = 0; $i < count($rm0Sbar); $i++) {
@@ -240,8 +244,6 @@ class Rm extends BaseController
             }
             $statusTtdRm0Sbar[] = $status;
         }
-
-
         // ================ end khusus SBAR=========================
 
         //===========status data=====================
@@ -330,6 +332,7 @@ class Rm extends BaseController
             "penerjemah" => $this->cekSemuaKolom($penerjemah, ['ttdWali']),
             "rm26jRujukanLuar" => $this->cekSemuaKolom($rm26jRujukanLuar, ['ttdWali', 'isiHandOverLainLain', 'alasanKeterangan']),
             "rm9aTransferPasien" => $this->cekSemuaKolom($rm9aTransferPasien, ['isiIndikasiLainnya']),
+            "rm7bPengkajian" => $this->cekSemuaKolom($rm7bPengkajian, ['ttdPetugas']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -368,6 +371,7 @@ class Rm extends BaseController
             'penerjemah'  => $penerjemah,    // Biarkan null jika data tidak ada
             'rm26jRujukanLuar'  => $rm26jRujukanLuar,    // Biarkan null jika data tidak ada
             'rm9aTransferPasien'  => $rm9aTransferPasien,    // Biarkan null jika data tidak ada
+            'rm7bPengkajian'  => $rm7bPengkajian,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 
