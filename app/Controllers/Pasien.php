@@ -66,7 +66,7 @@ class Pasien extends BaseController
 
     public function gelang($noRm)
     {
-        $pasien = $this->pasienModel->where('no_rkm_medis', $noRm)->first();
+        $pasien = $this->pasienModel->getPasienWithAlamat($noRm);
 
         $data = (object) [
             'pasien'     => $pasien
