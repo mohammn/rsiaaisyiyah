@@ -665,37 +665,41 @@
                                         <div id="ttdPerawatAnestesi">
                                             <?php if ($data->rm11b1Checklist["ttdPerawatAnestesi"]) {
                                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                                echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdPerawatAnestesi"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
+                                                // echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdPerawatAnestesi"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
                                             } else {
-                                                echo '<br><br><br><br><br>';
+                                                // echo '<br><br><br><br><br>';
                                             } ?>
                                         </div>
                                         <br>
                                         (<?= $data->rm11b1Checklist["perawatAnestesi"] ?? '-' ?> )
                                         <br><br>
-                                        <?php if (!$data->rm11b1Checklist["ttdPerawatAnestesi"]) { ?>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdPerawatAnestesi">
+                                        <?php //if (!$data->rm11b1Checklist["ttdPerawatAnestesi"]) { 
+                                        ?>
+                                        <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdPerawatAnestesi">
                                                 TTD
-                                            </button>
-                                        <?php } ?>
+                                            </button> -->
+                                        <?php //} 
+                                        ?>
                                     </td>
                                     <td>
                                         <div id="ttdDokterAnestesi1">
                                             <?php if ($data->rm11b1Checklist["ttdDokterAnestesi1"]) {
                                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                                echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdDokterAnestesi1"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
+                                                // echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdDokterAnestesi1"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
                                             } else {
-                                                echo '<br><br><br><br><br>';
+                                                // echo '<br><br><br><br><br>';
                                             } ?>
                                         </div>
                                         <br>
                                         (<?= $data->rm11b1Checklist["dokterAnestesi"] ?? '-' ?> )
                                         <br><br>
-                                        <?php if (!$data->rm11b1Checklist["ttdDokterAnestesi1"]) { ?>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdDokterAnestesi1">
+                                        <?php //if (!$data->rm11b1Checklist["ttdDokterAnestesi1"]) { 
+                                        ?>
+                                        <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdDokterAnestesi1">
                                                 TTD
-                                            </button>
-                                        <?php } ?>
+                                            </button> -->
+                                        <?php //} 
+                                        ?>
                                     </td>
                                 </tr>
                             </table>
@@ -711,37 +715,41 @@
                                         <div id="ttdSirkuler">
                                             <?php if ($data->rm11b1Checklist["ttdSirkuler"]) {
                                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                                echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdSirkuler"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
+                                                // echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdSirkuler"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
                                             } else {
-                                                echo '<br><br><br><br><br>';
+                                                // echo '<br><br><br><br><br>';
                                             } ?>
                                         </div>
                                         <br>
                                         (<?= $data->rm11b1Checklist["sirkuler"] ?? '-' ?> )
                                         <br><br>
-                                        <?php if (!$data->rm11b1Checklist["ttdSirkuler"]) { ?>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdSirkuler">
+                                        <?php //if (!$data->rm11b1Checklist["ttdSirkuler"]) { 
+                                        ?>
+                                        <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdSirkuler">
                                                 TTD
-                                            </button>
-                                        <?php } ?>
+                                            </button> -->
+                                        <?php //} 
+                                        ?>
                                     </td>
                                     <td>
                                         <div id="ttdInstrumen">
                                             <?php if ($data->rm11b1Checklist["ttdInstrumen"]) {
                                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                                echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdInstrumen"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
+                                                // echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdInstrumen"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
                                             } else {
-                                                echo '<br><br><br><br><br>';
+                                                // echo '<br><br><br><br><br>';
                                             } ?>
                                         </div>
                                         <br>
                                         (<?= $data->rm11b1Checklist["instrumen"] ?? '-' ?> )
                                         <br><br>
-                                        <?php if (!$data->rm11b1Checklist["ttdInstrumen"]) { ?>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdInstrumen">
+                                        <?php //if (!$data->rm11b1Checklist["ttdInstrumen"]) { 
+                                        ?>
+                                        <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdInstrumen">
                                                 TTD
-                                            </button>
-                                        <?php } ?>
+                                            </button> -->
+                                        <?php //} 
+                                        ?>
                                     </td>
                                 </tr>
                             </table>
@@ -758,55 +766,61 @@
                                         <div id="ttdAsisten">
                                             <?php if ($data->rm11b1Checklist["ttdAsisten"]) {
                                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                                echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdAsisten"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
+                                                // echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdAsisten"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
                                             } else {
-                                                echo '<br><br><br><br><br>';
+                                                // echo '<br><br><br><br><br>';
                                             } ?>
                                         </div>
                                         <br>
                                         (<?= $data->rm11b1Checklist["asisten"] ?? '-' ?> )
                                         <br><br>
-                                        <?php if (!$data->rm11b1Checklist["ttdAsisten"]) { ?>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdAsisten">
+                                        <?php //if (!$data->rm11b1Checklist["ttdAsisten"]) { 
+                                        ?>
+                                        <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdAsisten">
                                                 TTD
-                                            </button>
-                                        <?php } ?>
+                                            </button> -->
+                                        <?php //} 
+                                        ?>
                                     </td>
                                     <td>
                                         <div id="ttdOperator">
                                             <?php if ($data->rm11b1Checklist["ttdOperator"]) {
                                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                                echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdOperator"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
+                                                // echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdOperator"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
                                             } else {
-                                                echo '<br><br><br><br><br>';
+                                                // echo '<br><br><br><br><br>';
                                             } ?>
                                         </div>
                                         <br>
                                         (<?= $data->rm11b1Checklist["operator"] ?? '-' ?> )
                                         <br><br>
-                                        <?php if (!$data->rm11b1Checklist["ttdOperator"]) { ?>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdOperator">
+                                        <?php //if (!$data->rm11b1Checklist["ttdOperator"]) { 
+                                        ?>
+                                        <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdOperator">
                                                 TTD
-                                            </button>
-                                        <?php } ?>
+                                            </button> -->
+                                        <?php //} 
+                                        ?>
                                     </td>
                                     <td>
                                         <div id="ttdDokterAnestesi2">
                                             <?php if ($data->rm11b1Checklist["ttdDokterAnestesi2"]) {
                                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                                echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdDokterAnestesi2"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
+                                                //echo '<img src="' . base_url('public/ttd/rm11b1Checklist/' . $data->rm11b1Checklist["ttdDokterAnestesi2"]) . '" alt="tanda tangan Dokter" style="max-width: 75px;" data-is-new="false">';
                                             } else {
-                                                echo '<br><br><br><br><br>';
+                                                // echo '<br><br><br><br><br>';
                                             } ?>
                                         </div>
                                         <br>
                                         (<?= $data->rm11b1Checklist["drAnestesi"] ?? '-' ?> )
                                         <br><br>
-                                        <?php if (!$data->rm11b1Checklist["ttdDokterAnestesi2"]) { ?>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdDokterAnestesi2">
+                                        <?php //if (!$data->rm11b1Checklist["ttdDokterAnestesi2"]) { 
+                                        ?>
+                                        <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdDokterAnestesi2">
                                                 TTD
-                                            </button>
-                                        <?php } ?>
+                                            </button> -->
+                                        <?php //} 
+                                        ?>
                                     </td>
                                 </tr>
                             </table>
@@ -835,7 +849,7 @@
                             !$ttd["ttdDokterAnestesi2"]
                         ) {
                         ?>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalKunci">Selesaikan dan kunci Tanda tangan.</button>
+                            <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalKunci">Selesaikan dan kunci Tanda tangan.</button> -->
                         <?php } ?>
                     </div>
                 </div>
@@ -1030,6 +1044,106 @@
 
 <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs/qrcode.min.js"></script>
 <script>
+    <?php if ($data->rm11b1Checklist["perawatAnestesi"]): ?>
+        // Create a new QRCode instance
+        var qrPetugas = new QRCode(document.getElementById("ttdPerawatAnestesi"), {
+            width: 75, // Set the width of the QR code
+            height: 75, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
+
+        // Generate the QR code with the desired content
+        qrPetugas.makeCode("Di ttd <?= $data->rm11b1Checklist["perawatAnestesi"] ?? '-' ?> untuk Ceklist keselamatan ops. No Rawat :  <?= $data->rm11b1Checklist["noRawat"] ?? '-' ?>"); // Replace with your desired text or URL
+    <?php endif; ?>
+
+    <?php if ($data->rm11b1Checklist["dokterAnestesi"]): ?>
+        // Create a new QRCode instance
+        var qrPetugas = new QRCode(document.getElementById("ttdDokterAnestesi1"), {
+            width: 75, // Set the width of the QR code
+            height: 75, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
+
+        // Generate the QR code with the desired content
+        qrPetugas.makeCode("Di ttd <?= $data->rm11b1Checklist["dokterAnestesi"] ?? '-' ?> untuk Tata Tertib. No Rawat :  <?= $data->rm11b1Checklist["noRawat"] ?? '-' ?>"); // Replace with your desired text or URL
+    <?php endif; ?>
+
+    <?php if ($data->rm11b1Checklist["sirkuler"]): ?>
+        // Create a new QRCode instance
+        var qrPetugas = new QRCode(document.getElementById("ttdSirkuler"), {
+            width: 75, // Set the width of the QR code
+            height: 75, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
+
+        // Generate the QR code with the desired content
+        qrPetugas.makeCode("Di ttd <?= $data->rm11b1Checklist["sirkuler"] ?? '-' ?> untuk Tata Tertib. No Rawat :  <?= $data->rm11b1Checklist["noRawat"] ?? '-' ?>"); // Replace with your desired text or URL
+    <?php endif; ?>
+
+
+    <?php if ($data->rm11b1Checklist["instrumen"]): ?>
+        // Create a new QRCode instance
+        var qrPetugas = new QRCode(document.getElementById("ttdInstrumen"), {
+            width: 75, // Set the width of the QR code
+            height: 75, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
+
+        // Generate the QR code with the desired content
+        qrPetugas.makeCode("Di ttd <?= $data->rm11b1Checklist["instrumen"] ?? '-' ?> untuk Tata Tertib. No Rawat :  <?= $data->rm11b1Checklist["noRawat"] ?? '-' ?>"); // Replace with your desired text or URL
+    <?php endif; ?>
+
+    <?php if ($data->rm11b1Checklist["asisten"]): ?>
+        // Create a new QRCode instance
+        var qrPetugas = new QRCode(document.getElementById("ttdAsisten"), {
+            width: 75, // Set the width of the QR code
+            height: 75, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
+
+        // Generate the QR code with the desired content
+        qrPetugas.makeCode("Di ttd <?= $data->rm11b1Checklist["asisten"] ?? '-' ?> untuk Tata Tertib. No Rawat :  <?= $data->rm11b1Checklist["noRawat"] ?? '-' ?>"); // Replace with your desired text or URL
+    <?php endif; ?>
+
+    <?php if ($data->rm11b1Checklist["operator"]): ?>
+        // Create a new QRCode instance
+        var qrPetugas = new QRCode(document.getElementById("ttdOperator"), {
+            width: 75, // Set the width of the QR code
+            height: 75, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
+
+        // Generate the QR code with the desired content
+        qrPetugas.makeCode("Di ttd <?= $data->rm11b1Checklist["operator"] ?? '-' ?> untuk Tata Tertib. No Rawat :  <?= $data->rm11b1Checklist["noRawat"] ?? '-' ?>"); // Replace with your desired text or URL
+    <?php endif; ?>
+
+    <?php if ($data->rm11b1Checklist["drAnestesi"]): ?>
+        // Create a new QRCode instance
+        var qrPetugas = new QRCode(document.getElementById("ttdDokterAnestesi2"), {
+            width: 75, // Set the width of the QR code
+            height: 75, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
+
+        // Generate the QR code with the desired content
+        qrPetugas.makeCode("Di ttd <?= $data->rm11b1Checklist["drAnestesi"] ?? '-' ?> untuk Tata Tertib. No Rawat :  <?= $data->rm11b1Checklist["noRawat"] ?? '-' ?>"); // Replace with your desired text or URL
+    <?php endif; ?>
+
+
     function kunciTtd() {
         $("#pesanError").html("").removeClass("alert alert-danger");
 

@@ -78,24 +78,27 @@
                     <br><br>
                     <div class="text-center">
                         <?php
-                        $ttd = $data->rm11b1Checklist;
-                        if ((
-                            $ttd["ttdPerawatAnestesi"] &&
-                            $ttd["ttdDokterAnestesi1"] &&
-                            $ttd["ttdSirkuler"] &&
-                            $ttd["ttdInstrumen"] &&
-                            $ttd["ttdAsisten"] &&
-                            $ttd["ttdOperator"] &&
-                            $ttd["ttdDokterAnestesi2"]
-                        )): ?>
-                            <a class="btn btn-estetik btn-cetak" href="<?= base_url('/rm/rm11b1Checklist/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->rm11b1Checklist['id']) ?>" target="_blank">
-                                <i class="fas fa-print me-1"></i> Cetak
-                            </a>
-                        <?php else: ?>
-                            <a class="btn btn-estetik btn-simpan" href="<?= base_url('/rm/rm11b1Checklist/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->rm11b1Checklist['id']) ?>" target="_blank">
+                        // $ttd = $data->rm11b1Checklist;
+                        // if ((
+                        //     $ttd["ttdPerawatAnestesi"] &&
+                        //     $ttd["ttdDokterAnestesi1"] &&
+                        //     $ttd["ttdSirkuler"] &&
+                        //     $ttd["ttdInstrumen"] &&
+                        //     $ttd["ttdAsisten"] &&
+                        //     $ttd["ttdOperator"] &&
+                        //     $ttd["ttdDokterAnestesi2"]
+                        // )): 
+                        ?>
+                        <a class="btn btn-estetik btn-cetak" href="<?= base_url('/rm/rm11b1Checklist/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->rm11b1Checklist['id']) ?>" target="_blank">
+                            <i class="fas fa-print me-1"></i> Cetak
+                        </a>
+                        <?php //else: 
+                        ?>
+                        <!-- <a class="btn btn-estetik btn-simpan" href="<?= base_url('/rm/rm11b1Checklist/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->rm11b1Checklist['id']) ?>" target="_blank">
                                 <i class="fas fa-pen-nib me-1"></i> TTD
-                            </a>
-                        <?php endif ?>
+                            </a> -->
+                        <?php //endif 
+                        ?>
                         <button class="btn btn-estetik btn-lihat" data-bs-toggle="modal" data-bs-target="#modalEdit">
                             <i class="fa fa-edit me-1"></i> Edit
                         </button>
