@@ -186,7 +186,7 @@
                 <br>
                 <div class="row">
                     <div class="col-12 text-center">
-                        <p style="font-size: 14pt; margin:10px;" class="text-uppercase fw-bold"> TRANSFER PASIEN ANTAR UNIT PELAYANAN (<?= $data->rm9aTransferPasien["judul"] ?? '' ?>)
+                        <p style="font-size: 14pt; margin:10px;" class="text-uppercase fw-bold"> TRANSFER PASIEN ANTAR UNIT PELAYANAN <?= empty($data->rm9aTransferPasien["judul"] ?? '') ? '' : ' (' . $data->rm9aTransferPasien["judul"] . ')'   ?>
                         </p>
                     </div>
                 </div>
