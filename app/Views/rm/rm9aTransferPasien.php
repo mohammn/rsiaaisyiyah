@@ -15,7 +15,7 @@
         </div>
         <div class="card-body" style="overflow-y: auto;">
             <div class="text-center">
-                <h5 class="text-uppercase">TRANSFER PASIEN ANTAR UNIT PELAYANAN
+                <h5 class="text-uppercase">TRANSFER PASIEN ANTAR UNIT PELAYANAN <?= empty($data->rm9aTransferPasien["judul"] ?? '') ? '' : ' (' . $data->rm9aTransferPasien["judul"] . ')'   ?>
                 </h5>
                 Untuk pasien : <b><?= $data->pasien["nm_pasien"] ?></b> (<?= $data->pasien["no_rkm_medis"] ?>). NIK: <?= $data->pasien["no_ktp"] ?><br>
                 No Rawat : <b><?= $data->pasien["no_rawat"] ?></b>. Lahir : <?= $data->pasien["tgl_lahir"] ?> <br>
@@ -194,6 +194,7 @@
             noRawat: "<?= $data->pasien['no_rawat'] ?>",
 
             // Data Penanggung Jawab & Transfer
+            judul: $('#judul').val(),
             nama: $('#nama').val(),
             sebagai: $('#sebagai').val(),
             dariUnit: $('#dariUnit').val(),
@@ -251,7 +252,7 @@
             data: data,
             dataType: 'json',
             success: function(data) {
-                location.reload();
+                location.href = "<?= base_url('rm/rm9aTransferPasien/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>/" + data.id;
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
@@ -271,12 +272,12 @@
         }
 
         function hapus() {
-            var noRawat = "<?= $data->rm9aTransferPasien['noRawat'] ?? '' ?>";
+            var id = "<?= $data->rm9aTransferPasien['id'] ?? '' ?>";
 
             $.ajax({
                 url: '<?= base_url() ?>rm/rm9aTransferPasien/hapus',
                 method: 'post',
-                data: "noRawat=" + noRawat,
+                data: "id=" + id,
                 dataType: 'json',
                 success: function(data) {
                     location.href = "<?= base_url('rm/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>";

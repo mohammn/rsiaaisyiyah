@@ -37,7 +37,7 @@ class rm9aTransferPasien extends BaseController
         $this->petugasModel = new PetugasModel();
     }
 
-    public function index($noRawat)
+    public function index($noRawat, $id = null)
     {
         $dokter =  $this->dokterModel->where('kd_dokter !=', '-')->findAll();
         $petugas = $this->petugasModel->where('nip !=', '-')->findAll();
@@ -59,7 +59,7 @@ class rm9aTransferPasien extends BaseController
             ->where('reg_periksa.no_rawat', $noRawat)
             ->first();
 
-        $rm9aTransferPasien = $this->rm9aTransferPasienModel->where('noRawat', $noRawat)->first();
+        $rm9aTransferPasien = $this->rm9aTransferPasienModel->where('id', $id)->first();
 
         $pengaturan = $this->pengaturan->where('id', 1)->first();
         $pjPasien = $this->pjPasienModel->where('noRm', $pasien["no_rkm_medis"])->first();
@@ -82,6 +82,7 @@ class rm9aTransferPasien extends BaseController
         $data = [
             // Data Pasien & Petugas
             "noRawat"             => $this->request->getPost("noRawat"),
+            "judul"                => $this->request->getPost("judul"),
             "nama"                => $this->request->getPost("nama"),
             "sebagai"             => $this->request->getPost("sebagai"),
             "dariUnit"            => $this->request->getPost("dariUnit"),
@@ -130,34 +131,35 @@ class rm9aTransferPasien extends BaseController
 
         if ($this->request->getPost("tujuanSimpan") == 'tambah') {
             $this->rm9aTransferPasienModel->save($data);
-            $this->catatLog('simpan', 'rm9a_transfer_pasien', $this->request->getPost("noRawat"), $this->rm9aTransferPasienModel->where('noRawat', $this->request->getPost("noRawat"))->first());
+            $id = $this->rm9aTransferPasienModel->getInsertID();
+            $this->catatLog('simpan', 'rm9a_transfer_pasien', $this->request->getPost("noRawat"), $this->rm9aTransferPasienModel->where('id', $id)->first());
         } else {
-            $noRawat = $this->request->getPost("noRawat");
+            $id = $this->request->getPost("tujuanSimpan");
             unset($data['noRawat']);
 
-            $this->catatLog('ubah', 'rm9a_transfer_pasien', $noRawat, $this->rm9aTransferPasienModel->where('noRawat', $noRawat)->first(), $data);
+            $this->catatLog('ubah', 'rm9a_transfer_pasien', $id, $this->rm9aTransferPasienModel->where('id', $id)->first(), $data);
 
-            $this->rm9aTransferPasienModel->where('noRawat', $noRawat)->set($data)->update();
+            $this->rm9aTransferPasienModel->where('id', $id)->set($data)->update();
         }
 
         return $this->response->setJSON([
             'status'  => 'success',
-            'message' => 'Data berhasil disimpan'
+            'message' => 'Data berhasil disimpan',
+            'id' => $id
         ]);
     }
 
     public function hapus()
     {
-        $noRawat = $this->request->getPost("noRawat");
-        $noRawat = str_replace('-', '/', $noRawat);
-        $this->catatLog('hapus', 'rm9a_transfer_pasien', $noRawat, $this->rm9aTransferPasienModel->where('noRawat', $noRawat)->first());
+        $id = $this->request->getPost("id");
+        $this->catatLog('hapus', 'rm9a_transfer_pasien', $id, $this->rm9aTransferPasienModel->where('id', $id)->first());
 
-        $this->rm9aTransferPasienModel->where("noRawat", $noRawat)->delete();
+        $this->rm9aTransferPasienModel->where("id", $id)->delete();
         echo json_encode("");
     }
 
 
-    public function cetak($noRawat)
+    public function cetak($noRawat, $id = null)
     {
         $noRawat = str_replace('-', '/', $noRawat);
         $pasien = $this->regPeriksaModel
@@ -180,7 +182,7 @@ class rm9aTransferPasien extends BaseController
             ->where('reg_periksa.no_rawat', $noRawat)
             ->first();
 
-        $rm9aTransferPasien = $this->rm9aTransferPasienModel->where('noRawat', $noRawat)->first();
+        $rm9aTransferPasien = $this->rm9aTransferPasienModel->where('id', $id)->first();
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
         $data = (object) [

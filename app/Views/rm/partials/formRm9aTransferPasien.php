@@ -33,8 +33,14 @@
                     <hr>
                 </div>
                 <div class="row mt-2">
-                    <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Penanggung jawab :</label>
-                    <div class="col-md-12"><input type="text" class="form-control" id="nama" placeholder="Nama" value="<?= $data->rm9aTransferPasien['nama'] ?? '' ?>"></div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Penanggung jawab :</label>
+                        <input type="text" class="form-control" id="nama" placeholder="Nama" value="<?= $data->rm9aTransferPasien['nama'] ?? '' ?>">
+                    </div>
+                    <div class="col-md-6 bg-light border border-info p-2 rounded">
+                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">JUDUL :</label>
+                        <input type="text" class="form-control" id="judul" name="judul" value="<?= $data->rm9aTransferPasien['judul'] ?? '' ?>">
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">

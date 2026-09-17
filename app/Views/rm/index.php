@@ -631,21 +631,23 @@
                     <?php endif; ?>
 
                     <?php if ($data->rm9aTransferPasien) : ?>
-                        <tr>
-                            <td>Transfer Pasien antar Unit Layanan</td>
-                            <td>
-                                <span class="badge-estetik <?= $data->status["rm9aTransferPasien"][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
-                                    title="<?= htmlspecialchars(implode(', ', $data->status["rm9aTransferPasien"][1])) ?>">
-                                    <?= $data->status["rm9aTransferPasien"][0] ?>
-                                </span>
-                            </td>
-                            <td><?= !empty($data->rm9aTransferPasien['petugasMenyerahkan']) && !empty($data->rm9aTransferPasien['petugasMenerima']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
-                            <td>
-                                <a href="<?= base_url(" rm/rm9aTransferPasien/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
-                                <?= !empty($data->rm9aTransferPasien['petugasMenyerahkan']) && !empty($data->rm9aTransferPasien['petugasMenerima']) ? '<a href="' . base_url('/rm/rm9aTransferPasien/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/rm9aTransferPasien/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
-                                <a href="<?= base_url('/rm/rm9aTransferPasien/' . str_replace('/', '-', $data->pasien['no_rawat']))  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
-                            </td>
-                        </tr>
+                        <?php for ($i = 0; $i < count($data->rm9aTransferPasien); $i++) : ?>
+                            <tr>
+                                <td>Transfer Pasien antar Unit Layanan (<?= $data->rm9aTransferPasien[$i]['judul'] ?>)</td>
+                                <td>
+                                    <span class="badge-estetik <?= $data->status["rm9aTransferPasien"][$i][0] === 'Lengkap' ? 'bg-vibrant-teal' : 'bg-vibrant-red' ?>"
+                                        title="<?= htmlspecialchars(implode(', ', $data->status["rm9aTransferPasien"][$i][1])) ?>">
+                                        <?= $data->status["rm9aTransferPasien"][$i][0] ?>
+                                    </span>
+                                </td>
+                                <td><?= !empty($data->rm9aTransferPasien[$i]['petugasMenyerahkan']) && !empty($data->rm9aTransferPasien[$i]['petugasMenerima']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                                <td>
+                                    <a href="<?= base_url(" rm/rm9aTransferPasien/" . str_replace('/', '-', $data->pasien["no_rawat"])) . "/" . $data->rm9aTransferPasien[$i]["id"] ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>
+                                    <?= !empty($data->rm9aTransferPasien[$i]['petugasMenyerahkan']) && !empty($data->rm9aTransferPasien[$i]['petugasMenerima']) ? '<a href="' . base_url('/rm/rm9aTransferPasien/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . "/" . $data->rm9aTransferPasien[$i]["id"]) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-teal"><i class="fas fa-print"></i> Cetak</a>' : '<a href="' . base_url('/rm/rm9aTransferPasien/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . "/" . $data->rm9aTransferPasien[$i]["id"]) . '" target="_blank" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-blue"><i class="fas fa-pen-nib"></i> TTD</a>' ?>
+                                    <a href="<?= base_url('/rm/rm9aTransferPasien/' . str_replace('/', '-', $data->pasien['no_rawat'])) . "/" . $data->rm9aTransferPasien[$i]["id"]  ?>#modalHapus" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-red"><i class="fas fa-trash"></i> Hapus</a>
+                                </td>
+                            </tr>
+                        <?php endfor; ?>
                     <?php endif; ?>
 
                     <?php if ($data->rm7bPengkajian) : ?>
@@ -918,7 +920,7 @@
                             <td>33.</td>
                             <td>Transfer pasien antar unit layanan</td>
                             <td>
-                                <?= $data->rm9aTransferPasien ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<a href="' . base_url("rm/rm9aTransferPasien/" . str_replace('/', '-', $data->pasien["no_rawat"])) . '" class="btn-estetik btn-sm-estetik bg-vibrant-blue"  style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>' ?>
+                                <a href="<?= base_url("rm/rm9aTransferPasien/" . str_replace('/', '-', $data->pasien["no_rawat"]) . "/0")  ?>" class="btn-estetik btn-sm-estetik bg-vibrant-blue" style="text-decoration: none;"><i class="fas fa-plus"></i> Tambah</a>
                             </td>
                         </tr>
                         <tr>

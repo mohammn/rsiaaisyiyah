@@ -198,7 +198,7 @@ class Rm extends BaseController
         $rm11a2Timbang = $this->rm11a2TimbangModel->where('noRawat', $no_rawat)->first();
         $penerjemah = $this->penerjemahModel->where('noRawat', $no_rawat)->first();
         $rm26jRujukanLuar = $this->rm26jRujukanLuarModel->where('noRawat', $no_rawat)->first();
-        $rm9aTransferPasien = $this->rm9aTransferPasienModel->where('noRawat', $no_rawat)->first();
+        $rm9aTransferPasien = $this->rm9aTransferPasienModel->where('noRawat', $no_rawat)->findAll();
         $rm7bPengkajian = $this->rm7bPengkajianModel->where('noRawat', $no_rawat)->first();
 
 
@@ -254,6 +254,11 @@ class Rm extends BaseController
         $statusIcGeneral = [];
         for ($i = 0; $i < count($icGeneral); $i++) {
             $statusIcGeneral[$i] = $this->cekSemuaKolom($icGeneral[$i], ['ttdWali', 'ttdSaksi']);
+        }
+
+        $statusRm9aTransferPasien = [];
+        for ($i = 0; $i < count($rm9aTransferPasien); $i++) {
+            $statusRm9aTransferPasien[$i] = $this->cekSemuaKolom($rm9aTransferPasien[$i], ['isiIndikasiLainnya']);
         }
 
         $pengecualianIcPembiusan = ['isiKombinasi', 'tataCara', 'tujuan', 'komplikasi', 'risiko', 'alternatif', 'ttdWali', 'ttdSaksi'];
@@ -331,7 +336,7 @@ class Rm extends BaseController
             "rm11a2Timbang" => $this->cekSemuaKolom($rm11a2Timbang, ['ttdPengantar', 'ttdPenerima', 'ttdPengantar2', 'ttdPenerima2', 'jumlahDarah', 'darahDetail', 'isiPackJenis', 'isiGolonganDarah', 'jumlahDarah2', 'darahDetail2', 'isiPackJenis2', 'isiGolonganDarah2', 'rpd', 'isiRpdLainnya', 'rpd2', 'isiRpdLainnya2', 'isiAlergi', 'isiAlergi2', 'jumlahDarah', 'jumlahDarah2', 'tglTranfusi', 'jenisTranfusi', 'golTranfusi', 'jumlahTranfusi', 'tglTranfusi2', 'jenisTranfusi2', 'golTranfusi2', 'jumlahTranfusi2', 'isiLabJml', 'isiLabJml2', 'perhatianKhusus', 'isiHb', 'isiBun', 'isiPkLainLain', 'isiAlbumin', 'isiKreatinin', 'fotoDetail', 'isiRontgenKet', 'isiRontgenJml', 'isiUsgKet', 'isiUsgJml', 'isiBofJml', 'isiNst', 'isiEchoJml', 'isiIvpJml', 'isiEkgJml', 'perhatianKhusus2', 'isiHb2', 'isiBun2', 'isiPkLainLain2', 'isiAlbumin2', 'isiKreatinin2', 'fotoDetail2', 'isiRontgenKet2', 'isiRontgenJml2', 'isiUsgKet2', 'isiUsgJml2', 'isiBofJml2', 'isiNst2', 'isiEchoJml2', 'isiIvpJml2', 'isiEkgJml2', 'isiFotoJml', 'isiFotoJml2', 'isiFotoLainnya', 'isiFotoLainnya2', 'isiPuasaJam', 'isiLavementKet', 'isiPuasaJam2', 'isiLavementKet2', 'isiGigiDibawaOleh', 'isiGigiDibawaOleh2', 'isiKesadaranLain', 'isiKesadaranLain2']),
             "penerjemah" => $this->cekSemuaKolom($penerjemah, ['ttdWali']),
             "rm26jRujukanLuar" => $this->cekSemuaKolom($rm26jRujukanLuar, ['ttdWali', 'isiHandOverLainLain', 'alasanKeterangan']),
-            "rm9aTransferPasien" => $this->cekSemuaKolom($rm9aTransferPasien, ['isiIndikasiLainnya']),
+            "rm9aTransferPasien" => $statusRm9aTransferPasien,
             "rm7bPengkajian" => $this->cekSemuaKolom($rm7bPengkajian, ['ttdPetugas']),
         ];
 

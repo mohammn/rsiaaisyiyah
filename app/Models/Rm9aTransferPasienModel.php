@@ -12,6 +12,7 @@ class Rm9aTransferPasienModel extends Model
     // Daftarkan semua field yang boleh diisi di sini
     protected $allowedFields = [
         'noRawat',
+        'judul',
         'nama',
         'sebagai',
         'dariUnit',
