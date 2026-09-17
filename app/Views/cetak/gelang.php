@@ -102,7 +102,7 @@
                     </tr>
                     <tr>
                         <td>Alamat</td>
-                        <td>: <?= $data->pasien["alamat"] . ', Kel : ' . $data->pasien["nm_kel"] . ', Kec : ' . $data->pasien["nm_kec"] . ', Kab : ' . $data->pasien["nm_kab"] ?></td>
+                        <td>: <?= $data->pasien["alamat"] . ', Kel : ' . $data->pasien["nm_kel"] . ', Kec : ' . $data->pasien["nm_kec"] ?></td>
                     </tr>
                     <tr>
                         <td>NIK</td>
