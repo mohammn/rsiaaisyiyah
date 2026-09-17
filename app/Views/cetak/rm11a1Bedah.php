@@ -658,19 +658,21 @@
                                 <div id="ttdDokter">
                                     <?php if ($data->rm11a1Bedah["ttdDokter"]) {
                                         // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                        echo '<img src="' . base_url('public/ttd/rm11a1Bedah/' . $data->rm11a1Bedah["ttdDokter"]) . '" alt="tanda tangan Dokter" style="max-width: 150px;" data-is-new="false">';
-                                    } else {
-                                        echo '<br><br><br><br><br>';
+                                        //     echo '<img src="' . base_url('public/ttd/rm11a1Bedah/' . $data->rm11a1Bedah["ttdDokter"]) . '" alt="tanda tangan Dokter" style="max-width: 150px;" data-is-new="false">';
+                                        // } else {
+                                        //     echo '<br><br><br><br><br>';
                                     } ?>
                                 </div>
                                 <br>
                                 (<?= $data->rm11a1Bedah["dokter"] ?? '-' ?> )
                                 <br><br>
-                                <?php if (!$data->rm11a1Bedah["ttdDokter"]) { ?>
-                                    <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdDokter">
+                                <?php //if (!$data->rm11a1Bedah["ttdDokter"]) { 
+                                ?>
+                                <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdDokter">
                                         Tanda tangan
-                                    </button>
-                                <?php } ?>
+                                    </button> -->
+                                <?php //} 
+                                ?>
                             </td>
                             <td></td>
                             <td>
@@ -800,18 +802,19 @@
             $("#pesanError").addClass("alert alert-danger").html("Wali belum tanda tangan.");
             $("#modalKunci").modal("hide");
             return;
-        } else if (imgDokterEl.length === 0) {
-            $("#pesanError").addClass("alert alert-danger").html("Dokter belum tanda tangan.");
-            $("#modalKunci").modal("hide");
-            return;
         }
+        // else if (imgDokterEl.length === 0) {
+        //     $("#pesanError").addClass("alert alert-danger").html("Dokter belum tanda tangan.");
+        //     $("#modalKunci").modal("hide");
+        //     return;
+        // }
 
         // PERBAIKAN: Menggunakan .attr('data-is-new') untuk membaca string 'true' secara akurat
         var isWaliNew = (imgWaliEl.attr('data-is-new') === 'true' || imgWaliEl.data('is-new') === true);
         var ttdWali = isWaliNew ? imgWaliEl.attr('src') : '';
 
-        var isDokterNew = (imgDokterEl.attr('data-is-new') === 'true' || imgDokterEl.data('is-new') === true);
-        var ttdDokter = isDokterNew ? imgDokterEl.attr('src') : '';
+        // var isDokterNew = (imgDokterEl.attr('data-is-new') === 'true' || imgDokterEl.data('is-new') === true);
+        // var ttdDokter = isDokterNew ? imgDokterEl.attr('src') : '';
 
 
         $.ajax({
@@ -820,7 +823,7 @@
             data: {
                 noRawat: noRawat,
                 ttdWali: ttdWali,
-                ttdDokter: ttdDokter,
+                // ttdDokter: ttdDokter,
                 "<?= csrf_token() ?>": "<?= csrf_hash() ?>"
             },
             dataType: 'json',
@@ -839,18 +842,19 @@
         });
     }
 
-    // Create a new QRCode instance
-    // var qrDokter = new QRCode(document.getElementById("qrDokter"), {
-    //     width: 100, // Set the width of the QR code
-    //     height: 100, // Set the height of the QR code
-    //     colorDark: "#000000", // Color of the dark modules (e.g., black squares)
-    //     colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
-    //     correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
-    // });
+    <?php if ($data->rm11a1Bedah["dokter"]) : ?>
+        var qrDokter = new QRCode(document.getElementById("ttdDokter"), {
+            width: 100, // Set the width of the QR code
+            height: 100, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
 
-    // Generate the QR code with the desired content
-    // qrDokter.makeCode("Di ttd " + $("#dokter").val() + " untuk Tata Tertib. No Rawat : " + $("#noRawat").val()); // Replace with your desired text or URL
+        // Generate the QR code with the desired content
+        qrDokter.makeCode("Di ttd " + $("#dokter").val() + " untuk Tata Tertib. No Rawat : " + $("#noRawat").val()); // Replace with your desired text or URL
 
+    <?php endif; ?>
     //========================================================
 
     document.addEventListener('DOMContentLoaded', () => {
