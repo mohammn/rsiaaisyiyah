@@ -90,7 +90,7 @@
                                 <?= $data->status["rm11a2Timbang"][0] ?>
                             </span>
                         </td>
-                        <td><?= !empty($data->rm11a2Timbang['ttdPengantar']) && !empty($data->rm11a2Timbang['ttdPenerima']) && !empty($data->rm11a2Timbang['ttdPengantar2']) && !empty($data->rm11a2Timbang['ttdPenerima2']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
+                        <td><?= !empty($data->rm11a2Timbang['pengantar']) && !empty($data->rm11a2Timbang['penerima']) && !empty($data->rm11a2Timbang['pengantar2']) && !empty($data->rm11a2Timbang['penerima2']) ? '<span class="badge-estetik bg-vibrant-teal">Sudah</span>' : '<span class="badge-estetik bg-vibrant-red">Belum</span>' ?></td>
                         <td>
                             <?php if ($data->rm11a2Timbang) : ?>
                                 <a href="<?= base_url(" rm/rm11a2Timbang/" . str_replace('/', '-', $data->pasien["no_rawat"])) ?>" style="text-decoration: none;" class="btn-estetik btn-sm-estetik bg-vibrant-purple"><i class="fas fa-search"></i> Lihat</a>

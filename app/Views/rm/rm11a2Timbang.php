@@ -78,7 +78,7 @@
                     <div class="text-center">
 
                         <?php
-                        if (!empty($data->rm11a2Timbang['ttdPengantar']) && !empty($data->rm11a2Timbang['ttdPenerima']) && !empty($data->rm11a2Timbang['ttdPengantar2']) && !empty($data->rm11a2Timbang['ttdPenerima2'])): ?>
+                        if (!empty($data->rm11a2Timbang['pengantar']) && !empty($data->rm11a2Timbang['penerima']) && !empty($data->rm11a2Timbang['pengantar2']) && !empty($data->rm11a2Timbang['penerima2'])): ?>
                             <a class="btn btn-estetik btn-simpan" href="<?= base_url('/rm/rm11a2Timbang/cetak/' . str_replace('/', '-', $data->pasien['no_rawat']) . '/' . $data->rm11a2Timbang['id']) ?>" target="_blank">
                                 <i class="fas fa-print me-1"></i> Cetak
                             </a>

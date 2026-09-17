@@ -612,9 +612,9 @@ $tb = $data->rm11a2Timbang;
                                         <div id="ttdPengantar">
                                             <?php if ($data->rm11a2Timbang["ttdPengantar"]) {
                                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                                echo '<img src="' . base_url('public/ttd/rm11a2Timbang/' . $data->rm11a2Timbang["ttdPengantar"]) . '" alt="tanda tangan Pengantar" style="max-width: 75px;" data-is-new="false">';
-                                            } else {
-                                                echo '<br><br><br><br><br>';
+                                                //     echo '<img src="' . base_url('public/ttd/rm11a2Timbang/' . $data->rm11a2Timbang["ttdPengantar"]) . '" alt="tanda tangan Pengantar" style="max-width: 75px;" data-is-new="false">';
+                                                // } else {
+                                                //     echo '<br><br><br><br><br>';
                                             } ?>
                                         </div>
                                         <br>
@@ -622,20 +622,22 @@ $tb = $data->rm11a2Timbang;
                                         <br>
                                         Tanggal : <?= !empty($tb['waktu']) ? date('d-m-Y', strtotime($tb['waktu'])) : '-' ?>
                                         <br><br>
-                                        <?php if (!$data->rm11a2Timbang["ttdPengantar"]) { ?>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdPengantar">
+                                        <?php //if (!$data->rm11a2Timbang["ttdPengantar"]) { 
+                                        ?>
+                                        <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdPengantar">
                                                 TTD
-                                            </button>
-                                        <?php } ?>
+                                            </button> -->
+                                        <?php //} 
+                                        ?>
                                     </td>
                                     <td>
                                         Petugas Penerima
                                         <div id="ttdPenerima">
                                             <?php if ($data->rm11a2Timbang["ttdPenerima"]) {
                                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                                echo '<img src="' . base_url('public/ttd/rm11a2Timbang/' . $data->rm11a2Timbang["ttdPenerima"]) . '" alt="tanda tangan Penerima" style="max-width: 75px;" data-is-new="false">';
-                                            } else {
-                                                echo '<br><br><br><br><br>';
+                                                //     echo '<img src="' . base_url('public/ttd/rm11a2Timbang/' . $data->rm11a2Timbang["ttdPenerima"]) . '" alt="tanda tangan Penerima" style="max-width: 75px;" data-is-new="false">';
+                                                // } else {
+                                                //     echo '<br><br><br><br><br>';
                                             } ?>
                                         </div>
                                         <br>
@@ -643,11 +645,13 @@ $tb = $data->rm11a2Timbang;
                                         <br>
                                         Jam : <?= !empty($tb['waktu']) ? date('H:i', strtotime($tb['waktu'])) : '-' ?>
                                         <br><br>
-                                        <?php if (!$data->rm11a2Timbang["ttdPenerima"]) { ?>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdPenerima">
+                                        <?php //if (!$data->rm11a2Timbang["ttdPenerima"]) { 
+                                        ?>
+                                        <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdPenerima">
                                                 TTD
-                                            </button>
-                                        <?php } ?>
+                                            </button> -->
+                                        <?php //} 
+                                        ?>
                                     </td>
                                 </tr>
                             </table>
@@ -660,9 +664,9 @@ $tb = $data->rm11a2Timbang;
                                         <div id="ttdPengantar2">
                                             <?php if ($data->rm11a2Timbang["ttdPengantar2"]) {
                                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                                echo '<img src="' . base_url('public/ttd/rm11a2Timbang/' . $data->rm11a2Timbang["ttdPengantar2"]) . '" alt="tanda tangan Pengantar" style="max-width: 75px;" data-is-new="false">';
-                                            } else {
-                                                echo '<br><br><br><br><br>';
+                                                //     echo '<img src="' . base_url('public/ttd/rm11a2Timbang/' . $data->rm11a2Timbang["ttdPengantar2"]) . '" alt="tanda tangan Pengantar" style="max-width: 75px;" data-is-new="false">';
+                                                // } else {
+                                                //     echo '<br><br><br><br><br>';
                                             } ?>
                                         </div>
                                         <br>
@@ -670,20 +674,22 @@ $tb = $data->rm11a2Timbang;
                                         <br>
                                         Tanggal : <?= !empty($tb['waktu']) ? date('d-m-Y', strtotime($tb['waktu'])) : '-' ?>
                                         <br><br>
-                                        <?php if (!$data->rm11a2Timbang["ttdPengantar2"]) { ?>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdPengantar2">
+                                        <?php //if (!$data->rm11a2Timbang["ttdPengantar2"]) { 
+                                        ?>
+                                        <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdPengantar2">
                                                 TTD
-                                            </button>
-                                        <?php } ?>
+                                            </button> -->
+                                        <?php //} 
+                                        ?>
                                     </td>
                                     <td>
                                         Petugas Penerima
                                         <div id="ttdPenerima2">
                                             <?php if ($data->rm11a2Timbang["ttdPenerima2"]) {
                                                 // Sudah ditambahkan 'public/' agar gambar tidak broken/silang
-                                                echo '<img src="' . base_url('public/ttd/rm11a2Timbang/' . $data->rm11a2Timbang["ttdPenerima2"]) . '" alt="tanda tangan Penerima" style="max-width: 75px;" data-is-new="false">';
-                                            } else {
-                                                echo '<br><br><br><br><br>';
+                                                //     echo '<img src="' . base_url('public/ttd/rm11a2Timbang/' . $data->rm11a2Timbang["ttdPenerima2"]) . '" alt="tanda tangan Penerima" style="max-width: 75px;" data-is-new="false">';
+                                                // } else {
+                                                //     echo '<br><br><br><br><br>';
                                             } ?>
                                         </div>
                                         <br>
@@ -691,11 +697,13 @@ $tb = $data->rm11a2Timbang;
                                         <br>
                                         Jam : <?= !empty($tb['waktu']) ? date('H:i', strtotime($tb['waktu'])) : '-' ?>
                                         <br><br>
-                                        <?php if (!$data->rm11a2Timbang["ttdPenerima2"]) { ?>
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdPenerima2">
+                                        <?php //if (!$data->rm11a2Timbang["ttdPenerima2"]) { 
+                                        ?>
+                                        <!-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#modalTtdPenerima2">
                                                 TTD
-                                            </button>
-                                        <?php } ?>
+                                            </button> -->
+                                        <?php //} 
+                                        ?>
                                     </td>
                                 </tr>
                             </table>
@@ -711,18 +719,19 @@ $tb = $data->rm11a2Timbang;
                         <div class="" id="pesanError"></div>
                         <?php
                         // Ambil objek/array RM11B1 Checklist
-                        $ttd = $data->rm11a2Timbang;
+                        // $ttd = $data->rm11a2Timbang;
 
-                        // Cek apakah ADA SALAH SATU TTD yang masih kosong
-                        if (
-                            !$ttd["ttdPengantar"] ||
-                            !$ttd["ttdPenerima"] ||
-                            !$ttd["ttdPengantar2"] ||
-                            !$ttd["ttdPenerima2"]
-                        ) {
+                        // // Cek apakah ADA SALAH SATU TTD yang masih kosong
+                        // if (
+                        //     !$ttd["ttdPengantar"] ||
+                        //     !$ttd["ttdPenerima"] ||
+                        //     !$ttd["ttdPengantar2"] ||
+                        //     !$ttd["ttdPenerima2"]
+                        // ) {
                         ?>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalKunci">Selesaikan dan kunci Tanda tangan.</button>
-                        <?php } ?>
+                        <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalKunci">Selesaikan dan kunci Tanda tangan.</button> -->
+                        <?php //} 
+                        ?>
                     </div>
                 </div>
 
@@ -850,6 +859,63 @@ $tb = $data->rm11a2Timbang;
 
 <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs/qrcode.min.js"></script>
 <script>
+    <?php if ($data->rm11a2Timbang["pengantar"]): ?>
+        // Create a new QRCode instance
+        var qrPetugas = new QRCode(document.getElementById("ttdPengantar"), {
+            width: 75, // Set the width of the QR code
+            height: 75, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
+
+        // Generate the QR code with the desired content
+        qrPetugas.makeCode("Di ttd <?= $data->rm11a2Timbang["pengantar"] ?? '-' ?> untuk Timbang terima ops. No Rawat :  <?= $data->rm11a2Timbang["noRawat"] ?? '-' ?>"); // Replace with your desired text or URL
+
+        <?php endif; ?><?php if ($data->rm11a2Timbang["pengantar2"]): ?>
+        // Create a new QRCode instance
+        var qrPetugas = new QRCode(document.getElementById("ttdPengantar2"), {
+            width: 75, // Set the width of the QR code
+            height: 75, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
+
+        // Generate the QR code with the desired content
+        qrPetugas.makeCode("Di ttd <?= $data->rm11a2Timbang["pengantar2"] ?? '-' ?> untuk Timbang terima No Rawat :  <?= $data->rm11a2Timbang["noRawat"] ?? '-' ?>"); // Replace with your desired text or URL
+    <?php endif; ?>
+
+    <?php if ($data->rm11a2Timbang["penerima"]): ?>
+        // Create a new QRCode instance
+        var qrPetugas = new QRCode(document.getElementById("ttdPenerima"), {
+            width: 75, // Set the width of the QR code
+            height: 75, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
+
+        // Generate the QR code with the desired content
+        qrPetugas.makeCode("Di ttd <?= $data->rm11a2Timbang["penerima"] ?? '-' ?> untuk Timbang terima ops. No Rawat :  <?= $data->rm11a2Timbang["noRawat"] ?? '-' ?>"); // Replace with your desired text or URL
+    <?php endif; ?>
+
+    <?php if ($data->rm11a2Timbang["penerima2"]): ?>
+        // Create a new QRCode instance
+        var qrPetugas = new QRCode(document.getElementById("ttdPenerima2"), {
+            width: 75, // Set the width of the QR code
+            height: 75, // Set the height of the QR code
+            colorDark: "#000000", // Color of the dark modules (e.g., black squares)
+            colorLight: "#ffffff", // Color of the light modules (e.g., white spaces)
+            correctLevel: QRCode.CorrectLevel.L // Error correction level (L, M, Q, H)
+        });
+
+        // Generate the QR code with the desired content
+        qrPetugas.makeCode("Di ttd <?= $data->rm11a2Timbang["penerima2"] ?? '-' ?> untuk Timbang terima ops. No Rawat :  <?= $data->rm11a2Timbang["noRawat"] ?? '-' ?>"); // Replace with your desired text or URL
+    <?php endif; ?>
+
+
+
     function kunciTtd() {
         $("#pesanError").html("").removeClass("alert alert-danger");
 
