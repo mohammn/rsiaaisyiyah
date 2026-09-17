@@ -98,7 +98,9 @@ class LembarEdukasi extends BaseController
             "hambatan_edukasi"    => $identitas["hambatan_edukasi"] ?? '',
             "intervensi_hambatan" => $identitas["intervensi_hambatan"] ?? '',
             "nilai_keyakinan"     => $identitas["nilai_keyakinan"] ?? null,
-            "kesediaan_informasi" => $identitas["kesediaan_informasi"] ?? ''
+            "kesediaan_informasi" => $identitas["kesediaan_informasi"] ?? '',
+            "dietNutrisi" => $identitas["dietNutrisi"] ?? '',
+            "penyuluhanNutrisi" => $identitas["penyuluhanNutrisi"] ?? ''
         ];
 
         // 3. Masukkan data dari indeks 1-8 langsung ke dalam array $data yang sama (Menyamping)

@@ -446,8 +446,8 @@
                             <td>
                                 <strong>Nutrisi</strong>
                                 <ol type="a" class="mb-0">
-                                    <li>Diet nutrisi</li>
-                                    <li>Penyuluhan nutrisi</li>
+                                    <li>Diet nutrisi : <i><?= $data->lembarEdukasi["dietNutrisi"] ?: '' ?></i></li>
+                                    <li>Penyuluhan nutrisi : <i><?= $data->lembarEdukasi["penyuluhanNutrisi"] ?: '' ?></i></li>
                                     <li><?= $data->lembarEdukasi["lainnya_4"] ?: '...........................' ?></li>
                                 </ol>
                             </td>

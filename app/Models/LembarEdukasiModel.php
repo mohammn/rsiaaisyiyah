@@ -31,6 +31,9 @@ class LembarEdukasiModel extends Model
             'intervensi_hambatan',
             'nilai_keyakinan',
             'kesediaan_informasi',
+            'dietNutrisi',
+            'penyuluhanNutrisi',
+
             'ttdWali',
 
             'tglinput'

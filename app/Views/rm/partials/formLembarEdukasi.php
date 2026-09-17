@@ -644,8 +644,9 @@ $indikasiJanin = !empty($data->icSesar['indikasiJanin']) ? explode('|', $data->i
                                 <div class="row g-3">
                                     <div class="col-sm-6 border-end">
                                         <ol type="a">
-                                            <li>Diet nutrisi</li>
-                                            <li>Penyuluhan Nutrisi</li>
+                                            <li>Diet nutrisi : <input type="text" id="dietNutrisi" name="dietNutrisi" class="form-control form-control-sm" value="<?= $edu['dietNutrisi'] ?>">
+                                            </li>
+                                            <li>Penyuluhan Nutrisi : <input type="text" id="penyuluhanNutrisi" name="penyuluhanNutrisi" class="form-control form-control-sm" value="<?= $edu['penyuluhanNutrisi'] ?>"></li>
                                             <li>
                                                 <input type="text" id="lainnya_4" name="lainnya_4" class="form-control form-control-sm" placeholder="lainnya.." value="<?= $lainnya_4 ?>">
                                             </li>

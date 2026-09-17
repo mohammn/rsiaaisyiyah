@@ -258,7 +258,9 @@
                 $('input[name="hambatan_lainnya_input"]').val() : ($('input[name="hambatan_edukasi"]:checked').val() || ''),
             intervensi_hambatan: $('input[name="intervensi_hambatan"]:checked').val() || '',
             nilai_keyakinan: $('input[name="nilai_keyakinan"]').val(),
-            kesediaan_informasi: $('input[name="kesediaan_informasi"]:checked').val() || ''
+            kesediaan_informasi: $('input[name="kesediaan_informasi"]:checked').val() || '',
+            dietNutrisi: $('#dietNutrisi').val(),
+            penyuluhanNutrisi: $('#penyuluhanNutrisi').val()
         };
 
         let dataEdukasi = {};
