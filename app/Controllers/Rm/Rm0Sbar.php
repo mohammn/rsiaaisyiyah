@@ -170,6 +170,7 @@ class Rm0Sbar extends BaseController
 
     public function verif()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $this->rm0SbarDataModel->where('id', $this->request->getPost("id"))->set(["tglVerif" => date('Y-m-d H:i:s')])->update();
         echo json_encode(["status" => "success"]);
     }
