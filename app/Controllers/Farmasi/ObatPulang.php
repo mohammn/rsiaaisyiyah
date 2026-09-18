@@ -238,6 +238,8 @@ class ObatPulang extends BaseController
             $obatPulangDataMap[$detail['kode_brng']] = $detail;
         }
 
+        $dpjp = $this->dpjpModel->where('noRawat', $noRawat)->first();
+
         $pengaturan = $this->pengaturan->where('id', 1)->first();
         $resepPulang = $this->resepPulangModel->getResepByNoRawat($noRawat);
         $pjPasien = $this->pjPasienModel->where('noRm', $pasien["no_rkm_medis"])->first();
@@ -249,6 +251,7 @@ class ObatPulang extends BaseController
             'obatPulangData'  => $obatPulangDataMap, // Data Anak (indexed by kode_brng)
             'resepPulang' => $resepPulang,
             'pjPasien' => $pjPasien,
+            'dpjp'     => $dpjp,
             'pengaturan' => $pengaturan
         ];
         echo view("cetak/obatPulang", ["data" => $data]);
