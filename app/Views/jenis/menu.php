@@ -22,47 +22,6 @@ $isHalamanRm = ($segment1 === 'rm' && $currentJenis !== 'cppt');
 
         <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
 
-        <!-- Daftar Form (Dinamis: Modal jika di RM, Link biasa jika di luar RM) -->
-        <?php if ($isHalamanRm): ?>
-            <button type="button"
-                class="btn btn-sm btn-primary rounded-pill px-3 py-1 fw-semibold mx-1 shadow-sm"
-                data-bs-toggle="modal"
-                data-bs-target="#modalTambahForm">
-                <i class="fas fa-file-medical me-1"></i> Semua Form
-            </button>
-        <?php else: ?>
-            <a class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
-                href="<?= base_url('rm/' . $noRawatFormatted) ?>">
-                <i class="fas fa-file-medical me-1"></i> Semua Form
-            </a>
-        <?php endif; ?>
-
-        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
-
-        <!-- CPPT -->
-        <a class="btn btn-sm <?= ($currentJenis == 'cppt') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
-            href="<?= base_url('jenis/cppt/' . $noRawatFormatted) ?>">
-            <i class="fas fa-notes-medical me-1"></i> CPPT
-        </a>
-
-        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
-
-        <!-- Operasi / Bedah -->
-        <a class="btn btn-sm <?= ($currentJenis == 'operasi') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
-            href="<?= base_url('jenis/operasi/' . $noRawatFormatted) ?>">
-            <i class="fas fa-bed-pulse me-1"></i> Operasi
-        </a>
-
-        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
-
-        <!-- Menu Farmasi -->
-        <a class="btn btn-sm <?= ($currentJenis == 'farmasi') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
-            href="<?= base_url('jenis/farmasi/' . $noRawatFormatted) ?>">
-            <i class="fas fa-pills me-1"></i> Farmasi
-        </a>
-
-        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
-
         <!-- Menu General -->
         <a class="btn btn-sm <?= ($currentJenis == 'general') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
             href="<?= base_url('jenis/general/' . $noRawatFormatted) ?>">
@@ -79,11 +38,60 @@ $isHalamanRm = ($segment1 === 'rm' && $currentJenis !== 'cppt');
 
         <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
 
+        <!-- Operasi / Bedah -->
+        <a class="btn btn-sm <?= ($currentJenis == 'operasi') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
+            href="<?= base_url('jenis/operasi/' . $noRawatFormatted) ?>">
+            <i class="fas fa-bed-pulse me-1"></i> Operasi
+        </a>
+
+        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
+
+        <!-- CPPT -->
+        <a class="btn btn-sm <?= ($currentJenis == 'cppt') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
+            href="<?= base_url('jenis/cppt/' . $noRawatFormatted) ?>">
+            <i class="fas fa-notes-medical me-1"></i> CPPT
+        </a>
+
+        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
+
+        <!-- Menu Farmasi -->
+        <a class="btn btn-sm <?= ($currentJenis == 'surveilans') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
+            href="<?= base_url('jenis/surveilans/' . $noRawatFormatted) ?>">
+            <i class="fas fa-clipboard-check me-1"></i> Surveilans
+        </a>
+
+        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
+
+        <!-- Menu Farmasi -->
+        <a class="btn btn-sm <?= ($currentJenis == 'farmasi') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
+            href="<?= base_url('jenis/farmasi/' . $noRawatFormatted) ?>">
+            <i class="fas fa-pills me-1"></i> Farmasi
+        </a>
+
+        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
+
         <!-- Menu Lain-lain -->
         <a class="btn btn-sm <?= ($currentJenis == 'lain') ? 'btn-primary' : 'btn-light text-dark' ?> rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
             href="<?= base_url('jenis/lain/' . $noRawatFormatted) ?>">
             <i class="fas fa-ellipsis-h me-1"></i> Lain-lain
         </a>
+
+        <div class="vr bg-secondary opacity-25 align-self-center" style="height: 16px;"></div>
+
+        <!-- Daftar Form (Dinamis: Modal jika di RM, Link biasa jika di luar RM) -->
+        <?php if ($isHalamanRm): ?>
+            <button type="button"
+                class="btn btn-sm btn-primary rounded-pill px-3 py-1 fw-semibold mx-1 shadow-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#modalTambahForm">
+                <i class="fas fa-file-medical me-1"></i> Semua Form
+            </button>
+        <?php else: ?>
+            <a class="btn btn-sm btn-light text-dark rounded-pill px-3 py-1 border-0 fw-medium mx-1 shadow-none"
+                href="<?= base_url('rm/' . $noRawatFormatted) ?>">
+                <i class="fas fa-file-medical me-1"></i> Semua Form
+            </a>
+        <?php endif; ?>
 
     </div>
 </div>

@@ -312,6 +312,7 @@ $routes->get('/jenis/general/(:any)', 'Jenis\General::index/$1');
 $routes->get('/jenis/lain/(:any)', 'Jenis\Lain::index/$1');
 $routes->get('/jenis/operasi/(:any)', 'Jenis\Operasi::index/$1');
 $routes->get('/jenis/farmasi/(:any)', 'Jenis\Farmasi::index/$1');
+$routes->get('/jenis/surveilans/(:any)', 'Jenis\Surveilans::index/$1');
 
 $routes->get('/pasien/gelang/(:any)', 'Pasien::gelang/$1');
 $routes->get('/pasien', 'Pasien::Index');
