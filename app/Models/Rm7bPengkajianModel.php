@@ -26,9 +26,11 @@ class Rm7bPengkajianModel extends Model
 
         // Riwayat Kebidanan & Menstruasi
         'keluhanUtama',
-        'riwayatKeluhan',
+        'riwayatPenyakit',
+        'riwayatPenyakitKeluarga',
         'hpht',
         'hpl',
+        'mensLainnya',
         'riwayatPerkawinan',
         'jumlahKawin',
         'lamaKawin',
@@ -75,10 +77,12 @@ class Rm7bPengkajianModel extends Model
         'keluhanLainnyaInput',
 
         // Eliminasi (BAK & BAB)
+        'keluhanBak',
         'bakFrekuensi',
         'bakVolume',
         'bakWarna',
         'bakKeluhan',
+        'keluhanBab',
         'babFrekuensi',
         'babKonsistensi',
         'babWarna',
@@ -117,18 +121,22 @@ class Rm7bPengkajianModel extends Model
         'lineaNigra',
         'lineaAlba',
         'adaPembesaran',
+        'isiPembesaranLainnya',
         'tfu',
         'involusiUteri',
         'kontraksiUteri',
+        'isiKontraksiLainnya',
         'hisFrekuensi',
         'hisLama',
         'kelainanPalpasi',
+        'isiKelainanPalpasiLainnya',
         'terabaMassa',
         'massaPanjang',
         'massaLebar',
         'bisingUsus',
         'djjFrekuensi',
         'djjTeratur',
+        'isiDjjLainnya',
 
         // Anogenital & Inspekulo
         'pengeluaranVaginal',
@@ -140,12 +148,13 @@ class Rm7bPengkajianModel extends Model
         'laserasiDerajat',
         'periniumLainnyaKet',
         'jahitan',  // Saved as JSON
+        'jahitanLainnyaKet',
         'kelainan', // Saved as JSON
         'kelainanLainnyaKet',
         'portio',
         'portioLainnyaKet',
         'cavumDouglasi',
-        'dokter',
+        'petugasVt',
         'waktuVt',
 
         // Penunjang & Diagnosa Akhir

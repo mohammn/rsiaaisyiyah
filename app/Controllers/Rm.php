@@ -337,7 +337,7 @@ class Rm extends BaseController
             "penerjemah" => $this->cekSemuaKolom($penerjemah, ['ttdWali']),
             "rm26jRujukanLuar" => $this->cekSemuaKolom($rm26jRujukanLuar, ['ttdWali', 'isiHandOverLainLain', 'alasanKeterangan']),
             "rm9aTransferPasien" => $statusRm9aTransferPasien,
-            "rm7bPengkajian" => $this->cekSemuaKolom($rm7bPengkajian, ['ttdPetugas']),
+            "rm7bPengkajian" => $this->cekSemuaKolom($rm7bPengkajian, ['ttdPetugas', 'sumberDataLainnya', 'asalRujukan', 'pengantarRujukan', 'transportasiLainnya', 'hpht', 'hpl', 'mensLainnya', 'jumlahKawin', 'lamaKawin', 'jenisKbTerakhir', 'jenisGynekologiLainnya', 'jenisNamaObat', 'reaksiObat', 'jenisMakanan', 'reaksiMakanan', 'jenisAlergiLainnya', 'reaksiLainnya', 'riwayatAlergi', 'penyakitKronisLainnya', 'bakFrekuensi', 'bakVolume', 'bakWarna', 'bakKeluhan', 'babFrekuensi', 'babKonsistensi', 'babWarna', 'babKeluhan', 'tidurIstirahatKet', 'alatBantuKet', 'keadaanPsikologisLainnya', 'tingkatPendidikanLainnya', 'pekerjaanLainnya', 'tinggalBersamaLainnya', 'namaAsuransi', 'isiPembesaranLainnya', 'isiKontraksiLainnya', 'hisFrekuensi', 'hisLama', 'isiKelainanPalpasiLainnya', 'massaPanjang', 'massaLebar', 'djjFrekuensi', 'isiDjjLainnya', 'kelainanLainnyaKet', 'portioLainnyaKet', 'berbauKet', 'laserasiDerajat', 'periniumLainnyaKet', 'jahitanLainnyaKet']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object

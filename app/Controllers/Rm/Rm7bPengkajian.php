@@ -12,6 +12,7 @@ use App\Models\PengaturanModel;
 use App\Models\PjPasienModel;
 use App\Models\DokterModel;
 use App\Models\ResepPulangModel;
+use App\Models\PetugasModel;
 
 class Rm7bPengkajian extends BaseController
 {
@@ -23,6 +24,7 @@ class Rm7bPengkajian extends BaseController
     protected $pjPasienModel;
     protected $dokterModel;
     protected $resepPulangModel;
+    protected $petugasModel;
 
     public function __construct()
     {
@@ -37,6 +39,7 @@ class Rm7bPengkajian extends BaseController
         $this->pengaturan = new PengaturanModel();
         $this->pjPasienModel = new PjPasienModel();
         $this->dokterModel = new DokterModel();
+        $this->petugasModel = new PetugasModel();
         $this->resepPulangModel = new ResepPulangModel();
     }
 
@@ -60,6 +63,7 @@ class Rm7bPengkajian extends BaseController
             ->first();
 
         $dokter =  $this->dokterModel->where('kd_dokter !=', '-')->findAll();
+        $petugas =  $this->petugasModel->where('nip !=', '-')->findAll();
 
         $rm7bPengkajian = $this->rm7bPengkajianModel->where('noRawat', $noRawat)->first();
 
@@ -71,6 +75,7 @@ class Rm7bPengkajian extends BaseController
         $data = (object) [
             'pasien'     => $pasien,      // Jangan pakai (object) di sini
             'dokter'     => $dokter,      // Jangan pakai (object) di sini
+            'petugas'     => $petugas,
             'rm7bPengkajian' => $rm7bPengkajian,
             'resepPulang' => $resepPulang,
             'pjPasien' => $pjPasien,

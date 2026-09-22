@@ -211,24 +211,35 @@ if (isset($data->rm7bPengkajian)) {
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-12">
-                                        <label class="form-label fw-bold small text-secondary mb-0">Riwayat keluhan :</label>
-                                        <textarea name="riwayatKeluhan" id="riwayatKeluhan" class="form-control"><?= $data->rm7bPengkajian["riwayatKeluhan"] ?? '' ?></textarea>
+                                        <label class="form-label fw-bold small text-secondary mb-0">Riwayat penyakit :</label>
+                                        <textarea name="riwayatPenyakit" id="riwayatPenyakit" class="form-control"><?= $data->rm7bPengkajian["riwayatPenyakit"] ?? '' ?></textarea>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <label class="form-label fw-bold small text-secondary mb-0">Riwayat penyakit keluarga :</label>
+                                        <textarea name="riwayatPenyakitKeluarga" id="riwayatPenyakitKeluarga" class="form-control"><?= $data->rm7bPengkajian["riwayatPenyakitKeluarga"] ?? '' ?></textarea>
                                     </div>
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-md-12">
                                         <div class="border border-info rounded p-1">
-                                            <div class="d-flex flex-wrap gap-3 align-items-center">
+                                            <div class="d-flex flex-wrap gap-1 align-items-center">
                                                 <label class="form-label fw-bold small text-secondary mb-0 ms-1">Riwayat menstruasi :</label>
 
-                                                <div class="d-flex align-items-center gap-2">
+                                                <div class="d-flex align-items-center gap-1">
                                                     <label class="form-label small mb-0 text-nowrap" for="hpht">HPHT :</label>
                                                     <input type="date" class="form-control form-control-sm" id="hpht" name="hpht" value="<?= $data->rm7bPengkajian['hpht'] ?? '' ?>">
                                                 </div>
 
-                                                <div class="d-flex align-items-center gap-2">
+                                                <div class="d-flex align-items-center gap-1">
                                                     <label class="form-label small mb-0 text-nowrap" for="hpl">HPL :</label>
                                                     <input type="date" class="form-control form-control-sm" id="hpl" name="hpl" value="<?= $data->rm7bPengkajian['hpl'] ?? '' ?>">
+                                                </div>
+
+                                                <div class="d-flex align-items-center gap-1">
+                                                    <label class="form-label small mb-0 text-nowrap" for="mensLainnya">Lainnya :</label>
+                                                    <input type="text" class="form-control form-control-sm" id="mensLainnya" name="mensLainnya" value="<?= $data->rm7bPengkajian['mensLainnya'] ?? '' ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -348,13 +359,13 @@ if (isset($data->rm7bPengkajian)) {
                                     <div class="col-sm-12">
                                         <div class="border border-info rounded p-1">
                                             <div class="d-flex flex-column gap-1">
-                                                <label class="form-label fw-bold small text-secondary mb-0 ms-1">Riwayat Alergi :</label>
+                                                <label class="form-label fw-bold small text-secondary mb-0 ms-1">Riwayat Alergi (<i class="fw-normal" style="color: red;">Tidak perlu dicentang jika tidak ada.</i>) :</label>
 
                                                 <!-- Baris 1: Obat -->
                                                 <div class="form-check mb-0 ms-md-3 ms-1 d-flex flex-wrap align-items-center gap-2">
                                                     <input class="form-check-input mt-0" type="checkbox" name="riwayatAlergi[]" id="alergiObat" value="Obat" <?= (in_array("Obat", (array)($data->rm7bPengkajian['riwayatAlergi'] ?? []))) ? 'checked' : '' ?>>
                                                     <label class="form-check-label small text-nowrap" for="alergiObat">
-                                                        Obat : Jenis/nama Obat :
+                                                        Nama Obat :
                                                     </label>
                                                     <input type="text" id="jenisNamaObat" name="jenisNamaObat" class="form-control form-control-sm" style="width: auto;" value="<?= $data->rm7bPengkajian['jenisNamaObat'] ?? '' ?>">
                                                     <label class="small text-nowrap ms-1">Reaksi :</label>
@@ -689,6 +700,20 @@ if (isset($data->rm7bPengkajian)) {
                                                     <span class="fw-bold text-secondary small me-2">BAK :</span>
                                                 </div>
 
+                                                <div class="col-sm-12">
+                                                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                                                        <div class="form-check mb-0 me-1">
+                                                            <input class="form-check-input" type="radio" name="keluhanBak" id="keluhanBakTidak" value="Tidak" <?= (($data->rm7bPengkajian["keluhanBak"] ?? '') === "Tidak") ? 'checked' : '' ?>>
+                                                            <label class="form-check-label small" for="keluhanBakTidak">Tidak ada keluhan</label>
+                                                        </div>
+
+                                                        <div class="form-check mb-0 me-1 d-inline-flex align-items-center gap-2">
+                                                            <input class="form-check-input mt-0" type="radio" name="keluhanBak" id="keluhanBakAda" value="Ada" <?= (($data->rm7bPengkajian["keluhanBak"] ?? '') === "Ada") ? 'checked' : '' ?>>
+                                                            <label class="form-check-label small text-nowrap" for="keluhanBakAda">Ada keluhan :</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <!-- BAK Frekuensi -->
                                                 <div class="col-md-4 col-sm-6">
                                                     <div class="input-group input-group-sm">
@@ -728,6 +753,20 @@ if (isset($data->rm7bPengkajian)) {
                                                 <!-- ================= BAB SECTION ================= -->
                                                 <div class="col-12 mt-2">
                                                     <span class="fw-bold text-secondary small me-2">BAB :</span>
+                                                </div>
+
+                                                <div class="col-sm-12">
+                                                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                                                        <div class="form-check mb-0 me-1">
+                                                            <input class="form-check-input" type="radio" name="keluhanBab" id="keluhanBabTidak" value="Tidak" <?= (($data->rm7bPengkajian["keluhanBab"] ?? '') === "Tidak") ? 'checked' : '' ?>>
+                                                            <label class="form-check-label small" for="keluhanBabTidak">Tidak ada keluhan</label>
+                                                        </div>
+
+                                                        <div class="form-check mb-0 me-1 d-inline-flex align-items-center gap-2">
+                                                            <input class="form-check-input mt-0" type="radio" name="keluhanBab" id="keluhanBabAda" value="Ada" <?= (($data->rm7bPengkajian["keluhanBab"] ?? '') === "Ada") ? 'checked' : '' ?>>
+                                                            <label class="form-check-label small text-nowrap" for="keluhanBabAda">Ada keluhan :</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <!-- BAB Frekuensi -->
@@ -1560,61 +1599,59 @@ if (isset($data->rm7bPengkajian)) {
                                             <div class="d-flex flex-column gap-1">
 
                                                 <!-- 1. Bekas Operasi (disertai input lokasi jika Ada) -->
-                                                <div class="gap-2 align-items-center">
+                                                <div class="d-flex flex-wrap gap-1 align-items-center">
                                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">
                                                         Bekas Operasi :
                                                     </label>
 
-                                                    <div class="form-check mb-0 ms-4">
+                                                    <div class="form-check mb-0">
                                                         <input class="form-check-input" type="radio" name="bekasOperasi" id="bekasOpTidakAda" value="Tidak Ada" <?= (($data->rm7bPengkajian["bekasOperasi"] ?? '') == "Tidak Ada") ? 'checked' : '' ?>>
                                                         <label class="form-check-label small" for="bekasOpTidakAda">Tidak Ada</label>
                                                     </div>
-                                                    <div class="alert alert-secondary ms-3 mb-0 ps-2">
-                                                        <div class="form-check mb-0 me-2">
-                                                            <input class="form-check-input" type="radio" name="bekasOperasi" id="bekasOpAda" value="Ada" <?= (($data->rm7bPengkajian["bekasOperasi"] ?? '') == "Ada") ? 'checked' : '' ?>>
-                                                            <label class="form-check-label small" for="bekasOpAda">Ada</label>
-                                                        </div>
 
-                                                        <!-- 2. Linea Nigra -->
-                                                        <div class="d-flex flex-wrap gap-1 align-items-center">
-                                                            <label class="form-label fw-bold small text-secondary mb-0 ms-1">
-                                                                Linea Nigra :
-                                                            </label>
-
-                                                            <div class="form-check mb-0 me-2">
-                                                                <input class="form-check-input" type="radio" name="lineaNigra" id="lineaNigraAda" value="Ada" <?= (($data->rm7bPengkajian["lineaNigra"] ?? '') == "Ada") ? 'checked' : '' ?>>
-                                                                <label class="form-check-label small" for="lineaNigraAda">Ada</label>
-                                                            </div>
-
-                                                            <div class="form-check mb-0 me-2">
-                                                                <input class="form-check-input" type="radio" name="lineaNigra" id="lineaNigraTidak" value="Tidak Ada" <?= (($data->rm7bPengkajian["lineaNigra"] ?? '') == "Tidak Ada") ? 'checked' : '' ?>>
-                                                                <label class="form-check-label small" for="lineaNigraTidak">Tidak Ada</label>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <!-- 3. Linea Alba -->
-                                                        <div class="d-flex flex-wrap gap-2 align-items-center">
-                                                            <label class="form-label fw-bold small text-secondary mb-0 ms-1">
-                                                                Linea Alba :
-                                                            </label>
-
-                                                            <div class="form-check mb-0 me-2">
-                                                                <input class="form-check-input" type="radio" name="lineaAlba" id="lineaAlbaAda" value="Ada" <?= (($data->rm7bPengkajian["lineaAlba"] ?? '') == "Ada") ? 'checked' : '' ?>>
-                                                                <label class="form-check-label small" for="lineaAlbaAda">Ada</label>
-                                                            </div>
-
-                                                            <div class="form-check mb-0 me-2">
-                                                                <input class="form-check-input" type="radio" name="lineaAlba" id="lineaAlbaTidak" value="Tidak" <?= (($data->rm7bPengkajian["lineaAlba"] ?? '') == "Tidak") ? 'checked' : '' ?>>
-                                                                <label class="form-check-label small" for="lineaAlbaTidak">Tidak</label>
-                                                            </div>
-                                                        </div>
-
+                                                    <div class="form-check mb-0 ">
+                                                        <input class="form-check-input" type="radio" name="bekasOperasi" id="bekasOpAda" value="Ada" <?= (($data->rm7bPengkajian["bekasOperasi"] ?? '') == "Ada") ? 'checked' : '' ?>>
+                                                        <label class="form-check-label small" for="bekasOpAda">Ada</label>
                                                     </div>
-
                                                 </div>
 
+                                                <hr class="my-1 border-secondary opacity-25">
 
+                                                <!-- 2. Linea Nigra -->
+                                                <div class="d-flex flex-wrap gap-1 align-items-center">
+                                                    <label class="form-label fw-bold small text-secondary mb-0 ms-1">
+                                                        Linea Nigra :
+                                                    </label>
+
+                                                    <div class="form-check mb-0 me-2">
+                                                        <input class="form-check-input" type="radio" name="lineaNigra" id="lineaNigraAda" value="Ada" <?= (($data->rm7bPengkajian["lineaNigra"] ?? '') == "Ada") ? 'checked' : '' ?>>
+                                                        <label class="form-check-label small" for="lineaNigraAda">Ada</label>
+                                                    </div>
+
+                                                    <div class="form-check mb-0 me-2">
+                                                        <input class="form-check-input" type="radio" name="lineaNigra" id="lineaNigraTidak" value="Tidak Ada" <?= (($data->rm7bPengkajian["lineaNigra"] ?? '') == "Tidak Ada") ? 'checked' : '' ?>>
+                                                        <label class="form-check-label small" for="lineaNigraTidak">Tidak Ada</label>
+                                                    </div>
+                                                </div>
+
+                                                <hr class="my-1 border-secondary opacity-25">
+
+                                                <!-- 3. Linea Alba -->
+                                                <div class="d-flex flex-wrap gap-2 align-items-center">
+                                                    <label class="form-label fw-bold small text-secondary mb-0 ms-1">
+                                                        Linea Alba :
+                                                    </label>
+
+                                                    <div class="form-check mb-0 me-2">
+                                                        <input class="form-check-input" type="radio" name="lineaAlba" id="lineaAlbaAda" value="Ada" <?= (($data->rm7bPengkajian["lineaAlba"] ?? '') == "Ada") ? 'checked' : '' ?>>
+                                                        <label class="form-check-label small" for="lineaAlbaAda">Ada</label>
+                                                    </div>
+
+                                                    <div class="form-check mb-0 me-2">
+                                                        <input class="form-check-input" type="radio" name="lineaAlba" id="lineaAlbaTidak" value="Tidak" <?= (($data->rm7bPengkajian["lineaAlba"] ?? '') == "Tidak") ? 'checked' : '' ?>>
+                                                        <label class="form-check-label small" for="lineaAlbaTidak">Tidak</label>
+                                                    </div>
+                                                </div>
 
 
                                                 <hr class="my-1 border-secondary opacity-25">
@@ -1634,6 +1671,12 @@ if (isset($data->rm7bPengkajian)) {
                                                         <input class="form-check-input" type="radio" name="adaPembesaran" id="pembesaranMelebar" value="Melebar" <?= (($data->rm7bPengkajian["adaPembesaran"] ?? '') == "Melebar") ? 'checked' : '' ?>>
                                                         <label class="form-check-label small" for="pembesaranMelebar">Melebar</label>
                                                     </div>
+
+                                                    <div class="form-check mb-0 me-2">
+                                                        <input class="form-check-input" type="radio" name="adaPembesaran" id="pembesaranLainnya" value="Lainnya" <?= (($data->rm7bPengkajian["adaPembesaran"] ?? '') == "Lainnya") ? 'checked' : '' ?>>
+                                                        <label class="form-check-label small" for="pembesaranLainnya">Lainnya : </label>
+                                                    </div>
+                                                    <input type="text" class="form-control form-control-sm" style="width: 80px;" id="isiPembesaranLainnya" name="isiPembesaranLainnya" value="<?= $data->rm7bPengkajian["isiPembesaranLainnya"] ?? '' ?>">
                                                 </div>
 
                                             </div>
@@ -1675,11 +1718,11 @@ if (isset($data->rm7bPengkajian)) {
                                                 <hr class="my-1 border-secondary opacity-25">
 
                                                 <!-- 3. Kontraksi Uteri & His/Lama -->
-                                                <div class="d-flex flex-wrap gap-1 align-items-center">
-                                                    <label class="form-label fw-bold small text-secondary mb-0 ms-1">
-                                                        Kontraksi Uteri :
-                                                    </label>
+                                                <label class="form-label fw-bold small text-secondary mb-0 ms-1">
+                                                    Kontraksi Uteri :
+                                                </label>
 
+                                                <div class="d-flex flex-wrap gap-1 align-items-center">
                                                     <div class="form-check mb-0 me-1">
                                                         <input class="form-check-input" type="radio" name="kontraksiUteri" id="kontraksiTidakAda" value="Tidak Ada" <?= (($data->rm7bPengkajian["kontraksiUteri"] ?? '') == "Tidak Ada") ? 'checked' : '' ?>>
                                                         <label class="form-check-label small" for="kontraksiTidakAda">Tidak Ada</label>
@@ -1699,6 +1742,12 @@ if (isset($data->rm7bPengkajian)) {
                                                         <input class="form-check-input" type="radio" name="kontraksiUteri" id="kontraksiInadekuat" value="Inadekuat" <?= (($data->rm7bPengkajian["kontraksiUteri"] ?? '') == "Inadekuat") ? 'checked' : '' ?>>
                                                         <label class="form-check-label small" for="kontraksiInadekuat">Inadekuat</label>
                                                     </div>
+
+                                                    <div class="form-check mb-0 me-1">
+                                                        <input class="form-check-input" type="radio" name="kontraksiUteri" id="kontraksiLainnya" value="Lainnya" <?= (($data->rm7bPengkajian["kontraksiUteri"] ?? '') == "Lainnya") ? 'checked' : '' ?>>
+                                                        <label class="form-check-label small" for="kontraksiLainnya">Lainnya : </label>
+                                                    </div>
+                                                    <input type="text" class="form-control form-control-sm" style="width:80px;" name="isiKontraksiLainnya" id="isiKontraksiLainnya" value="<?= $data->rm7bPengkajian["isiKontraksiLainnya"] ?? '' ?>">
 
                                                     <!-- Input His & Lama -->
                                                     <div class="input-group input-group-sm ms-2" style="width: 180px;">
@@ -1736,6 +1785,13 @@ if (isset($data->rm7bPengkajian)) {
                                                         <input class="form-check-input" type="radio" name="kelainanPalpasi" id="kelainanBlassPenuh" value="Blass Penuh" <?= (($data->rm7bPengkajian["kelainanPalpasi"] ?? '') == "Blass Penuh") ? 'checked' : '' ?>>
                                                         <label class="form-check-label small" for="kelainanBlassPenuh">Blass Penuh</label>
                                                     </div>
+
+                                                    <div class="form-check mb-0 me-1">
+                                                        <input class="form-check-input" type="radio" name="kelainanPalpasi" id="kelainanPalpasiLainnya" value="Lainnya" <?= (($data->rm7bPengkajian["kelainanPalpasi"] ?? '') == "Lainnya") ? 'checked' : '' ?>>
+                                                        <label class="form-check-label small" for="kelainanPalpasiLainnya">Lainnya : </label>
+                                                    </div>
+
+                                                    <input type="text" class="form-control form-control-sm" style="width:80px;" id="isiKelainanPalpasiLainnya" name="isiKelainanPalpasiLainnya" value="<?= $data->rm7bPengkajian["isiKelainanPalpasiLainnya"] ?? '' ?>">
                                                 </div>
 
                                                 <hr class="my-1 border-secondary opacity-25">
@@ -1822,6 +1878,12 @@ if (isset($data->rm7bPengkajian)) {
                                                         <input class="form-check-input" type="radio" name="djjTeratur" id="djjTeraturTidak" value="Tidak Teratur" <?= (($data->rm7bPengkajian["djjTeratur"] ?? '') == "Tidak Teratur") ? 'checked' : '' ?>>
                                                         <label class="form-check-label small" for="djjTeraturTidak">Tidak Teratur</label>
                                                     </div>
+
+                                                    <div class="form-check mb-0 me-1">
+                                                        <input class="form-check-input" type="radio" name="djjTeratur" id="djjTeraturLainnya" value="Lainnya" <?= (($data->rm7bPengkajian["djjTeratur"] ?? '') == "Lainnya") ? 'checked' : '' ?>>
+                                                        <label class="form-check-label small" for="djjTeraturLainnya">Lainnya : </label>
+                                                    </div>
+                                                    <input type="text" class="form-control form-control-sm" style="width: 80px;;" id="isiDjjLainnya" name="isiDjjLainnya" value="<?= $data->rm7bPengkajian["isiDjjLainnya"] ?? '' ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -1943,14 +2005,14 @@ if (isset($data->rm7bPengkajian)) {
                                             <label class="form-label fw-bold small text-secondary mb-0 ms-1">
                                                 Vagina Toucher (VT) :
                                             </label>
-                                            <select name="dokter" id="dokter" class="form-select">
-                                                <option value="" <?= ($data->rm7bPengkajian['dokter'] ?? '') == '' ? ' selected' : '' ?>>-- Pilih Dokter --</option>
-                                                <?php for ($i = 0; $i < count($data->dokter); $i++) {
-                                                    echo '<option value="' . $data->dokter[$i]["nm_dokter"] . '"';
-                                                    if ($data->dokter[$i]["nm_dokter"] === ($data->rm7bPengkajian['dokter'] ?? '')) {
+                                            <select name="petugasVt" id="petugasVt" class="form-select">
+                                                <option value="" <?= ($data->rm7bPengkajian['petugasVt'] ?? '') == '' ? ' selected' : '' ?>>-- Pilih Petugas --</option>
+                                                <?php for ($i = 0; $i < count($data->petugas); $i++) {
+                                                    echo '<option value="' . $data->petugas[$i]["nama"] . '"';
+                                                    if ($data->petugas[$i]["nama"] === ($data->rm7bPengkajian['petugasVt'] ?? '')) {
                                                         echo ' selected';
                                                     }
-                                                    echo '>' . $data->dokter[$i]["nm_dokter"] . '</option>';
+                                                    echo '>' . $data->petugas[$i]["nama"] . '</option>';
                                                 } ?>
                                             </select>
                                         </div>
@@ -2109,6 +2171,14 @@ if (isset($data->rm7bPengkajian)) {
                                                     <label class="form-check-label small" for="jahitanKemerahan">Kemerahan</label>
                                                 </div>
 
+                                                <!-- Lainnya + Input Text -->
+                                                <div class="form-check mb-0 me-1">
+                                                    <input class="form-check-input" type="checkbox" name="jahitan[]" id="jahitanLainnya" value="Lainnya" <?= (in_array("Lainnya", $data->rm7bPengkajian["jahitan"] ?? [])) ? 'checked' : '' ?>>
+                                                    <label class="form-check-label small" for="jahitanLainnya">Lainnya :</label>
+                                                </div>
+                                                <input type="text" class="form-control form-control-sm" style="width: 180px;" name="jahitanLainnyaKet" value="<?= $data->rm7bPengkajian["jahitanLainnyaKet"] ?? '' ?>">
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -2153,26 +2223,7 @@ if (isset($data->rm7bPengkajian)) {
                                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">
                                                         Golongan Darah :
                                                     </label>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="golonganDarah" id="golA" value="A" <?= (($data->rm7bPengkajian["golonganDarah"] ?? '') == "A") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="golA">A</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="golonganDarah" id="golB" value="B" <?= (($data->rm7bPengkajian["golonganDarah"] ?? '') == "B") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="golB">B</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="golonganDarah" id="golAB" value="AB" <?= (($data->rm7bPengkajian["golonganDarah"] ?? '') == "AB") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="golAB">AB</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="golonganDarah" id="golO" value="O" <?= (($data->rm7bPengkajian["golonganDarah"] ?? '') == "O") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="golO">O</label>
-                                                    </div>
+                                                    <input type="text" class="form-control" name="golonganDarah" value="<?= $data->rm7bPengkajian["golonganDarah"] ?? '' ?>">
                                                 </div>
 
                                                 <hr class="my-1 border-secondary opacity-25">
@@ -2183,15 +2234,7 @@ if (isset($data->rm7bPengkajian)) {
                                                         Rhesus :
                                                     </label>
 
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="rhesus" id="rhPositif" value="Positif (+)" <?= (($data->rm7bPengkajian["rhesus"] ?? '') == "Positif (+)") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="rhPositif">Positif (+)</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="rhesus" id="rhNegatif" value="Negatif (-)" <?= (($data->rm7bPengkajian["rhesus"] ?? '') == "Negatif (-)") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="rhNegatif">Negatif (-)</label>
-                                                    </div>
+                                                    <input type="text" class="form-control" name="rhesus" value="<?= $data->rm7bPengkajian["rhesus"] ?? '' ?>">
                                                 </div>
 
                                                 <hr class="my-1 border-secondary opacity-25">
@@ -2202,15 +2245,7 @@ if (isset($data->rm7bPengkajian)) {
                                                         Toxo :
                                                     </label>
 
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="toxo" id="toxoNonReaktif" value="Non Reaktif" <?= (($data->rm7bPengkajian["toxo"] ?? '') == "Non Reaktif") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="toxoNonReaktif">Non Reaktif</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="toxo" id="toxoReaktif" value="Reaktif" <?= (($data->rm7bPengkajian["toxo"] ?? '') == "Reaktif") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="toxoReaktif">Reaktif</label>
-                                                    </div>
+                                                    <input type="text" class="form-control" name="toxo" value="<?= $data->rm7bPengkajian["toxo"] ?? '' ?>">
                                                 </div>
 
                                                 <hr class="my-1 border-secondary opacity-25">
@@ -2220,16 +2255,7 @@ if (isset($data->rm7bPengkajian)) {
                                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">
                                                         HbsAg :
                                                     </label>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="hbsag" id="hbsagNonReaktif" value="Non Reaktif" <?= (($data->rm7bPengkajian["hbsag"] ?? '') == "Non Reaktif") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="hbsagNonReaktif">Non Reaktif</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="hbsag" id="hbsagReaktif" value="Reaktif" <?= (($data->rm7bPengkajian["hbsag"] ?? '') == "Reaktif") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="hbsagReaktif">Reaktif</label>
-                                                    </div>
+                                                    <input type="text" class="form-control" name="hbsag" value="<?= $data->rm7bPengkajian["hbsag"] ?? '' ?>">
                                                 </div>
 
                                                 <hr class="my-1 border-secondary opacity-25">
@@ -2239,16 +2265,7 @@ if (isset($data->rm7bPengkajian)) {
                                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">
                                                         HIV :
                                                     </label>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="hiv" id="hivNonReaktif" value="Non Reaktif" <?= (($data->rm7bPengkajian["hiv"] ?? '') == "Non Reaktif") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="hivNonReaktif">Non Reaktif</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="hiv" id="hivReaktif" value="Reaktif" <?= (($data->rm7bPengkajian["hiv"] ?? '') == "Reaktif") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="hivReaktif">Reaktif</label>
-                                                    </div>
+                                                    <input type="text" class="form-control" name="hiv" value="<?= $data->rm7bPengkajian["hiv"] ?? '' ?>">
                                                 </div>
 
                                             </div>
@@ -2271,26 +2288,7 @@ if (isset($data->rm7bPengkajian)) {
                                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">
                                                         Albumin :
                                                     </label>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="albumin" id="albuminNegatif" value="Negatif (-)" <?= (($data->rm7bPengkajian["albumin"] ?? '') == "Negatif (-)") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="albuminNegatif">Negatif (-)</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="albumin" id="albuminPositiv1" value="Positif 1 (+)" <?= (($data->rm7bPengkajian["albumin"] ?? '') == "Positif 1 (+)") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="albuminPositiv1">Positif 1 (+)</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="albumin" id="albuminPositiv2" value="Positif 2 (++)" <?= (($data->rm7bPengkajian["albumin"] ?? '') == "Positif 2 (++)") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="albuminPositiv2">Positif 2 (++)</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="albumin" id="albuminPositiv3" value="Positif 3 (+++)" <?= (($data->rm7bPengkajian["albumin"] ?? '') == "Positif 3 (+++)") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="albuminPositiv3">Positif 3 (+++)</label>
-                                                    </div>
+                                                    <input type="text" class="form-control" name="albumin" value="<?= $data->rm7bPengkajian["albumin"] ?? '' ?>">
                                                 </div>
 
                                                 <hr class="my-1 border-secondary opacity-25">
@@ -2300,26 +2298,7 @@ if (isset($data->rm7bPengkajian)) {
                                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">
                                                         Reduksi :
                                                     </label>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="reduksi" id="reduksiNegatif" value="Negatif (-)" <?= (($data->rm7bPengkajian["reduksi"] ?? '') == "Negatif (-)") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="reduksiNegatif">Negatif (-)</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="reduksi" id="reduksiPositiv1" value="Positif 1 (+)" <?= (($data->rm7bPengkajian["reduksi"] ?? '') == "Positif 1 (+)") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="reduksiPositiv1">Positif 1 (+)</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="reduksi" id="reduksiPositiv2" value="Positif 2 (++)" <?= (($data->rm7bPengkajian["reduksi"] ?? '') == "Positif 2 (++)") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="reduksiPositiv2">Positif 2 (++)</label>
-                                                    </div>
-
-                                                    <div class="form-check mb-0 me-1">
-                                                        <input class="form-check-input" type="radio" name="reduksi" id="reduksiPositiv3" value="Positif 3 (+++)" <?= (($data->rm7bPengkajian["reduksi"] ?? '') == "Positif 3 (+++)") ? 'checked' : '' ?>>
-                                                        <label class="form-check-label small" for="reduksiPositiv3">Positif 3 (+++)</label>
-                                                    </div>
+                                                    <input type="text" class="form-control" name="reduksi" value="<?= $data->rm7bPengkajian["reduksi"] ?? '' ?>">
                                                 </div>
                                             </div>
                                         </div>

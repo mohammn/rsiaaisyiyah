@@ -252,12 +252,22 @@
                                     <td>: <?= $data->rm7bPengkajian["keluhanUtama"] ?? '-' ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Riwayat keluhan</td>
-                                    <td>: <?= $data->rm7bPengkajian["riwayatKeluhan"] ?? '-' ?></td>
+                                    <td>Riwayat penyakit</td>
+                                    <td>: <?= $data->rm7bPengkajian["riwayatPenyakit"] ?? '-' ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Riwayat penyakit keluarga</td>
+                                    <td>: <?= $data->rm7bPengkajian["riwayatPenyakitKeluarga"] ?? '-' ?></td>
                                 </tr>
                                 <tr>
                                     <td>RIwayat menstruasi</td>
-                                    <td>: HPHT : <?= date('d-m-Y', strtotime($data->rm7bPengkajian["hpht"])) ?? '-' ?>, &nbsp;&nbsp;&nbsp; HPL : <?= date('d-m-Y', strtotime($data->rm7bPengkajian["hpl"])) ?? '-' ?></td>
+                                    <td>
+                                        <?php if (!empty($data->rm7bPengkajian["mensLainnya"])): ?>
+                                            <?= $data->rm7bPengkajian["mensLainnya"] ?? '' ?>
+                                        <?php else: ?>
+                                            : HPHT : <?= date('d-m-Y', strtotime($data->rm7bPengkajian["hpht"])) ?? '-' ?>, &nbsp;&nbsp;&nbsp; HPL : <?= date('d-m-Y', strtotime($data->rm7bPengkajian["hpl"])) ?? '-' ?>
+                                        <?php endif; ?>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Riwayat perkawinan</td>
@@ -291,22 +301,22 @@
                                         if (is_string($rawAlergi)) {
                                             $rawAlergi = json_decode($rawAlergi, true) ?? [];
                                         }
-                                        $tidakAda = true;
+
                                         $riwayatAlergi = is_array($rawAlergi) ? $rawAlergi : [];
                                         if (in_array('Obat', $riwayatAlergi)) {
                                             echo 'Obat : <i>' . ($data->rm7bPengkajian["jenisNamaObat"] ?? '-') . '</i>. Reaksi : <i>' . ($data->rm7bPengkajian["reaksiObat"] ?? '-') . "</i><br>";
-                                            $tidakAda = false;
+                                        } else {
+                                            echo 'Obat : <i>Tidak ada.</i><br>';
                                         }
+
                                         if (in_array('Makanan', $riwayatAlergi)) {
                                             echo '&nbsp;&nbsp; Makanan : <i>' . ($data->rm7bPengkajian["jenisMakanan"] ?? '-') . '</i>. Reaksi : <i>' . ($data->rm7bPengkajian["reaksiMakanan"] ?? '-') . "</i><br>";
-                                            $tidakAda = false;
+                                        } else {
+                                            echo 'Makanan : <i>Tidak ada.</i><br>';
                                         }
+
                                         if (in_array('Lain-lain', $riwayatAlergi)) {
-                                            echo '&nbsp;&nbsp; Alergi Lainnya : <i>' . ($data->rm7bPengkajian["jenisAlergiLainnya"] ?? '-') . '</i>. Reaksi : <i>' . ($data->rm7bPengkajian["reaksiLainnya"] ?? '</i>-');
-                                            $tidakAda = false;
-                                        }
-                                        if ($tidakAda) {
-                                            echo 'Tidak ada';
+                                            echo '&nbsp;&nbsp; Alergi Lainnya : <i>' . ($data->rm7bPengkajian["jenisAlergiLainnya"] ?? '-') . '</i>. Reaksi : <i>' . ($data->rm7bPengkajian["reaksiLainnya"] ?? '-') . '</i>';
                                         }
                                         ?>
                                     </td>
@@ -742,12 +752,24 @@
                                     <br>
                                     <hr class="m-0">
                                     <b>2. Eliminasi dan pelepasan</b> <br>
-                                    BAK : Frekuensi <i><?= $data->rm7bPengkajian["bakFrekuensi"] ?? '-' ?></i> x/hr <br>
-                                    Volume : <i><?= $data->rm7bPengkajian["bakVolume"] ?? '-' ?></i> cc. Warna : <i><?= $data->rm7bPengkajian["bakWarna"] ?? '-' ?></i><br>
-                                    Keluhan : <i><?= $data->rm7bPengkajian["bakKeluhan"] ?? '-' ?></i>
-                                    BAB : Frekuensi <i><?= $data->rm7bPengkajian["babFrekuensi"] ?? '-' ?></i> x/hr <br>
-                                    Konsistensi : <i><?= $data->rm7bPengkajian["babKonsistensi"] ?? '-' ?></i>. Warna : <i><?= $data->rm7bPengkajian["babWarna"] ?? '-' ?></i> <br>
-                                    Keluhan : <i><?= $data->rm7bPengkajian["babKeluhan"] ?? '-' ?></i><br>
+                                    <?php if ($data->rm7bPengkajian["keluhanBak"] === 'Ada'): ?>
+                                        BAK : Frekuensi <i><?= $data->rm7bPengkajian["bakFrekuensi"] ?? '-' ?></i> x/hr <br>
+                                        Volume : <i><?= $data->rm7bPengkajian["bakVolume"] ?? '-' ?></i> cc. Warna : <i><?= $data->rm7bPengkajian["bakWarna"] ?? '-' ?></i><br>
+                                        Keluhan : <i><?= $data->rm7bPengkajian["bakKeluhan"] ?? '-' ?></i>
+                                    <?php else: ?>
+                                        BAK : Tidak ada keluhan
+                                    <?php endif;
+                                    if ($data->rm7bPengkajian["keluhanBab"] === 'Ada'):
+                                    ?>
+                                        <br> BAB : Frekuensi <i><?= $data->rm7bPengkajian["babFrekuensi"] ?? '-' ?></i> x/hr <br>
+                                        Konsistensi : <i><?= $data->rm7bPengkajian["babKonsistensi"] ?? '-' ?></i>. Warna : <i><?= $data->rm7bPengkajian["babWarna"] ?? '-' ?></i> <br>
+                                        Keluhan : <i><?= $data->rm7bPengkajian["babKeluhan"] ?? '-' ?></i>
+                                    <?php else: ?>
+                                        <br>
+                                        BAB : Tidak ada keluhan
+                                    <?php endif;
+                                    ?>
+                                    <br>
                                     <hr class="m-0">
                                     <b>3. Aktifitas dan istirahat</b> <br>
                                     Tidur/Istirahat : <i><?= ($data->rm7bPengkajian['tidurIstirahat'] ?? '') === 'Ada keluhan' ? 'Ada keluhan : ' . ($data->rm7bPengkajian['tidurIstirahatKet'] ?? '') : ($data->rm7bPengkajian['tidurIstirahat'] ?? '') ?></i> <br>
@@ -820,21 +842,19 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 30%;">Bekas Operasi</td>
-                                                <td> :
-                                                    <?php
-                                                    if ($data->rm7bPengkajian['bekasOperasi'] == 'Ada') {
-                                                        echo "Ada : ";
-                                                        echo '&nbsp;&nbsp; Linea Nigra : ' . $data->rm7bPengkajian['lineaNigra'] . ',';
-                                                        echo '&nbsp;&nbsp;&nbsp; Linea Alba : ' . $data->rm7bPengkajian['lineaAlba'];
-                                                    } else {
-                                                        echo 'Tidak ada';
-                                                    }
-                                                    ?>
-                                                </td>
+                                                <td>: <?= $data->rm7bPengkajian['bekasOperasi'] ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Linea nigra</td>
+                                                <td>: <?= $data->rm7bPengkajian['lineaNigra'] ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Linea alba</td>
+                                                <td>: <?= $data->rm7bPengkajian['lineaAlba'] ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Ada pembesaran </td>
-                                                <td>: <?= $data->rm7bPengkajian['adaPembesaran'] ?? '-' ?></td>
+                                                <td>: <?= $data->rm7bPengkajian['adaPembesaran'] === 'Lainnya' ? $data->rm7bPengkajian['isiPembesaranLainnya'] : ($data->rm7bPengkajian['adaPembesaran'] ?? '-') ?></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" class="fw-bold border-bottom">Palpasi</td>
@@ -849,11 +869,11 @@
                                             </tr>
                                             <tr>
                                                 <td>Kontraksi Uterus</td>
-                                                <td>: <?= $data->rm7bPengkajian['kontraksiUteri'] ?? '-' ?>, &nbsp;&nbsp;&nbsp; His : <i><?= $data->rm7bPengkajian['hisLama'] ?? '......' ?></i> x/10mnt, Lama : <i><?= $data->rm7bPengkajian['hisLama'] ?? '.....' ?></i> detik</td>
+                                                <td>: <?= $data->rm7bPengkajian['kontraksiUteri'] === 'Lainnya' ? ($data->rm7bPengkajian['isiKontraksiLainnya'] ?? '-') : ($data->rm7bPengkajian['kontraksiUteri'] ?? '-') ?>, &nbsp;&nbsp;&nbsp; His : <i><?= $data->rm7bPengkajian['hisLama'] ?? '......' ?></i> x/10mnt, Lama : <i><?= $data->rm7bPengkajian['hisLama'] ?? '.....' ?></i> detik</td>
                                             </tr>
                                             <tr>
                                                 <td>Kelainan</td>
-                                                <td>: <?= $data->rm7bPengkajian['kelainanPalpasi'] ?? '-' ?></td>
+                                                <td>: <?= $data->rm7bPengkajian['kelainanPalpasi'] === 'Lainnya' ? $data->rm7bPengkajian['isiKelainanPalpasiLainnya'] : ($data->rm7bPengkajian['kelainanPalpasi'] ?? '-') ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Teraba massa</td>
@@ -868,7 +888,13 @@
                                             </tr>
                                             <tr>
                                                 <td>Denyut jantung janin</td>
-                                                <td>: <?= $data->rm7bPengkajian['djjFrekuensi'] ?? '' ?> x/mnt, <?= $data->rm7bPengkajian['djjTeratur'] ?? '' ?></td>
+                                                <td>:
+                                                    <?php if ($data->rm7bPengkajian['djjTeratur'] === 'Lainnya') : ?>
+                                                        <?= $data->rm7bPengkajian['isiDjjLainnya'] ?? '-' ?>
+                                                    <?php else: ?>
+                                                        <?= $data->rm7bPengkajian['djjFrekuensi'] ?? '' ?> x/mnt, <?= $data->rm7bPengkajian['djjTeratur'] ?? '' ?>
+                                                    <?php endif; ?>
+                                                </td>
                                             </tr>
                                         </table>
                                     </td>
@@ -918,7 +944,14 @@
                                             </tr>
                                             <tr>
                                                 <td>Jahitan</td>
-                                                <td>: <?= esc(!empty($data->rm7bPengkajian['jahitan']) ? implode(', ', json_decode($data->rm7bPengkajian['jahitan'], true) ?? []) : '-') ?></td>
+                                                <td>:
+                                                    <?= esc(!empty($data->rm7bPengkajian['jahitan'])
+                                                        ? implode(', ', array_map(
+                                                            fn($item) => $item === 'Lainnya' ? ($data->rm7bPengkajian['jahitanLainnyaKet'] ?? 'Lainnya') : $item,
+                                                            json_decode($data->rm7bPengkajian['jahitan'], true) ?? []
+                                                        ))
+                                                        : '-') ?>
+                                                </td>
                                             </tr>
                                         </table>
                                     </td>
@@ -953,7 +986,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Vagina Toucher (VT)</td>
-                                                <td>: <?= $data->rm7bPengkajian['dokter'] ?? '' ?></td>
+                                                <td>: <?= $data->rm7bPengkajian['petugasVt'] ?? '' ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Tanggal dan jam</td>
@@ -1015,7 +1048,7 @@
                                         </tr>
                                     </table>
                                     <b>c. USG : </b> <?= $data->rm7bPengkajian['usg'] ?? '-' ?> <br>
-                                    <b>d. Lainnya : </b> <?= $data->rm7bPengkajian['lainnya'] ?? '-' ?>
+                                    <b>d. Lainnya : </b> <?= $data->rm7bPengkajian['pemeriksaanLainnya'] ?? '-' ?>
                                 </div>
                             </div>
                         </td>
