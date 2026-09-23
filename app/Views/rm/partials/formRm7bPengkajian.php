@@ -2007,6 +2007,7 @@ if (isset($data->rm7bPengkajian)) {
                                             </label>
                                             <select name="petugasVt" id="petugasVt" class="form-select">
                                                 <option value="" <?= ($data->rm7bPengkajian['petugasVt'] ?? '') == '' ? ' selected' : '' ?>>-- Pilih Petugas --</option>
+                                                <option value="Tidak ada" <?= ($data->rm7bPengkajian['petugasVt'] ?? '') == 'Tidak ada' ? ' selected' : '' ?>>-- Pilih Petugas --</option>
                                                 <?php for ($i = 0; $i < count($data->petugas); $i++) {
                                                     echo '<option value="' . $data->petugas[$i]["nama"] . '"';
                                                     if ($data->petugas[$i]["nama"] === ($data->rm7bPengkajian['petugasVt'] ?? '')) {
