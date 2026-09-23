@@ -93,6 +93,13 @@
                 </div>
 
                 <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Alasan admisi / masuk perawatan :</label>
+                        <textarea name="alasanAdmisi" id="alasanAdmisi" class="form-control" rows="2"><?= $data->rm9aTransferPasien['alasanAdmisi'] ?? '' ?></textarea>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
                     <div class="col-md-12">
                         <div class="border border-info rounded p-1">
                             <p class="form-label fw-bold small text-secondary mb-0">Metode Pemindahan :</p>
@@ -186,7 +193,14 @@
                 <div class="row mt-2">
                     <div class="col-sm-12">
                         <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Diagnosa :</label>
-                        <textarea name="diagnosa" id="diagnosa" class="form-control" rows="3"><?= $data->rm9aTransferPasien['diagnosa'] ?? '' ?></textarea>
+                        <textarea name="diagnosa" id="diagnosa" class="form-control" rows="2"><?= $data->rm9aTransferPasien['diagnosa'] ?? '' ?></textarea>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Temuan signifikan :</label>
+                        <textarea name="temuan" id="temuan" class="form-control" rows="2"><?= $data->rm9aTransferPasien['temuan'] ?? '' ?></textarea>
                     </div>
                 </div>
 
@@ -204,14 +218,6 @@
                     </div>
                 </div>
 
-                <div class="row mt-2">
-                    <div class="col-sm-12">
-                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Pemeriksaan penunjang yang sudah dilakukan :</label>
-                        <textarea name="pemeriksaan" id="pemeriksaan" class="form-control"><?= $data->rm9aTransferPasien['pemeriksaan'] ?? '' ?></textarea>
-                    </div>
-                </div>
-
-
             </div>
         </div>
         <div class="col-6">
@@ -219,6 +225,12 @@
                 <div class="row">
                     <div class="col-12 text-center">Keadaaan Pasien :</div>
                     <hr>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-12">
+                        <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Pemeriksaan penunjang yang sudah dilakukan :</label>
+                        <textarea name="pemeriksaan" id="pemeriksaan" class="form-control"><?= $data->rm9aTransferPasien['pemeriksaan'] ?? '' ?></textarea>
+                    </div>
                 </div>
                 <div class="row mt-2">
                     <!-- PROSES DECODE JSON PENGGUNAAN ALAT MEDIS -->

@@ -211,13 +211,19 @@
                     </tr>
                     <tr>
                         <td style="width:40%;">
-                            1. Metode Pemindahan
+                            1. Alasan Admisi /Masuk Perawatan :
+                        </td>
+                        <td>: <?= $data->rm9aTransferPasien["alasanAdmisi"] ?? '..............' ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            2. Metode Pemindahan
                         </td>
                         <td>: <?= $data->rm9aTransferPasien["metodePindah"] ?? '..............' ?></td>
                     </tr>
                     <tr>
                         <td>
-                            2. Indikasi Pindah
+                            3. Indikasi Pindah
                         </td>
                         <td>:
                             <?php
@@ -242,31 +248,37 @@
                     </tr>
                     <tr>
                         <td>
-                            3. Diagnosa Medis
+                            4. Diagnosa Medis
                         </td>
                         <td>: <?= $data->rm9aTransferPasien["diagnosa"] ?? '..............' ?></td>
                     </tr>
                     <tr>
                         <td>
-                            4. Tindakan yang sudah dilakukan
+                            5. Temuan Signifikan
+                        </td>
+                        <td>: <?= $data->rm9aTransferPasien["temuan"] ?? '..............' ?></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            6. Tindakan yang sudah dilakukan
                         </td>
                         <td>: <?= $data->rm9aTransferPasien["tindakan"] ?? '..............' ?></td>
                     </tr>
                     <tr>
                         <td>
-                            5. Obat-obatan yang diberikan
+                            7. Obat-obatan yang diberikan
                         </td>
                         <td>: <?= $data->rm9aTransferPasien["obat"] ?? '..............' ?></td>
                     </tr>
                     <tr>
                         <td>
-                            6. Pemeriksaan penunjang yang sudah dilakukan
+                            8. Pemeriksaan penunjang yang sudah dilakukan
                         </td>
                         <td>: <?= $data->rm9aTransferPasien["pemeriksaan"] ?? '..............' ?></td>
                     </tr>
                     <tr>
                         <td>
-                            7. Penggunaan Alat Medis
+                            9. Penggunaan Alat Medis
                         </td>
                         <td>:
                             <?php
@@ -282,17 +294,17 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            8. Bila pemberi persetujuan adalah keluarga / penanggung jawab pasien. <br>
+                            10. Bila pemberi persetujuan adalah keluarga / penanggung jawab pasien. <br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Nama :</b> <?= $data->rm9aTransferPasien["nama"] ?? '..............' ?>. &nbsp;&nbsp;&nbsp;&nbsp; <b>Hubungan :</b> <?= $data->rm9aTransferPasien["sebagai"] ?? '..............' ?></td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            9. Pasien / keluarga mengetahui dan menyetujui alasan pemindahan : <?= $data->rm9aTransferPasien["setuju"] ?? '..............' ?>
+                            11. Pasien / keluarga mengetahui dan menyetujui alasan pemindahan : <?= $data->rm9aTransferPasien["setuju"] ?? '..............' ?>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            10. Dokter Penanggung Jawab
+                            12. Dokter Penanggung Jawab
                         </td>
                         <td>
                             : <?= $data->rm9aTransferPasien["dokter"] ?? '..............' ?>
@@ -300,7 +312,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            11. Keadaan pasien saat pindah sebelum transfer :
+                            13. Keadaan pasien saat pindah sebelum transfer :
                         </td>
                     </tr>
                     <tr>
@@ -328,7 +340,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            12. Keadaan pasien saat pindah setelah transfer :
+                            14. Keadaan pasien saat pindah setelah transfer :
                         </td>
                     </tr>
                     <tr>

@@ -89,12 +89,14 @@ class rm9aTransferPasien extends BaseController
             "keUnit"              => $this->request->getPost("keUnit"),
             "dokter"              => $this->request->getPost("dokter"),
             "waktu"               => !empty($this->request->getPost("waktu")) ? $this->request->getPost("waktu") : null,
+            "alasanAdmisi"        => $this->request->getPost("alasanAdmisi"),
             "metodePindah"        => $this->request->getPost("metodePindah"),
 
             // Indikasi Pindah & Diagnosa (Array di-encode ke JSON)
             "indikasiPindah"      => json_encode($this->request->getPost("indikasiPindah") ?? []),
             "isiIndikasiLainnya"  => $this->request->getPost("isiIndikasiLainnya"),
             "diagnosa"            => $this->request->getPost("diagnosa"),
+            "temuan"              => $this->request->getPost("temuan"),
             "tindakan"            => $this->request->getPost("tindakan"),
             "obat"                => $this->request->getPost("obat"),
             "pemeriksaan"         => $this->request->getPost("pemeriksaan"),

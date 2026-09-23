@@ -201,6 +201,7 @@
             keUnit: $('#keUnit').val(),
             dokter: $('#dokter').val(),
             waktu: $('#waktu').val(),
+            alasanAdmisi: $('#alasanAdmisi').val(),
             metodePindah: $('input[name="metodePindah"]:checked').val() || '',
 
             // Indikasi Pindah & Diagnosa
@@ -209,6 +210,7 @@
             }).get(),
             isiIndikasiLainnya: $('#isiIndikasiLainnya').val(),
             diagnosa: $('#diagnosa').val(),
+            temuan: $('#temuan').val(),
             tindakan: $('#tindakan').val(),
             obat: $('#obat').val(),
             pemeriksaan: $('#pemeriksaan').val(),
