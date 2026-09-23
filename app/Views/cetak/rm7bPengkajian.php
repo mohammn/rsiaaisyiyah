@@ -371,21 +371,22 @@
                                                             $row = json_decode($row, true);
                                                         }
 
-                                                        // Ambil nilai helper aman untuk Array atau Object
+                                                        // Ambil nilai helper aman untuk Array atau Object (Kembalikan '-' jika kosong/null)
                                                         $getVal = function ($key) use ($row) {
-                                                            if (is_array($row)) return $row[$key] ?? '';
-                                                            if (is_object($row)) return $row->$key ?? '';
-                                                            return '';
+                                                            $val = null;
+                                                            if (is_array($row)) $val = $row[$key] ?? null;
+                                                            if (is_object($row)) $val = $row->$key ?? null;
+
+                                                            // Jika nilainya null, string kosong, atau berjarak spasinya saja, tampilkan '-'
+                                                            return (is_null($val) || trim((string)$val) === '') ? '-' : $val;
                                                         };
 
                                                         $jk = $getVal('jk');
-                                                        $jkText = '';
+                                                        $jkText = '-'; // Default nilai jika tidak cocok L/P
                                                         if ($jk === 'L') {
                                                             $jkText = '♂';
                                                         } elseif ($jk === 'P') {
                                                             $jkText = '♀';
-                                                        } elseif ($jk === 'TK') {
-                                                            $jkText = '-';
                                                         }
                                                         ?>
                                                         <tr>
