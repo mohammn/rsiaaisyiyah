@@ -295,12 +295,6 @@
                                                     <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #fef9c3; color: #854d0e; border: 1px solid #fde68a;">E</div>
                                                     <div style="flex: 1; white-space: pre-line;"><?= esc($item['evaluasi'] ?? '-') ?></div>
                                                 </div>
-
-                                                <!-- Instruksi (I) -->
-                                                <div style="display: flex; align-items: stretch; gap: 8px;">
-                                                    <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #ccfbf1; color: #115e59; border: 1px solid #99f6e4;">I</div>
-                                                    <div style="flex: 1; white-space: pre-line;"><?= esc($item['instruksi'] ?? '-') ?></div>
-                                                </div>
                                             </div>
                                         <?php else: ?>
                                             <!-- SBAR -->
@@ -416,7 +410,14 @@
                                                     }).makeCode("Di ttd oleh <?= $item['penerima'] ?> "); // Replace with your desired text or URL
                                                 </script>
                                             <?php endif; ?>
+                                        <?php elseif (($item['jenis_hasil'] ?? '') === 'ADIME'): ?>
+                                            <!-- Instruksi (I) -->
+                                            <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #ccfbf1; color: #115e59; border: 1px solid #99f6e4;">I</div>
+                                                <div style="flex: 1; white-space: pre-line;"><?= esc($item['instruksi'] ?? '-') ?></div>
+                                            </div>
                                         <?php endif; ?>
+
                                     </td>
                                     <!-- Petugas / Dokter -->
                                     <td class="align-top">

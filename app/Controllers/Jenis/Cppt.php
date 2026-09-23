@@ -231,7 +231,7 @@ class Cppt extends BaseController
 
         // 7. Mapping adime
         $adimeMapped = array_map(function ($item) {
-            $item['sumber']        = (isset($item['kd_poli']) && $item['kd_poli'] === 'IGDK') ? 'IGD' : ($item['nm_poli'] ?? 'Ralan');
+            $item['sumber']        = 'Ranap';
             $item['jenis_hasil']   = 'ADIME';
             $item['tanggal_hasil'] = date('Y-m-d', strtotime($item['tanggal']));
             $item['jam_hasil']     = date('H:i:s', strtotime($item['tanggal']));
