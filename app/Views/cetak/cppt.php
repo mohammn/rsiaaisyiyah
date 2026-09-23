@@ -264,6 +264,44 @@
                                                     <div style="flex: 1; white-space: pre-line;"><?= esc($item['rtl'] ?? '-') ?></div>
                                                 </div>
                                             </div>
+                                        <?php elseif (($item['jenis_hasil'] ?? '') === 'ADIME'): ?>
+                                            <div class="space-y-2" style="display: flex; flex-direction: column; gap: 8px;">
+                                                <!-- Asesmen (A) -->
+                                                <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                    <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca;">A</div>
+                                                    <div style="flex: 1; white-space: pre-line;"><?= esc($item['asesmen'] ?? '-') ?></div>
+                                                </div>
+
+                                                <!-- Diagnosis (D) -->
+                                                <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                    <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #dbeafe; color: #1e3a8a; border: 1px solid #bfdbfe;">D</div>
+                                                    <div style="flex: 1; white-space: pre-line;"><?= esc($item['diagnosis'] ?? '-') ?></div>
+                                                </div>
+
+                                                <!-- Intervensi (I) -->
+                                                <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                    <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #ede9fe; color: #5b21b6; border: 1px solid #ddd6fe;">I</div>
+                                                    <div style="flex: 1; white-space: pre-line;"><?= esc($item['intervensi'] ?? '-') ?></div>
+                                                </div>
+
+                                                <!-- Monitoring (M) -->
+                                                <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                    <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0;">M</div>
+                                                    <div style="flex: 1; white-space: pre-line;"><?= esc($item['monitoring'] ?? '-') ?></div>
+                                                </div>
+
+                                                <!-- Evaluasi (E) -->
+                                                <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                    <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #fef9c3; color: #854d0e; border: 1px solid #fde68a;">E</div>
+                                                    <div style="flex: 1; white-space: pre-line;"><?= esc($item['evaluasi'] ?? '-') ?></div>
+                                                </div>
+
+                                                <!-- Instruksi (I) -->
+                                                <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                    <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #ccfbf1; color: #115e59; border: 1px solid #99f6e4;">I</div>
+                                                    <div style="flex: 1; white-space: pre-line;"><?= esc($item['instruksi'] ?? '-') ?></div>
+                                                </div>
+                                            </div>
                                         <?php else: ?>
                                             <!-- SBAR -->
                                             <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -290,7 +328,7 @@
                                         <?php endif; ?>
 
 
-                                        <?php if ($item['jenis_pelaksana'] != 'Dokter' && ($item['jenis_hasil'] ?? '') === 'SOAP' && empty($item['penerima'])): ?>
+                                        <?php if ($item['jenis_pelaksana'] != 'Dokter' && (($item['jenis_hasil'] ?? '') === 'SOAP' || ($item['jenis_hasil'] ?? '') === 'ADIME') && empty($item['penerima'])): ?>
                                             <br>
                                             <div class="d-flex flex-column align-items-center justify-content-center text-center">
                                                 <div id="qrPetSoap<?= $index ?>"></div>

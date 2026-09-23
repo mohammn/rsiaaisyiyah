@@ -9,6 +9,7 @@ use App\Models\RegPeriksaModel;
 use App\Models\PetugasModel;
 use App\Models\PemeriksaanRalanModel;
 use App\Models\PemeriksaanRanapModel;
+use App\Models\CatatanAdimeGiziModel;
 use App\Models\CpptVerifModel;
 use App\Models\CpptPenerimaModel;
 use App\Models\Rm0SbarModel;
@@ -179,6 +180,7 @@ class Cppt extends BaseController
         $regPeriksaModel       = new RegPeriksaModel();
         $pemeriksaanRalanModel = new PemeriksaanRalanModel();
         $pemeriksaanRanapModel = new PemeriksaanRanapModel();
+        $catatanAdimeGizi = new CatatanAdimeGiziModel();
         $sbarModel             = new Rm0SbarModel();
         $sbarDataModel             = new Rm0SbarDataModel();
 
@@ -188,6 +190,7 @@ class Cppt extends BaseController
         // 4. Query data dari masing-masing model
         $ralanData = $pemeriksaanRalanModel->getByNoRawat($no_rawat);
         $ranapData = $pemeriksaanRanapModel->getByNoRawat($no_rawat);
+        $adimeData = $catatanAdimeGizi->getByNoRawat($no_rawat);
 
         $ralanData = $this->masukkanWaktuVerif($ralanData);
         $ranapData = $this->masukkanWaktuVerif($ranapData);
@@ -226,7 +229,18 @@ class Cppt extends BaseController
             return $item;
         }, $ranapData);
 
-        // 7. Mapping SBAR
+        // 7. Mapping adime
+        $adimeMapped = array_map(function ($item) {
+            $item['sumber']        = (isset($item['kd_poli']) && $item['kd_poli'] === 'IGDK') ? 'IGD' : ($item['nm_poli'] ?? 'Ralan');
+            $item['jenis_hasil']   = 'ADIME';
+            $item['tanggal_hasil'] = date('Y-m-d', strtotime($item['tanggal']));
+            $item['jam_hasil']     = date('H:i:s', strtotime($item['tanggal']));
+            $this->mapPelaksana($item);
+
+            return $item;
+        }, $adimeData);
+
+        // 8. Mapping SBAR
         $sbarMapped = array_map(function ($item) use ($registration) {
             $item['sumber']            = $item['judul']; //$this->registrationSource($registration);
             $item['jenis_hasil']       = 'SBAR';
@@ -239,8 +253,8 @@ class Cppt extends BaseController
             return $item;
         }, $sbarData);
 
-        // 8. Concat (Merge Array)
-        $combinedData = array_merge($ralanMapped, $ranapMapped, $sbarMapped);
+        // 9. Concat (Merge Array)
+        $combinedData = array_merge($ralanMapped, $ranapMapped, $adimeMapped, $sbarMapped);
 
         usort($combinedData, function ($a, $b) {
             return [$a['tanggal_hasil'], $a['jam_hasil']] <=> [$b['tanggal_hasil'], $b['jam_hasil']];

@@ -128,6 +128,44 @@
                                                 <div style="flex: 1; white-space: pre-line;"><?= esc($item['evaluasi'] ?? '-') ?></div>
                                             </div>
                                         </div>
+                                    <?php elseif (($item['jenis_hasil'] ?? '') === 'ADIME'): ?>
+                                        <div class="space-y-2" style="display: flex; flex-direction: column; gap: 8px;">
+                                            <!-- Asesmen (A) -->
+                                            <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca;">A</div>
+                                                <div style="flex: 1; white-space: pre-line;"><?= esc($item['asesmen'] ?? '-') ?></div>
+                                            </div>
+
+                                            <!-- Diagnosis (D) -->
+                                            <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #dbeafe; color: #1e3a8a; border: 1px solid #bfdbfe;">D</div>
+                                                <div style="flex: 1; white-space: pre-line;"><?= esc($item['diagnosis'] ?? '-') ?></div>
+                                            </div>
+
+                                            <!-- Intervensi (I) -->
+                                            <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #ede9fe; color: #5b21b6; border: 1px solid #ddd6fe;">I</div>
+                                                <div style="flex: 1; white-space: pre-line;"><?= esc($item['intervensi'] ?? '-') ?></div>
+                                            </div>
+
+                                            <!-- Monitoring (M) -->
+                                            <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0;">M</div>
+                                                <div style="flex: 1; white-space: pre-line;"><?= esc($item['monitoring'] ?? '-') ?></div>
+                                            </div>
+
+                                            <!-- Evaluasi (E) -->
+                                            <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #fef9c3; color: #854d0e; border: 1px solid #fde68a;">E</div>
+                                                <div style="flex: 1; white-space: pre-line;"><?= esc($item['evaluasi'] ?? '-') ?></div>
+                                            </div>
+
+                                            <!-- Instruksi (I) -->
+                                            <div style="display: flex; align-items: stretch; gap: 8px;">
+                                                <div style="width: 28px; display: flex; align-items: flex-start; justify-content: center; border-radius: 6px; padding: 4px 8px; font-size: 0.75rem; font-weight: bold; background-color: #ccfbf1; color: #115e59; border: 1px solid #99f6e4;">I</div>
+                                                <div style="flex: 1; white-space: pre-line;"><?= esc($item['instruksi'] ?? '-') ?></div>
+                                            </div>
+                                        </div>
                                     <?php else: ?>
                                         <!-- SBAR -->
                                         <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -167,53 +205,55 @@
                                                 <?= esc($item['jenis_pelaksana']) ?>
                                             </span>
 
-                                            <?php if (($item['jenis_pelaksana'] ?? '') != 'Dokter'): ?>
+                                            <?php if (($item['jenis_hasil'] ?? '') != 'ADIME'): ?>
+                                                <?php if (($item['jenis_pelaksana'] ?? '') != 'Dokter'): ?>
 
-                                                <?php if (!empty($item['waktuVerif'])): ?>
-                                                    <!-- Tampilan Jika Dokter & Sudah Diverifikasi -->
-                                                    <span style="border: 1px solid #198754; color: #198754; background-color: #e8f5e9; padding: 2px 6px; font-size: 0.75rem; border-radius: 4px; display: inline-block;" title="Diverifikasi pada: <?= esc($item['waktuVerif']) ?>">
-                                                        ✓ Verified
-                                                    </span>
-                                                <?php else: ?>
-                                                    <!-- Tampilan Jika Dokter & Belum Diverifikasi -->
-                                                    <span style="border: 1px solid #dc3545; color: #dc3545; background-color: #ffebee; padding: 2px 6px; font-size: 0.75rem; border-radius: 4px; display: inline-block;">
-                                                        Belum Verif
-                                                    </span>
+                                                    <?php if (!empty($item['waktuVerif'])): ?>
+                                                        <!-- Tampilan Jika Dokter & Sudah Diverifikasi -->
+                                                        <span style="border: 1px solid #198754; color: #198754; background-color: #e8f5e9; padding: 2px 6px; font-size: 0.75rem; border-radius: 4px; display: inline-block;" title="Diverifikasi pada: <?= esc($item['waktuVerif']) ?>">
+                                                            ✓ Verified
+                                                        </span>
+                                                    <?php else: ?>
+                                                        <!-- Tampilan Jika Dokter & Belum Diverifikasi -->
+                                                        <span style="border: 1px solid #dc3545; color: #dc3545; background-color: #ffebee; padding: 2px 6px; font-size: 0.75rem; border-radius: 4px; display: inline-block;">
+                                                            Belum Verif
+                                                        </span>
 
-                                                    <?php if (($data->dpjp['dokter'] ?? '') === session()->get('nama')): ?>
+                                                        <?php if (($data->dpjp['dokter'] ?? '') === session()->get('nama')): ?>
+                                                            <button type="button"
+                                                                class="btn btn-info btn-sm ms-1"
+                                                                style="padding: 1px 6px; font-size: 0.75rem;"
+                                                                onclick="verif('<?= esc($item['no_rawat']) ?>', '<?= esc($item['tanggal_hasil']) ?>', '<?= esc($item['jam_hasil']) ?>')">
+                                                                Verifikasi
+                                                            </button>
+                                                        <?php endif; ?>
+                                                    <?php endif; ?>
+
+                                                    <?php if (!empty($item['penerima'])): ?>
+                                                        <!-- Jika Sudah Ada Penerima -->
+                                                        <span style="background: #fef9c3; border: 1px solid #ffc107; color: #334155; padding: 2px 6px; font-size: 0.75rem; border-radius: 4px; display: inline-block;">
+                                                            Penerima : <?= esc($item['penerima']) ?>
+
+                                                            <!-- Tombol Hapus Serah Terima -->
+                                                            <button type="button"
+                                                                class="btn btn-outline-danger btn-sm ms-1"
+                                                                style="padding: 0px 5px; font-size: 0.70rem; line-height: 1.0;"
+                                                                title="Hapus Serah Terima"
+                                                                onclick="hapusSerahTerima('<?= esc($item['no_rawat']) ?>', '<?= esc($item['tanggal_hasil']) ?>', '<?= esc($item['jam_hasil']) ?>')">
+                                                                &times;
+                                                            </button>
+                                                        </span>
+
+
+                                                    <?php else: ?>
+                                                        <!-- Jika Belum Ada Penerima -->
                                                         <button type="button"
-                                                            class="btn btn-info btn-sm ms-1"
+                                                            class="btn btn-warning btn-sm ms-1"
                                                             style="padding: 1px 6px; font-size: 0.75rem;"
-                                                            onclick="verif('<?= esc($item['no_rawat']) ?>', '<?= esc($item['tanggal_hasil']) ?>', '<?= esc($item['jam_hasil']) ?>')">
-                                                            Verifikasi
+                                                            onclick="serahTerima('<?= esc($item['no_rawat']) ?>', '<?= esc($item['tanggal_hasil']) ?>', '<?= esc($item['jam_hasil']) ?>')">
+                                                            Serah terima
                                                         </button>
                                                     <?php endif; ?>
-                                                <?php endif; ?>
-
-                                                <?php if (!empty($item['penerima'])): ?>
-                                                    <!-- Jika Sudah Ada Penerima -->
-                                                    <span style="background: #fef9c3; border: 1px solid #ffc107; color: #334155; padding: 2px 6px; font-size: 0.75rem; border-radius: 4px; display: inline-block;">
-                                                        Penerima : <?= esc($item['penerima']) ?>
-
-                                                        <!-- Tombol Hapus Serah Terima -->
-                                                        <button type="button"
-                                                            class="btn btn-outline-danger btn-sm ms-1"
-                                                            style="padding: 0px 5px; font-size: 0.70rem; line-height: 1.0;"
-                                                            title="Hapus Serah Terima"
-                                                            onclick="hapusSerahTerima('<?= esc($item['no_rawat']) ?>', '<?= esc($item['tanggal_hasil']) ?>', '<?= esc($item['jam_hasil']) ?>')">
-                                                            &times;
-                                                        </button>
-                                                    </span>
-
-
-                                                <?php else: ?>
-                                                    <!-- Jika Belum Ada Penerima -->
-                                                    <button type="button"
-                                                        class="btn btn-warning btn-sm ms-1"
-                                                        style="padding: 1px 6px; font-size: 0.75rem;"
-                                                        onclick="serahTerima('<?= esc($item['no_rawat']) ?>', '<?= esc($item['tanggal_hasil']) ?>', '<?= esc($item['jam_hasil']) ?>')">
-                                                        Serah terima
-                                                    </button>
                                                 <?php endif; ?>
                                             <?php endif; ?>
 
