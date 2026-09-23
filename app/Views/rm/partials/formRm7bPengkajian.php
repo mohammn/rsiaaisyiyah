@@ -2007,7 +2007,7 @@ if (isset($data->rm7bPengkajian)) {
                                             </label>
                                             <select name="petugasVt" id="petugasVt" class="form-select">
                                                 <option value="" <?= ($data->rm7bPengkajian['petugasVt'] ?? '') == '' ? ' selected' : '' ?>>-- Pilih Petugas --</option>
-                                                <option value="Tidak ada" <?= ($data->rm7bPengkajian['petugasVt'] ?? '') == 'Tidak ada' ? ' selected' : '' ?>>Tidak ada</option>
+                                                <option value="Tidak dilakukan" <?= ($data->rm7bPengkajian['petugasVt'] ?? '') == 'Tidak dilakukan' ? ' selected' : '' ?>>Tidak dilakukan</option>
                                                 <?php for ($i = 0; $i < count($data->petugas); $i++) {
                                                     echo '<option value="' . $data->petugas[$i]["nama"] . '"';
                                                     if ($data->petugas[$i]["nama"] === ($data->rm7bPengkajian['petugasVt'] ?? '')) {
@@ -2022,6 +2022,9 @@ if (isset($data->rm7bPengkajian)) {
                                                 Tanggal dan jam :
                                             </label>
                                             <input type="datetime-local" id="waktuVt" name="waktuVt" class="form-control" value="<?= $data->rm7bPengkajian["waktuVt"] ?? '' ?>">
+                                        </div>
+                                        <div class="col-md-12 mt-1">
+                                            <textarea name="ketVt" id="ketVt" class="form-control"><?= $data->rm7bPengkajian["ketVt"] ?? '' ?></textarea>
                                         </div>
                                     </div>
                                 </div>

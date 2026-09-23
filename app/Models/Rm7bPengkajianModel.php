@@ -156,6 +156,7 @@ class Rm7bPengkajianModel extends Model
         'cavumDouglasi',
         'petugasVt',
         'waktuVt',
+        'ketVt',
 
         // Penunjang & Diagnosa Akhir
         'hb',

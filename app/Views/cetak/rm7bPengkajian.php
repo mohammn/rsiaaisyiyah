@@ -987,11 +987,12 @@
                                             </tr>
                                             <tr>
                                                 <td>Vagina Toucher (VT)</td>
-                                                <td>: <?= $data->rm7bPengkajian['petugasVt'] ?? '' ?></td>
+                                                <td>: <?= $data->rm7bPengkajian['petugasVt'] ?? '' ?>. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tanggal dan jam : <?= !empty($data->rm7bPengkajian['waktuVt']) ? date('d-m-Y H:i', strtotime($data->rm7bPengkajian['waktuVt'])) . ' WIB' : '-' ?></td>
                                             </tr>
                                             <tr>
-                                                <td>Tanggal dan jam</td>
-                                                <td>: <?= !empty($data->rm7bPengkajian['waktuVt']) ? date('d-m-Y H:i', strtotime($data->rm7bPengkajian['waktuVt'])) . ' WIB' : '-' ?></td>
+                                                <td>
+                                                </td>
+                                                <td>&nbsp;&nbsp;<?= $data->rm7bPengkajian['ketVt'] ?? '' ?></td>
                                             </tr>
                                         </table>
                                     </td>
