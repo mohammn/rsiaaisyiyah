@@ -64,8 +64,8 @@
                                     <td>: <?= $data->rm7bPengkajian["keluhanUtama"] ?? '' ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Riwayat Keluhan</td>
-                                    <td>: <?= $data->rm7bPengkajian["riwayatKeluhan"] ?? ''  ?></td>
+                                    <td>Riwayat Penyakit</td>
+                                    <td>: <?= $data->rm7bPengkajian["riwayatPenyakit"] ?? ''  ?></td>
                                 </tr>
                                 <tr>
                                     <td>Keadaan Umum</td>
