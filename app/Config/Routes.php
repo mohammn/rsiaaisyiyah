@@ -91,6 +91,13 @@ $routes->get('/rm/rm11a1Bedah/cetak/(:any)', 'Rm\Rm11a1Bedah::cetak/$1');
 $routes->post('/rm/rm11a1Bedah/simpan', 'Rm\Rm11a1Bedah::simpan');
 $routes->get('/rm/rm11a1Bedah/(:any)', 'Rm\Rm11a1Bedah::index/$1');
 
+$routes->post('/rm/rm11b2StatusAnestesi/simpanTtd', 'Rm\Rm11b2StatusAnestesi::simpanTtd');
+$routes->post('/rm/rm11b2StatusAnestesi/hapus', 'Rm\Rm11b2StatusAnestesi::hapus');
+$routes->get('/rm/rm11b2StatusAnestesi/cetak/(:any)', 'Rm\Rm11b2StatusAnestesi::cetak/$1');
+$routes->post('/rm/rm11b2StatusAnestesi/simpan', 'Rm\Rm11b2StatusAnestesi::simpan');
+$routes->get('/rm/rm11b2StatusAnestesi/(:any)', 'Rm\Rm11b2StatusAnestesi::index/$1');
+
+
 $routes->post('/rm/rm11b1Checklist/simpanTtd', 'Rm\Rm11b1Checklist::simpanTtd');
 $routes->post('/rm/rm11b1Checklist/hapus', 'Rm\Rm11b1Checklist::hapus');
 $routes->get('/rm/rm11b1Checklist/cetak/(:any)', 'Rm\Rm11b1Checklist::cetak/$1');

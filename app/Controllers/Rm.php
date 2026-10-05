@@ -45,6 +45,7 @@ use App\Models\PenerjemahModel;
 use App\Models\Rm26jRujukanLuarModel;
 use App\Models\Rm9aTransferPasienModel;
 use App\Models\Rm7bPengkajianModel;
+use App\Models\Rm11b2StatusAnestesiModel;
 
 use function PHPSTORM_META\type;
 
@@ -93,6 +94,7 @@ class Rm extends BaseController
     protected $rm26jRujukanLuarModel;
     protected $rm9aTransferPasienModel;
     protected $rm7bPengkajianModel;
+    protected $rm11b2StatusAnestesiModel;
 
     public function __construct()
     {
@@ -143,6 +145,7 @@ class Rm extends BaseController
         $this->rm26jRujukanLuarModel = new Rm26jRujukanLuarModel();
         $this->rm9aTransferPasienModel = new Rm9aTransferPasienModel();
         $this->rm7bPengkajianModel = new Rm7bPengkajianModel();
+        $this->rm11b2StatusAnestesiModel = new Rm11b2StatusAnestesiModel();
     }
     public function index($no_rawat)
     {
@@ -200,6 +203,7 @@ class Rm extends BaseController
         $rm26jRujukanLuar = $this->rm26jRujukanLuarModel->where('noRawat', $no_rawat)->first();
         $rm9aTransferPasien = $this->rm9aTransferPasienModel->where('noRawat', $no_rawat)->findAll();
         $rm7bPengkajian = $this->rm7bPengkajianModel->where('noRawat', $no_rawat)->first();
+        $rm11b2StatusAnesetesi = $this->rm11b2StatusAnestesiModel->where('noRawat', $no_rawat)->first();
 
 
         // ================khusus SBAR=========================
@@ -338,6 +342,7 @@ class Rm extends BaseController
             "rm26jRujukanLuar" => $this->cekSemuaKolom($rm26jRujukanLuar, ['ttdWali', 'isiHandOverLainLain', 'alasanKeterangan']),
             "rm9aTransferPasien" => $statusRm9aTransferPasien,
             "rm7bPengkajian" => $this->cekSemuaKolom($rm7bPengkajian, ['waktuVt', 'ttdPetugas', 'sumberDataLainnya', 'asalRujukan', 'pengantarRujukan', 'transportasiLainnya', 'hpht', 'hpl', 'mensLainnya', 'jumlahKawin', 'lamaKawin', 'jenisKbTerakhir', 'jenisGynekologiLainnya', 'jenisNamaObat', 'reaksiObat', 'jenisMakanan', 'reaksiMakanan', 'jenisAlergiLainnya', 'reaksiLainnya', 'riwayatAlergi', 'penyakitKronisLainnya', 'bakFrekuensi', 'bakVolume', 'bakWarna', 'bakKeluhan', 'babFrekuensi', 'babKonsistensi', 'babWarna', 'babKeluhan', 'tidurIstirahatKet', 'alatBantuKet', 'keadaanPsikologisLainnya', 'tingkatPendidikanLainnya', 'pekerjaanLainnya', 'tinggalBersamaLainnya', 'namaAsuransi', 'isiPembesaranLainnya', 'isiKontraksiLainnya', 'hisFrekuensi', 'hisLama', 'isiKelainanPalpasiLainnya', 'massaPanjang', 'massaLebar', 'djjFrekuensi', 'isiDjjLainnya', 'kelainanLainnyaKet', 'portioLainnyaKet', 'berbauKet', 'laserasiDerajat', 'periniumLainnyaKet', 'jahitanLainnyaKet']),
+            "rm11b2StatusAnestesi" => $this->cekSemuaKolom($rm11b2StatusAnesetesi, ['anamnesaLainnya', 'keteranganAnestesi', 'keteranganKomplikasi', 'keteranganAlergi', 'pernafasan', 'pernafasan', 'pernafasanLainnyaCheck', 'pernafasanLainnyaText', 'pernafasanDbn', 'merokok', 'kardiovaskuler', 'kardiovaskulerLainnyaCheck', 'kardiovaskulerLainnyaText', 'kardiovaskulerDbn', 'alkohol', 'neuroMuskuloskeletal', 'neuroLainnyaCheck', 'neuroLainnyaText', 'neuroMuskuloskeletalDbn', 'catatanNeuro', 'renalEndokrin', 'renalLainnyaCheck', 'renalLainnyaText', 'renalEndokrinDbn', 'catatanRenal', 'hepatoGastro', 'hepatoLainnyaCheck', 'hepatoLainnyaText', 'hepatoGastroDbn', 'catatanHepato', 'organLainLain', 'organLainnyaCheck', 'organLainnyaText', 'organLainLainDbn', 'catatanOrganLain', 'obatAwal', 'permedikasiDetail', 'permedikasiLainnyaCheck', 'permedikasiLainnya', 'generalAnestesiTipe', 'gaLainnyaCheck', 'gaLainnyaText', 'obatInduksi', 'insufilasiText', 'sedatifDetail', 'sedatifLainnyaCheck', 'sedatifLainnya', 'analgetikDetail', 'analgetikLainnyaCheck', 'analgetikLainnya', 'pelumpuhDetail', 'pelumpuhLainnyaCheck', 'pelumpuhLainnya', 'obatMaintenance', 'inhalasiDetail', 'inhalasiLainnyaCheck', 'inhalasiLainnya', 'intravenaDetail', 'intravenaLainnyaCheck', 'intravenaLainnyaNama', 'intravenaLainnyaDosis', 'regionalAnestesiTipe', 'raLainnyaCheck', 'raLainnyaText', 'anestesiLokalDetail', 'anestesiLokalLainnyaCheck', 'anestesiLokalLainnya', 'additif1Check', 'additif1Nama', 'additif1Dosis', 'additif2Check', 'additif2Nama', 'additif2Dosis', 'masalahInduksiText', 'perubahanRencanaText', 'posisiLainnya']),
         ];
 
         // Tambahkan (object) di depan variabel agar array berubah jadi object
@@ -377,6 +382,7 @@ class Rm extends BaseController
             'rm26jRujukanLuar'  => $rm26jRujukanLuar,    // Biarkan null jika data tidak ada
             'rm9aTransferPasien'  => $rm9aTransferPasien,    // Biarkan null jika data tidak ada
             'rm7bPengkajian'  => $rm7bPengkajian,    // Biarkan null jika data tidak ada
+            'rm11b2StatusAnestesi'  => $rm11b2StatusAnesetesi,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 
