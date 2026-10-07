@@ -114,13 +114,13 @@
                             <a class="btn btn-estetik btn-simpan" href="<?= base_url('/rm/rm11a1Bedah/cetak/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>" target="_blank">
                                 <i class="fas fa-pen-nib me-1"></i> TTD
                             </a>
-                            <button class="btn btn-estetik btn-lihat" data-bs-toggle="modal" data-bs-target="#modalEdit">
-                                <i class="fa fa-edit me-1"></i> Edit
-                            </button>
-                            <a class="btn btn-estetik btn-cetak" href="<?= base_url('/rm/rm11a1Bedah/penandaan/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>">
-                                <i class="fas fa-pencil me-1"></i> Edit Lokasi Ops
-                            </a>
                         <?php endif ?>
+                        <button class="btn btn-estetik btn-lihat" data-bs-toggle="modal" data-bs-target="#modalEdit">
+                            <i class="fa fa-edit me-1"></i> Edit
+                        </button>
+                        <a class="btn btn-estetik btn-cetak" href="<?= base_url('/rm/rm11a1Bedah/penandaan/' . str_replace('/', '-', $data->pasien['no_rawat'])) ?>">
+                            <i class="fas fa-pencil me-1"></i> Edit Lokasi Ops
+                        </a>
                         <button class="btn btn-estetik btn-hapus" onclick="tryHapus()">
                             <i class="fas fa-trash-alt me-1"></i> Hapus
                         </button>
