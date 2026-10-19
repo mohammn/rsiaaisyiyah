@@ -363,8 +363,13 @@
                                         $sifat = $data->rm11a1Bedah['sifatProsedur'] ?? '';
                                         $tglElektif = $data->rm11a1Bedah['isiElektif'] ?? '';
 
+                                        if (!empty($tglElektif)) {
+                                            // Mengubah string tanggal menjadi format dd-mm-yyyy
+                                            $tglElektif = date('d-m-Y', strtotime($tglElektif));
+                                        }
+
                                         if (!empty($sifat)) {
-                                            if ($sifat === 'Elektif') {
+                                            if ($sifat === 'Elektif Hari/Tanggal') {
                                                 echo !empty($tglElektif) ? "Elektif ($tglElektif)" : "Elektif";
                                             } else {
                                                 echo $sifat; // Mencetak "Cito" / "Urgent" / lainnya
