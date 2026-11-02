@@ -8,6 +8,8 @@ use App\Models\RegPeriksaModel;
 use App\Models\Rm11b1ChecklistModel;
 use App\Models\Rm11a1BedahModel;
 use App\Models\Rm11a2TimbangModel;
+use App\Models\Rm11b2StatusAnestesiModel;
+use App\Models\Rm11b2MonitoringAnestesiModel;
 
 use function PHPSTORM_META\type;
 
@@ -17,6 +19,8 @@ class Operasi extends BaseController
     protected $rm11B1ChecklistModel;
     protected $rm11a1BedahModel;
     protected $rm11a2TimbangModel;
+    protected $rm11b2StatusAnestesiModel;
+    protected $rm11b2MonitoringAnestesiModel;
 
     public function __construct()
     {
@@ -28,6 +32,8 @@ class Operasi extends BaseController
         $this->rm11B1ChecklistModel = new Rm11b1ChecklistModel();
         $this->rm11a1BedahModel = new Rm11a1BedahModel();
         $this->rm11a2TimbangModel = new Rm11a2TimbangModel();
+        $this->rm11b2StatusAnestesiModel = new Rm11b2StatusAnestesiModel();
+        $this->rm11b2MonitoringAnestesiModel = new Rm11b2MonitoringAnestesiModel();
     }
 
     public function index($noRawat)
@@ -37,11 +43,15 @@ class Operasi extends BaseController
         $rm11B1Checklist = $this->rm11B1ChecklistModel->where('noRawat', $noRawat)->first();
         $rm11a1Bedah = $this->rm11a1BedahModel->where('noRawat', $noRawat)->first();
         $rm11a2Timbang = $this->rm11a2TimbangModel->where('noRawat', $noRawat)->first();
+        $rm11b2StatusAnesetesi = $this->rm11b2StatusAnestesiModel->where('noRawat', $noRawat)->first();
+        $rm11b2MonitoringAnesetesi = $this->rm11b2MonitoringAnestesiModel->where('noRawat', $noRawat)->first();
 
         $status = [
             "rm11b1Checklist" => $this->cekSemuaKolom($rm11B1Checklist, ['isiAlergi', 'isiKelengkapanLainnya', 'isijenisLainnya', 'profilaksisObat', 'profilaksisJam', 'profilaksisDosis', 'ttdPerawatAnestesi', 'ttdDokterAnestesi1', 'ttdSirkuler', 'ttdInstrumen', 'ttdAsisten', 'ttdOperator', 'ttdDokterAnestesi2']),
             "rm11a1Bedah" => $this->cekSemuaKolom($rm11a1Bedah, ['ttdDokter', 'isiRiwayatLainnya', 'jenisOperasi', 'lokasiOperasi', 'tglOperasi', 'isiAlergi', 'isidiagnosaLain', 'isiElektif', 'isiMulaiJam', 'isiKonsultasi', 'isiPeralatanLain', 'isiWholeBlood', 'isiPackedRed', 'isiKomponenLain', 'catatan', 'ttdWali', 'badan', 'kepalaSamping', 'kepala', 'telapakTangan', 'kaki', 'punggungTangan']),
             "rm11a2Timbang" => $this->cekSemuaKolom($rm11a2Timbang, ['ttdPengantar', 'ttdPenerima', 'ttdPengantar2', 'ttdPenerima2', 'jumlahDarah', 'darahDetail', 'isiPackJenis', 'isiGolonganDarah', 'jumlahDarah2', 'darahDetail2', 'isiPackJenis2', 'isiGolonganDarah2', 'rpd', 'isiRpdLainnya', 'rpd2', 'isiRpdLainnya2', 'isiAlergi', 'isiAlergi2', 'jumlahDarah', 'jumlahDarah2', 'tglTranfusi', 'jenisTranfusi', 'golTranfusi', 'jumlahTranfusi', 'tglTranfusi2', 'jenisTranfusi2', 'golTranfusi2', 'jumlahTranfusi2', 'isiLabJml', 'isiLabJml2', 'perhatianKhusus', 'isiHb', 'isiBun', 'isiPkLainLain', 'isiAlbumin', 'isiKreatinin', 'fotoDetail', 'isiRontgenKet', 'isiRontgenJml', 'isiUsgKet', 'isiUsgJml', 'isiBofJml', 'isiNst', 'isiEchoJml', 'isiIvpJml', 'isiEkgJml', 'perhatianKhusus2', 'isiHb2', 'isiBun2', 'isiPkLainLain2', 'isiAlbumin2', 'isiKreatinin2', 'fotoDetail2', 'isiRontgenKet2', 'isiRontgenJml2', 'isiUsgKet2', 'isiUsgJml2', 'isiBofJml2', 'isiNst2', 'isiEchoJml2', 'isiIvpJml2', 'isiEkgJml2', 'isiFotoJml', 'isiFotoJml2', 'isiFotoLainnya', 'isiFotoLainnya2', 'isiPuasaJam', 'isiLavementKet', 'isiPuasaJam2', 'isiLavementKet2', 'isiGigiDibawaOleh', 'isiGigiDibawaOleh2', 'isiKesadaranLain', 'isiKesadaranLain2']),
+            "rm11b2StatusAnestesi" => $this->cekSemuaKolom($rm11b2StatusAnesetesi, ['anamnesaLainnya', 'keteranganAnestesi', 'keteranganKomplikasi', 'keteranganAlergi', 'pernafasan', 'pernafasan', 'pernafasanLainnyaCheck', 'pernafasanLainnyaText', 'pernafasanDbn', 'merokok', 'kardiovaskuler', 'kardiovaskulerLainnyaCheck', 'kardiovaskulerLainnyaText', 'kardiovaskulerDbn', 'alkohol', 'neuroMuskuloskeletal', 'neuroLainnyaCheck', 'neuroLainnyaText', 'neuroMuskuloskeletalDbn', 'catatanNeuro', 'renalEndokrin', 'renalLainnyaCheck', 'renalLainnyaText', 'renalEndokrinDbn', 'catatanRenal', 'hepatoGastro', 'hepatoLainnyaCheck', 'hepatoLainnyaText', 'hepatoGastroDbn', 'catatanHepato', 'organLainLain', 'organLainnyaCheck', 'organLainnyaText', 'organLainLainDbn', 'catatanOrganLain', 'obatAwal', 'permedikasiDetail', 'permedikasiLainnyaCheck', 'permedikasiLainnya', 'generalAnestesiTipe', 'gaLainnyaCheck', 'gaLainnyaText', 'obatInduksi', 'insufilasiText', 'sedatifDetail', 'sedatifLainnyaCheck', 'sedatifLainnya', 'analgetikDetail', 'analgetikLainnyaCheck', 'analgetikLainnya', 'pelumpuhDetail', 'pelumpuhLainnyaCheck', 'pelumpuhLainnya', 'obatMaintenance', 'inhalasiDetail', 'inhalasiLainnyaCheck', 'inhalasiLainnya', 'intravenaDetail', 'intravenaLainnyaCheck', 'intravenaLainnyaNama', 'intravenaLainnyaDosis', 'regionalAnestesiTipe', 'raLainnyaCheck', 'raLainnyaText', 'anestesiLokalDetail', 'anestesiLokalLainnyaCheck', 'anestesiLokalLainnya', 'additif1Check', 'additif1Nama', 'additif1Dosis', 'additif2Check', 'additif2Nama', 'additif2Dosis', 'masalahInduksiText', 'perubahanRencanaText', 'posisiLainnya']),
+            "rm11b2MonitoringAnestesi" => $this->cekSemuaKolom($rm11b2MonitoringAnesetesi, ['ttdDokter', 'ttdPerawat', 'ttdPerawatRr', 'ttdAnestesi']),
         ];
 
         $pasien = $this->regPeriksaModel
@@ -64,6 +74,8 @@ class Operasi extends BaseController
             'rm11b1Checklist'  => $rm11B1Checklist,    // Biarkan null jika data tidak ada
             'rm11a1Bedah'  => $rm11a1Bedah,    // Biarkan null jika data tidak ada
             'rm11a2Timbang'  => $rm11a2Timbang,    // Biarkan null jika data tidak ada
+            'rm11b2StatusAnestesi'  => $rm11b2StatusAnesetesi,    // Biarkan null jika data tidak ada
+            'rm11b2MonitoringAnestesi'  => $rm11b2MonitoringAnesetesi,    // Biarkan null jika data tidak ada
             'status'  => $status    // Biarkan null jika data tidak ada
         ];
 

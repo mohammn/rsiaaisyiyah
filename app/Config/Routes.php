@@ -97,6 +97,14 @@ $routes->get('/rm/rm11b2StatusAnestesi/cetak/(:any)', 'Rm\Rm11b2StatusAnestesi::
 $routes->post('/rm/rm11b2StatusAnestesi/simpan', 'Rm\Rm11b2StatusAnestesi::simpan');
 $routes->get('/rm/rm11b2StatusAnestesi/(:any)', 'Rm\Rm11b2StatusAnestesi::index/$1');
 
+$routes->post('/rm/rm11b2MonitoringAnestesi/simpanMonitoring', 'Rm\Rm11b2MonitoringAnestesi::simpanMonitoring');
+$routes->post('/rm/rm11b2MonitoringAnestesi/getDataMonitoring', 'Rm\Rm11b2MonitoringAnestesi::getDataMonitoring');
+$routes->post('/rm/rm11b2MonitoringAnestesi/hapusMonitoring', 'Rm\Rm11b2MonitoringAnestesi::hapusMonitoring');
+$routes->post('/rm/rm11b2MonitoringAnestesi/simpanTtd', 'Rm\Rm11b2MonitoringAnestesi::simpanTtd');
+$routes->post('/rm/rm11b2MonitoringAnestesi/hapus', 'Rm\Rm11b2MonitoringAnestesi::hapus');
+$routes->get('/rm/rm11b2MonitoringAnestesi/cetak/(:any)', 'Rm\Rm11b2MonitoringAnestesi::cetak/$1');
+$routes->post('/rm/rm11b2MonitoringAnestesi/simpan', 'Rm\Rm11b2MonitoringAnestesi::simpan');
+$routes->get('/rm/rm11b2MonitoringAnestesi/(:any)', 'Rm\Rm11b2MonitoringAnestesi::index/$1');
 
 $routes->post('/rm/rm11b1Checklist/simpanTtd', 'Rm\Rm11b1Checklist::simpanTtd');
 $routes->post('/rm/rm11b1Checklist/hapus', 'Rm\Rm11b1Checklist::hapus');
