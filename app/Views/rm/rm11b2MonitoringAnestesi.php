@@ -129,11 +129,11 @@
                                 <thead>
                                     <tr>
                                         <th>Waktu</th>
-                                        <th>TD</th>
-                                        <th>S/D</th>
+                                        <th>S</th>
+                                        <th>D</th>
                                         <th>RR</th>
                                         <th>SP02</th>
-                                        <th>Suhu</th>
+                                        <th>Nadi</th>
                                         <th>hapus</th>
                                     </tr>
                                 </thead>
@@ -143,7 +143,7 @@
                             </table>
 
                             <div class="w-100 mt-3 text-center">
-                                <button class="btn btn-sm btn-estetik btn-lihat" data-bs-toggle="modal" data-bs-target="#modalIntraAnestesi">Tambah</button>
+                                <button class="btn btn-sm btn-estetik btn-lihat" onclick="tryTambahIntra()">Tambah</button>
                             </div>
                         </div>
                     </div>
@@ -166,11 +166,11 @@
                                 <thead>
                                     <tr>
                                         <th>Waktu</th>
-                                        <th>TD</th>
-                                        <th>S/D</th>
+                                        <th>S</th>
+                                        <th>D</th>
                                         <th>RR</th>
                                         <th>SP02</th>
-                                        <th>Suhu</th>
+                                        <th>Nadi</th>
                                         <th>hapus</th>
                                     </tr>
                                 </thead>
@@ -180,7 +180,7 @@
                             </table>
 
                             <div class="w-100 mt-3 text-center">
-                                <button class="btn btn-sm btn-estetik btn-lihat" data-bs-toggle="modal" data-bs-target="#modalPascaAnestesi">Tambah</button>
+                                <button class="btn btn-sm btn-estetik btn-lihat" onclick="tryTambahPasca()">Tambah</button>
                             </div>
                         </div>
                     </div>
@@ -249,6 +249,7 @@
     </div>
 </div>
 
+<!-- Modal Monitoring INTRA-->
 <div class="modal fade" id="modalIntraAnestesi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -267,11 +268,11 @@
                     <!-- Baris Input Parameter -->
                     <div class="row g-2">
                         <div class="col">
-                            <label class="form-label small fw-bold text-secondary">TD Sistolik (mmHg)</label>
+                            <label class="form-label small fw-bold text-secondary">Sistolik (mmHg)</label>
                             <input type="number" id="inputSistolik" value="0" class="form-control form-control-sm">
                         </div>
                         <div class="col">
-                            <label class="form-label small fw-bold text-secondary">TD Diastolik (mmHg)</label>
+                            <label class="form-label small fw-bold text-secondary">Diastolik (mmHg)</label>
                             <input type="number" id="inputDiastolik" value="0" class="form-control form-control-sm">
                         </div>
                         <div class="col">
@@ -283,7 +284,7 @@
                             <input type="number" id="inputSpO2" value="0" class="form-control form-control-sm">
                         </div>
                         <div class="col">
-                            <label class="form-label small fw-bold text-secondary">Suhu (°C)</label>
+                            <label class="form-label small fw-bold text-secondary">Nadi</label>
                             <input type="number" step="0.1" id="inputTemp" value="0" class="form-control form-control-sm">
                         </div>
                     </div>
@@ -291,12 +292,15 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-primary" onclick="simpanMonitoringIntra()">Simpan</button>
+                <button type="button" id="tombolSimpanIntra" class="btn btn-primary" onclick="simpanMonitoringIntra('tambah')">Simpan</button>
+                <button type="button" id="tombolTemplateIntra" class="btn btn-info" onclick="simpanMonitoringIntra('template')">Template</button>
+                <button type="button" id="tombolUpdateIntra" class="btn btn-warning" onclick="simpanMonitoringIntra('update')">Update</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Modal Monitoring PASCA-->
 <div class="modal fade" id="modalPascaAnestesi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -315,11 +319,11 @@
                     <!-- Baris Input Parameter -->
                     <div class="row g-2">
                         <div class="col">
-                            <label class="form-label small fw-bold text-secondary">TD Sistolik (mmHg)</label>
+                            <label class="form-label small fw-bold text-secondary">Sistolik (mmHg)</label>
                             <input type="number" id="inputSistolik2" value="0" class="form-control form-control-sm">
                         </div>
                         <div class="col">
-                            <label class="form-label small fw-bold text-secondary">TD Diastolik (mmHg)</label>
+                            <label class="form-label small fw-bold text-secondary">Diastolik (mmHg)</label>
                             <input type="number" id="inputDiastolik2" value="0" class="form-control form-control-sm">
                         </div>
                         <div class="col">
@@ -331,7 +335,7 @@
                             <input type="number" id="inputSpO22" value="0" class="form-control form-control-sm">
                         </div>
                         <div class="col">
-                            <label class="form-label small fw-bold text-secondary">Suhu (°C)</label>
+                            <label class="form-label small fw-bold text-secondary">Nadi</label>
                             <input type="number" step="0.1" id="inputTemp2" value="0" class="form-control form-control-sm">
                         </div>
                     </div>
@@ -339,7 +343,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-primary" onclick="simpanMonitoringPasca()">Simpan</button>
+                <button type="button" id="tombolSimpanPasca" class="btn btn-primary" onclick="simpanMonitoringPasca('tambah')">Simpan</button>
+                <button type="button" id="tombolTemplatePasca" class="btn btn-info" onclick="simpanMonitoringPasca('template')">Template</button>
+                <button type="button" id="tombolUpdatePasca" class="btn btn-warning" onclick="simpanMonitoringPasca('update')">Update</button>
             </div>
         </div>
     </div>
@@ -471,7 +477,7 @@
                             fill: false
                         },
                         {
-                            label: "Temp",
+                            label: "Nadi",
                             data: [0],
                             borderColor: "#f59e0b",
                             backgroundColor: "#f59e0b",
@@ -616,7 +622,7 @@
                             fill: false
                         },
                         {
-                            label: "Temp",
+                            label: "Nadi",
                             data: [0],
                             borderColor: "#f59e0b",
                             backgroundColor: "#f59e0b",
@@ -720,10 +726,28 @@
             getDataMonitoringPasca();
         });
 
-        function simpanMonitoringIntra() {
+        function tryTambahIntra() {
+
+            $("#tombolSimpanIntra").show();
+            $("#tombolTemplateIntra").show();
+            $("#tombolUpdateIntra").hide();
+
+            $('#inputWaktu').prop('disabled', false);
+
+            $('#inputWaktu').val('');
+            $('#inputSistolik').val(0);
+            $('#inputDiastolik').val(0);
+            $('#inputRR').val(0);
+            $('#inputSpO2').val(0);
+            $('#inputTemp').val(0);
+
+            $('#modalIntraAnestesi').modal('show');
+        }
+
+        function simpanMonitoringIntra(tujuan) {
             var data = {
                 // ID / Informasi Tambahan (Opsional/Disesuaikan)
-                idMonitoring: "<?= isset($data->rm11b2MonitoringAnestesi['id']) ?? '' ?>",
+                idMonitoring: "<?= isset($data->rm11b2MonitoringAnestesi['id']) ? $data->rm11b2MonitoringAnestesi['id'] : '' ?>",
 
                 // --- DATA WAKTU & TANDA VITAL ---
                 waktu: $('#inputWaktu').val(),
@@ -732,7 +756,8 @@
                 rr: parseFloat($('#inputRR').val()) || 0,
                 spo2: parseFloat($('#inputSpO2').val()) || 0,
                 temp: parseFloat($('#inputTemp').val()) || 0,
-                jenis: 'intra'
+                jenis: 'intra',
+                tujuan: tujuan
             };
 
             // Validasi sederhana
@@ -818,6 +843,9 @@
                                 <td>${item.spo2}</td>
                                 <td>${item.temp}</td>
                                 <td>
+                                    <button type="button" class="btn btn-sm btn-info btn-sm py-0 px-1" onclick="tryEditIntra(${item.id})">
+                                        <i class="fa fa-pen"></i>
+                                    </button>
                                     <button type="button" class="btn btn-sm btn-danger btn-sm py-0 px-1" onclick="hapusMonitoring(${item.id})">
                                         <i class="fa fa-trash"></i>
                                     </button>
@@ -836,6 +864,38 @@
                             chartMonitoringAnestesi();
                         }
                     }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("Terjadi kesalahan: " + error);
+                }
+            });
+        }
+
+        function tryEditIntra(id) {
+            data = {
+                id: id
+            }
+
+            $.ajax({
+                url: '<?= base_url("rm/rm11b2MonitoringAnestesi/getDataMonitoringById") ?>',
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function(response) {
+                    $("#tombolSimpanIntra").hide();
+                    $("#tombolTemplateIntra").hide();
+                    $("#tombolUpdateIntra").show();
+
+                    $('#inputWaktu').val(response.data.waktu);
+                    $('#inputWaktu').prop('disabled', true);
+                    $('#inputSistolik').val(response.data.sistolik);
+                    $('#inputDiastolik').val(response.data.diastolik);
+                    $('#inputRR').val(response.data.rr);
+                    $('#inputSpO2').val(response.data.spo2);
+                    $('#inputTemp').val(response.data.temp);
+
+                    $("#modalIntraAnestesi").modal('show');
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
@@ -869,10 +929,28 @@
             }
         }
 
-        function simpanMonitoringPasca() {
+        function tryTambahPasca() {
+
+            $("#tombolSimpanPasca").show();
+            $("#tombolTemplatePasca").show();
+            $("#tombolUpdatePasca").hide();
+
+            $('#inputWaktu2').prop('disabled', false);
+
+            $('#inputWaktu2').val('');
+            $('#inputSistolik2').val(0);
+            $('#inputDiastolik2').val(0);
+            $('#inputRR2').val(0);
+            $('#inputSpO22').val(0);
+            $('#inputTemp2').val(0);
+
+            $('#modalPascaAnestesi').modal('show');
+        }
+
+        function simpanMonitoringPasca(tujuan) {
             var data = {
                 // ID / Informasi Tambahan (Opsional/Disesuaikan)
-                idMonitoring: "<?= isset($data->rm11b2MonitoringAnestesi['id']) ?? '' ?>",
+                idMonitoring: "<?= isset($data->rm11b2MonitoringAnestesi['id']) ? $data->rm11b2MonitoringAnestesi['id'] : '' ?>",
 
                 // --- DATA WAKTU & TANDA VITAL ---
                 waktu: $('#inputWaktu2').val(),
@@ -881,7 +959,8 @@
                 rr: parseFloat($('#inputRR2').val()) || 0,
                 spo2: parseFloat($('#inputSpO22').val()) || 0,
                 temp: parseFloat($('#inputTemp2').val()) || 0,
-                jenis: 'pasca'
+                jenis: 'pasca',
+                tujuan: tujuan
             };
 
             // Validasi sederhana
@@ -967,6 +1046,9 @@
                                 <td>${item.spo2}</td>
                                 <td>${item.temp}</td>
                                 <td>
+                                    <button type="button" class="btn btn-sm btn-info btn-sm py-0 px-1" onclick="tryEditPasca(${item.id})">
+                                        <i class="fa fa-pen"></i>
+                                    </button>
                                     <button type="button" class="btn btn-sm btn-danger btn-sm py-0 px-1" onclick="hapusMonitoring(${item.id})">
                                         <i class="fa fa-trash"></i>
                                     </button>
@@ -985,6 +1067,38 @@
                             chartMonitoringAnestesi();
                         }
                     }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("Terjadi kesalahan: " + error);
+                }
+            });
+        }
+
+        function tryEditPasca(id) {
+            data = {
+                id: id
+            }
+
+            $.ajax({
+                url: '<?= base_url("rm/rm11b2MonitoringAnestesi/getDataMonitoringById") ?>',
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function(response) {
+                    $("#tombolSimpanPasca").hide();
+                    $("#tombolTemplatePasca").hide();
+                    $("#tombolUpdatePasca").show();
+
+                    $('#inputWaktu2').val(response.data.waktu);
+                    $('#inputWaktu2').prop('disabled', true);
+                    $('#inputSistolik2').val(response.data.sistolik);
+                    $('#inputDiastolik2').val(response.data.diastolik);
+                    $('#inputRR2').val(response.data.rr);
+                    $('#inputSpO22').val(response.data.spo2);
+                    $('#inputTemp2').val(response.data.temp);
+
+                    $("#modalPascaAnestesi").modal('show');
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);

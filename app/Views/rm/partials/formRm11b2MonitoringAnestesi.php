@@ -77,7 +77,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Obat-obatan :</label>
-                                    <textarea class="form-control" name="obatObatan" id="obatObatan"><?= $data->rm11b2MonitoringAnestesi['obatObatan'] ?? '' ?></textarea>
+                                    <textarea class="form-control" name="obatObatan" id="obatObatan"><?= $data->rm11b2MonitoringAnestesi['obatObatan'] ?? 'REGIVEL
+RANITIDINE 
+METOCLOPRAMID
+TRANXA 
+METAMIZOLE ' ?></textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Vertilasi :</label>
@@ -200,7 +204,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Waktu Insisi :</label>
-                                    <input type="datetime-local" id="waktuInsisi" name="waktuInsisi" class="form-control form-control-sm " value="<?= isset($data->rm11b2MonitoringAnestesi['waktuInsisi']) ? date('Y-m-d\TH:i', strtotime($data->rm11b2MonitoringAnestesi['waktuInsisi'])) : '' ?>">
+                                    <input type="datetime-local" id="waktuInsisi" name="waktuInsisi" class="form-control form-control-sm" style="border: 2px solid #dc3545 !important;" value="<?= isset($data->rm11b2MonitoringAnestesi['waktuInsisi']) ? date('Y-m-d\TH:i', strtotime($data->rm11b2MonitoringAnestesi['waktuInsisi'])) : '' ?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Waktu selesai Operasi :</label>
@@ -243,31 +247,31 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Teknik :</label>
-                                    <textarea class="form-control" name="teknik" id="teknik"><?= $data->rm11b2MonitoringAnestesi['teknik'] ?? '' ?></textarea>
+                                    <textarea class="form-control" name="teknik" id="teknik"><?= $data->rm11b2MonitoringAnestesi['teknik'] ?? 'SAB' ?></textarea>
                                 </div>
 
                                 <!-- Anestesi Lokal Obat -->
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Anestesi Lokal Obat :</label>
-                                    <input type="text" class="form-control form-control-sm" name="anestesi_lokal_obat" id="anestesi_lokal_obat" value="<?= $data->rm11b2MonitoringAnestesi['anestesi_lokal_obat'] ?? '' ?>">
+                                    <input type="text" class="form-control form-control-sm" name="anestesi_lokal_obat" id="anestesi_lokal_obat" value="<?= $data->rm11b2MonitoringAnestesi['anestesi_lokal_obat'] ?? 'BUPIVACAINE + FENTANYL' ?>">
                                 </div>
 
                                 <!-- Tipe -->
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Tipe :</label>
-                                    <input type="text" class="form-control form-control-sm" name="tipe" id="tipe" value="<?= $data->rm11b2MonitoringAnestesi['tipe'] ?? '' ?>">
+                                    <input type="text" class="form-control form-control-sm" name="tipe" id="tipe" value="<?= $data->rm11b2MonitoringAnestesi['tipe'] ?? 'HYPERBARIC' ?>">
                                 </div>
 
                                 <!-- Jumlah Volume -->
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Jumlah Volume :</label>
-                                    <input type="text" class="form-control form-control-sm" name="jumlah_volume" id="jumlah_volume" value="<?= $data->rm11b2MonitoringAnestesi['jumlah_volume'] ?? '' ?>">
+                                    <input type="text" class="form-control form-control-sm" name="jumlah_volume" id="jumlah_volume" value="<?= $data->rm11b2MonitoringAnestesi['jumlah_volume'] ?? '2.5ml' ?>">
                                 </div>
 
                                 <!-- Masalah/Keterangan (Menggunakan Textarea) -->
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Masalah/Keterangan :</label>
-                                    <textarea class="form-control form-control-sm mt-1" name="masalah_keterangan" id="masalah_keterangan" rows="2"><?= $data->rm11b2MonitoringAnestesi['masalah_keterangan'] ?? '' ?></textarea>
+                                    <textarea class="form-control form-control-sm mt-1" name="masalah_keterangan" id="masalah_keterangan" rows="2"><?= $data->rm11b2MonitoringAnestesi['masalah_keterangan'] ?? 'DBN' ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -319,7 +323,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label class="form-label fw-bold small text-secondary mb-0 ms-1">Kristaloid :</label>
-                                            <textarea class="form-control" name="kristaloidPra" id="kristaloidPra"><?= $data->rm11b2MonitoringAnestesi['kristaloidPra'] ?? '' ?></textarea>
+                                            <textarea class="form-control" name="kristaloidPra" id="kristaloidPra"><?= $data->rm11b2MonitoringAnestesi['kristaloidPra'] ?? 'RL 500ML' ?></textarea>
                                         </div>
 
                                         <div class="col-md-12">
@@ -347,7 +351,7 @@
                                 <div class="col-md-6">
                                     <!-- Urin -->
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Urin :</label>
-                                    <input type="text" class="form-control form-control-sm" name="urinPra" id="urinPra" value="<?= $data->rm11b2MonitoringAnestesi['urinPra'] ?? '' ?>">
+                                    <input type="text" class="form-control form-control-sm" name="urinPra" id="urinPra" value="<?= $data->rm11b2MonitoringAnestesi['urinPra'] ?? '100ML' ?>">
                                 </div>
                                 <div class="col-md-6">
 
@@ -410,7 +414,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label class="form-label fw-bold small text-secondary mb-0 ms-1">Kristaloid :</label>
-                                            <textarea class="form-control" name="kristaloidIntra" id="kristaloidIntra"><?= $data->rm11b2MonitoringAnestesi['kristaloidIntra'] ?? '' ?></textarea>
+                                            <textarea class="form-control" name="kristaloidIntra" id="kristaloidIntra"><?= $data->rm11b2MonitoringAnestesi['kristaloidIntra'] ?? 'RL 500ML' ?></textarea>
                                         </div>
 
                                         <div class="col-md-12">
@@ -439,7 +443,7 @@
                                 <div class="col-md-6">
                                     <!-- Urin -->
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Urin :</label>
-                                    <input type="text" class="form-control form-control-sm" name="urinIntra" id="urinIntra" value="<?= $data->rm11b2MonitoringAnestesi['urinIntra'] ?? '' ?>">
+                                    <input type="text" class="form-control form-control-sm" name="urinIntra" id="urinIntra" value="<?= $data->rm11b2MonitoringAnestesi['urinIntra'] ?? '50ML' ?>">
                                 </div>
                                 <div class="col-md-6">
 
@@ -480,13 +484,22 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Diperiksa Oleh :</label>
-                                    <select name="dokter1" id="dokter1" class="form-select form-select-sm">
-                                        <option value="" <?= (empty($data->rm11b2MonitoringAnestesi['dokter1'])) ? 'selected' : '' ?> disabled>-- Pilih Dokter --</option>
-                                        <?php for ($i = 0; $i < count($data->dokter); $i++) {
-                                            $selected = (($data->rm11b2MonitoringAnestesi['dokter1'] ?? '') === $data->dokter[$i]["nm_dokter"]) ? 'selected' : '';
-                                            echo '<option value="' . $data->dokter[$i]["nm_dokter"] . '" ' . $selected . '>' . $data->dokter[$i]["nm_dokter"] . '</option>';
-                                        } ?>
-                                    </select>
+
+                                    <!-- Input biasa yang bisa diketik bebas -->
+                                    <input type="text"
+                                        name="dokter1"
+                                        id="dokter1"
+                                        class="form-control form-control-sm"
+                                        list="listDokter"
+                                        placeholder="Ketik atau pilih nama dokter..."
+                                        value="<?= isset($data->rm11b2MonitoringAnestesi['dokter1']) ? $data->rm11b2MonitoringAnestesi['dokter1'] : 'dr. IRWAN WIBOWO, Sp.An' ?>">
+
+                                    <!-- Datalist sebagai sumber saran otomatis -->
+                                    <datalist id="listDokter">
+                                        <?php for ($i = 0; $i < count($data->dokter); $i++) { ?>
+                                            <option value="<?= $data->dokter[$i]["nm_dokter"] ?>">
+                                            <?php } ?>
+                                    </datalist>
                                 </div>
 
                             </div>
@@ -513,13 +526,13 @@
                                 <!-- Pendarahan -->
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Pendarahan :</label>
-                                    <input type="text" class="form-control form-control-sm " name="pendarahan" id="pendarahan" value="<?= $data->rm11b2MonitoringAnestesi['pendarahan'] ?? '' ?>">
+                                    <input type="text" class="form-control form-control-sm " name="pendarahan" id="pendarahan" value="<?= $data->rm11b2MonitoringAnestesi['pendarahan'] ?? '50ML' ?>">
                                 </div>
 
                                 <!-- Kontraksi Uterus -->
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Kontraksi Uterus :</label>
-                                    <input type="text" class="form-control form-control-sm " name="kontraksi_uterus" id="kontraksi_uterus" value="<?= $data->rm11b2MonitoringAnestesi['kontraksi_uterus'] ?? '' ?>">
+                                    <input type="text" class="form-control form-control-sm " name="kontraksi_uterus" id="kontraksi_uterus" value="<?= $data->rm11b2MonitoringAnestesi['kontraksi_uterus'] ?? '+ / KERAS' ?>">
                                 </div>
 
                                 <!-- Kompartemen syndrom -->
@@ -549,7 +562,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Pesanan/Tindakan :</label>
-                                    <textarea class="form-control" name="perasanTindakan" id="perasanTindakan" rows="5"><?= $data->rm11b2MonitoringAnestesi['perasanTindakan'] ?? '' ?></textarea>
+                                    <textarea class="form-control" name="perasanTindakan" id="perasanTindakan" rows="5"><?= $data->rm11b2MonitoringAnestesi['perasanTindakan'] ?? '- OBS TTV
+- OBS NYERI
+- BERI O2 NASAL 4 LPM' ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -599,8 +614,8 @@
                                                 <div class="small fw-semibold mt-1">Bromage 3 (complete)</div>
                                             </td>
                                             <td class="fw-bold">3</td>
-                                            <td><input class="form-check-input" type="radio" name="bromage_t[0]" value="3" <?= (isset($bromageTData[0]) && $bromageTData[0] == '3') ? 'checked' : '' ?>></td>
-                                            <td><input class="form-check-input" type="radio" name="bromage_t[5]" value="3" <?= (isset($bromageTData[5]) && $bromageTData[5] == '3') ? 'checked' : '' ?>></td>
+                                            <td><input class="form-check-input" type="radio" name="bromage_t[0]" value="3" <?= (!isset($bromageTData[0]) || $bromageTData[0] == '3') ? 'checked' : '' ?>></td>
+                                            <td><input class="form-check-input" type="radio" name="bromage_t[5]" value="3" <?= (!isset($bromageTData[5]) || $bromageTData[5] == '3') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[15]" value="3" <?= (isset($bromageTData[15]) && $bromageTData[15] == '3') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[30]" value="3" <?= (isset($bromageTData[30]) && $bromageTData[30] == '3') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[45]" value="3" <?= (isset($bromageTData[45]) && $bromageTData[45] == '3') ? 'checked' : '' ?>></td>
@@ -620,7 +635,7 @@
                                             <td class="fw-bold">2</td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[0]" value="2" <?= (isset($bromageTData[0]) && $bromageTData[0] == '2') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[5]" value="2" <?= (isset($bromageTData[5]) && $bromageTData[5] == '2') ? 'checked' : '' ?>></td>
-                                            <td><input class="form-check-input" type="radio" name="bromage_t[15]" value="2" <?= (isset($bromageTData[15]) && $bromageTData[15] == '2') ? 'checked' : '' ?>></td>
+                                            <td><input class="form-check-input" type="radio" name="bromage_t[15]" value="2" <?= (!isset($bromageTData[15]) || $bromageTData[15] == '2') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[30]" value="2" <?= (isset($bromageTData[30]) && $bromageTData[30] == '2') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[45]" value="2" <?= (isset($bromageTData[45]) && $bromageTData[45] == '2') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[60]" value="2" <?= (isset($bromageTData[60]) && $bromageTData[60] == '2') ? 'checked' : '' ?>></td>
@@ -640,8 +655,8 @@
                                             <td><input class="form-check-input" type="radio" name="bromage_t[0]" value="1" <?= (isset($bromageTData[0]) && $bromageTData[0] == '1') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[5]" value="1" <?= (isset($bromageTData[5]) && $bromageTData[5] == '1') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[15]" value="1" <?= (isset($bromageTData[15]) && $bromageTData[15] == '1') ? 'checked' : '' ?>></td>
-                                            <td><input class="form-check-input" type="radio" name="bromage_t[30]" value="1" <?= (isset($bromageTData[30]) && $bromageTData[30] == '1') ? 'checked' : '' ?>></td>
-                                            <td><input class="form-check-input" type="radio" name="bromage_t[45]" value="1" <?= (isset($bromageTData[45]) && $bromageTData[45] == '1') ? 'checked' : '' ?>></td>
+                                            <td><input class="form-check-input" type="radio" name="bromage_t[30]" value="1" <?= (!isset($bromageTData[30]) || $bromageTData[30] == '1') ? 'checked' : '' ?>></td>
+                                            <td><input class="form-check-input" type="radio" name="bromage_t[45]" value="1" <?= (!isset($bromageTData[45]) || $bromageTData[45] == '1') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[60]" value="1" <?= (isset($bromageTData[60]) && $bromageTData[60] == '1') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[120]" value="1" <?= (isset($bromageTData[120]) && $bromageTData[120] == '1') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[180]" value="1" <?= (isset($bromageTData[180]) && $bromageTData[180] == '1') ? 'checked' : '' ?>></td>
@@ -661,11 +676,11 @@
                                             <td><input class="form-check-input" type="radio" name="bromage_t[15]" value="0" <?= (isset($bromageTData[15]) && $bromageTData[15] == '0') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[30]" value="0" <?= (isset($bromageTData[30]) && $bromageTData[30] == '0') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[45]" value="0" <?= (isset($bromageTData[45]) && $bromageTData[45] == '0') ? 'checked' : '' ?>></td>
-                                            <td><input class="form-check-input" type="radio" name="bromage_t[60]" value="0" <?= (isset($bromageTData[60]) && $bromageTData[60] == '0') ? 'checked' : '' ?>></td>
-                                            <td><input class="form-check-input" type="radio" name="bromage_t[120]" value="0" <?= (isset($bromageTData[120]) && $bromageTData[120] == '0') ? 'checked' : '' ?>></td>
+                                            <td><input class="form-check-input" type="radio" name="bromage_t[60]" value="0" <?= (!isset($bromageTData[60]) || $bromageTData[60] == '0') ? 'checked' : '' ?>></td>
+                                            <td><input class="form-check-input" type="radio" name="bromage_t[120]" value="0" <?= (!isset($bromageTData[120]) || $bromageTData[120] == '0') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[180]" value="0" <?= (isset($bromageTData[180]) && $bromageTData[180] == '0') ? 'checked' : '' ?>></td>
                                             <td><input class="form-check-input" type="radio" name="bromage_t[240]" value="0" <?= (isset($bromageTData[240]) && $bromageTData[240] == '0') ? 'checked' : '' ?>></td>
-                                            <td><input class="form-check-input" type="radio" name="bromage_keluar" value="0" <?= ($bromageKeluar == '0') ? 'checked' : '' ?>></td>
+                                            <td><input class="form-check-input" type="radio" name="bromage_keluar" value="0" <?= (empty($bromageKeluar) || $bromageKeluar == '0') ? 'checked' : '' ?>></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -692,11 +707,11 @@
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Waktu :</label>
                                     <input type="datetime-local" id="waktuPindah" name="waktuPindah" class="form-control form-control-sm" value="<?= isset($data->rm11b2MonitoringAnestesi['waktuPindah']) ? date('Y-m-d\TH:i', strtotime($data->rm11b2MonitoringAnestesi['waktuPindah'])) : '' ?>">
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Disetujui Oleh :</label>
                                     <select name="disetujuiOleh" id="disetujuiOleh" class="form-select form-select-sm">
-                                        <option value="" <?= (empty($data->rm11b2MonitoringAnestesi['disetujuiOleh'])) ? 'selected' : '' ?> disabled>-- Pilih Dokter --</option>
-                                        <?php for ($i = 0; $i < count($data->dokter); $i++) {
+                                        <option value="" < (empty($data->rm11b2MonitoringAnestesi['disetujuiOleh'])) ? 'selected' : '' ?> disabled>-- Pilih Dokter --</option>
+                                        < for ($i = 0; $i < count($data->dokter); $i++) {
                                             $selected = (($data->rm11b2MonitoringAnestesi['disetujuiOleh'] ?? '') === $data->dokter[$i]["nm_dokter"]) ? 'selected' : '';
                                             echo '<option value="' . $data->dokter[$i]["nm_dokter"] . '" ' . $selected . '>' . $data->dokter[$i]["nm_dokter"] . '</option>';
                                         } ?>
@@ -704,8 +719,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">TT :</label>
-                                    <input type="text" class="form-control" name="tt" id="tt" value="<?= $data->rm11b2MonitoringAnestesi['tt'] ?? '' ?>">
-                                </div>
+                                    <input type="text" class="form-control" name="tt" id="tt" value="< $data->rm11b2MonitoringAnestesi['tt'] ?? '' ?>">
+                                </div> -->
                             </div>
 
                             <hr>
@@ -733,7 +748,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label class="form-label fw-bold small text-secondary mb-0 ms-1">Bila bising usus positif :</label>
-                                        <input type="text" class="form-control" name="bisingUsus" id="bisingUsus" value="<?= $data->rm11b2MonitoringAnestesi['bisingUsus'] ?? '' ?>">
+                                        <input type="text" class="form-control" name="bisingUsus" id="bisingUsus" value="<?= $data->rm11b2MonitoringAnestesi['bisingUsus'] ?? 'SADAR BAIK, MUAL (-), MUNTAH (-), MAKAN MINUM BERTAHAP' ?>">
                                     </div>
                                 </div>
 
@@ -743,15 +758,15 @@
                             <div class="border border-info rounded p-1 mb-1">
                                 <div class="row">
                                     <!-- Observasi -->
-                                    <div class="col-md-6 ">
-                                        <label class="form-label fw-bold small text-secondary mb-0 ms-1">Observasi :</label>
-                                        <input type="text" class="form-control form-control-sm  " name="observasi" id="observasi" value="<?= $data->rm11b2MonitoringAnestesi['observasi'] ?? '' ?>">
-                                    </div>
+                                    <!-- <div class="col-md-6 "> -->
+                                    <label class="form-label fw-bold small mb-0 ms-1">Observasi :</label>
+                                    <!-- <input type="text" class="form-control form-control-sm  " name="observasi" id="observasi" value="< $data->rm11b2MonitoringAnestesi['observasi'] ?? 'TIAP 15 MENIT ' ?>"> -->
+                                    <!-- </div> -->
 
                                     <!-- Perfusi -->
-                                    <div class="col-md-6 ">
+                                    <div class="col-md-12 ">
                                         <label class="form-label fw-bold small text-secondary mb-0 ms-1">Perfusi :</label>
-                                        <input type="text" class="form-control form-control-sm " name="perfusi" id="perfusi" value="<?= $data->rm11b2MonitoringAnestesi['perfusi'] ?? '' ?>">
+                                        <input type="text" class="form-control form-control-sm " name="perfusi" id="perfusi" value="<?= $data->rm11b2MonitoringAnestesi['perfusi'] ?? 'HKM, CRT < 2' ?>">
                                     </div>
 
                                     <!-- Tensi (dengan teks tambahan di kanan) -->
@@ -759,8 +774,8 @@
                                         <label class="form-label fw-bold small text-secondary mb-0 ms-1">Tensi :</label>
                                         <div class="input-group input-group-sm  ">
                                             <input type="text" class="form-control" name="tensi" id="tensi" value="<?= $data->rm11b2MonitoringAnestesi['tensi'] ?? '' ?>">
-                                            <span class="input-group-text bg-light text-secondary">, bila sistole > 160 mmHg</span>
-                                            <input type="text" class="form-control" name="tensi_bila" id="tensi_bila" value="<?= $data->rm11b2MonitoringAnestesi['tensi_bila'] ?? '' ?>">
+                                            <!-- <span class="input-group-text bg-light text-secondary">, bila sistole > 160 mmHg</span>
+                                            <input type="text" class="form-control" name="tensi_bila" id="tensi_bila" value="< $data->rm11b2MonitoringAnestesi['tensi_bila'] ?? '' ?>"> -->
                                         </div>
                                     </div>
 
@@ -769,21 +784,21 @@
                                         <label class="form-label fw-bold small text-secondary mb-0 ms-1">Nadi :</label>
                                         <div class="input-group input-group-sm  ">
                                             <input type="text" class="form-control" name="nadi" id="nadi" value="<?= $data->rm11b2MonitoringAnestesi['nadi'] ?? '' ?>">
-                                            <span class="input-group-text bg-light text-secondary">, bila</span>
-                                            <input type="text" class="form-control" name="nadi_bila" id="nadi_bila" value="<?= $data->rm11b2MonitoringAnestesi['nadi_bila'] ?? '' ?>">
+                                            <!-- <span class="input-group-text bg-light text-secondary">, bila</span>
+                                            <input type="text" class="form-control" name="nadi_bila" id="nadi_bila" value="< $data->rm11b2MonitoringAnestesi['nadi_bila'] ?? '' ?>"> -->
                                         </div>
                                     </div>
 
                                     <!-- Kesadaran -->
                                     <div class="col-md-6 ">
                                         <label class="form-label fw-bold small text-secondary mb-0 ms-1">Kesadaran :</label>
-                                        <input type="text" class="form-control form-control-sm  " name="kesadaran" id="kesadaran" value="<?= $data->rm11b2MonitoringAnestesi['kesadaran'] ?? '' ?>">
+                                        <input type="text" class="form-control form-control-sm  " name="kesadaran" id="kesadaran" value="<?= $data->rm11b2MonitoringAnestesi['kesadaran'] ?? 'COMPOSMENTIS' ?>">
                                     </div>
 
                                     <!-- Produksi Urine -->
                                     <div class="col-md-6 ">
                                         <label class="form-label fw-bold small text-secondary mb-0 ms-1">Produksi Urine :</label>
-                                        <input type="text" class="form-control form-control-sm  " name="produksi_urine" id="produksi_urine" value="<?= $data->rm11b2MonitoringAnestesi['produksi_urine'] ?? '' ?>">
+                                        <input type="text" class="form-control form-control-sm  " name="produksi_urine" id="produksi_urine" value="<?= $data->rm11b2MonitoringAnestesi['produksi_urine'] ?? '20 ML/JAM' ?>">
                                     </div>
                                 </div>
                             </div>
@@ -791,58 +806,64 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Terapi :</label>
-                                    <textarea class="form-control" name="terapi" id="terapi"><?= $data->rm11b2MonitoringAnestesi['terapi'] ?? '' ?></textarea>
+                                    <textarea class="form-control" name="terapi" id="terapi"><?= $data->rm11b2MonitoringAnestesi['terapi'] ?? 'DAMABEM 3X4mg
+RANITIDINE 3X50mg
+METAMIZOLE 3X1Gr
+PAMOL 4X1GR' ?></textarea>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Mobilisasi :</label>
-                                    <textarea class="form-control" name="mobilisasi" id="mobilisasi"><?= $data->rm11b2MonitoringAnestesi['mobilisasi'] ?? '' ?></textarea>
+                                    <textarea class="form-control" name="mobilisasi" id="mobilisasi"><?= $data->rm11b2MonitoringAnestesi['mobilisasi'] ?? 'IMMOBILISASI 24 JAM, MIKA MIKI SAAT KAKI BISA BERGERAK' ?></textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold small text-secondary mb-0 ms-1">Lain-lain :</label>
-                                    <textarea class="form-control" name="pascaOpLain" id="pascaOpLain"><?= $data->rm11b2MonitoringAnestesi['pascaOpLain'] ?? '' ?></textarea>
+                                    <textarea class="form-control" name="pascaOpLain" id="pascaOpLain"><?= $data->rm11b2MonitoringAnestesi['pascaOpLain'] ?? '-' ?></textarea>
                                 </div>
                             </div>
 
                             <div class="row">
+                                <!-- Perawat -->
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Perawat :</label>
-                                    <select name="perawat" id="perawat" class="form-select">
-                                        <option value="" <?= ($data->rm11b2MonitoringAnestesi['perawat'] ?? '') == '' ? ' selected' : '' ?>>-- Pilih Petugas --</option>
-                                        <?php for ($i = 0; $i < count($data->petugas); $i++) {
-                                            echo '<option value="' . $data->petugas[$i]["nama"] . '"';
-                                            if ($data->petugas[$i]["nama"] === ($data->rm11b2MonitoringAnestesi['perawat'] ?? '')) {
-                                                echo ' selected';
-                                            }
-                                            echo '>' . $data->petugas[$i]["nama"] . '</option>';
-                                        } ?>
-                                    </select>
+                                    <input type="text"
+                                        name="perawat"
+                                        id="perawat"
+                                        class="form-control form-control-sm"
+                                        list="listPetugas"
+                                        placeholder="Ketik atau pilih nama perawat..."
+                                        value="<?= isset($data->rm11b2MonitoringAnestesi['perawat']) ? $data->rm11b2MonitoringAnestesi['perawat'] : '' ?>">
                                 </div>
+
+                                <!-- Perawat RR -->
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Perawat RR :</label>
-                                    <select name="perawatRr" id="perawatRr" class="form-select">
-                                        <option value="" <?= ($data->rm11b2MonitoringAnestesi['perawatRr'] ?? '') == '' ? ' selected' : '' ?>>-- Pilih Petugas --</option>
-                                        <?php for ($i = 0; $i < count($data->petugas); $i++) {
-                                            echo '<option value="' . $data->petugas[$i]["nama"] . '"';
-                                            if ($data->petugas[$i]["nama"] === ($data->rm11b2MonitoringAnestesi['perawatRr'] ?? '')) {
-                                                echo ' selected';
-                                            }
-                                            echo '>' . $data->petugas[$i]["nama"] . '</option>';
-                                        } ?>
-                                    </select>
+                                    <input type="text"
+                                        name="perawatRr"
+                                        id="perawatRr"
+                                        class="form-control form-control-sm"
+                                        list="listPetugas"
+                                        placeholder="Ketik atau pilih nama perawat..."
+                                        value="<?= isset($data->rm11b2MonitoringAnestesi['perawatRr']) ? $data->rm11b2MonitoringAnestesi['perawatRr'] : '' ?>">
                                 </div>
+
+                                <!-- Perawat Anestesi -->
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Perawat Anestesi :</label>
-                                    <select name="perawatAnestesi" id="perawatAnestesi" class="form-select">
-                                        <option value="" <?= ($data->rm11b2MonitoringAnestesi['perawatAnestesi'] ?? '') == '' ? ' selected' : '' ?>>-- Pilih Petugas --</option>
-                                        <?php for ($i = 0; $i < count($data->petugas); $i++) {
-                                            echo '<option value="' . $data->petugas[$i]["nama"] . '"';
-                                            if ($data->petugas[$i]["nama"] === ($data->rm11b2MonitoringAnestesi['perawatAnestesi'] ?? '')) {
-                                                echo ' selected';
-                                            }
-                                            echo '>' . $data->petugas[$i]["nama"] . '</option>';
-                                        } ?>
-                                    </select>
+                                    <input type="text"
+                                        name="perawatAnestesi"
+                                        id="perawatAnestesi"
+                                        class="form-control form-control-sm"
+                                        list="listPetugas"
+                                        placeholder="Ketik atau pilih nama perawat..."
+                                        value="<?= isset($data->rm11b2MonitoringAnestesi['perawatAnestesi']) ? $data->rm11b2MonitoringAnestesi['perawatAnestesi'] : '' ?>">
                                 </div>
+
+                                <!-- Satu Datalist Bersama untuk Semua Input Petugas -->
+                                <datalist id="listPetugas">
+                                    <?php for ($i = 0; $i < count($data->petugas); $i++) { ?>
+                                        <option value="<?= $data->petugas[$i]["nama"] ?>">
+                                        <?php } ?>
+                                </datalist>
                             </div>
 
 
@@ -864,10 +885,10 @@
                         <div class="row">
                             <div class="col-12">
                                 <!-- Bagian Header TD Pra-Anestesi -->
-                                <div class="mb-1 d-flex align-items-center gap-2">
+                                <!-- <div class="mb-1 d-flex align-items-center gap-2">
                                     <label for="td_pra_anestesi" class="form-label fw-semibold mb-0 text-nowrap">TD Pra-Anestesi :</label>
                                     <input type="text" class="form-control form-control-sm w-25" id="td_pra_anestesi" name="td_pra_anestesi" value="<?= $data->rm11b2MonitoringAnestesi['td_pra_anestesi'] ?? '' ?>" placeholder="Masukkan TD...">
-                                </div>
+                                </div> -->
 
                                 <!-- Tabel Penilaian (Aldrete Score / Pemulihan) -->
                                 <div class="table-responsive">
@@ -909,20 +930,20 @@
                                                 <td>2</td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[0]" value="2" data-col="0" <?= (isset($sirkulasiTData[0]) && $sirkulasiTData[0] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[5]" value="2" data-col="5" <?= (isset($sirkulasiTData[5]) && $sirkulasiTData[5] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[15]" value="2" data-col="15" <?= (isset($sirkulasiTData[15]) && $sirkulasiTData[15] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[30]" value="2" data-col="30" <?= (isset($sirkulasiTData[30]) && $sirkulasiTData[30] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[45]" value="2" data-col="45" <?= (isset($sirkulasiTData[45]) && $sirkulasiTData[45] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[60]" value="2" data-col="60" <?= (isset($sirkulasiTData[60]) && $sirkulasiTData[60] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[15]" value="2" data-col="15" <?= (!isset($sirkulasiTData[15]) || $sirkulasiTData[15] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[30]" value="2" data-col="30" <?= (!isset($sirkulasiTData[30]) || $sirkulasiTData[30] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[45]" value="2" data-col="45" <?= (!isset($sirkulasiTData[45]) || $sirkulasiTData[45] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[60]" value="2" data-col="60" <?= (!isset($sirkulasiTData[60]) || $sirkulasiTData[60] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[120]" value="2" data-col="120" <?= (isset($sirkulasiTData[120]) && $sirkulasiTData[120] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[180]" value="2" data-col="180" <?= (isset($sirkulasiTData[180]) && $sirkulasiTData[180] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[240]" value="2" data-col="240" <?= (isset($sirkulasiTData[240]) && $sirkulasiTData[240] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_keluar" value="2" data-col="keluar" <?= ($sirkulasiKeluar == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_keluar" value="2" data-col="keluar" <?= (empty($sirkulasiKeluar) || $sirkulasiKeluar == '2') ? 'checked' : '' ?>></td>
                                             </tr>
                                             <tr data-parameter="sirkulasi">
                                                 <td class="text-start">TD +/- 20-50 mmHg dari normal</td>
                                                 <td>1</td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[0]" value="1" data-col="0" <?= (isset($sirkulasiTData[0]) && $sirkulasiTData[0] == '1') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[5]" value="1" data-col="5" <?= (isset($sirkulasiTData[5]) && $sirkulasiTData[5] == '1') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[0]" value="1" data-col="0" <?= (!isset($sirkulasiTData[0]) || $sirkulasiTData[0] == '1') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[5]" value="1" data-col="5" <?= (!isset($sirkulasiTData[5]) || $sirkulasiTData[5] == '1') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[15]" value="1" data-col="15" <?= (isset($sirkulasiTData[15]) && $sirkulasiTData[15] == '1') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[30]" value="1" data-col="30" <?= (isset($sirkulasiTData[30]) && $sirkulasiTData[30] == '1') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="sirkulasi_t[45]" value="1" data-col="45" <?= (isset($sirkulasiTData[45]) && $sirkulasiTData[45] == '1') ? 'checked' : '' ?>></td>
@@ -963,16 +984,16 @@
                                                 <td rowspan="3" class="fw-bold bg-white">Kesadaran</td>
                                                 <td class="text-start">Sadar penuh</td>
                                                 <td>2</td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[0]" value="2" data-col="0" <?= (isset($kesadaranTData[0]) && $kesadaranTData[0] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[5]" value="2" data-col="5" <?= (isset($kesadaranTData[5]) && $kesadaranTData[5] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[15]" value="2" data-col="15" <?= (isset($kesadaranTData[15]) && $kesadaranTData[15] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[30]" value="2" data-col="30" <?= (isset($kesadaranTData[30]) && $kesadaranTData[30] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[45]" value="2" data-col="45" <?= (isset($kesadaranTData[45]) && $kesadaranTData[45] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[60]" value="2" data-col="60" <?= (isset($kesadaranTData[60]) && $kesadaranTData[60] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[0]" value="2" data-col="0" <?= (!isset($kesadaranTData[0]) || $kesadaranTData[0] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[5]" value="2" data-col="5" <?= (!isset($kesadaranTData[5]) || $kesadaranTData[5] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[15]" value="2" data-col="15" <?= (!isset($kesadaranTData[15]) || $kesadaranTData[15] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[30]" value="2" data-col="30" <?= (!isset($kesadaranTData[30]) || $kesadaranTData[30] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[45]" value="2" data-col="45" <?= (!isset($kesadaranTData[45]) || $kesadaranTData[45] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[60]" value="2" data-col="60" <?= (!isset($kesadaranTData[60]) || $kesadaranTData[60] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[120]" value="2" data-col="120" <?= (isset($kesadaranTData[120]) && $kesadaranTData[120] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[180]" value="2" data-col="180" <?= (isset($kesadaranTData[180]) && $kesadaranTData[180] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="kesadaran_t[240]" value="2" data-col="240" <?= (isset($kesadaranTData[240]) && $kesadaranTData[240] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_keluar" value="2" data-col="keluar" <?= ($kesadaranKeluar == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="kesadaran_keluar" value="2" data-col="keluar" <?= (empty($kesadaranKeluar) || $kesadaranKeluar == '2') ? 'checked' : '' ?>></td>
                                             </tr>
                                             <tr data-parameter="kesadaran">
                                                 <td class="text-start">Respon terhadap panggilan</td>
@@ -1019,16 +1040,16 @@
                                                 <td rowspan="3" class="fw-bold bg-white">Oksigenasi</td>
                                                 <td class="text-start">SpO₂ > 92% (dengan udara bebas)</td>
                                                 <td>2</td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[0]" value="2" data-col="0" <?= (isset($oksigenasiTData[0]) && $oksigenasiTData[0] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[5]" value="2" data-col="5" <?= (isset($oksigenasiTData[5]) && $oksigenasiTData[5] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[15]" value="2" data-col="15" <?= (isset($oksigenasiTData[15]) && $oksigenasiTData[15] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[30]" value="2" data-col="30" <?= (isset($oksigenasiTData[30]) && $oksigenasiTData[30] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[45]" value="2" data-col="45" <?= (isset($oksigenasiTData[45]) && $oksigenasiTData[45] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[60]" value="2" data-col="60" <?= (isset($oksigenasiTData[60]) && $oksigenasiTData[60] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[0]" value="2" data-col="0" <?= (!isset($oksigenasiTData[0]) || $oksigenasiTData[0] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[5]" value="2" data-col="5" <?= (!isset($oksigenasiTData[5]) || $oksigenasiTData[5] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[15]" value="2" data-col="15" <?= (!isset($oksigenasiTData[15]) || $oksigenasiTData[15] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[30]" value="2" data-col="30" <?= (!isset($oksigenasiTData[30]) || $oksigenasiTData[30] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[45]" value="2" data-col="45" <?= (!isset($oksigenasiTData[45]) || $oksigenasiTData[45] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[60]" value="2" data-col="60" <?= (!isset($oksigenasiTData[60]) || $oksigenasiTData[60] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[120]" value="2" data-col="120" <?= (isset($oksigenasiTData[120]) && $oksigenasiTData[120] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[180]" value="2" data-col="180" <?= (isset($oksigenasiTData[180]) && $oksigenasiTData[180] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_t[240]" value="2" data-col="240" <?= (isset($oksigenasiTData[240]) && $oksigenasiTData[240] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_keluar" value="2" data-col="keluar" <?= ($oksigenasiKeluar == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="oksigenasi_keluar" value="2" data-col="keluar" <?= (empty($oksigenasiKeluar) || $oksigenasiKeluar == '2') ? 'checked' : '' ?>></td>
                                             </tr>
                                             <tr data-parameter="oksigenasi">
                                                 <td class="text-start">SpO₂ > 92% (dengan suplemen O₂)</td>
@@ -1075,16 +1096,16 @@
                                                 <td rowspan="3" class="fw-bold bg-white">Pernafasan</td>
                                                 <td class="text-start">Bisa menarik nafas dalam dan batuk bebas</td>
                                                 <td>2</td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[0]" value="2" data-col="0" <?= (isset($pernafasanTData[0]) && $pernafasanTData[0] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[5]" value="2" data-col="5" <?= (isset($pernafasanTData[5]) && $pernafasanTData[5] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[15]" value="2" data-col="15" <?= (isset($pernafasanTData[15]) && $pernafasanTData[15] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[30]" value="2" data-col="30" <?= (isset($pernafasanTData[30]) && $pernafasanTData[30] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[45]" value="2" data-col="45" <?= (isset($pernafasanTData[45]) && $pernafasanTData[45] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[60]" value="2" data-col="60" <?= (isset($pernafasanTData[60]) && $pernafasanTData[60] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[0]" value="2" data-col="0" <?= (!isset($pernafasanTData[0]) || $pernafasanTData[0] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[5]" value="2" data-col="5" <?= (!isset($pernafasanTData[5]) || $pernafasanTData[5] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[15]" value="2" data-col="15" <?= (!isset($pernafasanTData[15]) || $pernafasanTData[15] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[30]" value="2" data-col="30" <?= (!isset($pernafasanTData[30]) || $pernafasanTData[30] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[45]" value="2" data-col="45" <?= (!isset($pernafasanTData[45]) || $pernafasanTData[45] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[60]" value="2" data-col="60" <?= (!isset($pernafasanTData[60]) || $pernafasanTData[60] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[120]" value="2" data-col="120" <?= (isset($pernafasanTData[120]) && $pernafasanTData[120] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[180]" value="2" data-col="180" <?= (isset($pernafasanTData[180]) && $pernafasanTData[180] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="pernafasan_t[240]" value="2" data-col="240" <?= (isset($pernafasanTData[240]) && $pernafasanTData[240] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_keluar" value="2" data-col="keluar" <?= ($pernafasanKeluar == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="pernafasan_keluar" value="2" data-col="keluar" <?= (empty($pernafasanKeluar) || $pernafasanKeluar == '2') ? 'checked' : '' ?>></td>
                                             </tr>
                                             <tr data-parameter="pernafasan">
                                                 <td class="text-start">Dispeneu atau limitasi bernafas</td>
@@ -1135,20 +1156,20 @@
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[5]" value="2" data-col="5" <?= (isset($aktivitasTData[5]) && $aktivitasTData[5] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[15]" value="2" data-col="15" <?= (isset($aktivitasTData[15]) && $aktivitasTData[15] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[30]" value="2" data-col="30" <?= (isset($aktivitasTData[30]) && $aktivitasTData[30] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[45]" value="2" data-col="45" <?= (isset($aktivitasTData[45]) && $aktivitasTData[45] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[60]" value="2" data-col="60" <?= (isset($aktivitasTData[60]) && $aktivitasTData[60] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[45]" value="2" data-col="45" <?= (!isset($aktivitasTData[45]) || $aktivitasTData[45] == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[60]" value="2" data-col="60" <?= (!isset($aktivitasTData[60]) || $aktivitasTData[60] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[120]" value="2" data-col="120" <?= (isset($aktivitasTData[120]) && $aktivitasTData[120] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[180]" value="2" data-col="180" <?= (isset($aktivitasTData[180]) && $aktivitasTData[180] == '2') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[240]" value="2" data-col="240" <?= (isset($aktivitasTData[240]) && $aktivitasTData[240] == '2') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_keluar" value="2" data-col="keluar" <?= ($aktivitasKeluar == '2') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_keluar" value="2" data-col="keluar" <?= (empty($aktivitasKeluar) || $aktivitasKeluar == '2') ? 'checked' : '' ?>></td>
                                             </tr>
                                             <tr data-parameter="aktivitas">
                                                 <td class="text-start">Menggerakkan 2 ekstremitas</td>
                                                 <td>1</td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[0]" value="1" data-col="0" <?= (isset($aktivitasTData[0]) && $aktivitasTData[0] == '1') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[5]" value="1" data-col="5" <?= (isset($aktivitasTData[5]) && $aktivitasTData[5] == '1') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[15]" value="1" data-col="15" <?= (isset($aktivitasTData[15]) && $aktivitasTData[15] == '1') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[30]" value="1" data-col="30" <?= (isset($aktivitasTData[30]) && $aktivitasTData[30] == '1') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[15]" value="1" data-col="15" <?= (!isset($aktivitasTData[15]) || $aktivitasTData[15] == '1') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[30]" value="1" data-col="30" <?= (!isset($aktivitasTData[30]) || $aktivitasTData[30] == '1') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[45]" value="1" data-col="45" <?= (isset($aktivitasTData[45]) && $aktivitasTData[45] == '1') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[60]" value="1" data-col="60" <?= (isset($aktivitasTData[60]) && $aktivitasTData[60] == '1') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[120]" value="1" data-col="120" <?= (isset($aktivitasTData[120]) && $aktivitasTData[120] == '1') ? 'checked' : '' ?>></td>
@@ -1159,8 +1180,8 @@
                                             <tr data-parameter="aktivitas">
                                                 <td class="text-start">Tidak mampu menggerakkan ekstremitas</td>
                                                 <td>0</td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[0]" value="0" data-col="0" <?= (isset($aktivitasTData[0]) && $aktivitasTData[0] == '0') ? 'checked' : '' ?>></td>
-                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[5]" value="0" data-col="5" <?= (isset($aktivitasTData[5]) && $aktivitasTData[5] == '0') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[0]" value="0" data-col="0" <?= (!isset($aktivitasTData[0]) || $aktivitasTData[0] == '0') ? 'checked' : '' ?>></td>
+                                                <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[5]" value="0" data-col="5" <?= (!isset($aktivitasTData[5]) || $aktivitasTData[5] == '0') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[15]" value="0" data-col="15" <?= (isset($aktivitasTData[15]) && $aktivitasTData[15] == '0') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[30]" value="0" data-col="30" <?= (isset($aktivitasTData[30]) && $aktivitasTData[30] == '0') ? 'checked' : '' ?>></td>
                                                 <td><input class="form-check-input score-radio" type="radio" name="aktivitas_t[45]" value="0" data-col="45" <?= (isset($aktivitasTData[45]) && $aktivitasTData[45] == '0') ? 'checked' : '' ?>></td>
@@ -1176,7 +1197,7 @@
                                             <tr>
                                                 <td colspan="2" class="text-start align-top">
                                                     <label for="catatanAldrete" class="form-label fw-semibold">Catatan :</label>
-                                                    <textarea class="form-control form-control-sm" id="catatanAldrete" name="catatanAldrete" rows="3"><?= $data->rm11b2MonitoringAnestesi['catatanAldrete'] ?? '' ?></textarea>
+                                                    <textarea class="form-control form-control-sm" id="catatanAldrete" name="catatanAldrete" rows="3"><?= $data->rm11b2MonitoringAnestesi['catatanAldrete'] ?? '-' ?></textarea>
                                                 </td>
                                                 <td colspan="1" class="align-middle fw-bold bg-light text-end">Total</td>
                                                 <!-- Kolom total skor di bawah setiap waktu/kolom -->
@@ -1234,6 +1255,59 @@
 
                                         // Hitung saat halaman dimuat (jika ada data lama yang sudah ter-check)
                                         calculateTotals();
+                                    });
+
+
+
+                                    $(document).ready(function() {
+                                        // Fungsi bantu untuk format tanggal ke YYYY-MM-DDTHH:mm
+                                        function formatDateTimeLocal(date) {
+                                            const year = date.getFullYear();
+                                            const month = String(date.getMonth() + 1).padStart(2, '0');
+                                            const day = String(date.getDate()).padStart(2, '0');
+                                            const hours = String(date.getHours()).padStart(2, '0');
+                                            const minutes = String(date.getMinutes()).padStart(2, '0');
+                                            return `${year}-${month}-${day}T${hours}:${minutes}`;
+                                        }
+
+                                        // 1. Ketika 'waktuInsisi' diubah nilainya
+                                        $('#waktuInsisi').on('change', function() {
+                                            const valInsisi = $(this).val();
+                                            if (!valInsisi) return;
+
+                                            const baseDate = new Date(valInsisi).getTime();
+
+                                            // Mengisi field-field yang bergantung pada waktu insisi
+                                            $('#waktuMasukOk').val(formatDateTimeLocal(new Date(baseDate - 20 * 60000)));
+                                            $('#waktuPembiusan').val(formatDateTimeLocal(new Date(baseDate - 10 * 60000)));
+
+                                            // Waktu Selesai Operasi (+45 menit)
+                                            const selesaiOp = formatDateTimeLocal(new Date(baseDate + 45 * 60000));
+                                            $('#waktuSelesaiOp').val(selesaiOp);
+
+                                            // PENTING: Memicu event change secara manual agar fungsi di bawahnya ikut berjalan!
+                                            $('#waktuSelesaiOp').trigger('change');
+
+                                            $('#waktuSelesaiAnestesi').val(formatDateTimeLocal(new Date(baseDate + 55 * 60000)));
+                                            $('#waktuKeluarOk').val(formatDateTimeLocal(new Date(baseDate + 65 * 60000)));
+                                            $('#waktuBayiLahir').val(formatDateTimeLocal(new Date(baseDate + 5 * 60000)));
+                                        });
+
+                                        // 2. Ketika 'waktuSelesaiOp' berubah (baik manual maupun otomatis dari insisi)
+                                        $('#waktuSelesaiOp').on('change', function() {
+                                            const valSelesaiOp = $(this).val();
+                                            if (!valSelesaiOp) return;
+
+                                            // Tambah 4 jam (4 * 60 * 60 * 1000 = 14,400,000 ms)
+                                            const baseDateOp = new Date(valSelesaiOp).getTime();
+                                            const targetDate = new Date(baseDateOp + 4 * 60 * 60 * 1000);
+                                            const formattedTarget = formatDateTimeLocal(targetDate);
+
+                                            // Masukkan nilai yang sama ke Minum, Makan, dan Bising Usus
+                                            $('#puasaMinum').val(formattedTarget);
+                                            $('#puasaMakan').val(formattedTarget);
+                                            $('#puasaSampai').val(formattedTarget); // Sesuaikan jika format bising usus berbeda
+                                        });
                                     });
                                 </script>
                             </div>

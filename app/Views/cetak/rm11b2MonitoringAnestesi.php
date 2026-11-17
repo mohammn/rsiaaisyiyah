@@ -496,9 +496,11 @@ function formatDateTime($datetimeStr)
 
                 <table class="table table-sm table-bordered">
                     <tr>
-                        <td style="width: 40%;">
-                            <b>Anestesi Regional / Blok Saraf Perifer</b>
+                        <td style="width: 60%;">
                             <table class="table table-sm table-borderless mb-0 tabelSempit">
+                                <tr>
+                                    <th colspan="2" class="text-center bg-light p-1">Anestesi Regional / Blok Saraf Perifer</th>
+                                </tr>
                                 <tr>
                                     <td>Teknik</td>
                                     <td>: <?= $data->rm11b2MonitoringAnestesi["teknik"] ?? '-' ?></td>
@@ -521,7 +523,7 @@ function formatDateTime($datetimeStr)
                                 </tr>
                             </table>
                         </td>
-                        <td style="width: 40%;">
+                        <td style="width: 20%;">
                             <b>Catatan :</b> <br>
                             <?= nl2br(esc($data->rm11b2MonitoringAnestesi["catatanIntra"])) ?? '-' ?>
                         </td>
@@ -621,7 +623,7 @@ function formatDateTime($datetimeStr)
 
                 <table class="table table-sm table-bordered">
                     <tr>
-                        <td style="width: 50%;">
+                        <td>
                             <table class="table table-sm table-borderless">
                                 <tr>
                                     <td>Pendarahan</td>
@@ -641,114 +643,9 @@ function formatDateTime($datetimeStr)
                                 </tr>
                             </table>
                         </td>
-                        <td>
-                            <b>Pesanan / Tindakan di ruang pulih sadar :</b><br>
-                            <?= nl2br(esc($data->rm11b2MonitoringAnestesi["perasanTindakan"] ?? '-')) ?>
-                        </td>
                     </tr>
                 </table>
 
-                <?php
-                // Ambil dan decode JSON dari kolom bromage_t
-                $bromage_t = json_decode($data->rm11b2MonitoringAnestesi['bromage_t'] ?? '{}', true) ?: [];
-                $bromage_keluar = $data->rm11b2MonitoringAnestesi['bromage_keluar'] ?? '';
-                ?>
-
-                <table class="table table-bordered align-middle text-center table-sm table-hover" id="bromageTable">
-                    <thead class="table-light">
-                        <tr>
-                            <th style="width: 35%;">Bromage Score</th>
-                            <th style="width: 7%;">N</th>
-                            <th style="width: 4%;">0"</th>
-                            <th style="width: 4%;">5"</th>
-                            <th style="width: 4%;">15"</th>
-                            <th style="width: 4%;">30"</th>
-                            <th style="width: 4%;">45"</th>
-                            <th style="width: 4%;">1'</th>
-                            <th style="width: 4%;">2'</th>
-                            <th style="width: 4%;">3'</th>
-                            <th style="width: 4%;">4'</th>
-                            <th style="width: 8%;">K</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- BROMAGE 3 -->
-                        <tr>
-                            <td class="text-center align-middle bg-white" style="height: 70px;">
-                                <img src="<?= base_url() ?>public/assets/img/Rm11b2MonitoringAnestesi/bromage3.png" width="50%" alt="">
-                                <div class="small fw-semibold mt-1">Bromage 3 (complete)</div>
-                            </td>
-                            <td class="fw-bold">3</td>
-                            <td><?= (($bromage_t['0'] ?? '') == '3') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['5'] ?? '') == '3') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['15'] ?? '') == '3') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['30'] ?? '') == '3') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['45'] ?? '') == '3') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['60'] ?? '') == '3') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['120'] ?? '') == '3') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['180'] ?? '') == '3') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['240'] ?? '') == '3') ? '✓' : '' ?></td>
-                            <td><?= ($bromage_keluar == '3') ? '✓' : '' ?></td>
-                        </tr>
-
-                        <!-- BROMAGE 2 -->
-                        <tr>
-                            <td class="text-center align-middle bg-white" style="height: 70px;">
-                                <img src="<?= base_url() ?>public/assets/img/Rm11b2MonitoringAnestesi/bromage2.png" width="50%" alt="">
-                                <div class="small fw-semibold mt-1">Bromage 2 (almost complete)</div>
-                            </td>
-                            <td class="fw-bold">2</td>
-                            <td><?= (($bromage_t['0'] ?? '') == '2') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['5'] ?? '') == '2') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['15'] ?? '') == '2') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['30'] ?? '') == '2') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['45'] ?? '') == '2') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['60'] ?? '') == '2') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['120'] ?? '') == '2') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['180'] ?? '') == '2') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['240'] ?? '') == '2') ? '✓' : '' ?></td>
-                            <td><?= ($bromage_keluar == '2') ? '✓' : '' ?></td>
-                        </tr>
-
-                        <!-- BROMAGE 1 -->
-                        <tr>
-                            <td class="text-center align-middle bg-white" style="height: 70px;">
-                                <img src="<?= base_url() ?>public/assets/img/Rm11b2MonitoringAnestesi/bromage1.png" width="50%" alt="">
-                                <div class="small fw-semibold mt-1">Bromage 1 (partial)</div>
-                            </td>
-                            <td class="fw-bold">1</td>
-                            <td><?= (($bromage_t['0'] ?? '') == '1') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['5'] ?? '') == '1') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['15'] ?? '') == '1') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['30'] ?? '') == '1') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['45'] ?? '') == '1') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['60'] ?? '') == '1') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['120'] ?? '') == '1') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['180'] ?? '') == '1') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['240'] ?? '') == '1') ? '✓' : '' ?></td>
-                            <td><?= ($bromage_keluar == '1') ? '✓' : '' ?></td>
-                        </tr>
-
-                        <!-- BROMAGE 0 -->
-                        <tr>
-                            <td class="text-center align-middle bg-white" style="height: 70px;">
-                                <img src="<?= base_url() ?>public/assets/img/Rm11b2MonitoringAnestesi/bromage0.png" width="50%" alt="">
-                                <div class="small fw-semibold mt-1">Bromage 0 (none)</div>
-                            </td>
-                            <td class="fw-bold">0</td>
-                            <td><?= (($bromage_t['0'] ?? '') == '0') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['5'] ?? '') == '0') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['15'] ?? '') == '0') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['30'] ?? '') == '0') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['45'] ?? '') == '0') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['60'] ?? '') == '0') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['120'] ?? '') == '0') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['180'] ?? '') == '0') ? '✓' : '' ?></td>
-                            <td><?= (($bromage_t['240'] ?? '') == '0') ? '✓' : '' ?></td>
-                            <td><?= ($bromage_keluar == '0') ? '✓' : '' ?></td>
-                        </tr>
-                    </tbody>
-                </table>
 
                 <?php
                 // Ambil dan decode JSON untuk masing-masing parameter dari database
@@ -771,14 +668,12 @@ function formatDateTime($datetimeStr)
                 $waktu_kolom = ['0', '5', '15', '30', '45', '60', '120', '180', '240'];
                 ?>
 
-            </div>
-        </div>
-        <div class="page">
-            <div class="subpage">
-                <br>
-                <b>TD Pra-Anestesi : <?= $data->rm11b2MonitoringAnestesi["td_pra_anestesi"] ?? '-' ?>.</b><br><br>
+                <!-- <b>TD Pra-Anestesi : < //$data->rm11b2MonitoringAnestesi["td_pra_anestesi"] ?? '-' ?>.</b><br><br> -->
                 <table class="table table-bordered table-sm table-striped table-hover align-middle text-center" id="aldreteTable">
                     <thead>
+                        <tr>
+                            <th class="text-center" colspan="13">SKOR ALDRETTE PASCA ANESTESI</th>
+                        </tr>
                         <tr>
                             <th style="width: 15%;">Parameter</th>
                             <th style="width: 38%;">Kriteria Penilaian</th>
@@ -953,7 +848,126 @@ function formatDateTime($datetimeStr)
                     </tfoot>
                 </table>
 
-                Pasien Pindah ke : <b><?= $data->rm11b2MonitoringAnestesi["pindahKe"] ?? '-' ?>.</b> Tanggal / Jam : <b><?= formatDateTime($data->rm11b2MonitoringAnestesi["waktuPindah"] ?? null) ?>.</b> Disetujui oleh : <b><?= $data->rm11b2MonitoringAnestesi["disetujuiOleh"] ?? '-' ?>.</b> TT : <b><?= $data->rm11b2MonitoringAnestesi["tt"] ?? '-' ?>.</b>
+            </div>
+        </div>
+        <div class="page">
+            <div class="subpage">
+                <br>
+                <?php
+                // Ambil dan decode JSON dari kolom bromage_t
+                $bromage_t = json_decode($data->rm11b2MonitoringAnestesi['bromage_t'] ?? '{}', true) ?: [];
+                $bromage_keluar = $data->rm11b2MonitoringAnestesi['bromage_keluar'] ?? '';
+                ?>
+
+
+                <table class="table table-bordered align-middle text-center table-sm table-hover" id="bromageTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 35%;">Bromage Score</th>
+                            <th style="width: 7%;">N</th>
+                            <th style="width: 4%;">0"</th>
+                            <th style="width: 4%;">5"</th>
+                            <th style="width: 4%;">15"</th>
+                            <th style="width: 4%;">30"</th>
+                            <th style="width: 4%;">45"</th>
+                            <th style="width: 4%;">1'</th>
+                            <th style="width: 4%;">2'</th>
+                            <th style="width: 4%;">3'</th>
+                            <th style="width: 4%;">4'</th>
+                            <th style="width: 8%;">K</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- BROMAGE 3 -->
+                        <tr>
+                            <td class="text-center align-middle bg-white" style="height: 70px;">
+                                <img src="<?= base_url() ?>public/assets/img/Rm11b2MonitoringAnestesi/bromage3.png" width="50%" alt="">
+                                <div class="small fw-semibold mt-1">Bromage 3 (complete)</div>
+                            </td>
+                            <td class="fw-bold">3</td>
+                            <td><?= (($bromage_t['0'] ?? '') == '3') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['5'] ?? '') == '3') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['15'] ?? '') == '3') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['30'] ?? '') == '3') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['45'] ?? '') == '3') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['60'] ?? '') == '3') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['120'] ?? '') == '3') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['180'] ?? '') == '3') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['240'] ?? '') == '3') ? '✓' : '' ?></td>
+                            <td><?= ($bromage_keluar == '3') ? '✓' : '' ?></td>
+                        </tr>
+
+                        <!-- BROMAGE 2 -->
+                        <tr>
+                            <td class="text-center align-middle bg-white" style="height: 70px;">
+                                <img src="<?= base_url() ?>public/assets/img/Rm11b2MonitoringAnestesi/bromage2.png" width="50%" alt="">
+                                <div class="small fw-semibold mt-1">Bromage 2 (almost complete)</div>
+                            </td>
+                            <td class="fw-bold">2</td>
+                            <td><?= (($bromage_t['0'] ?? '') == '2') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['5'] ?? '') == '2') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['15'] ?? '') == '2') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['30'] ?? '') == '2') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['45'] ?? '') == '2') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['60'] ?? '') == '2') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['120'] ?? '') == '2') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['180'] ?? '') == '2') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['240'] ?? '') == '2') ? '✓' : '' ?></td>
+                            <td><?= ($bromage_keluar == '2') ? '✓' : '' ?></td>
+                        </tr>
+
+                        <!-- BROMAGE 1 -->
+                        <tr>
+                            <td class="text-center align-middle bg-white" style="height: 70px;">
+                                <img src="<?= base_url() ?>public/assets/img/Rm11b2MonitoringAnestesi/bromage1.png" width="50%" alt="">
+                                <div class="small fw-semibold mt-1">Bromage 1 (partial)</div>
+                            </td>
+                            <td class="fw-bold">1</td>
+                            <td><?= (($bromage_t['0'] ?? '') == '1') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['5'] ?? '') == '1') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['15'] ?? '') == '1') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['30'] ?? '') == '1') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['45'] ?? '') == '1') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['60'] ?? '') == '1') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['120'] ?? '') == '1') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['180'] ?? '') == '1') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['240'] ?? '') == '1') ? '✓' : '' ?></td>
+                            <td><?= ($bromage_keluar == '1') ? '✓' : '' ?></td>
+                        </tr>
+
+                        <!-- BROMAGE 0 -->
+                        <tr>
+                            <td class="text-center align-middle bg-white" style="height: 70px;">
+                                <img src="<?= base_url() ?>public/assets/img/Rm11b2MonitoringAnestesi/bromage0.png" width="50%" alt="">
+                                <div class="small fw-semibold mt-1">Bromage 0 (none)</div>
+                            </td>
+                            <td class="fw-bold">0</td>
+                            <td><?= (($bromage_t['0'] ?? '') == '0') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['5'] ?? '') == '0') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['15'] ?? '') == '0') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['30'] ?? '') == '0') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['45'] ?? '') == '0') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['60'] ?? '') == '0') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['120'] ?? '') == '0') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['180'] ?? '') == '0') ? '✓' : '' ?></td>
+                            <td><?= (($bromage_t['240'] ?? '') == '0') ? '✓' : '' ?></td>
+                            <td><?= ($bromage_keluar == '0') ? '✓' : '' ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-sm table-bordered">
+                    <tr>
+                        <td>
+                            <b>Pesanan / Tindakan di ruang pulih sadar :</b><br>
+                            <?= nl2br(esc($data->rm11b2MonitoringAnestesi["perasanTindakan"] ?? '-')) ?>
+                        </td>
+                    </tr>
+                </table>
+
+
+                Pasien Pindah ke : <b><?= $data->rm11b2MonitoringAnestesi["pindahKe"] ?? '-' ?>.</b> Tanggal / Jam : <b><?= formatDateTime($data->rm11b2MonitoringAnestesi["waktuPindah"] ?? null) ?>.</b>
+                <!-- Disetujui oleh : <b>< $data->rm11b2MonitoringAnestesi["disetujuiOleh"] ?? '-' ?>.</b> TT : <b>< $data->rm11b2MonitoringAnestesi["tt"] ?? '-' ?>.</b> -->
                 <table class="table table-sm table-bordered">
                     <tr>
                         <td colspan="3" class="text-center fw-bold">Pesanan Pasien Pindah Pasca Anestesi</td>
@@ -982,16 +996,20 @@ function formatDateTime($datetimeStr)
                     </tr>
                     <tr>
                         <td rowspan="6">3</td>
-                        <td>Observasi</td>
-                        <td>: <?= $data->rm11b2MonitoringAnestesi["observasi"] ?? '-' ?></td>
+                        <td colspan="2" class="fw-bold">Observasi</td>
+                        <!-- <td>: < $data->rm11b2MonitoringAnestesi["observasi"] ?? '-' ?></td> -->
                     </tr>
                     <tr>
                         <td>Tensi</td>
-                        <td>: <?= $data->rm11b2MonitoringAnestesi["tensi"] ?? '-' ?> bila sistole > 160 mmHg <?= $data->rm11b2MonitoringAnestesi["tensi_bila"] ?? '-' ?></td>
+                        <td>: <?= $data->rm11b2MonitoringAnestesi["tensi"] ?? '-' ?>
+                            <!-- bila sistole > 160 mmHg < $data->rm11b2MonitoringAnestesi["tensi_bila"] ?? '-' ?> -->
+                        </td>
                     </tr>
                     <tr>
                         <td>Nadi</td>
-                        <td>: <?= $data->rm11b2MonitoringAnestesi["nadi"] ?? '-' ?> bila <?= $data->rm11b2MonitoringAnestesi["nadi_bila"] ?? '-' ?></td>
+                        <td>: <?= $data->rm11b2MonitoringAnestesi["nadi"] ?? '-' ?>
+                            <!-- bila < $data->rm11b2MonitoringAnestesi["nadi_bila"] ?? '-' ?> -->
+                        </td>
                     </tr>
                     <tr>
                         <td>Kesadaran</td>
@@ -1290,7 +1308,7 @@ function formatDateTime($datetimeStr)
                         fill: false
                     },
                     {
-                        label: "Temp",
+                        label: "Nadi",
                         data: [0],
                         borderColor: "#f59e0b",
                         backgroundColor: "#f59e0b",
@@ -1540,7 +1558,7 @@ function formatDateTime($datetimeStr)
                         fill: false
                     },
                     {
-                        label: "Temp",
+                        label: "Nadi",
                         data: [0],
                         borderColor: "#f59e0b",
                         backgroundColor: "#f59e0b",

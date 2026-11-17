@@ -280,7 +280,9 @@ class Rm11b2MonitoringAnestesi extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException();
         }
 
-        // Mengambil data yang dikirim via POST dari jQuery
+        // Mengambil data yang dikirim via POST dari jQuery (Tanpa 'tujuan' untuk db)
+        $tujuan = $this->request->getPost('tujuan'); // Ambil tujuan hanya untuk percabangan logika
+
         $dataSimpan = [
             'idMonitoring' => $this->request->getPost('idMonitoring'),
             'waktu'        => $this->request->getPost('waktu'),
@@ -292,42 +294,134 @@ class Rm11b2MonitoringAnestesi extends BaseController
             'jenis'        => $this->request->getPost('jenis')
         ];
 
-        // Validasi data kosong (terutama waktu dan relasi idMonitoring)
-        if (empty($dataSimpan['waktu']) || empty($dataSimpan['idMonitoring'])) {
-            return $this->response->setJSON([
-                'status'  => 'error',
-                'message' => 'Waktu dan ID Monitoring wajib diisi!'
-            ]);
-        }
+        $dataTemplate = [];
 
-        // Cek apakah data dengan idMonitoring, waktu, dan jenis yang sama sudah ada di database
-        $cekAda = $this->rm11b2MonitoringAnestesiDataModel
-            ->where('idMonitoring', $dataSimpan['idMonitoring'])
-            ->where('waktu', $dataSimpan['waktu'])
-            ->where('jenis', $dataSimpan['jenis'])
-            ->first();
+        if ($tujuan == 'template') {
+            // Ambil nilai dasar dari input
+            $waktuAwal    = $this->request->getPost('waktu');
+            $stAwal       = (int) $this->request->getPost('sistolik');
+            $dAwal        = (int) $this->request->getPost('diastolik');
+            $idMonitoring = $this->request->getPost('idMonitoring');
+            $jenis        = $this->request->getPost('jenis');
 
-        // Jika data sudah ada, abaikan/batalkan penyimpanan
-        if ($cekAda) {
-            return $this->response->setJSON([
-                'status'  => 'ignored',
-                'message' => 'Data untuk waktu jam ' . $dataSimpan['waktu'] . ' sudah ada, input diabaikan.'
-            ]);
-        }
+            // Ubah format waktu awal ke timestamp agar mudah ditambah menit
+            $timestampAwal = strtotime($waktuAwal);
 
-        // Proses simpan ke database menggunakan model
-        $simpan = $this->rm11b2MonitoringAnestesiDataModel->insert($dataSimpan);
+            // Loop sebanyak 4 kali (index 0 sampai 3)
+            for ($i = 0; $i < 4; $i++) {
+                // Hitung penambahan waktu kelipatan 15 menit (0, 15, 30, 45)
+                $waktuBaru = date('H:i', strtotime("+" . ($i * 15) . " minutes", $timestampAwal));
 
-        if ($simpan) {
-            return $this->response->setJSON([
-                'status'  => 'success',
-                'message' => 'Data tanda vital berhasil disimpan.'
-            ]);
+                // Menyesuaikan pola Sistolik & Diastolik berdasarkan urutan baris ($i)
+                if ($i == 0) {
+                    $st = $stAwal;
+                    $d  = $dAwal;
+                } elseif ($i == 1) {
+                    $st = $stAwal + 5;
+                    $d  = $dAwal + 5;
+                } elseif ($i == 2) {
+                    $st = $stAwal;
+                    $d  = $dAwal;
+                } elseif ($i == 3) {
+                    $st = $stAwal - 10;
+                    $d  = $dAwal - 5;
+                }
+
+                // --- Cek ke database berdasarkan idMonitoring, waktu, dan jenis ---
+                $cekAda = $this->rm11b2MonitoringAnestesiDataModel
+                    ->where('idMonitoring', $idMonitoring)
+                    ->where('waktu', $waktuBaru)
+                    ->where('jenis', $jenis)
+                    ->first();
+
+                // Jika data sudah ada di database, lewati (pass)
+                if ($cekAda) {
+                    continue;
+                }
+
+                // Jika belum ada, susun data sementara (tanpa 'tujuan') lalu masukkan ke array
+                $dataSementara = [
+                    'idMonitoring' => $idMonitoring,
+                    'waktu'        => $waktuBaru,
+                    'sistolik'     => $st,
+                    'diastolik'    => $d,
+                    'rr'           => $this->request->getPost('rr'),
+                    'spo2'         => $this->request->getPost('spo2'),
+                    'temp'         => $this->request->getPost('temp'),
+                    'jenis'        => $jenis
+                ];
+
+                array_push($dataTemplate, $dataSementara);
+            }
+
+            // Cek apakah dataTemplate tidak kosong sebelum melakukan insert batch
+            if (!empty($dataTemplate)) {
+                $simpan = $this->rm11b2MonitoringAnestesiDataModel->insertBatch($dataTemplate);
+
+                if ($simpan) {
+                    return $this->response->setJSON([
+                        'status'  => 'success',
+                        'message' => 'Data template tanda vital berhasil disimpan.'
+                    ]);
+                } else {
+                    return $this->response->setJSON([
+                        'status'  => 'error',
+                        'message' => 'Gagal menyimpan data template ke database.'
+                    ]);
+                }
+            } else {
+                return $this->response->setJSON([
+                    'status'  => 'error',
+                    'message' => 'Data template gagal disimpan karena semua interval waktu tersebut sudah ada di database.'
+                ]);
+            }
         } else {
-            return $this->response->setJSON([
-                'status'  => 'error',
-                'message' => 'Gagal menyimpan data ke database.'
-            ]);
+            // Proses untuk Single Data (Insert atau Update)
+            $simpan = NULL;
+
+            if ($tujuan == 'update') {
+                // Logika Update: Update data berdasarkan idMonitoring, waktu, dan jenis
+                $simpan = $this->rm11b2MonitoringAnestesiDataModel
+                    ->where('idMonitoring', $dataSimpan['idMonitoring'])
+                    ->where('waktu', $dataSimpan['waktu'])
+                    ->where('jenis', $dataSimpan['jenis'])
+                    ->set($dataSimpan)
+                    ->update();
+
+                $pesanSukses = 'Data tanda vital berhasil diperbarui.';
+                $pesanGagal  = 'Gagal memperbarui data ke database.';
+            } else {
+                // Logika Insert Single: Cek dulu apakah data sudah ada
+                $cekAda = $this->rm11b2MonitoringAnestesiDataModel
+                    ->where('idMonitoring', $dataSimpan['idMonitoring'])
+                    ->where('waktu', $dataSimpan['waktu'])
+                    ->where('jenis', $dataSimpan['jenis'])
+                    ->first();
+
+                if ($cekAda) {
+                    return $this->response->setJSON([
+                        'status'  => 'ignored',
+                        'message' => 'Data untuk waktu jam ' . $dataSimpan['waktu'] . ' sudah ada, input diabaikan.'
+                    ]);
+                }
+
+                $simpan = $this->rm11b2MonitoringAnestesiDataModel->insert($dataSimpan);
+
+                $pesanSukses = 'Data tanda vital berhasil disimpan.';
+                $pesanGagal  = 'Gagal menyimpan data ke database.';
+            }
+
+            if ($simpan) {
+                return $this->response->setJSON([
+                    'status'  => 'success',
+                    'message' => $pesanSukses
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'status'  => 'error',
+                    'message' => $pesanGagal
+                ]);
+            }
         }
     }
 
@@ -381,6 +475,31 @@ class Rm11b2MonitoringAnestesi extends BaseController
                 'spo2'      => $spo2,
                 'temp'      => $temp
             ]
+        ];
+
+        // Return sebagai JSON ke jQuery di sisi klien
+        return $this->response->setJSON($response);
+    }
+
+    public function getDataMonitoringById()
+    {
+        // Pastikan request datang dari AJAX
+        if (!$this->request->isAJAX()) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException();
+        }
+
+        $id = $this->request->getPost('id');
+
+        // Ambil data dari database menggunakan model, diurutkan berdasarkan waktu (ASC)
+        $queryData = $this->rm11b2MonitoringAnestesiDataModel
+            ->where('id', $id)
+            ->first();
+
+        // Menggabungkan data mentah dari DB dan data yang sudah diolah/dikelompokkan
+        $response = [
+            'status' => 'success',
+            // 1. Data mentah langsung dari database
+            'data' => $queryData,
         ];
 
         // Return sebagai JSON ke jQuery di sisi klien
