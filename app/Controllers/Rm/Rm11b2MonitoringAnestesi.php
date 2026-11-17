@@ -313,6 +313,8 @@ class Rm11b2MonitoringAnestesi extends BaseController
                 $waktuBaru = date('H:i', strtotime("+" . ($i * 15) . " minutes", $timestampAwal));
 
                 // Menyesuaikan pola Sistolik & Diastolik berdasarkan urutan baris ($i)
+                $st = $stAwal;
+                $d  = $dAwal;
                 if ($i == 0) {
                     $st = $stAwal;
                     $d  = $dAwal;
