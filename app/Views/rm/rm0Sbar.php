@@ -414,14 +414,14 @@
             dataType: 'json',
             success: function(data) {
                 $('#idVerif').val(data.id);
-                $('#dpetugas').text(data.petugas);
-                $('#ddokter').text(data.dokter);
-                $('#dwaktu').text(data.waktu);
+                $('#dpetugas').html(data.petugas);
+                $('#ddokter').html(data.dokter);
+                $('#dwaktu').html(data.waktu);
 
-                $('#ds').text(data.s);
-                $('#db').text(data.b);
-                $('#da').text(data.a);
-                $('#dr').text(data.r);
+                $('#ds').html(data.s);
+                $('#db').html(data.b);
+                $('#da').html(data.a);
+                $('#dr').html(data.r);
 
                 if (data.tglVerif) {
                     $('#dtglVerif').html(data.tglVerif);
@@ -519,7 +519,7 @@
                     // 2. Masukkan data ke dalam tbody
                     $("#dataTabelSbar").html(hasil);
 
-                    // 3. Inisialisasi ulang DataTable setelah html selesai dimuat
+                    // 3. Inisialisasi ulang DataTable setelah HTML selesai dimuat
                     $('#tabelSbar').DataTable({
                         // Anda bisa menambahkan konfigurasi DataTable di sini jika diperlukan, contoh:
                         "language": {
@@ -552,8 +552,8 @@
         function tryHapus(id) {
             $("#modalHapus").modal("show");
             $("#idHapus").val(id);
-            $("#namaPasienHapus").text("<?= $data->pasien["nm_pasien"] ?>")
-            $("#noRawatHapus").text("<?= $data->pasien["no_rawat"] ?>")
+            $("#namaPasienHapus").text("<?= json_encode($data->pasien["nm_pasien"]) ?>")
+            $("#noRawatHapus").html("<?= $data->pasien["no_rawat"] ?>")
         }
 
         function hapus() {
