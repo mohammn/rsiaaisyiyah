@@ -1228,7 +1228,7 @@
         function tryHapusObat(id, nama) {
             $("#modalHapusObat").modal("show");
             $("#idHapus").val(id);
-            $("#namaObatHapus").html(nama)
+            $("#namaObatHapus").text(nama)
         }
 
         function hapusObat() {
@@ -1338,7 +1338,7 @@
 
         function tryHapus() {
             $("#modalHapus").modal("show");
-            $("#namaPasienHapus").html("<?= $data->pasien["nm_pasien"] ?>")
+            $("#namaPasienHapus").text(<?= json_encode($data->pasien["nm_pasien"]) ?>)
             $("#noRawatHapus").html("<?= $data->pasien["no_rawat"] ?>")
         }
 
