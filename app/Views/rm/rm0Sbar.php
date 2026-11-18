@@ -575,7 +575,7 @@
 
         function tryHapusJudul() {
             $("#modalHapusJudul").modal("show");
-            $("#namaPasienHapusJudul").html("<?= $data->pasien["nm_pasien"] ?>")
+            $("#namaPasienHapus").text(<?= json_encode($data->pasien["nm_pasien"]) ?>)
             $("#noRawatHapusJudul").html("<?= $data->pasien["no_rawat"] ?>")
         }
 
