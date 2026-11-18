@@ -552,7 +552,7 @@
         function tryHapus(id) {
             $("#modalHapus").modal("show");
             $("#idHapus").val(id);
-            $("#namaPasienHapus").text("<?= json_encode($data->pasien["nm_pasien"]) ?>")
+            $("#namaPasienHapus").text(<?= json_encode($data->pasien["nm_pasien"]) ?>)
             $("#noRawatHapus").html("<?= $data->pasien["no_rawat"] ?>")
         }
 
