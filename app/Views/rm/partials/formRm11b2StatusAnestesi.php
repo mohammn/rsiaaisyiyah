@@ -75,8 +75,8 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Diagnosis Pra-Anestesi :</label>
-                                    <textarea class="form-control" id="diagnosisPraAnestesi" name="diagnosisPraAnestesi"><?= $data->rm11b2StatusAnestesi['diagnosisPraAnestesi'] ?? '' ?></textarea>
+                                    <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Diagnosis Pra-Anestesi : <i class="fw-normal" style="color: red;">(terisi otomatis dari pengkajian kebidanan.)</i></label>
+                                    <textarea class="form-control" id="diagnosisPraAnestesi" name="diagnosisPraAnestesi"><?= $data->rm11b2StatusAnestesi['diagnosisPraAnestesi'] ?? ($data->rm7bPengkajian['diagnosaKebidanan'] ?? '') ?></textarea>
                                 </div>
                             </div>
 
@@ -111,37 +111,183 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Diisi Oleh (dokter/perawat) :</label>
-                                    <input type="text" class="form-control" id="petugas" name="petugas" value="<?= $data->rm11b2StatusAnestesi['petugas'] ?? session()->get('nama') ?>">
+                                    <input type="text"
+                                        class="form-control"
+                                        id="petugas"
+                                        name="petugas"
+                                        list="listPetugasGabungan"
+                                        placeholder="-- Pilih atau Ketik Nama Dokter / Petugas --"
+                                        value="<?= htmlspecialchars($data->rm11b2StatusAnestesi['petugas'] ?? session()->get('nama') ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                        autocomplete="off">
+
+                                    <datalist id="listPetugasGabungan">
+                                        <?php if (!empty($data->dokter)): ?>
+                                            <?php foreach ($data->dokter as $dokter): ?>
+                                                <option value="<?= htmlspecialchars($dokter['nm_dokter'], ENT_QUOTES, 'UTF-8') ?>">
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+
+                                            <?php if (!empty($data->petugas)): ?>
+                                                <?php foreach ($data->petugas as $ptg): ?>
+                                                <option value="<?= htmlspecialchars($ptg['nama'], ENT_QUOTES, 'UTF-8') ?>">
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                    </datalist>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Spesialis Bedah :</label>
-                                    <input type="text" class="form-control" id="spesialisBedah" name="spesialisBedah" value="<?= $data->rm11b2StatusAnestesi['spesialisBedah'] ?? '' ?>">
+                                    <input type="text"
+                                        class="form-control"
+                                        id="spesialisBedah"
+                                        name="spesialisBedah"
+                                        list="listDokterSaja"
+                                        placeholder="-- Pilih atau Ketik Nama Dokter --"
+                                        value="<?= htmlspecialchars($data->rm11b2StatusAnestesi['spesialisBedah'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                        autocomplete="off">
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 position-relative">
                                     <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Asisten Bedah :</label>
-                                    <input type="text" class="form-control" id="asistenBedah" name="asistenBedah" value="<?= $data->rm11b2StatusAnestesi['asistenBedah'] ?? '' ?>">
+                                    <input type="text"
+                                        class="form-control"
+                                        id="asistenBedah"
+                                        name="asistenBedah"
+                                        placeholder="-- Pilih atau Ketik Nama Petugas (pisahkan dengan ;) --"
+                                        value="<?= htmlspecialchars($data->rm11b2StatusAnestesi['asistenBedah'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                        autocomplete="off">
+
+                                    <!-- Wadah saran custom -->
+                                    <div id="saranAsistenBedah"
+                                        class="list-group position-absolute w-100 shadow-sm"
+                                        style="z-index: 1050; max-height: 200px; overflow-y: auto; display: none;"></div>
                                 </div>
                             </div>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const input = document.getElementById('asistenBedah');
+                                    const saranBox = document.getElementById('saranAsistenBedah');
+                                    const datalist = document.getElementById('listPetugasSaja');
+
+                                    if (!input || !saranBox || !datalist) return;
+
+                                    const semuaPetugas = Array.from(datalist.options)
+                                        .map(opt => opt.value.trim())
+                                        .filter(Boolean);
+
+                                    function renderSaran() {
+                                        const val = input.value;
+                                        const lastSemiIndex = val.lastIndexOf(';');
+
+                                        // Ambil teks setelah ';' terakhir (atau seluruh teks jika belum ada ';')
+                                        const prefix = lastSemiIndex >= 0 ? val.slice(0, lastSemiIndex + 1) : '';
+                                        const kataKunci = (lastSemiIndex >= 0 ? val.slice(lastSemiIndex + 1) : val)
+                                            .trim()
+                                            .toLowerCase();
+
+                                        // Nama-nama yang sudah dipilih sebelumnya
+                                        const sudahDipilih = val
+                                            .split(';')
+                                            .slice(0, lastSemiIndex >= 0 ? -1 : 0)
+                                            .map(item => item.trim().toLowerCase())
+                                            .filter(Boolean);
+
+                                        // Filter daftar saran: cocok dengan kata kunci & belum dipilih
+                                        const hasilFilter = semuaPetugas.filter(nama => {
+                                            const namaLower = nama.toLowerCase();
+                                            if (sudahDipilih.includes(namaLower)) return false;
+                                            if (!kataKunci) return true; // Jika baru ketik ';', tampilkan semua opsi yang tersedia
+                                            return namaLower.includes(kataKunci);
+                                        });
+
+                                        saranBox.innerHTML = '';
+
+                                        if (hasilFilter.length === 0) {
+                                            saranBox.style.display = 'none';
+                                            return;
+                                        }
+
+                                        hasilFilter.forEach(nama => {
+                                            const item = document.createElement('button');
+                                            item.type = 'button';
+                                            item.className = 'list-group-item list-group-item-action py-1 px-2 small';
+                                            item.textContent = nama;
+
+                                            // Gunakan mousedown agar tidak hilang sebelum event blur input jalan
+                                            item.addEventListener('mousedown', function(e) {
+                                                e.preventDefault();
+                                                const awalan = prefix ? prefix.replace(/;\s*$/, '; ') : '';
+                                                input.value = awalan + nama + '; ';
+                                                input.focus();
+                                                renderSaran(); // Langsung perbarui daftar untuk pilihan berikutnya
+                                            });
+
+                                            saranBox.appendChild(item);
+                                        });
+
+                                        saranBox.style.display = 'block';
+                                    }
+
+                                    input.addEventListener('focus', renderSaran);
+                                    input.addEventListener('input', renderSaran);
+
+                                    // Tutup daftar saran saat klik di luar
+                                    document.addEventListener('click', function(e) {
+                                        if (!input.contains(e.target) && !saranBox.contains(e.target)) {
+                                            saranBox.style.display = 'none';
+                                        }
+                                    });
+                                });
+                            </script>
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Spesialis Anestesiologi :</label>
-                                    <input type="text" class="form-control" id="spesialisAnestesiologi" name="spesialisAnestesiologi" value="<?= $data->rm11b2StatusAnestesi['spesialisAnestesiologi'] ?? '' ?>">
+                                    <input type="text"
+                                        class="form-control"
+                                        id="spesialisAnestesiologi"
+                                        name="spesialisAnestesiologi"
+                                        list="listDokterSaja"
+                                        placeholder="-- Pilih atau Ketik Nama Dokter --"
+                                        value="<?= htmlspecialchars($data->rm11b2StatusAnestesi['spesialisAnestesiologi'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                        autocomplete="off">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="form-label fw-bold small text-secondary mb-0 text-nowrap">Asisten/Perawat Anestesi :</label>
-                                    <input type="text" class="form-control" id="asistenAnestesi" name="asistenAnestesi" value="<?= $data->rm11b2StatusAnestesi['asistenAnestesi'] ?? '' ?>">
+                                    <input type="text"
+                                        class="form-control"
+                                        id="asistenAnestesi"
+                                        name="asistenAnestesi"
+                                        list="listPetugasSaja"
+                                        placeholder="-- Pilih atau Ketik Nama Petugas --"
+                                        value="<?= htmlspecialchars($data->rm11b2StatusAnestesi['asistenAnestesi'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                        autocomplete="off">
                                 </div>
                             </div>
+
+                            <datalist id="listDokterSaja">
+                                <?php if (!empty($data->dokter)): ?>
+                                    <?php foreach ($data->dokter as $dokter): ?>
+                                        <option value="<?= htmlspecialchars($dokter['nm_dokter'], ENT_QUOTES, 'UTF-8') ?>">
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                            </datalist>
+
+                            <datalist id="listPetugasSaja">
+                                <?php if (!empty($data->petugas)): ?>
+                                    <?php foreach ($data->petugas as $ptg): ?>
+                                        <option value="<?= htmlspecialchars($ptg['nama'], ENT_QUOTES, 'UTF-8') ?>">
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                            </datalist>
 
                         </div>
                     </div>
@@ -375,6 +521,32 @@
                                 </div>
                             </div>
 
+                            <script>
+                                $(function() {
+                                    const fieldMap = {
+                                        tensiDarah: '#tdIII',
+                                        nadi: '#hrIII',
+                                        rr: '#rrIII',
+                                        suhu: '#tIII'
+                                    };
+
+                                    $.each(fieldMap, function(sourceName, targetSelector) {
+                                        const $source = $(`input[name="${sourceName}"]`);
+                                        const $target = $(targetSelector);
+
+                                        // Sinkronisasi real-time saat diketik
+                                        $source.on('input', function() {
+                                            $target.val($(this).val());
+                                        });
+
+                                        // Isi otomatis saat load jika sumber ada isi & target masih kosong
+                                        if ($source.val() && !$target.val()) {
+                                            $target.val($source.val());
+                                        }
+                                    });
+                                });
+                            </script>
+
 
                         </div>
 
@@ -490,8 +662,8 @@
                                 <div class="col-sm-12">
                                     <!-- 1. Hb/Het -->
                                     <div class="mb-2">
-                                        <label class="form-label fw-bold small text-secondary mb-0 ms-1" for="hbHet">Hb/Het :</label>
-                                        <textarea id="hbHet" name="hbHet" class="form-control form-control-sm mt-1" rows="2"><?= $data->rm11b2StatusAnestesi['hbHet'] ?? '' ?></textarea>
+                                        <label class="form-label fw-bold small text-secondary mb-0 ms-1" for="hbHet">Hb/Het : <i class="fw-normal" style="color: red;">(terisi otomatis dari pengkajian kebidanan.)</i></label>
+                                        <textarea id="hbHet" name="hbHet" class="form-control form-control-sm mt-1" rows="2"><?= $data->rm11b2StatusAnestesi['hbHet'] ?? ($data->rm7bPengkajian['hb'] ?? '') ?></textarea>
                                     </div>
 
                                     <!-- 2. Fungsi Ginjal -->
@@ -1090,13 +1262,20 @@
                                     <!-- 1. Diperiksa Oleh -->
                                     <div class="mb-2">
                                         <label class="form-label fw-bold small text-secondary mb-0 ms-1" for="dokterI">Diperiksa Oleh :</label>
-                                        <select name="dokterI" id="dokterI" class="form-select form-select-sm">
-                                            <option value="" <?= (empty($data->rm11b2StatusAnestesi['dokterI'])) ? 'selected' : '' ?> disabled>-- Pilih Dokter --</option>
-                                            <?php for ($i = 0; $i < count($data->dokter); $i++) {
-                                                $selected = (($data->rm11b2StatusAnestesi['dokterI'] ?? '') === $data->dokter[$i]["nm_dokter"]) ? 'selected' : '';
-                                                echo '<option value="' . $data->dokter[$i]["nm_dokter"] . '" ' . $selected . '>' . $data->dokter[$i]["nm_dokter"] . '</option>';
-                                            } ?>
-                                        </select>
+                                        <input type="text"
+                                            name="dokterI"
+                                            id="dokterI"
+                                            list="listDokterI"
+                                            class="form-control form-control-sm"
+                                            placeholder="-- Pilih atau Ketik Nama Dokter --"
+                                            value="<?= htmlspecialchars($data->rm11b2StatusAnestesi['dokterI'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                            autocomplete="off">
+
+                                        <datalist id="listDokterI">
+                                            <?php foreach ($data->dokter as $dokter): ?>
+                                                <option value="<?= htmlspecialchars($dokter['nm_dokter'], ENT_QUOTES, 'UTF-8') ?>">
+                                                <?php endforeach; ?>
+                                        </datalist>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -1362,28 +1541,40 @@
 
                                         <!-- 1. Inhalasi -->
                                         <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" name="obatMaintenance[]" id="inhalasi" value="Inhalasi" <?= (in_array("Inhalasi", (array)($data->rm11b2StatusAnestesi["obatMaintenance"] ?? []))) ? 'checked' : '' ?>>
+                                            <input class="form-check-input" type="checkbox" name="obatMaintenance[]" id="inhalasi" value="Inhalasi" <?= in_array("Inhalasi", json_decode($data->rm11b2StatusAnestesi["obatMaintenance"] ?? '[]', true) ?: [], true) ? 'checked' : '' ?>>
                                             <label class="form-label fw-bold small text-secondary mb-0 ms-1" for="inhalasi">Inhalasi :</label>
                                         </div>
                                         <div class="ms-4 text-secondary small">
+                                            <?php
+                                            $rawInhalasi = $data->rm11b2StatusAnestesi["inhalasiDetail"] ?? [];
+
+                                            if (is_string($rawInhalasi)) {
+                                                $inhalasiTerpilih = json_decode($rawInhalasi, true) ?? [];
+                                            } elseif (is_array($rawInhalasi)) {
+                                                $inhalasiTerpilih = $rawInhalasi;
+                                            } else {
+                                                $inhalasiTerpilih = [];
+                                            }
+                                            ?>
+
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="inhalasiDetail[]" id="inhO2" value="O2" <?= (in_array("O2", (array)($data->rm11b2StatusAnestesi["inhalasiDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="inhalasiDetail[]" id="inhO2" value="O2" <?= in_array("O2", $inhalasiTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="inhO2">1. O2</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="inhalasiDetail[]" id="inhIsofluran" value="Isofluran, 1 MAC = 1,2%" <?= (in_array("Isofluran, 1 MAC = 1,2%", (array)($data->rm11b2StatusAnestesi["inhalasiDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="inhalasiDetail[]" id="inhIsofluran" value="Isofluran, 1 MAC = 1,2%" <?= in_array("Isofluran, 1 MAC = 1,2%", $inhalasiTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="inhIsofluran">2. Isofluran, 1 MAC = 1,2%</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="inhalasiDetail[]" id="inhSevofluran" value="Sevofluran, 1 MAC = 2%" <?= (in_array("Sevofluran, 1 MAC = 2%", (array)($data->rm11b2StatusAnestesi["inhalasiDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="inhalasiDetail[]" id="inhSevofluran" value="Sevofluran, 1 MAC = 2%" <?= in_array("Sevofluran, 1 MAC = 2%", $inhalasiTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="inhSevofluran">3. Sevofluran, 1 MAC = 2%</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="inhalasiDetail[]" id="inhEnfluran" value="Enfluran, 1 MAC = 1,7%" <?= (in_array("Enfluran, 1 MAC = 1,7%", (array)($data->rm11b2StatusAnestesi["inhalasiDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="inhalasiDetail[]" id="inhEnfluran" value="Enfluran, 1 MAC = 1,7%" <?= in_array("Enfluran, 1 MAC = 1,7%", $inhalasiTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="inhEnfluran">4. Enfluran, 1 MAC = 1,7%</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="inhalasiDetail[]" id="inhDesflurane" value="Desflurane, 1 MAC = 6%" <?= (in_array("Desflurane, 1 MAC = 6%", (array)($data->rm11b2StatusAnestesi["inhalasiDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="inhalasiDetail[]" id="inhDesflurane" value="Desflurane, 1 MAC = 6%" <?= in_array("Desflurane, 1 MAC = 6%", $inhalasiTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="inhDesflurane">5. Desflurane, 1 MAC = 6%</label>
                                             </div>
                                             <!-- Lainnya Inhalasi -->
@@ -1401,39 +1592,50 @@
 
                                         <!-- 2. Intravena -->
                                         <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" name="obatMaintenance[]" id="intravena" value="Intravena" <?= (in_array("Intravena", (array)($data->rm11b2StatusAnestesi["obatMaintenance"] ?? []))) ? 'checked' : '' ?>>
+                                            <input class="form-check-input" type="checkbox" name="obatMaintenance[]" id="intravena" value="Intravena" <?= in_array("Intravena", json_decode($data->rm11b2StatusAnestesi["obatMaintenance"] ?? '[]', true) ?: [], true) ? 'checked' : '' ?>>
                                             <label class="form-label fw-bold small text-secondary mb-0 ms-1" for="intravena">Intravena :</label>
                                         </div>
                                         <div class="ms-4 text-secondary small">
+                                            <?php
+                                            $rawIntravena = $data->rm11b2StatusAnestesi["intravenaDetail"] ?? [];
+
+                                            if (is_string($rawIntravena)) {
+                                                $intravenaTerpilih = json_decode($rawIntravena, true) ?? [];
+                                            } elseif (is_array($rawIntravena)) {
+                                                $intravenaTerpilih = $rawIntravena;
+                                            } else {
+                                                $intravenaTerpilih = [];
+                                            }
+                                            ?>
+
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivPropofol" value="Propofol, Dosis 1-2 mg/KgBB" <?= (in_array("Propofol, Dosis 1-2 mg/KgBB", (array)($data->rm11b2StatusAnestesi["intravenaDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivPropofol" value="Propofol, Dosis 1-2 mg/KgBB" <?= in_array("Propofol, Dosis 1-2 mg/KgBB", $intravenaTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="ivPropofol">1. Propofol, Dosis 1-2 mg/KgBB</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivMorphine" value="Morphine, Dosis 0,1-2 mg/KgBB" <?= (in_array("Morphine, Dosis 0,1-2 mg/KgBB", (array)($data->rm11b2StatusAnestesi["intravenaDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivMorphine" value="Morphine, Dosis 0,1-2 mg/KgBB" <?= in_array("Morphine, Dosis 0,1-2 mg/KgBB", $intravenaTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="ivMorphine">2. Morphine, Dosis 0,1-2 mg/KgBB</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivPethidine" value="Pethidine, Dosis 2,5-5 mg/KgBB" <?= (in_array("Pethidine, Dosis 2,5-5 mg/KgBB", (array)($data->rm11b2StatusAnestesi["intravenaDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivPethidine" value="Pethidine, Dosis 2,5-5 mg/KgBB" <?= in_array("Pethidine, Dosis 2,5-5 mg/KgBB", $intravenaTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="ivPethidine">3. Pethidine, Dosis 2,5-5 mg/KgBB</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivFentanyl" value="Fentanyl, Dosis 2-150 mg/KgBB" <?= (in_array("Fentanyl, Dosis 2-150 mg/KgBB", (array)($data->rm11b2StatusAnestesi["intravenaDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivFentanyl" value="Fentanyl, Dosis 2-150 mg/KgBB" <?= in_array("Fentanyl, Dosis 2-150 mg/KgBB", $intravenaTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="ivFentanyl">4. Fentanyl, Dosis 2-150 mcg/KgBB</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivAtracurium" value="Atracurium, Dosis 0,1 mg/KgBB" <?= (in_array("Atracurium, Dosis 0,1 mg/KgBB", (array)($data->rm11b2StatusAnestesi["intravenaDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivAtracurium" value="Atracurium, Dosis 0,1 mg/KgBB" <?= in_array("Atracurium, Dosis 0,1 mg/KgBB", $intravenaTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="ivAtracurium">5. Atracurium, Dosis 0,1 mg/KgBB</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivVericuronium" value="Vericuronium, Dosis 0,01 mg/KgBB" <?= (in_array("Vericuronium, Dosis 0,01 mg/KgBB", (array)($data->rm11b2StatusAnestesi["intravenaDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivVericuronium" value="Vericuronium, Dosis 0,01 mg/KgBB" <?= in_array("Vericuronium, Dosis 0,01 mg/KgBB", $intravenaTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="ivVericuronium">6. Vericuronium, Dosis 0,01 mg/KgBB</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivRocuronium" value="Rocuronium, Dosis 0,15 mg/KgBB" <?= (in_array("Rocuronium, Dosis 0,15 mg/KgBB", (array)($data->rm11b2StatusAnestesi["intravenaDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="intravenaDetail[]" id="ivRocuronium" value="Rocuronium, Dosis 0,15 mg/KgBB" <?= in_array("Rocuronium, Dosis 0,15 mg/KgBB", $intravenaTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="ivRocuronium">7. Rocuronium, Dosis 0,15 mg/KgBB</label>
-                                            </div>
-                                            <!-- Lainnya Intravena -->
+                                            </div> <!-- Lainnya Intravena -->
                                             <div class="d-flex align-items-center gap-2 mt-1">
                                                 <div class="form-check mb-0">
                                                     <input class="form-check-input" type="checkbox" name="intravenaLainnyaCheck" id="intravenaLainnyaCheck" value="1" <?= (!empty($data->rm11b2StatusAnestesi['intravenaLainnyaCheck'])) ? 'checked' : '' ?>>
@@ -1450,20 +1652,32 @@
                                     <div class="border border-info rounded p-1 mb-2">
                                         <div class="d-flex align-items-center gap-3 flex-wrap">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="obatMaintenance[]" id="regionalAnestesi" value="Regional Anestesi" <?= (in_array("Regional Anestesi", (array)($data->rm11b2StatusAnestesi["obatMaintenance"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="obatMaintenance[]" id="regionalAnestesi" value="Regional Anestesi" <?= in_array("Regional Anestesi", json_decode($data->rm11b2StatusAnestesi["obatMaintenance"] ?? '[]', true) ?: [], true) ? 'checked' : '' ?>>
                                                 <label class="form-label fw-bold small text-secondary mb-0 ms-1 text-nowrap" for="regionalAnestesi">Regional Anestesi :</label>
                                             </div>
                                             <div class="d-flex align-items-center gap-3 text-secondary small flex-grow-1 flex-wrap">
+                                                <?php
+                                                $rawRegional = $data->rm11b2StatusAnestesi["regionalAnestesiTipe"] ?? [];
+
+                                                if (is_string($rawRegional)) {
+                                                    $regionalTerpilih = json_decode($rawRegional, true) ?? [];
+                                                } elseif (is_array($rawRegional)) {
+                                                    $regionalTerpilih = $rawRegional;
+                                                } else {
+                                                    $regionalTerpilih = [];
+                                                }
+                                                ?>
+
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="regionalAnestesiTipe[]" id="raSab" value="SAB" <?= (in_array("SAB", (array)($data->rm11b2StatusAnestesi["regionalAnestesiTipe"] ?? []))) ? 'checked' : '' ?>>
+                                                    <input class="form-check-input" type="checkbox" name="regionalAnestesiTipe[]" id="raSab" value="SAB" <?= in_array("SAB", $regionalTerpilih, true) ? 'checked' : '' ?>>
                                                     <label class="form-check-label" for="raSab">SAB</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="regionalAnestesiTipe[]" id="raEpidural" value="Epidural" <?= (in_array("Epidural", (array)($data->rm11b2StatusAnestesi["regionalAnestesiTipe"] ?? []))) ? 'checked' : '' ?>>
+                                                    <input class="form-check-input" type="checkbox" name="regionalAnestesiTipe[]" id="raEpidural" value="Epidural" <?= in_array("Epidural", $regionalTerpilih, true) ? 'checked' : '' ?>>
                                                     <label class="form-check-label" for="raEpidural">Epidural</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="regionalAnestesiTipe[]" id="raPnb" value="PNB" <?= (in_array("PNB", (array)($data->rm11b2StatusAnestesi["regionalAnestesiTipe"] ?? []))) ? 'checked' : '' ?>>
+                                                    <input class="form-check-input" type="checkbox" name="regionalAnestesiTipe[]" id="raPnb" value="PNB" <?= in_array("PNB", $regionalTerpilih, true) ? 'checked' : '' ?>>
                                                     <label class="form-check-label" for="raPnb">PNB</label>
                                                 </div>
                                                 <!-- Input Lainnya untuk Regional Anestesi -->
@@ -1481,20 +1695,32 @@
                                     <!-- 4. Anestesi Lokal -->
                                     <div class="border border-info rounded p-1 mb-2">
                                         <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" name="obatMaintenance[]" id="anestesiLokal" value="Anestesi Lokal" <?= (in_array("Anestesi Lokal", (array)($data->rm11b2StatusAnestesi["obatMaintenance"] ?? []))) ? 'checked' : '' ?>>
+                                            <input class="form-check-input" type="checkbox" name="obatMaintenance[]" id="anestesiLokal" value="Anestesi Lokal" <?= in_array("Anestesi Lokal", json_decode($data->rm11b2StatusAnestesi["obatMaintenance"] ?? '[]', true) ?: [], true) ? 'checked' : '' ?>>
                                             <label class="form-label fw-bold small text-secondary mb-0 ms-1" for="anestesiLokal">Anestesi Lokal :</label>
                                         </div>
                                         <div class="ms-4 text-secondary small">
+                                            <?php
+                                            $rawLokal = $data->rm11b2StatusAnestesi["anestesiLokalDetail"] ?? [];
+
+                                            if (is_string($rawLokal)) {
+                                                $lokalTerpilih = json_decode($rawLokal, true) ?? [];
+                                            } elseif (is_array($rawLokal)) {
+                                                $lokalTerpilih = $rawLokal;
+                                            } else {
+                                                $lokalTerpilih = [];
+                                            }
+                                            ?>
+
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="anestesiLokalDetail[]" id="alLidocaine" value="Lidocaine, Dosis maks. 4,5mg/KgBB (7mg/KgBB dgn epinephrine)" <?= (in_array("Lidocaine, Dosis maks. 4,5mg/KgBB (7mg/KgBB dgn epinephrine)", (array)($data->rm11b2StatusAnestesi["anestesiLokalDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="anestesiLokalDetail[]" id="alLidocaine" value="Lidocaine, Dosis maks. 4,5mg/KgBB (7mg/KgBB dgn epinephrine)" <?= in_array("Lidocaine, Dosis maks. 4,5mg/KgBB (7mg/KgBB dgn epinephrine)", $lokalTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="alLidocaine">1. Lidocaine, Dosis maks. 4,5mg/KgBB (7mg/KgBB dgn epinephrine)</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="anestesiLokalDetail[]" id="alBupivacaine" value="Bupivacaine, Dosis maks. 2,5mg/KgBB (3mg/KgBB dgn epinephrine)" <?= (in_array("Bupivacaine, Dosis maks. 2,5mg/KgBB (3mg/KgBB dgn epinephrine)", (array)($data->rm11b2StatusAnestesi["anestesiLokalDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="anestesiLokalDetail[]" id="alBupivacaine" value="Bupivacaine, Dosis maks. 2,5mg/KgBB (3mg/KgBB dgn epinephrine)" <?= in_array("Bupivacaine, Dosis maks. 2,5mg/KgBB (3mg/KgBB dgn epinephrine)", $lokalTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="alBupivacaine">2. Bupivacaine, Dosis maks. 2,5mg/KgBB (3mg/KgBB dgn epinephrine)</label>
                                             </div>
                                             <div class="form-check mb-1">
-                                                <input class="form-check-input" type="checkbox" name="anestesiLokalDetail[]" id="alRopivacaine" value="Ropivacaine, Dosis maks. 3mg/KgBB" <?= (in_array("Ropivacaine, Dosis maks. 3mg/KgBB", (array)($data->rm11b2StatusAnestesi["anestesiLokalDetail"] ?? []))) ? 'checked' : '' ?>>
+                                                <input class="form-check-input" type="checkbox" name="anestesiLokalDetail[]" id="alRopivacaine" value="Ropivacaine, Dosis maks. 3mg/KgBB" <?= in_array("Ropivacaine, Dosis maks. 3mg/KgBB", $lokalTerpilih, true) ? 'checked' : '' ?>>
                                                 <label class="form-check-label" for="alRopivacaine">3. Ropivacaine, Dosis maks. 3mg/KgBB</label>
                                             </div>
                                             <!-- Lainnya Anestesi Lokal -->
@@ -1511,7 +1737,7 @@
                                     <!-- 5. Additif -->
                                     <div class="border border-info rounded p-1 mb-2">
                                         <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox" name="obatMaintenance[]" id="additif" value="Additif" <?= (in_array("Additif", (array)($data->rm11b2StatusAnestesi["obatMaintenance"] ?? []))) ? 'checked' : '' ?>>
+                                            <input class="form-check-input" type="checkbox" name="obatMaintenance[]" id="additif" value="Additif" <?= in_array("Additif", json_decode($data->rm11b2StatusAnestesi["obatMaintenance"] ?? '[]', true) ?: [], true) ? 'checked' : '' ?>>
                                             <label class="form-label fw-bold small text-secondary mb-0 ms-1" for="additif">Additif :</label>
                                         </div>
                                         <div class="ms-4 text-secondary small">
@@ -1560,13 +1786,20 @@
                                     <!-- 1. disusun Oleh -->
                                     <div class="mb-2">
                                         <label class="form-label fw-bold small text-secondary mb-0 ms-1">Diperiksa Oleh :</label>
-                                        <select name="dokterII" id="dokterII" class="form-select form-select-sm">
-                                            <option value="" <?= (empty($data->rm11b2StatusAnestesi['dokterII'])) ? 'selected' : '' ?> disabled>-- Pilih Dokter --</option>
-                                            <?php for ($i = 0; $i < count($data->dokter); $i++) {
-                                                $selected = (($data->rm11b2StatusAnestesi['dokterII'] ?? '') === $data->dokter[$i]["nm_dokter"]) ? 'selected' : '';
-                                                echo '<option value="' . $data->dokter[$i]["nm_dokter"] . '" ' . $selected . '>' . $data->dokter[$i]["nm_dokter"] . '</option>';
-                                            } ?>
-                                        </select>
+                                        <input type="text"
+                                            name="dokterII"
+                                            id="dokterII"
+                                            list="listDokterII"
+                                            class="form-control form-control-sm"
+                                            placeholder="-- Pilih atau Ketik Nama Dokter --"
+                                            value="<?= htmlspecialchars($data->rm11b2StatusAnestesi['dokterII'] ?? 'dr. IRWAN WIBOWO, Sp.An', ENT_QUOTES, 'UTF-8') ?>"
+                                            autocomplete="off">
+
+                                        <datalist id="listDokterII">
+                                            <?php foreach ($data->dokter as $dokter): ?>
+                                                <option value="<?= htmlspecialchars($dokter['nm_dokter'], ENT_QUOTES, 'UTF-8') ?>">
+                                                <?php endforeach; ?>
+                                        </datalist>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -1575,6 +1808,14 @@
                                         <label class="form-label fw-bold small text-secondary mb-0 ms-1">Tanggal / Jam :</label>
                                         <input type="datetime-local" id="tanggalJamII" name="tanggalJamII" class="form-control form-control-sm mt-1" value="<?= isset($data->rm11b2StatusAnestesi['tanggalJamII']) ? date('Y-m-d\TH:i', strtotime($data->rm11b2StatusAnestesi['tanggalJamII'])) : '' ?>">
                                     </div>
+
+                                    <script>
+                                        $(function() {
+                                            $('#tanggalJamII').on('change', function() {
+                                                $('#tanggalJamIII').val($(this).val());
+                                            });
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -1710,6 +1951,23 @@
                                     <input type="datetime-local" class="form-control" id="minumTerakhir" name="minumTerakhir" value="<?= !empty($data->rm11b2StatusAnestesi['minumTerakhir']) ? date('Y-m-d\TH:i', strtotime($data->rm11b2StatusAnestesi['minumTerakhir'])) : '' ?>">
                                 </div>
                             </div>
+
+                            <script>
+                                $(function() {
+                                    $('#makanTerakhir').on('change input', function() {
+                                        const val = $(this).val();
+                                        if (!val) return;
+
+                                        const dt = new Date(val);
+                                        dt.setMinutes(dt.getMinutes() + 30);
+
+                                        const pad = n => String(n).padStart(2, '0');
+                                        const formatted = `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}T${pad(dt.getHours())}:${pad(dt.getMinutes())}`;
+
+                                        $('#minumTerakhir').val(formatted);
+                                    });
+                                });
+                            </script>
                         </div>
 
                         <div class="alert alert-info" role="alert">
@@ -1723,13 +1981,20 @@
                                     <!-- 1. disusun Oleh -->
                                     <div class="mb-2">
                                         <label class="form-label fw-bold small text-secondary mb-0 ms-1">Diperiksa Oleh :</label>
-                                        <select name="dokterIII" id="dokterIII" class="form-select form-select-sm">
-                                            <option value="" <?= (empty($data->rm11b2StatusAnestesi['dokterIII'])) ? 'selected' : '' ?> disabled>-- Pilih Dokter --</option>
-                                            <?php for ($i = 0; $i < count($data->dokter); $i++) {
-                                                $selected = (($data->rm11b2StatusAnestesi['dokterIII'] ?? '') === $data->dokter[$i]["nm_dokter"]) ? 'selected' : '';
-                                                echo '<option value="' . $data->dokter[$i]["nm_dokter"] . '" ' . $selected . '>' . $data->dokter[$i]["nm_dokter"] . '</option>';
-                                            } ?>
-                                        </select>
+                                        <input type="text"
+                                            name="dokterIII"
+                                            id="dokterIII"
+                                            list="listDokterIII"
+                                            class="form-control form-control-sm"
+                                            placeholder="-- Pilih atau Ketik Nama Dokter --"
+                                            value="<?= htmlspecialchars($data->rm11b2StatusAnestesi['dokterIII'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                            autocomplete="off">
+
+                                        <datalist id="listDokterIII">
+                                            <?php foreach ($data->dokter as $dokter): ?>
+                                                <option value="<?= htmlspecialchars($dokter['nm_dokter'], ENT_QUOTES, 'UTF-8') ?>">
+                                                <?php endforeach; ?>
+                                        </datalist>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -1743,13 +2008,20 @@
                                     <!-- 1. disusun Oleh -->
                                     <div class="mb-2">
                                         <label class="form-label fw-bold small text-secondary mb-0 ms-1">Diberikan Oleh :</label>
-                                        <select name="diberikanOleh" id="diberikanOleh" class="form-select form-select-sm">
-                                            <option value="" <?= (empty($data->rm11b2StatusAnestesi['diberikanOleh'])) ? 'selected' : '' ?> disabled>-- Pilih Dokter --</option>
-                                            <?php for ($i = 0; $i < count($data->dokter); $i++) {
-                                                $selected = (($data->rm11b2StatusAnestesi['diberikanOleh'] ?? '') === $data->dokter[$i]["nm_dokter"]) ? 'selected' : '';
-                                                echo '<option value="' . $data->dokter[$i]["nm_dokter"] . '" ' . $selected . '>' . $data->dokter[$i]["nm_dokter"] . '</option>';
-                                            } ?>
-                                        </select>
+                                        <input type="text"
+                                            name="diberikanOleh"
+                                            id="diberikanOleh"
+                                            list="listDiberikanOleh"
+                                            class="form-control form-control-sm"
+                                            placeholder="-- Pilih atau Ketik Nama Dokter --"
+                                            value="<?= htmlspecialchars($data->rm11b2StatusAnestesi['diberikanOleh'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                                            autocomplete="off">
+
+                                        <datalist id="listDiberikanOleh">
+                                            <?php foreach ($data->dokter as $dokter): ?>
+                                                <option value="<?= htmlspecialchars($dokter['nm_dokter'], ENT_QUOTES, 'UTF-8') ?>">
+                                                <?php endforeach; ?>
+                                        </datalist>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -1776,89 +2048,104 @@
                             </div>
 
                             <?php
-                            // Parse JSON persiapan jika berupa string, jika tidak jadikan array
                             $persiapanData = $data->rm11b2StatusAnestesi["persiapan"] ?? [];
                             if (is_string($persiapanData)) {
                                 $persiapanData = json_decode($persiapanData, true) ?? [];
                             }
+
+                            $defaultPersiapan = [
+                                "Identifikasi pasien",
+                                "Ijin Operasi",
+                                "Puasa dijalankan dengan baik",
+                                "Urine Kateter",
+                                "Mesin Anestesi",
+                                "Pulse Oxymeter",
+                                "Suction",
+                                "Obat-obatan",
+                            ];
+
+                            // Jika record $data->rm11b2StatusAnestesi belum ada/kosong (tambah data baru), pakai default
+                            $checkedPersiapan = empty($data->rm11b2StatusAnestesi)
+                                ? $defaultPersiapan
+                                : (array) $persiapanData;
                             ?>
 
                             <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 text-secondary small">
                                 <!-- Identifikasi pasien -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanIdentifikasiPasien" value="Identifikasi pasien" <?= (in_array("Identifikasi pasien", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanIdentifikasiPasien" value="Identifikasi pasien" <?= in_array("Identifikasi pasien", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanIdentifikasiPasien">Identifikasi pasien</label>
                                 </div>
 
                                 <!-- Ijin Operasi -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanIjinOperasi" value="Ijin Operasi" <?= (in_array("Ijin Operasi", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanIjinOperasi" value="Ijin Operasi" <?= in_array("Ijin Operasi", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanIjinOperasi">Ijin Operasi</label>
                                 </div>
 
                                 <!-- Puasa dijalankan dengan baik -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanPuasa" value="Puasa dijalankan dengan baik" <?= (in_array("Puasa dijalankan dengan baik", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanPuasa" value="Puasa dijalankan dengan baik" <?= in_array("Puasa dijalankan dengan baik", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanPuasa">Puasa dijalankan dengan baik</label>
                                 </div>
 
                                 <!-- Mesin Anestesi -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanMesinAnestesi" value="Mesin Anestesi" <?= (in_array("Mesin Anestesi", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanMesinAnestesi" value="Mesin Anestesi" <?= in_array("Mesin Anestesi", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanMesinAnestesi">Mesin Anestesi</label>
                                 </div>
 
                                 <!-- Suction -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanSuction" value="Suction" <?= (in_array("Suction", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanSuction" value="Suction" <?= in_array("Suction", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanSuction">Suction</label>
                                 </div>
 
                                 <!-- Obat-obatan -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanObatObatan" value="Obat-obatan" <?= (in_array("Obat-obatan", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanObatObatan" value="Obat-obatan" <?= in_array("Obat-obatan", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanObatObatan">Obat-obatan</label>
                                 </div>
 
                                 <!-- Antibiotik profilaksis -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanAntibiotikProfilaksis" value="Antibiotik profilaksis" <?= (in_array("Antibiotik profilaksis", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanAntibiotikProfilaksis" value="Antibiotik profilaksis" <?= in_array("Antibiotik profilaksis", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanAntibiotikProfilaksis">Antibiotik profilaksis</label>
                                 </div>
 
                                 <!-- Pulse Oxymeter -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanPulseOxymeter" value="Pulse Oxymeter" <?= (in_array("Pulse Oxymeter", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanPulseOxymeter" value="Pulse Oxymeter" <?= in_array("Pulse Oxymeter", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanPulseOxymeter">Pulse Oxymeter</label>
                                 </div>
 
                                 <!-- EKG -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanEkg" value="EKG" <?= (in_array("EKG", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanEkg" value="EKG" <?= in_array("EKG", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanEkg">EKG</label>
                                 </div>
 
                                 <!-- Sabuk Pengaman -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanSabukPengaman" value="Sabuk Pengaman" <?= (in_array("Sabuk Pengaman", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanSabukPengaman" value="Sabuk Pengaman" <?= in_array("Sabuk Pengaman", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanSabukPengaman">Sabuk Pengaman</label>
                                 </div>
 
                                 <!-- NIBP -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanNibp" value="NIBP" <?= (in_array("NIBP", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanNibp" value="NIBP" <?= in_array("NIBP", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanNibp">NIBP</label>
                                 </div>
 
                                 <!-- Urine Kateter -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanUrineKateter" value="Urine Kateter" <?= (in_array("Urine Kateter", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanUrineKateter" value="Urine Kateter" <?= in_array("Urine Kateter", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanUrineKateter">Urine Kateter</label>
                                 </div>
 
                                 <!-- End Tydal CO2 -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanEndTydalCo2" value="End Tydal CO2" <?= (in_array("End Tydal CO2", (array)$persiapanData)) ? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="checkbox" name="persiapan[]" id="persiapanEndTydalCo2" value="End Tydal CO2" <?= in_array("End Tydal CO2", $checkedPersiapan) ? 'checked' : '' ?>>
                                     <label class="form-check-label text-nowrap" for="persiapanEndTydalCo2">End Tydal CO<sub>2</sub></label>
                                 </div>
                             </div>

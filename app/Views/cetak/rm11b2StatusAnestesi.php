@@ -818,241 +818,206 @@ $parseArray = function ($data) {
 
                                     <table class="table table-sm tabelSempit table-striped mb-0">
                                         <!-- Checkbox Utama: Permedikasi -->
-                                        <tr>
-                                            <td class="text-center">
-                                                <?= in_array("Permedikasi", $obatAwal) ? '✓' : '' ?>
-                                            </td>
-                                            <td colspan="3"><b>Permedikasi</b></td>
-                                        </tr>
+                                        <?php if (in_array("Permedikasi", $obatAwal)): ?>
+                                            <tr>
+                                                <td colspan="3"><b>Permedikasi</b></td>
+                                            </tr>
 
-                                        <!-- Item 1: Midazolam -->
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center">
-                                                <?= $hasDetail("Midazolam") ? '✓' : '' ?>
-                                            </td>
-                                            <td style="width: 8px;">Midazolam,</td>
-                                            <td>Dosis 0,07-0,15 mg/KgBB, IM</td>
-                                        </tr>
+                                            <!-- Item 1: Midazolam -->
+                                            <?php if ($hasDetail("Midazolam")): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td style="width: 8px;">Midazolam,</td>
+                                                    <td>Dosis 0,07-0,15 mg/KgBB, IM</td>
+                                                </tr>
+                                            <?php endif; ?>
 
-                                        <!-- Item 2: Morphine -->
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center">
-                                                <?= $hasDetail("Morphine") ? '✓' : '' ?>
-                                            </td>
-                                            <td>Morphine,</td>
-                                            <td>Dosis 0,05-0,2 mg/KgBB, IM</td>
-                                        </tr>
+                                            <!-- Item 2: Morphine -->
+                                            <?php if ($hasDetail("Morphine")): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Morphine,</td>
+                                                    <td>Dosis 0,05-0,2 mg/KgBB, IM</td>
+                                                </tr>
+                                            <?php endif; ?>
 
-                                        <!-- Item 3: Pethidine -->
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center">
-                                                <?= $hasDetail("Pethidine") ? '✓' : '' ?>
-                                            </td>
-                                            <td>Pethidine,</td>
-                                            <td>Dosis 0,5-1 mg/KgBB, IM</td>
-                                        </tr>
+                                            <!-- Item 3: Pethidine -->
+                                            <?php if ($hasDetail("Pethidine")): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Pethidine,</td>
+                                                    <td>Dosis 0,5-1 mg/KgBB, IM</td>
+                                                </tr>
+                                            <?php endif; ?>
 
-                                        <!-- Item 4: Sulfas Atropin -->
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center">
-                                                <?= $hasDetail("Sulfas Atropin") ? '✓' : '' ?>
-                                            </td>
-                                            <td>Sulfas Atropin,</td>
-                                            <td>Dosis 0,01-0,02 mg/KgBB, IM</td>
-                                        </tr>
+                                            <!-- Item 4: Sulfas Atropin -->
+                                            <?php if ($hasDetail("Sulfas Atropin")): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Sulfas Atropin,</td>
+                                                    <td>Dosis 0,01-0,02 mg/KgBB, IM</td>
+                                                </tr>
+                                            <?php endif; ?>
 
-                                        <!-- Item 5: Lainnya -->
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center">
-                                                <?= (!empty($data->rm11b2StatusAnestesi['permedikasiLainnyaCheck']) && $data->rm11b2StatusAnestesi['permedikasiLainnyaCheck'] == 1) ? '✓' : '' ?>
-                                            </td>
-                                            <td colspan="2">
-                                                <?= !empty($data->rm11b2StatusAnestesi['permedikasiLainnya']) ? $data->rm11b2StatusAnestesi['permedikasiLainnya'] : '' ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">
-                                                <?= in_array("General Anestesi", is_string($data->rm11b2StatusAnestesi["obatAwal"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["obatAwal"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["obatAwal"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td colspan="3"><b>General Anestesi</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <?= in_array("Masker", is_string($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? [])) ? '✓ ' : '' ?>Masker
-                                            </td>
-                                            <td>
-                                                <?= in_array("Intubasi", is_string($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? [])) ? '✓ ' : '' ?>Intubasi
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <?= in_array("TIV", is_string($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? [])) ? '✓ ' : '' ?>TIV
-                                            </td>
-                                            <td>
-                                                <?= in_array("LMA", is_string($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? [])) ? '✓ ' : '' ?>LMA
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td colspan="2">
-                                                <?= (!empty($data->rm11b2StatusAnestesi['gaLainnyaCheck']) && $data->rm11b2StatusAnestesi['gaLainnyaCheck'] == 1) ? '✓ ' : '' ?>Lainnya :
-                                                <?= !empty($data->rm11b2StatusAnestesi['gaLainnyaText']) ? $data->rm11b2StatusAnestesi['gaLainnyaText'] : '' ?>
-                                            </td>
-                                        </tr>
+                                            <!-- Item 5: Lainnya -->
+                                            <?php if ((!empty($data->rm11b2StatusAnestesi['permedikasiLainnyaCheck']) && $data->rm11b2StatusAnestesi['permedikasiLainnyaCheck'] == 1)): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td colspan="2">
+                                                        <?= !empty($data->rm11b2StatusAnestesi['permedikasiLainnya']) ? $data->rm11b2StatusAnestesi['permedikasiLainnya'] : '' ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endif; ?>
+
+                                        <?php endif; ?>
+                                        <?php if (in_array("General Anestesi", $obatAwal)): ?>
+                                            <tr>
+                                                <td colspan="3"><b>General Anestesi</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td colspan="2">
+                                                    <?php
+                                                    $raw  = $data->rm11b2StatusAnestesi["generalAnestesiTipe"] ?? '';
+                                                    $tipe = is_string($raw) ? (json_decode($raw, true) ?? []) : (array) $raw;
+
+                                                    // Pastikan yang di-implode benar-benar array dan tidak ada elemen kosong
+                                                    $tipe = is_array($tipe) ? array_filter($tipe, fn($v) => $v !== null && $v !== '') : [];
+
+                                                    echo htmlspecialchars(!empty($tipe) ? implode(', ', $tipe) : '-', ENT_QUOTES, 'UTF-8');
+                                                    ?>
+                                                    <?= (!empty($data->rm11b2StatusAnestesi['gaLainnyaCheck']) && $data->rm11b2StatusAnestesi['gaLainnyaCheck'] == 1) ? '<br>' . $data->rm11b2StatusAnestesi['gaLainnyaText'] : '' ?>
+                                                </td>
+                                            </tr>
+                                        <?php endif; ?>
                                     </table>
 
                                     <b>Induksi</b>
                                     <table class="table table-sm tabelSempit table-striped mb-0" cellpadding="0" cellspacing="0">
                                         <!-- Insufilasi -->
-                                        <tr>
-                                            <td width="20" class="text-center" valign="top">
-                                                <?= in_array("Insufilasi", is_string($data->rm11b2StatusAnestesi["obatInduksi"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["obatInduksi"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["obatInduksi"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td colspan="3">
-                                                Insufilasi dengan : <?= !empty($data->rm11b2StatusAnestesi['insufilasiText']) ? $data->rm11b2StatusAnestesi['insufilasiText'] : '................................' ?>
-                                            </td>
-                                        </tr>
+                                        <?php if (in_array("Insufilasi", is_string($data->rm11b2StatusAnestesi["obatInduksi"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["obatInduksi"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["obatInduksi"] ?? []))): ?>
+                                            <tr>
+                                                <td colspan="3">
+                                                    Insufilasi dengan : <?= !empty($data->rm11b2StatusAnestesi['insufilasiText']) ? $data->rm11b2StatusAnestesi['insufilasiText'] : '................................' ?>
+                                                </td>
+                                            </tr>
+                                        <?php endif; ?>
 
                                         <!-- Sedatif -->
-                                        <tr>
-                                            <td width="20" class="text-center" valign="top">
-                                                <?= in_array("Sedatif", is_string($data->rm11b2StatusAnestesi["obatInduksi"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["obatInduksi"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["obatInduksi"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td colspan="3"><b>Sedatif</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td width="20" class="text-center" valign="top">
-                                                <?= in_array("Midazolam, Dosis 0,1-0,4 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["sedatifDetail"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td>Midazolam,</td>
-                                            <td>Dosis 0,1-0,4 mg/KgBB, IV</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= in_array("Propofol, Dosis 1-2,5 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["sedatifDetail"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td>Propofol,</td>
-                                            <td>Dosis 1-2,5 mg/KgBB, IV</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= in_array("Ketamine, Dosis 1-2 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["sedatifDetail"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td>Ketamine,</td>
-                                            <td>Dosis 1-2 mg/KgBB, IV</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= (!empty($data->rm11b2StatusAnestesi['sedatifLainnyaCheck']) && $data->rm11b2StatusAnestesi['sedatifLainnyaCheck'] == 1) ? '✓' : '' ?>
-                                            </td>
-                                            <td colspan="2">
-                                                Lainnya : <?= !empty($data->rm11b2StatusAnestesi['sedatifLainnya']) ? $data->rm11b2StatusAnestesi['sedatifLainnya'] : '................................' ?>
-                                            </td>
-                                        </tr>
+                                        <?php if (in_array("Sedatif", is_string($data->rm11b2StatusAnestesi["obatInduksi"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["obatInduksi"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["obatInduksi"] ?? []))): ?>
+                                            <tr>
+                                                <td colspan="3"><b>Sedatif</b></td>
+                                            </tr>
+                                            <?php if (in_array("Midazolam, Dosis 0,1-0,4 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["sedatifDetail"] ?? []))): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Midazolam,</td>
+                                                    <td>Dosis 0,1-0,4 mg/KgBB, IV</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (in_array("Propofol, Dosis 1-2,5 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["sedatifDetail"] ?? []))): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Propofol,</td>
+                                                    <td>Dosis 1-2,5 mg/KgBB, IV</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (in_array("Ketamine, Dosis 1-2 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["sedatifDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["sedatifDetail"] ?? []))): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Ketamine,</td>
+                                                    <td>Dosis 1-2 mg/KgBB, IV</td>
+                                                </tr>
+                                            <?php endif; ?>
+
+                                            <?php if ((!empty($data->rm11b2StatusAnestesi['sedatifLainnyaCheck']) && $data->rm11b2StatusAnestesi['sedatifLainnyaCheck'] == 1)): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td colspan="2">
+                                                        Lainnya : <?= !empty($data->rm11b2StatusAnestesi['sedatifLainnya']) ? $data->rm11b2StatusAnestesi['sedatifLainnya'] : '................................' ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
 
                                         <!-- Analgetik -->
-                                        <tr>
-                                            <td class="text-center" valign="top">
-                                                <?= in_array("Analgetik", is_string($data->rm11b2StatusAnestesi["obatInduksi"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["obatInduksi"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["obatInduksi"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td colspan="3"><b>Analgetik</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= in_array("Morphine, Dosis 0,1-1 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["analgetikDetail"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td>Morphine,</td>
-                                            <td>Dosis 0,1-1 mg/KgBB, IV</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= in_array("Pethidine, Dosis 2,5-5 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["analgetikDetail"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td>Pethidine,</td>
-                                            <td>Dosis 2,5-5 mg/KgBB, IV</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= in_array("Fentanyl, Dosis 2-150 mcg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["analgetikDetail"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td>Fentanyl,</td>
-                                            <td>Dosis 2-150 mcg/KgBB, IV</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= in_array("Ketamine, Dosis 0,25-0,5 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["analgetikDetail"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td>Ketamine,</td>
-                                            <td>Dosis 0,25-0,5 mg/KgBB, IV</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= (!empty($data->rm11b2StatusAnestesi['analgetikLainnyaCheck']) && $data->rm11b2StatusAnestesi['analgetikLainnyaCheck'] == 1) ? '✓' : '' ?>
-                                            </td>
-                                            <td colspan="2">
-                                                Lainnya : <?= !empty($data->rm11b2StatusAnestesi['analgetikLainnya']) ? $data->rm11b2StatusAnestesi['analgetikLainnya'] : '................................' ?>
-                                            </td>
-                                        </tr>
+                                        <?php if (in_array("Analgetik", is_string($data->rm11b2StatusAnestesi["obatInduksi"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["obatInduksi"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["obatInduksi"] ?? []))): ?>
+                                            <tr>
+                                                <td colspan="3"><b>Analgetik</b></td>
+                                            </tr>
+                                            <?php if (in_array("Morphine, Dosis 0,1-1 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["analgetikDetail"] ?? []))): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Morphine,</td>
+                                                    <td>Dosis 0,1-1 mg/KgBB, IV</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (in_array("Pethidine, Dosis 2,5-5 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["analgetikDetail"] ?? []))): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Pethidine,</td>
+                                                    <td>Dosis 2,5-5 mg/KgBB, IV</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (in_array("Fentanyl, Dosis 2-150 mcg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["analgetikDetail"] ?? []))): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Fentanyl,</td>
+                                                    <td>Dosis 2-150 mcg/KgBB, IV</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (in_array("Ketamine, Dosis 0,25-0,5 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["analgetikDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["analgetikDetail"] ?? []))): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Ketamine,</td>
+                                                    <td>Dosis 0,25-0,5 mg/KgBB, IV</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if ((!empty($data->rm11b2StatusAnestesi['analgetikLainnyaCheck']) && $data->rm11b2StatusAnestesi['analgetikLainnyaCheck'] == 1)): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td colspan="2">
+                                                        Lainnya : <?= !empty($data->rm11b2StatusAnestesi['analgetikLainnya']) ? $data->rm11b2StatusAnestesi['analgetikLainnya'] : '................................' ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
 
                                         <!-- Pelumpuh otot -->
-                                        <tr>
-                                            <td class="text-center" valign="top">
-                                                <?= in_array("Pelumpuh otot", is_string($data->rm11b2StatusAnestesi["obatInduksi"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["obatInduksi"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["obatInduksi"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td colspan="3"><b>Pelumpuh otot</b></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= in_array("Atracurium, Dosis 0,5 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td>Atracurium,</td>
-                                            <td>Dosis 0,5 mg/KgBB, IV</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= in_array("Vericuronium, Dosis 0,12 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td>Vericuronium,</td>
-                                            <td>Dosis 0,12 mg/KgBB, IV</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= in_array("Rocuronium, Dosis 0,6-1,2 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? [])) ? '✓' : '' ?>
-                                            </td>
-                                            <td>Rocuronium,</td>
-                                            <td>Dosis 0,6-1,2 mg/KgBB, IV</td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-center" valign="top">
-                                                <?= (!empty($data->rm11b2StatusAnestesi['pelumpuhLainnyaCheck']) && $data->rm11b2StatusAnestesi['pelumpuhLainnyaCheck'] == 1) ? '✓' : '' ?>
-                                            </td>
-                                            <td colspan="2">
-                                                Lainnya : <?= !empty($data->rm11b2StatusAnestesi['pelumpuhLainnya']) ? $data->rm11b2StatusAnestesi['pelumpuhLainnya'] : '................................' ?>
-                                            </td>
-                                        </tr>
+                                        <?php if (in_array("Pelumpuh otot", is_string($data->rm11b2StatusAnestesi["obatInduksi"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["obatInduksi"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["obatInduksi"] ?? []))): ?>
+                                            <tr>
+                                                <td colspan="3"><b>Pelumpuh otot</b></td>
+                                            </tr>
+                                            <?php if (in_array("Atracurium, Dosis 0,5 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? []))) : ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Atracurium,</td>
+                                                    <td>Dosis 0,5 mg/KgBB, IV</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (in_array("Vericuronium, Dosis 0,12 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? []))): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Vericuronium,</td>
+                                                    <td>Dosis 0,12 mg/KgBB, IV</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (in_array("Rocuronium, Dosis 0,6-1,2 mg/KgBB, IV", is_string($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '') ? (json_decode($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? '[]', true) ?? []) : (array)($data->rm11b2StatusAnestesi["pelumpuhDetail"] ?? []))): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Rocuronium,</td>
+                                                    <td>Dosis 0,6-1,2 mg/KgBB, IV</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if ((!empty($data->rm11b2StatusAnestesi['pelumpuhLainnyaCheck']) && $data->rm11b2StatusAnestesi['pelumpuhLainnyaCheck'] == 1)): ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td colspan="2">
+                                                        Lainnya : <?= !empty($data->rm11b2StatusAnestesi['pelumpuhLainnya']) ? $data->rm11b2StatusAnestesi['pelumpuhLainnya'] : '................................' ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
                                     </table>
                                 </div>
                                 <div class="col-5">
@@ -1070,210 +1035,219 @@ $parseArray = function ($data) {
                                         <div><strong>Maintenance</strong></div>
 
                                         <!-- 1. INHALASI -->
-                                        <div style="margin-bottom: 6px;">
-                                            <div>
-                                                <span style="display: inline-block; width: 15px; text-align: center; font-weight: bold;"><?= in_array("Inhalasi", $obatMaintenanceData) ? '✓' : '' ?></span>
-                                                <strong>Inhalasi :</strong>
+                                        <?php if (in_array("Inhalasi", $obatMaintenanceData)): ?>
+                                            <div style="margin-bottom: 6px;">
+                                                <div>
+                                                    <strong>Inhalasi :</strong>
+                                                </div>
+                                                <div style="margin-left: 20px;">
+                                                    <table class="table table-sm tabelSempit table-striped mb-0">
+                                                        <?php if (in_array("O2", $inhalasiDetailData)): ?>
+                                                            <tr>
+                                                                <td style="width: 20px;"><?= in_array("O2", $inhalasiDetailData) ? '1.' : '' ?></td>
+                                                                <td colspan="2">O<sub>2</sub></td>
+                                                            </tr>
+                                                        <?php endif; ?>
+                                                        <?php if (in_array("Isofluran, 1 MAC = 1,2%", $inhalasiDetailData)): ?>
+                                                            <tr>
+                                                                <td style="width: 100px;">Isofluran</td>
+                                                                <td>1 MAC = 1,2%</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (in_array("Sevofluran, 1 MAC = 2%", $inhalasiDetailData)): ?>
+                                                            <tr>
+                                                                <td>Sevofluran,</td>
+                                                                <td>1 MAC = 2%</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (in_array("Enfluran, 1 MAC = 1,7%", $inhalasiDetailData)): ?>
+                                                            <tr>
+                                                                <td>Enfluran,</td>
+                                                                <td>1 MAC = 1,7%</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (in_array("Desflurane, 1 MAC = 6%", $inhalasiDetailData)): ?>
+                                                            <tr>
+                                                                <td>Desflurane,</td>
+                                                                <td>1 MAC = 6%</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+                                                        <?php if (!empty($data->rm11b2StatusAnestesi['inhalasiLainnyaCheck'])): ?>
+                                                            <tr>
+                                                                <td colspan="2">Lainnya: <?= htmlspecialchars($data->rm11b2StatusAnestesi['inhalasiLainnya'] ?? '') ?></td>
+                                                            </tr>
+                                                        <?php endif; ?>
+                                                    </table>
+                                                </div>
                                             </div>
-                                            <div style="margin-left: 20px;">
-                                                <table class="table table-sm tabelSempit table-striped mb-0">
-                                                    <tr>
-                                                        <td style="width: 20px;"><span><?= in_array("O2", $inhalasiDetailData) ? '✓' : '' ?></span></td>
-                                                        <td style="width: 20px;"><?= in_array("O2", $inhalasiDetailData) ? '1.' : '' ?></td>
-                                                        <td colspan="2">O<sub>2</sub></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Isofluran, 1 MAC = 1,2%", $inhalasiDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Isofluran, 1 MAC = 1,2%", $inhalasiDetailData) ? '2.' : '' ?></td>
-                                                        <td style="width: 100px;">Isofluran</td>
-                                                        <td>1 MAC = 1,2%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Sevofluran, 1 MAC = 2%", $inhalasiDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Sevofluran, 1 MAC = 2%", $inhalasiDetailData) ? '3.' : '' ?></td>
-                                                        <td>Sevofluran,</td>
-                                                        <td>1 MAC = 2%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Enfluran, 1 MAC = 1,7%", $inhalasiDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Enfluran, 1 MAC = 1,7%", $inhalasiDetailData) ? '4.' : '' ?></td>
-                                                        <td>Enfluran,</td>
-                                                        <td>1 MAC = 1,7%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Desflurane, 1 MAC = 6%", $inhalasiDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Desflurane, 1 MAC = 6%", $inhalasiDetailData) ? '5.' : '' ?></td>
-                                                        <td>Desflurane,</td>
-                                                        <td>1 MAC = 6%</td>
-                                                    </tr>
-                                                    <?php if (!empty($data->rm11b2StatusAnestesi['inhalasiLainnyaCheck'])): ?>
-                                                        <tr>
-                                                            <td></td>
-                                                            <td><span>✓</span></td>
-                                                            <td colspan="2">Lainnya: <?= htmlspecialchars($data->rm11b2StatusAnestesi['inhalasiLainnya'] ?? '') ?></td>
-                                                        </tr>
-                                                    <?php endif; ?>
-                                                </table>
-                                            </div>
-                                        </div>
+                                        <?php endif; ?>
 
                                         <!-- 2. INTRAVENA -->
-                                        <div style="margin-bottom: 6px;">
-                                            <div>
-                                                <span style="display: inline-block; width: 15px; text-align: center; font-weight: bold;"><?= in_array("Intravena", $obatMaintenanceData) ? '✓' : '' ?></span>
-                                                <strong>Intravena</strong>
+                                        <?php if (in_array("Intravena", $obatMaintenanceData)) : ?>
+                                            <div style="margin-bottom: 6px;">
+                                                <div>
+                                                    <strong>Intravena</strong>
+                                                </div>
+                                                <div style="margin-left: 20px;">
+                                                    <table class="table table-sm tabelSempit table-striped mb-0">
+                                                        <?php if (in_array("Propofol, Dosis 1-2 mg/KgBB", $intravenaDetailData)): ?>
+                                                            <tr>
+                                                                <td>Propofol,</td>
+                                                                <td>Dosis 1-2 mg/KgBB</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (in_array("Morphine, Dosis 0,1-2 mg/KgBB", $intravenaDetailData)): ?>
+                                                            <tr>
+                                                                <td>Morphine,</td>
+                                                                <td>Dosis 0,1-2 mg/KgBB</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (in_array("Pethidine, Dosis 2,5-5 mg/KgBB", $intravenaDetailData)): ?>
+                                                            <tr>
+                                                                <td>Pethidine,</td>
+                                                                <td>Dosis 2,5-5 mg/KgBB</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (in_array("Fentanyl, Dosis 2-150 mg/KgBB", $intravenaDetailData)): ?>
+                                                            <tr>
+                                                                <td>Fentanyl,</td>
+                                                                <td>Dosis 2-150 mg/KgBB</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (in_array("Atracurium, Dosis 0,1 mg/KgBB", $intravenaDetailData)): ?>
+                                                            <tr>
+                                                                <td>Atracurium,</td>
+                                                                <td>Dosis 0,1 mg/KgBB</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (in_array("Vericuronium, Dosis 0,01 mg/KgBB", $intravenaDetailData)): ?>
+                                                            <tr>
+                                                                <td>Vericuronium,</td>
+                                                                <td>Dosis 0,01 mg/KgBB</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (in_array("Rocuronium, Dosis 0,15 mg/KgBB", $intravenaDetailData)): ?>
+                                                            <tr>
+                                                                <td>Rocuronium,</td>
+                                                                <td>Dosis 0,15 mg/KgBB</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+                                                        <?php if (!empty($data->rm11b2StatusAnestesi['intravenaLainnyaCheck'])) : ?>
+                                                            <tr>
+                                                                <td><?= htmlspecialchars($data->rm11b2StatusAnestesi['intravenaLainnyaNama'] ?? '....................') ?>,</td>
+                                                                <td>Dosis <?= htmlspecialchars($data->rm11b2StatusAnestesi['intravenaLainnyaDosis'] ?? '....................') ?></td>
+                                                            </tr>
+                                                        <?php endif; ?>
+                                                    </table>
+                                                </div>
                                             </div>
-                                            <div style="margin-left: 20px;">
-                                                <table class="table table-sm tabelSempit table-striped mb-0">
-                                                    <tr>
-                                                        <td><span><?= in_array("Propofol, Dosis 1-2 mg/KgBB", $intravenaDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Propofol, Dosis 1-2 mg/KgBB", $intravenaDetailData) ? '1.' : '' ?></td>
-                                                        <td>Propofol,</td>
-                                                        <td>Dosis 1-2 mg/KgBB</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Morphine, Dosis 0,1-2 mg/KgBB", $intravenaDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Morphine, Dosis 0,1-2 mg/KgBB", $intravenaDetailData) ? '2.' : '' ?></td>
-                                                        <td>Morphine,</td>
-                                                        <td>Dosis 0,1-2 mg/KgBB</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Pethidine, Dosis 2,5-5 mg/KgBB", $intravenaDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Pethidine, Dosis 2,5-5 mg/KgBB", $intravenaDetailData) ? '3.' : '' ?></td>
-                                                        <td>Pethidine,</td>
-                                                        <td>Dosis 2,5-5 mg/KgBB</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Fentanyl, Dosis 2-150 mg/KgBB", $intravenaDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Fentanyl, Dosis 2-150 mg/KgBB", $intravenaDetailData) ? '4.' : '' ?></td>
-                                                        <td>Fentanyl,</td>
-                                                        <td>Dosis 2-150 mg/KgBB</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Atracurium, Dosis 0,1 mg/KgBB", $intravenaDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Atracurium, Dosis 0,1 mg/KgBB", $intravenaDetailData) ? '5.' : '' ?></td>
-                                                        <td>Atracurium,</td>
-                                                        <td>Dosis 0,1 mg/KgBB</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Vericuronium, Dosis 0,01 mg/KgBB", $intravenaDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Vericuronium, Dosis 0,01 mg/KgBB", $intravenaDetailData) ? '6.' : '' ?></td>
-                                                        <td>Vericuronium,</td>
-                                                        <td>Dosis 0,01 mg/KgBB</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Rocuronium, Dosis 0,15 mg/KgBB", $intravenaDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Rocuronium, Dosis 0,15 mg/KgBB", $intravenaDetailData) ? '7.' : '' ?></td>
-                                                        <td>Rocuronium,</td>
-                                                        <td>Dosis 0,15 mg/KgBB</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td><span><?= !empty($data->rm11b2StatusAnestesi['intravenaLainnyaCheck']) ? '✓' : '' ?></span></td>
-                                                        <td><?= htmlspecialchars($data->rm11b2StatusAnestesi['intravenaLainnyaNama'] ?? '....................') ?>,</td>
-                                                        <td>Dosis <?= htmlspecialchars($data->rm11b2StatusAnestesi['intravenaLainnyaDosis'] ?? '....................') ?></td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
+                                        <?php endif; ?>
 
                                         <!-- 3. REGIONAL ANESTESI -->
-                                        <div style="margin-bottom: 6px;">
-                                            <span style="display: inline-block; width: 15px; text-align: center; font-weight: bold;"><?= in_array("Regional Anestesi", $obatMaintenanceData) ? '✓' : '' ?></span>
-                                            <strong>Regional Anestesi :</strong>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span><?= in_array("SAB", $regionalAnestesiTipeData) ? '✓' : '' ?></span> SAB
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span><?= in_array("Epidural", $regionalAnestesiTipeData) ? '✓' : '' ?></span> Epidural
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span><?= in_array("PNB", $regionalAnestesiTipeData) ? '✓' : '' ?></span> PNB
-                                            <?php if (!empty($data->rm11b2StatusAnestesi['raLainnyaCheck'])): ?>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                                Lainnya : <?= htmlspecialchars($data->rm11b2StatusAnestesi['raLainnyaText'] ?? '') ?>
+                                        <?php if (in_array("Regional Anestesi", $obatMaintenanceData)): ?>
+                                            <div style="margin-bottom: 6px;">
+                                                <strong>Regional Anestesi :</strong>
+                                                <?php
+                                                $rawRegional  = $regionalAnestesiTipeData ?? '[]';
+                                                $dataRegional = is_string($rawRegional)
+                                                    ? (json_decode($rawRegional, true) ?? [])
+                                                    : (array) $rawRegional;
+
+                                                $dataRegional = is_array($dataRegional)
+                                                    ? array_filter($dataRegional, fn($v) => $v !== null && $v !== '')
+                                                    : [];
+                                                ?>
+
+                                                <?= htmlspecialchars(implode(', ', $dataRegional), ENT_QUOTES, 'UTF-8') ?><?php if (!empty($data->rm11b2StatusAnestesi['raLainnyaCheck'])): ?>
+
+                                                , <?= htmlspecialchars($data->rm11b2StatusAnestesi['raLainnyaText'] ?? '') ?>
                                             <?php endif; ?>
-                                        </div>
+                                            </div>
+                                        <?php endif; ?>
 
                                         <!-- 4. ANESTESI LOKAL -->
-                                        <div style="margin-bottom: 6px;">
-                                            <div>
-                                                <span style="display: inline-block; width: 15px; text-align: center; font-weight: bold;"><?= in_array("Anestesi Lokal", $obatMaintenanceData) ? '✓' : '' ?></span>
-                                                <strong>Anestesi Lokal :</strong>
+                                        <?php if (in_array("Anestesi Lokal", $obatMaintenanceData)): ?>
+                                            <div style="margin-bottom: 6px;">
+                                                <div>
+                                                    <strong>Anestesi Lokal :</strong>
+                                                </div>
+                                                <div style="margin-left: 20px;">
+                                                    <table class="table tabelSempit table-sm table-borderless mb-0">
+                                                        <?php if (in_array("Lidocaine, Dosis maks. 4,5mg/KgBB (7mg/KgBB dgn epinephrine)", $anestesiLokalDetailData)): ?>
+                                                            <tr>
+                                                                <td>
+                                                                    Lidocaine, Dosis maks. 4,5mg/KgBB<br>
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(7mg/KgBB dgn epinephrine)
+                                                                </td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (in_array("Bupivacaine, Dosis maks. 2,5mg/KgBB (3mg/KgBB dgn epinephrine)", $anestesiLokalDetailData)): ?>
+                                                            <tr>
+                                                                <td>
+                                                                    Bupivacaine, Dosis maks. 2,5mg/KgBB<br>
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(3mg/KgBB dgn epinephrine)
+                                                                </td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (in_array("Ropivacaine, Dosis maks. 3mg/KgBB", $anestesiLokalDetailData)): ?>
+                                                            <tr>
+                                                                <td>Ropivacaine, Dosis maks. 3mg/KgBB</td>
+                                                            </tr>
+                                                        <?php endif; ?>
+                                                        <?php if (!empty($data->rm11b2StatusAnestesi['anestesiLokalLainnyaCheck'])): ?>
+                                                            <tr>
+                                                                <td>Lainnya: <?= htmlspecialchars($data->rm11b2StatusAnestesi['anestesiLokalLainnya'] ?? '') ?></td>
+                                                            </tr>
+                                                        <?php endif; ?>
+                                                    </table>
+                                                </div>
                                             </div>
-                                            <div style="margin-left: 20px;">
-                                                <table class="table tabelSempit table-sm table-borderless mb-0">
-                                                    <tr>
-                                                        <td style="width: 20px;"><span><?= in_array("Lidocaine, Dosis maks. 4,5mg/KgBB (7mg/KgBB dgn epinephrine)", $anestesiLokalDetailData) ? '✓' : '' ?></span></td>
-                                                        <td style="width: 20px;"><?= in_array("Lidocaine, Dosis maks. 4,5mg/KgBB (7mg/KgBB dgn epinephrine)", $anestesiLokalDetailData) ? '1.' : '' ?></td>
-                                                        <td>
-                                                            Lidocaine, Dosis maks. 4,5mg/KgBB<br>
-                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(7mg/KgBB dgn epinephrine)
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Bupivacaine, Dosis maks. 2,5mg/KgBB (3mg/KgBB dgn epinephrine)", $anestesiLokalDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Bupivacaine, Dosis maks. 2,5mg/KgBB (3mg/KgBB dgn epinephrine)", $anestesiLokalDetailData) ? '2.' : '' ?></td>
-                                                        <td>
-                                                            Bupivacaine, Dosis maks. 2,5mg/KgBB<br>
-                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(3mg/KgBB dgn epinephrine)
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><span><?= in_array("Ropivacaine, Dosis maks. 3mg/KgBB", $anestesiLokalDetailData) ? '✓' : '' ?></span></td>
-                                                        <td><?= in_array("Ropivacaine, Dosis maks. 3mg/KgBB", $anestesiLokalDetailData) ? '3.' : '' ?></td>
-                                                        <td>Ropivacaine, Dosis maks. 3mg/KgBB</td>
-                                                    </tr>
-                                                    <?php if (!empty($data->rm11b2StatusAnestesi['anestesiLokalLainnyaCheck'])): ?>
-                                                        <tr>
-                                                            <td></td>
-                                                            <td><span>✓</span></td>
-                                                            <td>Lainnya: <?= htmlspecialchars($data->rm11b2StatusAnestesi['anestesiLokalLainnya'] ?? '') ?></td>
-                                                        </tr>
-                                                    <?php endif; ?>
-                                                </table>
-                                            </div>
-                                        </div>
+                                        <?php endif; ?>
 
                                         <!-- 5. ADDITIF -->
-                                        <div style="margin-bottom: 6px;">
-                                            <div>
-                                                <span style="display: inline-block; width: 15px; text-align: center; font-weight: bold;"><?= in_array("Additif", $obatMaintenanceData) ? '✓' : '' ?></span>
-                                                <strong>Additif :</strong>
+                                        <?php if (in_array("Additif", $obatMaintenanceData)): ?>
+                                            <div style="margin-bottom: 6px;">
+                                                <div>
+                                                    <strong>Additif :</strong>
+                                                </div>
+                                                <div style="margin-left: 20px;">
+                                                    <table class="table table-sm tabelSempit table-striped mb-0">
+                                                        <?php if (!empty($data->rm11b2StatusAnestesi['additif1Check'])): ?>
+                                                            <tr>
+                                                                <td style="width: 140px;">
+                                                                    <?= htmlspecialchars($data->rm11b2StatusAnestesi['additif1Nama'], ENT_QUOTES, 'UTF-8') ?>
+                                                                </td>
+                                                                <td>
+                                                                    Dosis <?= !empty($data->rm11b2StatusAnestesi['additif1Dosis']) ? htmlspecialchars($data->rm11b2StatusAnestesi['additif1Dosis'], ENT_QUOTES, 'UTF-8') : '-' ?>
+                                                                </td>
+                                                            </tr>
+                                                        <?php endif; ?>
+
+                                                        <?php if (!empty($data->rm11b2StatusAnestesi['additif2Check'])): ?>
+                                                            <tr>
+                                                                <td>
+                                                                    <?= htmlspecialchars($data->rm11b2StatusAnestesi['additif2Nama'], ENT_QUOTES, 'UTF-8') ?>
+                                                                </td>
+                                                                <td>
+                                                                    Dosis <?= !empty($data->rm11b2StatusAnestesi['additif2Dosis']) ? htmlspecialchars($data->rm11b2StatusAnestesi['additif2Dosis'], ENT_QUOTES, 'UTF-8') : '-' ?>
+                                                                </td>
+                                                            </tr>
+                                                        <?php endif; ?>
+                                                    </table>
+                                                </div>
                                             </div>
-                                            <div style="margin-left: 20px;">
-                                                <table class="table table-sm tabelSempit table-striped mb-0">
-                                                    <tr>
-                                                        <td style="width: 20px;">
-                                                            <span>
-                                                                <?= !empty($data->rm11b2StatusAnestesi['additif1Nama']) ? '✓' : '' ?>
-                                                            </span>
-                                                        </td>
-                                                        <td style="width: 20px;">
-                                                        </td>
-                                                        <td style="width: 140px;">
-                                                            <?= !empty($data->rm11b2StatusAnestesi['additif1Nama']) ? htmlspecialchars($data->rm11b2StatusAnestesi['additif1Nama']) : '..........' ?>
-                                                        </td>
-                                                        <td>
-                                                            Dosis <?= !empty($data->rm11b2StatusAnestesi['additif1Dosis']) ? htmlspecialchars($data->rm11b2StatusAnestesi['additif1Dosis']) : '..........' ?>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <span>
-                                                                <?= !empty($data->rm11b2StatusAnestesi['additif2Nama']) ? '✓' : '' ?>
-                                                            </span>
-                                                        </td>
-                                                        <td>
-                                                        </td>
-                                                        <td>
-                                                            <?= !empty($data->rm11b2StatusAnestesi['additif2Nama']) ? htmlspecialchars($data->rm11b2StatusAnestesi['additif2Nama']) : '..........' ?>
-                                                        </td>
-                                                        <td>
-                                                            Dosis <?= !empty($data->rm11b2StatusAnestesi['additif2Dosis']) ? htmlspecialchars($data->rm11b2StatusAnestesi['additif2Dosis']) : '..........' ?>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
+                                        <?php endif; ?>
 
                                     </div>
                                 </div>
@@ -1316,7 +1290,7 @@ $parseArray = function ($data) {
                     <tr>
                         <td>
                             <div class="row">
-                                <div class="col-7">
+                                <div class="col-8">
                                     <table class="table table-sm tabelSempit table-striped mb-0">
                                         <tr>
                                             <td>Makan Terakhir : <?= formatTgl($data->rm11b2StatusAnestesi['makanTerakhir'] ?? '') ?></td>
@@ -1372,7 +1346,7 @@ $parseArray = function ($data) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-5">
+                                <div class="col-4">
                                     <b>Premedikasi</b><br>
                                     Agen : <br>
                                     <?= !empty($data->rm11b2StatusAnestesi['agen']) ? htmlspecialchars($data->rm11b2StatusAnestesi['agen']) : '.........' ?><br>
@@ -1426,91 +1400,40 @@ $parseArray = function ($data) {
                         <td>
                             <div class="row">
                                 <div class="col-8">
-                                    <table class="table table-sm tabelSempit mb-0">
-                                        <tr>
-                                            <!-- KOLOM KIRI: PERSIAPAN -->
-                                            <td style="width: 60%; vertical-align: top; padding-right: 10px;">
-                                                <table class="table table-sm tabelSempit table-striped mb-0">
+                                    <table class="table table-striped table-sm tabelSempit">
+                                        <thead>
+                                            <tr>
+                                                <th width="50">No</th>
+                                                <th>Persiapan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($persiapanData)): ?>
+                                                <?php foreach (array_values($persiapanData) as $i => $item): ?>
                                                     <tr>
-                                                        <td style="width: 15px;"><?= in_array("Identifikasi pasien", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>Identifikasi pasien</td>
+                                                        <td><?= $i + 1 ?></td>
+                                                        <td><?= htmlspecialchars((string) $item) ?></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><?= in_array("Ijin Operasi", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>Ijin Operasi</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?= in_array("Puasa dijalankan dengan baik", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>Puasa dijalankan dengan baik</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?= in_array("Mesin Anestesi", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>Mesin Anestesi</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?= in_array("Suction", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>Suction</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?= in_array("Obat-obatan", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>Obat-obatan</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?= in_array("Antibiotik profilaksis", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>Antibiotik profilaksis</td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                            <td style="width: 60%; vertical-align: top; padding-right: 10px;">
-                                                <table class="table table-sm tabelSempit table-striped mb-0">
-                                                    <tr>
-                                                        <td><?= in_array("Pulse Oxymeter", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>Pulse Oxymeter</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?= in_array("EKG", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>EKG</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?= in_array("Sabuk Pengaman", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>Sabuk Pengaman</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?= in_array("NIBP", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>NIBP</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?= in_array("Urine Kateter", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>Urine Kateter</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?= in_array("End Tydal CO2", $persiapanData) || in_array("End Tydal CO₂", $persiapanData) ? '✓' : '' ?></td>
-                                                        <td>End Tydal CO<sub>2</sub></td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td colspan="2" class="text-center text-muted">Tidak ada data</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        </tbody>
                                     </table>
                                 </div>
                                 <div class="col-4">
-                                    <table class="table table-sm tabelSempit mb-0">
-                                        <tr>
-
-                                            <!-- KOLOM KANAN: PASCA INDUKSI -->
-                                            <td style="width: 40%; vertical-align: top;">
-                                                <div style="font-weight: bold; margin-bottom: 4px;">Pasca Induksi</div>
-                                                <table style="width: 100%; border-collapse: collapse;">
-                                                    <tr>
-                                                        <td style="width: 15px; text-align: center; font-weight: bold; vertical-align: top;"><?= in_array("Titik-titik tekanan diperiksa", $pascaInduksiData) ? '✓' : '' ?></td>
-                                                        <td>Titik-titik tekanan diperiksa</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?= in_array("Mata terlindungi", $pascaInduksiData) ? '✓' : '' ?></td>
-                                                        <td>Mata terlindungi</td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
+                                    <div style="font-weight: bold; margin-bottom: 4px;">Pasca Induksi</div>
+                                    <table style="width: 100%; border-collapse: collapse;">
+                                        <?php foreach ($pascaInduksiData ?? [] as $item): ?>
+                                            <?php if (!empty($item)): ?>
+                                                <tr>
+                                                    <td style="width: 15px; text-align: center; font-weight: bold; vertical-align: top;">-</td>
+                                                    <td><?= htmlspecialchars((string) $item) ?></td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
                                     </table>
                                 </div>
                             </div>
@@ -1546,31 +1469,39 @@ $parseArray = function ($data) {
                                     $posisiData = $parseArray($data->rm11b2StatusAnestesi["posisi"] ?? []);
                                     ?>
                                     <table class="table table-sm table-borderless">
-                                        <tr>
-                                            <td><?= in_array("Supine", $posisiData) ? '✓' : '' ?></td>
-                                            <td>Supine</td>
-                                        </tr>
-                                        <tr>
-                                            <td><?= in_array("Prone", $posisiData) ? '✓' : '' ?></td>
-                                            <td>Prone</td>
-                                        </tr>
-                                        <tr>
-                                            <td><?= in_array("Trendelenburg", $posisiData) ? '✓' : '' ?></td>
-                                            <td>Trendelenburg</td>
-                                        </tr>
-                                        <tr>
-                                            <td><?= in_array("Lithotomy", $posisiData) ? '✓' : '' ?></td>
-                                            <td>Lithotomy</td>
-                                        </tr>
-                                        <tr>
-                                            <td><?= in_array("Lateral", $posisiData) ? '✓' : '' ?></td>
-                                            <td>Lateral</td>
-                                        </tr>
+                                        <?php if (in_array("Supine", $posisiData)): ?>
+                                            <tr>
+                                                <td>Supine</td>
+                                            </tr>
+                                        <?php endif; ?>
+
+                                        <?php if (in_array("Prone", $posisiData)): ?>
+                                            <tr>
+                                                <td>Prone</td>
+                                            </tr>
+                                        <?php endif; ?>
+
+                                        <?php if (in_array("Trendelenburg", $posisiData)): ?>
+                                            <tr>
+                                                <td>Trendelenburg</td>
+                                            </tr>
+                                        <?php endif; ?>
+
+                                        <?php if (in_array("Lithotomy", $posisiData)): ?>
+                                            <tr>
+                                                <td>Lithotomy</td>
+                                            </tr>
+                                        <?php endif; ?>
+
+                                        <?php if (in_array("Lateral", $posisiData)): ?>
+                                            <tr>
+                                                <td>Lateral</td>
+                                            </tr>
+                                        <?php endif; ?>
 
                                         <!-- CETAK LAINNYA HANYA JIKA ADA ISINYA -->
                                         <?php if (!empty($data->rm11b2StatusAnestesi['posisiLainnya'])): ?>
                                             <tr>
-                                                <td>✓</td>
                                                 <td>Lainnya : <?= htmlspecialchars($data->rm11b2StatusAnestesi['posisiLainnya']) ?></td>
                                             </tr>
                                         <?php endif; ?>

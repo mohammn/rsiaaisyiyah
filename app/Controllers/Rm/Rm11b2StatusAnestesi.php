@@ -12,6 +12,8 @@ use App\Models\PjPasienModel;
 use App\Models\DokterModel;
 use App\Models\PetugasModel;
 
+use App\Models\Rm7bPengkajianModel;
+
 class Rm11b2StatusAnestesi extends BaseController
 {
     protected $regPeriksaModel;
@@ -21,6 +23,8 @@ class Rm11b2StatusAnestesi extends BaseController
     protected $pjPasienModel;
     protected $dokterModel;
     protected $petugasModel;
+
+    protected $rm7bPengkajianModel;
 
     public function __construct()
     {
@@ -35,6 +39,8 @@ class Rm11b2StatusAnestesi extends BaseController
         $this->pjPasienModel = new PjPasienModel();
         $this->dokterModel = new DokterModel();
         $this->petugasModel = new PetugasModel();
+
+        $this->rm7bPengkajianModel = new Rm7bPengkajianModel();
     }
 
     public function index($noRawat)
@@ -61,6 +67,8 @@ class Rm11b2StatusAnestesi extends BaseController
 
         $rm11b2StatusAnestesi = $this->rm11b2StatusAnestesiModel->where('noRawat', $noRawat)->first();
 
+        $rm7bPengkajian = $this->rm7bPengkajianModel->where('noRawat', $noRawat)->first();
+
         $pengaturan = $this->pengaturan->where('id', 1)->first();
         $pjPasien = $this->pjPasienModel->where('noRm', $pasien["no_rkm_medis"])->first();
 
@@ -71,6 +79,7 @@ class Rm11b2StatusAnestesi extends BaseController
             'petugas'     => $petugas,      // Jangan pakai (object) di sini
             'rm11b2StatusAnestesi' => $rm11b2StatusAnestesi,
             'pjPasien' => $pjPasien,
+            'rm7bPengkajian' => $rm7bPengkajian,
             'pengaturan' => $pengaturan
         ];
 
